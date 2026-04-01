@@ -339,40 +339,36 @@
       max-width: 380px;
     }
 
+    .card-top {
+      flex: 1;
+      position: relative;
+      z-index: 2;
+    }
+
     .card-footer {
       margin-top: auto;
       padding-top: 1.25rem;
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: flex-end;
+      position: relative;
+      z-index: 3;
     }
 
-    .card-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      color: var(--accent);
+    /* Stretched link — makes h2 link fill the entire card */
+    .card-title {
+      color: inherit;
       text-decoration: none;
-      font-weight: 500;
-      font-size: 0.85rem;
-      transition: gap 0.3s ease, color 0.3s ease;
     }
 
-    .card-link:hover {
-      gap: 10px;
-      color: var(--accent-light);
+    .card-title::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 1;
     }
 
-    .card-link .arrow {
-      transition: transform 0.3s ease;
-      font-size: 1.1em;
-    }
-
-    .card-link:hover .arrow {
-      transform: translateX(2px);
-    }
-
-    /* GitHub icon in card footer */
+    /* GitHub icon in card footer — sits above stretched link */
     .card-gh {
       display: flex;
       align-items: center;
@@ -386,6 +382,8 @@
       transition: color 0.2s, background 0.2s, border-color 0.2s;
       text-decoration: none;
       flex-shrink: 0;
+      position: relative;
+      z-index: 4;
     }
 
     .card-gh:hover {
@@ -650,25 +648,15 @@
       <div class="card card--hero" style="--card-glow: var(--accent-glow);">
         <div class="card-top">
           <span class="badge badge--active">Active</span>
-          <h2>Claude Knowledge Portal</h2>
+          <h2><a href="https://gilesparnell.github.io/Claude/" class="card-title">Claude Knowledge Portal</a></h2>
           <p>Skills, walkthroughs, architectural decisions, and reusable patterns. The engineering brain of Parnell Systems.</p>
           <div class="stats-row">
-            <div class="stat">
-              <span class="stat-value">20+</span>
-              <span class="stat-label">Docs</span>
-            </div>
-            <div class="stat">
-              <span class="stat-value">7+</span>
-              <span class="stat-label">Active Projects</span>
-            </div>
-            <div class="stat">
-              <span class="stat-value">4</span>
-              <span class="stat-label">Client Sites</span>
-            </div>
+            <div class="stat"><span class="stat-value">20+</span><span class="stat-label">Docs</span></div>
+            <div class="stat"><span class="stat-value">7+</span><span class="stat-label">Active Projects</span></div>
+            <div class="stat"><span class="stat-value">4</span><span class="stat-label">Client Sites</span></div>
           </div>
         </div>
         <div class="card-footer">
-          <a href="https://gilesparnell.github.io/Claude/" class="card-link">Explore portal <span class="arrow">&rarr;</span></a>
           <a href="https://github.com/gilesparnell/Claude" class="card-gh" title="GitHub repo" target="_blank"><svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>
         </div>
       </div>
@@ -677,7 +665,7 @@
       <div class="card" style="--card-glow: rgba(97, 153, 230, 0.2);">
         <div class="card-top">
           <span class="badge badge--active">Active</span>
-          <h2>Platform Intelligence</h2>
+          <h2><a href="https://github.com/gilesparnell/parnellsystems-platform" class="card-title">Platform Intelligence</a></h2>
           <p>Core API, Twilio voice/SMS, OpenAI integration, client management.</p>
           <div class="tech-tags">
             <span class="tech-tag">Next.js 15</span>
@@ -686,7 +674,6 @@
           </div>
         </div>
         <div class="card-footer">
-          <a href="https://github.com/gilesparnell/parnellsystems-platform" class="card-link">View project <span class="arrow">&rarr;</span></a>
           <a href="https://github.com/gilesparnell/parnellsystems-platform" class="card-gh" title="GitHub repo" target="_blank"><svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>
         </div>
       </div>
@@ -695,7 +682,7 @@
       <div class="card" style="--card-glow: rgba(167, 139, 250, 0.2);">
         <div class="card-top">
           <span class="badge badge--active">Active</span>
-          <h2>AllConvos</h2>
+          <h2><a href="https://github.com/gilesparnell/awe2m8-core" class="card-title">AllConvos</a></h2>
           <p>AI receptionist with voice agents, number provisioning, and billing.</p>
           <div class="tech-tags">
             <span class="tech-tag">Next.js 16</span>
@@ -705,7 +692,6 @@
           </div>
         </div>
         <div class="card-footer">
-          <a href="https://github.com/gilesparnell/awe2m8-core" class="card-link">View project <span class="arrow">&rarr;</span></a>
           <a href="https://github.com/gilesparnell/awe2m8-core" class="card-gh" title="GitHub repo" target="_blank"><svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>
         </div>
       </div>
@@ -714,7 +700,7 @@
       <div class="card card--wide" style="--card-glow: var(--accent-glow);">
         <div class="card-top">
           <span class="badge badge--active">Active</span>
-          <h2>parnellsystems.com</h2>
+          <h2><a href="https://github.com/gilesparnell/parnellsystems" class="card-title">parnellsystems.com</a></h2>
           <p>Company website and marketing. React + Vite with Shadcn/UI components and Tailwind CSS.</p>
           <div class="tech-tags">
             <span class="tech-tag">React 18</span>
@@ -724,7 +710,6 @@
           </div>
         </div>
         <div class="card-footer">
-          <a href="https://github.com/gilesparnell/parnellsystems" class="card-link">View project <span class="arrow">&rarr;</span></a>
           <a href="https://github.com/gilesparnell/parnellsystems" class="card-gh" title="GitHub repo" target="_blank"><svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>
         </div>
       </div>
@@ -733,14 +718,13 @@
       <div class="card" style="--card-glow: rgba(97, 153, 230, 0.2);">
         <div class="card-top">
           <span class="badge badge--active">Active</span>
-          <h2>Sprint Tracker</h2>
+          <h2><a href="https://gilesparnell.github.io/SprintTracker/" class="card-title">Sprint Tracker</a></h2>
           <p>Sprint planning and progress tracking tool with docs and diagrams.</p>
           <div class="tech-tags">
             <span class="tech-tag">Next.js</span>
           </div>
         </div>
         <div class="card-footer">
-          <a href="https://gilesparnell.github.io/SprintTracker/" class="card-link">View docs <span class="arrow">&rarr;</span></a>
           <a href="https://github.com/gilesparnell/SprintTracker" class="card-gh" title="GitHub repo" target="_blank"><svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>
         </div>
       </div>
@@ -756,11 +740,10 @@
       <div class="card" style="--card-glow: rgba(97, 153, 230, 0.15);">
         <div class="card-top">
           <span class="badge badge--client">Client</span>
-          <h2>Rob's Gardens</h2>
+          <h2><a href="https://github.com/gilesparnell/robs-gardens" class="card-title">Rob's Gardens</a></h2>
           <p>Landscaping business website and lead generation.</p>
         </div>
         <div class="card-footer">
-          <a href="https://github.com/gilesparnell/robs-gardens" class="card-link">View project <span class="arrow">&rarr;</span></a>
           <a href="https://github.com/gilesparnell/robs-gardens" class="card-gh" title="GitHub repo" target="_blank"><svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>
         </div>
       </div>
@@ -771,9 +754,6 @@
           <h2>Moving4U</h2>
           <p>Removals and logistics company website.</p>
         </div>
-        <div class="card-footer">
-          <span class="card-link" style="color:var(--text-tertiary)">Coming soon</span>
-        </div>
       </div>
 
       <div class="card" style="--card-glow: rgba(97, 153, 230, 0.15);">
@@ -782,9 +762,6 @@
           <h2>FSCA</h2>
           <p>Client website and online presence.</p>
         </div>
-        <div class="card-footer">
-          <span class="card-link" style="color:var(--text-tertiary)">Coming soon</span>
-        </div>
       </div>
 
       <div class="card" style="--card-glow: rgba(97, 153, 230, 0.15);">
@@ -792,9 +769,6 @@
           <span class="badge badge--client">Client</span>
           <h2>LeadGen Site</h2>
           <p>Lead generation landing page system.</p>
-        </div>
-        <div class="card-footer">
-          <span class="card-link" style="color:var(--text-tertiary)">Coming soon</span>
         </div>
       </div>
 
@@ -809,7 +783,7 @@
       <div class="card" style="--card-glow: rgba(240, 123, 110, 0.15);">
         <div class="card-top">
           <span class="badge badge--personal">Personal</span>
-          <h2>Lily Health Diary</h2>
+          <h2><a href="https://github.com/gilesparnell/LilyHealthDiary" class="card-title">Lily Health Diary</a></h2>
           <p>Gothic dark food &amp; symptom diary for tracking meals and abdominal pain patterns.</p>
           <div class="tech-tags">
             <span class="tech-tag">Next.js 15</span>
@@ -818,7 +792,6 @@
           </div>
         </div>
         <div class="card-footer">
-          <a href="https://github.com/gilesparnell/LilyHealthDiary" class="card-link">View project <span class="arrow">&rarr;</span></a>
           <a href="https://github.com/gilesparnell/LilyHealthDiary" class="card-gh" title="GitHub repo" target="_blank"><svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>
         </div>
       </div>
@@ -826,11 +799,10 @@
       <div class="card" style="--card-glow: rgba(240, 123, 110, 0.15);">
         <div class="card-top">
           <span class="badge badge--personal">Personal</span>
-          <h2>Vonnies</h2>
+          <h2><a href="https://github.com/gilesparnell/Vonnies" class="card-title">Vonnies</a></h2>
           <p>A playpit for the loveFest.</p>
         </div>
         <div class="card-footer">
-          <a href="https://github.com/gilesparnell/Vonnies" class="card-link">View project <span class="arrow">&rarr;</span></a>
           <a href="https://github.com/gilesparnell/Vonnies" class="card-gh" title="GitHub repo" target="_blank"><svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>
         </div>
       </div>
@@ -838,11 +810,10 @@
       <div class="card" style="--card-glow: rgba(167, 139, 250, 0.15);">
         <div class="card-top">
           <span class="badge badge--personal">Personal</span>
-          <h2>Pool Game</h2>
+          <h2><a href="https://github.com/gilesparnell/advancedpoolcare" class="card-title">Pool Game</a></h2>
           <p>Advanced pool care and game tracking.</p>
         </div>
         <div class="card-footer">
-          <a href="https://github.com/gilesparnell/advancedpoolcare" class="card-link">View project <span class="arrow">&rarr;</span></a>
           <a href="https://github.com/gilesparnell/advancedpoolcare" class="card-gh" title="GitHub repo" target="_blank"><svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>
         </div>
       </div>
@@ -850,7 +821,7 @@
       <div class="card" style="--card-glow: rgba(232, 164, 74, 0.15);">
         <div class="card-top">
           <span class="badge badge--tool">Tool</span>
-          <h2>Voice SMS Demo</h2>
+          <h2><a href="https://github.com/gilesparnell/googleVoiceAiDemo" class="card-title">Voice SMS Demo</a></h2>
           <p>Google Gemini AI chat demo with niche presets and editable prompts.</p>
           <div class="tech-tags">
             <span class="tech-tag">Node.js</span>
@@ -859,7 +830,6 @@
           </div>
         </div>
         <div class="card-footer">
-          <a href="https://github.com/gilesparnell/googleVoiceAiDemo" class="card-link">View project <span class="arrow">&rarr;</span></a>
           <a href="https://github.com/gilesparnell/googleVoiceAiDemo" class="card-gh" title="GitHub repo" target="_blank"><svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>
         </div>
       </div>
@@ -867,7 +837,7 @@
       <div class="card" style="--card-glow: rgba(232, 164, 74, 0.15);">
         <div class="card-top">
           <span class="badge badge--tool">Tool</span>
-          <h2>Drive Migration</h2>
+          <h2><a href="https://github.com/gilesparnell/google-drive-migration" class="card-title">Drive Migration</a></h2>
           <p>Multi-account Google Drive consolidation with dry-run, resume, and duplicate handling.</p>
           <div class="tech-tags">
             <span class="tech-tag">Python</span>
@@ -875,7 +845,6 @@
           </div>
         </div>
         <div class="card-footer">
-          <a href="https://github.com/gilesparnell/google-drive-migration" class="card-link">View project <span class="arrow">&rarr;</span></a>
           <a href="https://github.com/gilesparnell/google-drive-migration" class="card-gh" title="GitHub repo" target="_blank"><svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>
         </div>
       </div>
@@ -883,11 +852,10 @@
       <div class="card" style="--card-glow: rgba(232, 164, 74, 0.15);">
         <div class="card-top">
           <span class="badge badge--tool">Tool</span>
-          <h2>OpenClaw</h2>
+          <h2><a href="https://github.com/gilesparnell/openclaw" class="card-title">OpenClaw</a></h2>
           <p>Open Claw Memory — persistent knowledge system.</p>
         </div>
         <div class="card-footer">
-          <a href="https://github.com/gilesparnell/openclaw" class="card-link">View project <span class="arrow">&rarr;</span></a>
           <a href="https://github.com/gilesparnell/openclaw" class="card-gh" title="GitHub repo" target="_blank"><svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>
         </div>
       </div>
@@ -901,9 +869,6 @@
             <span class="tech-tag">TypeScript</span>
             <span class="tech-tag">Tailwind</span>
           </div>
-        </div>
-        <div class="card-footer">
-          <span class="card-link" style="color:var(--text-tertiary)">Coming soon</span>
         </div>
       </div>
 
