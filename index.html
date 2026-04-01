@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Parnell Systems — Hub</title>
+  <meta name="description" content="AI-powered SaaS platform for SMEs. Projects, documentation, and knowledge portal.">
+
+  <!-- Fonts -->
+  <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap">
+
+  <style>
+    /* =============================================
+       PARNELL SYSTEMS HUB PORTAL
+       Deep Ocean Tech — Bento + Glassmorphism
+       ============================================= */
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --font-display: 'Satoshi', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-body: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+
+      /* Deep Ocean Tech palette */
+      --bg-deep:      #0a0c10;
+      --bg-surface:   #12151c;
+      --bg-raised:    #1a1e28;
+
+      --text-primary:   #e8eaf0;
+      --text-secondary: #8b92a8;
+      --text-tertiary:  #4a5068;
+
+      --accent:         #38bfa0;
+      --accent-light:   #5edcb8;
+      --accent-muted:   rgba(56, 191, 160, 0.15);
+      --accent-glow:    rgba(56, 191, 160, 0.20);
+
+      --warm:           #e8a44a;
+      --warm-muted:     rgba(232, 164, 74, 0.12);
+
+      --coral:          #f07b6e;
+      --coral-muted:    rgba(240, 123, 110, 0.12);
+
+      --blue:           #6199e6;
+      --blue-muted:     rgba(97, 153, 230, 0.12);
+
+      --purple:         #a78bfa;
+      --purple-muted:   rgba(167, 139, 250, 0.12);
+
+      --border:         rgba(255, 255, 255, 0.06);
+      --border-hover:   rgba(255, 255, 255, 0.14);
+
+      --radius:    20px;
+      --radius-sm: 12px;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--bg-deep);
+      color: var(--text-primary);
+      line-height: 1.6;
+      letter-spacing: -0.01em;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ---- Animated mesh background ---- */
+    .mesh-bg {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .mesh-bg .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(90px);
+      will-change: transform;
+    }
+
+    .mesh-bg .blob:nth-child(1) {
+      width: 650px; height: 650px;
+      background: hsla(168, 55%, 32%, 0.35);
+      top: -12%; left: -8%;
+      animation: drift1 20s ease-in-out infinite alternate;
+    }
+
+    .mesh-bg .blob:nth-child(2) {
+      width: 500px; height: 500px;
+      background: hsla(335, 45%, 28%, 0.25);
+      top: 5%; right: -12%;
+      animation: drift2 24s ease-in-out infinite alternate;
+    }
+
+    .mesh-bg .blob:nth-child(3) {
+      width: 580px; height: 580px;
+      background: hsla(215, 55%, 28%, 0.28);
+      bottom: -18%; left: 25%;
+      animation: drift3 28s ease-in-out infinite alternate;
+    }
+
+    .mesh-bg .blob:nth-child(4) {
+      width: 400px; height: 400px;
+      background: hsla(40, 50%, 30%, 0.15);
+      bottom: 10%; right: 5%;
+      animation: drift4 22s ease-in-out infinite alternate;
+    }
+
+    @keyframes drift1 { to { transform: translate(90px, 70px) scale(1.08); } }
+    @keyframes drift2 { to { transform: translate(-70px, 90px) scale(0.92); } }
+    @keyframes drift3 { to { transform: translate(50px, -60px) scale(1.12); } }
+    @keyframes drift4 { to { transform: translate(-40px, -50px) scale(1.06); } }
+
+    /* ---- Page structure ---- */
+    .page {
+      position: relative;
+      z-index: 1;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 3rem 2rem 4rem;
+    }
+
+    /* ---- Header ---- */
+    .site-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 3rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--accent), #2a8a74);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: 1.2rem;
+      color: #fff;
+      letter-spacing: -0.03em;
+    }
+
+    .brand-text {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.25rem;
+      letter-spacing: -0.03em;
+    }
+
+    .header-links {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+    }
+
+    .header-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .header-links a:hover {
+      color: var(--text-primary);
+    }
+
+    .gh-link {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .gh-link svg {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
+    }
+
+    /* ---- Hero ---- */
+    .hero {
+      margin-bottom: 3.5rem;
+    }
+
+    .hero .label {
+      font-family: var(--font-body);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+      display: block;
+    }
+
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 5.5vw, 4.2rem);
+      font-weight: 900;
+      line-height: 1.05;
+      letter-spacing: -0.04em;
+      margin-bottom: 1rem;
+    }
+
+    .hero .tagline {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      color: var(--text-secondary);
+      max-width: 520px;
+      line-height: 1.65;
+    }
+
+    /* ---- Section headers ---- */
+    .section-label {
+      font-family: var(--font-body);
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      margin-bottom: 1.25rem;
+      padding-left: 2px;
+    }
+
+    .section-gap {
+      margin-top: 2.5rem;
+    }
+
+    /* ---- Bento grid ---- */
+    .bento {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+
+    /* ---- Glass card ---- */
+    .card {
+      background: rgba(255, 255, 255, 0.035);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.6rem;
+      position: relative;
+      overflow: hidden;
+      min-height: 170px;
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+      color: inherit;
+      transition:
+        transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+        box-shadow 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+        border-color 0.4s ease;
+    }
+
+    /* Top edge light catch */
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+      pointer-events: none;
+    }
+
+    /* Cursor glow */
+    .card::after {
+      content: '';
+      position: absolute;
+      width: 350px; height: 350px;
+      background: radial-gradient(circle, var(--card-glow, var(--accent-glow)) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      top: var(--mouse-y, 50%);
+      left: var(--mouse-x, 50%);
+      transform: translate(-50%, -50%);
+    }
+
+    .card:hover::after { opacity: 1; }
+
+    .card:hover {
+      transform: translateY(-3px) scale(1.008);
+      border-color: var(--border-hover);
+      box-shadow:
+        0 24px 64px rgba(0, 0, 0, 0.35),
+        0 0 48px var(--card-glow, var(--accent-muted));
+    }
+
+    /* Card sizing */
+    .card--hero  { grid-column: span 2; grid-row: span 2; min-height: 380px; }
+    .card--wide  { grid-column: span 2; }
+    .card--tall  { grid-row: span 2; }
+
+    /* Card internals */
+    .card-top {
+      flex: 1;
+    }
+
+    .card h2 {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.15rem;
+      line-height: 1.2;
+      letter-spacing: -0.025em;
+      margin-top: 0.35rem;
+    }
+
+    .card--hero h2 {
+      font-size: clamp(1.5rem, 3vw, 2rem);
+    }
+
+    .card p {
+      color: var(--text-secondary);
+      font-size: 0.88rem;
+      line-height: 1.6;
+      margin-top: 0.5rem;
+    }
+
+    .card--hero p {
+      font-size: 0.95rem;
+      max-width: 380px;
+    }
+
+    .card-footer {
+      margin-top: auto;
+      padding-top: 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .card-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.85rem;
+      transition: gap 0.3s ease, color 0.3s ease;
+    }
+
+    .card-link:hover {
+      gap: 10px;
+      color: var(--accent-light);
+    }
+
+    .card-link .arrow {
+      transition: transform 0.3s ease;
+      font-size: 1.1em;
+    }
+
+    .card-link:hover .arrow {
+      transform: translateX(2px);
+    }
+
+    /* ---- Badges ---- */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.62rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 100px;
+    }
+
+    .badge--active {
+      background: rgba(52, 211, 153, 0.12);
+      color: #34d399;
+    }
+
+    .badge--active::before {
+      content: '';
+      width: 5px; height: 5px;
+      background: #34d399;
+      border-radius: 50%;
+      animation: pulse 2.5s ease-in-out infinite;
+    }
+
+    .badge--client {
+      background: var(--blue-muted);
+      color: var(--blue);
+    }
+
+    .badge--tool {
+      background: var(--warm-muted);
+      color: var(--warm);
+    }
+
+    .badge--personal {
+      background: var(--purple-muted);
+      color: var(--purple);
+    }
+
+    .badge--archive {
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-tertiary);
+    }
+
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.4); }
+      50%      { box-shadow: 0 0 0 5px rgba(52, 211, 153, 0); }
+    }
+
+    /* ---- Tech tags ---- */
+    .tech-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 0.75rem;
+    }
+
+    .tech-tag {
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      color: var(--text-tertiary);
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 6px;
+      padding: 2px 8px;
+    }
+
+    /* ---- Stats row inside hero card ---- */
+    .stats-row {
+      display: flex;
+      gap: 2rem;
+      margin-top: 1.5rem;
+    }
+
+    .stat {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .stat-value {
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: 1.8rem;
+      letter-spacing: -0.03em;
+      color: var(--accent);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 0.72rem;
+      color: var(--text-tertiary);
+      margin-top: 4px;
+      font-weight: 500;
+    }
+
+    /* ---- Archive cards: dimmed ---- */
+    .card--archive {
+      opacity: 0.5;
+      min-height: 120px;
+    }
+
+    .card--archive:hover {
+      opacity: 0.75;
+    }
+
+    /* ---- Footer ---- */
+    .site-footer {
+      margin-top: 4rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.78rem;
+      color: var(--text-tertiary);
+    }
+
+    .site-footer a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .site-footer a:hover {
+      color: var(--accent);
+    }
+
+    /* ---- Staggered fade-in ---- */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero {
+      animation: fadeUp 0.7s ease-out both;
+    }
+
+    .card {
+      animation: fadeUp 0.6s ease-out both;
+    }
+
+    .bento .card:nth-child(1)  { animation-delay: 0.1s; }
+    .bento .card:nth-child(2)  { animation-delay: 0.15s; }
+    .bento .card:nth-child(3)  { animation-delay: 0.2s; }
+    .bento .card:nth-child(4)  { animation-delay: 0.25s; }
+    .bento .card:nth-child(5)  { animation-delay: 0.3s; }
+    .bento .card:nth-child(6)  { animation-delay: 0.35s; }
+    .bento .card:nth-child(7)  { animation-delay: 0.4s; }
+    .bento .card:nth-child(8)  { animation-delay: 0.45s; }
+    .bento .card:nth-child(9)  { animation-delay: 0.5s; }
+    .bento .card:nth-child(10) { animation-delay: 0.55s; }
+    .bento .card:nth-child(11) { animation-delay: 0.6s; }
+    .bento .card:nth-child(12) { animation-delay: 0.65s; }
+
+    /* ---- Responsive ---- */
+    @media (max-width: 960px) {
+      .bento {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .card--hero {
+        grid-column: span 2;
+        grid-row: span 1;
+        min-height: 280px;
+      }
+    }
+
+    @media (max-width: 580px) {
+      .bento {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+      .card--hero,
+      .card--wide {
+        grid-column: span 1;
+      }
+      .card--hero {
+        min-height: 240px;
+      }
+      .page {
+        padding: 2rem 1rem 3rem;
+      }
+      .site-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+      }
+      .stats-row {
+        gap: 1.5rem;
+      }
+      .site-footer {
+        flex-direction: column;
+        gap: 0.75rem;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Animated mesh background -->
+  <div class="mesh-bg" aria-hidden="true">
+    <div class="blob"></div>
+    <div class="blob"></div>
+    <div class="blob"></div>
+    <div class="blob"></div>
+  </div>
+
+  <div class="page">
+
+    <!-- Header -->
+    <header class="site-header">
+      <div class="brand">
+        <div class="brand-mark">PS</div>
+        <span class="brand-text">Parnell Systems</span>
+      </div>
+      <nav class="header-links">
+        <a href="https://gilesparnell.github.io/Claude/" class="gh-link">Knowledge Portal</a>
+        <a href="https://github.com/gilesparnell" class="gh-link">
+          <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+          GitHub
+        </a>
+      </nav>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+      <span class="label">Hub Portal</span>
+      <h1>Build. Ship. Iterate.</h1>
+      <p class="tagline">AI-powered SaaS platform for SMEs. Every project, every doc, every decision &mdash; one front door.</p>
+    </section>
+
+    <!-- ==========================================
+         CORE PLATFORM
+         ========================================== -->
+    <div class="section-label">Core Platform</div>
+    <div class="bento">
+
+      <!-- Hero card: Knowledge Portal -->
+      <a href="https://gilesparnell.github.io/Claude/" class="card card--hero" style="--card-glow: var(--accent-glow);">
+        <div class="card-top">
+          <span class="badge badge--active">Active</span>
+          <h2>Claude Knowledge Portal</h2>
+          <p>Skills, walkthroughs, architectural decisions, and reusable patterns. The engineering brain of Parnell Systems.</p>
+          <div class="stats-row">
+            <div class="stat">
+              <span class="stat-value">20+</span>
+              <span class="stat-label">Docs</span>
+            </div>
+            <div class="stat">
+              <span class="stat-value">7+</span>
+              <span class="stat-label">Active Projects</span>
+            </div>
+            <div class="stat">
+              <span class="stat-value">4</span>
+              <span class="stat-label">Client Sites</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <span class="card-link">Explore portal <span class="arrow">&rarr;</span></span>
+          <div class="tech-tags">
+            <span class="tech-tag">Skills</span>
+            <span class="tech-tag">Decisions</span>
+            <span class="tech-tag">Diagrams</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- parnellsystems-platform -->
+      <a href="https://github.com/gilesparnell/parnellsystems-platform" class="card" style="--card-glow: rgba(97, 153, 230, 0.2);">
+        <div class="card-top">
+          <span class="badge badge--active">Active</span>
+          <h2>Platform Intelligence</h2>
+          <p>Core API, Twilio voice/SMS, OpenAI integration, client management.</p>
+          <div class="tech-tags">
+            <span class="tech-tag">Next.js 15</span>
+            <span class="tech-tag">Prisma</span>
+            <span class="tech-tag">Twilio</span>
+          </div>
+        </div>
+        <div class="card-footer">
+          <span class="card-link">View project <span class="arrow">&rarr;</span></span>
+        </div>
+      </a>
+
+      <!-- AllConvos -->
+      <a href="https://github.com/gilesparnell/awe2m8-core" class="card" style="--card-glow: rgba(167, 139, 250, 0.2);">
+        <div class="card-top">
+          <span class="badge badge--active">Active</span>
+          <h2>AllConvos</h2>
+          <p>AI receptionist with voice agents, number provisioning, and billing.</p>
+          <div class="tech-tags">
+            <span class="tech-tag">Next.js 16</span>
+            <span class="tech-tag">Clerk</span>
+            <span class="tech-tag">Stripe</span>
+            <span class="tech-tag">Realtime AI</span>
+          </div>
+        </div>
+        <div class="card-footer">
+          <span class="card-link">View project <span class="arrow">&rarr;</span></span>
+        </div>
+      </a>
+
+      <!-- Parnell Systems Website -->
+      <a href="https://github.com/gilesparnell/parnellsystems" class="card card--wide" style="--card-glow: var(--accent-glow);">
+        <div class="card-top">
+          <span class="badge badge--active">Active</span>
+          <h2>parnellsystems.com</h2>
+          <p>Company website and marketing. React + Vite with Shadcn/UI components and Tailwind CSS.</p>
+          <div class="tech-tags">
+            <span class="tech-tag">React 18</span>
+            <span class="tech-tag">Vite</span>
+            <span class="tech-tag">Shadcn/UI</span>
+            <span class="tech-tag">Tailwind</span>
+          </div>
+        </div>
+        <div class="card-footer">
+          <span class="card-link">View project <span class="arrow">&rarr;</span></span>
+        </div>
+      </a>
+
+      <!-- Sprint Tracker -->
+      <a href="https://github.com/gilesparnell/SprintTracker" class="card" style="--card-glow: rgba(97, 153, 230, 0.2);">
+        <div class="card-top">
+          <span class="badge badge--active">Active</span>
+          <h2>Sprint Tracker</h2>
+          <p>Sprint planning and progress tracking tool with docs and diagrams.</p>
+          <div class="tech-tags">
+            <span class="tech-tag">Next.js</span>
+          </div>
+        </div>
+        <div class="card-footer">
+          <span class="card-link">View project <span class="arrow">&rarr;</span></span>
+        </div>
+      </a>
+
+    </div>
+
+    <!-- ==========================================
+         CLIENT SITES
+         ========================================== -->
+    <div class="section-label section-gap">Client Sites</div>
+    <div class="bento">
+
+      <a href="https://github.com/gilesparnell/robs-gardens" class="card" style="--card-glow: rgba(97, 153, 230, 0.15);">
+        <div class="card-top">
+          <span class="badge badge--client">Client</span>
+          <h2>Rob's Gardens</h2>
+          <p>Landscaping business website and lead generation.</p>
+        </div>
+        <div class="card-footer">
+          <span class="card-link">View project <span class="arrow">&rarr;</span></span>
+        </div>
+      </a>
+
+      <a href="#" class="card" style="--card-glow: rgba(97, 153, 230, 0.15);">
+        <div class="card-top">
+          <span class="badge badge--client">Client</span>
+          <h2>Moving4U</h2>
+          <p>Removals and logistics company website.</p>
+        </div>
+        <div class="card-footer">
+          <span class="card-link">View project <span class="arrow">&rarr;</span></span>
+        </div>
+      </a>
+
+      <a href="#" class="card" style="--card-glow: rgba(97, 153, 230, 0.15);">
+        <div class="card-top">
+          <span class="badge badge--client">Client</span>
+          <h2>FSCA</h2>
+          <p>Client website and online presence.</p>
+        </div>
+        <div class="card-footer">
+          <span class="card-link">View project <span class="arrow">&rarr;</span></span>
+        </div>
+      </a>
+
+      <a href="#" class="card" style="--card-glow: rgba(97, 153, 230, 0.15);">
+        <div class="card-top">
+          <span class="badge badge--client">Client</span>
+          <h2>LeadGen Site</h2>
+          <p>Lead generation landing page system.</p>
+        </div>
+        <div class="card-footer">
+          <span class="card-link">View project <span class="arrow">&rarr;</span></span>
+        </div>
+      </a>
+
+    </div>
+
+    <!-- ==========================================
+         PERSONAL & TOOLS
+         ========================================== -->
+    <div class="section-label section-gap">Personal &amp; Tools</div>
+    <div class="bento">
+
+      <a href="https://github.com/gilesparnell/LilyHealthDiary" class="card" style="--card-glow: rgba(240, 123, 110, 0.15);">
+        <div class="card-top">
+          <span class="badge badge--personal">Personal</span>
+          <h2>Lily Health Diary</h2>
+          <p>Gothic dark food &amp; symptom diary for tracking meals and abdominal pain patterns.</p>
+          <div class="tech-tags">
+            <span class="tech-tag">Next.js 15</span>
+            <span class="tech-tag">Prisma</span>
+            <span class="tech-tag">Vercel</span>
+          </div>
+        </div>
+        <div class="card-footer">
+          <span class="card-link">View project <span class="arrow">&rarr;</span></span>
+        </div>
+      </a>
+
+      <a href="https://github.com/gilesparnell/Vonnies" class="card" style="--card-glow: rgba(240, 123, 110, 0.15);">
+        <div class="card-top">
+          <span class="badge badge--personal">Personal</span>
+          <h2>Vonnies</h2>
+          <p>A playpit for the loveFest.</p>
+        </div>
+        <div class="card-footer">
+          <span class="card-link">View project <span class="arrow">&rarr;</span></span>
+        </div>
+      </a>
+
+      <a href="https://github.com/gilesparnell/advancedpoolcare" class="card" style="--card-glow: rgba(167, 139, 250, 0.15);">
+        <div class="card-top">
+          <span class="badge badge--personal">Personal</span>
+          <h2>Pool Game</h2>
+          <p>Advanced pool care and game tracking.</p>
+        </div>
+        <div class="card-footer">
+          <span class="card-link">View project <span class="arrow">&rarr;</span></span>
+        </div>
+      </a>
+
+      <a href="https://github.com/gilesparnell/googleVoiceAiDemo" class="card" style="--card-glow: rgba(232, 164, 74, 0.15);">
+        <div class="card-top">
+          <span class="badge badge--tool">Tool</span>
+          <h2>Voice SMS Demo</h2>
+          <p>Google Gemini AI chat demo with niche presets and editable prompts.</p>
+          <div class="tech-tags">
+            <span class="tech-tag">Node.js</span>
+            <span class="tech-tag">Gemini</span>
+            <span class="tech-tag">WebSocket</span>
+          </div>
+        </div>
+        <div class="card-footer">
+          <span class="card-link">View project <span class="arrow">&rarr;</span></span>
+        </div>
+      </a>
+
+      <a href="https://github.com/gilesparnell/google-drive-migration" class="card" style="--card-glow: rgba(232, 164, 74, 0.15);">
+        <div class="card-top">
+          <span class="badge badge--tool">Tool</span>
+          <h2>Drive Migration</h2>
+          <p>Multi-account Google Drive consolidation with dry-run, resume, and duplicate handling.</p>
+          <div class="tech-tags">
+            <span class="tech-tag">Python</span>
+            <span class="tech-tag">Google API</span>
+          </div>
+        </div>
+        <div class="card-footer">
+          <span class="card-link">View project <span class="arrow">&rarr;</span></span>
+        </div>
+      </a>
+
+      <a href="https://github.com/gilesparnell/openclaw" class="card" style="--card-glow: rgba(232, 164, 74, 0.15);">
+        <div class="card-top">
+          <span class="badge badge--tool">Tool</span>
+          <h2>OpenClaw</h2>
+          <p>Open Claw Memory — persistent knowledge system.</p>
+        </div>
+        <div class="card-footer">
+          <span class="card-link">View project <span class="arrow">&rarr;</span></span>
+        </div>
+      </a>
+
+      <a href="#" class="card" style="--card-glow: rgba(232, 164, 74, 0.15);">
+        <div class="card-top">
+          <span class="badge badge--tool">Tool</span>
+          <h2>Packages / UI</h2>
+          <p>Shared UI utility library for Parnell Systems projects. Published to npm.</p>
+          <div class="tech-tags">
+            <span class="tech-tag">TypeScript</span>
+            <span class="tech-tag">Tailwind</span>
+          </div>
+        </div>
+        <div class="card-footer">
+          <span class="card-link">View project <span class="arrow">&rarr;</span></span>
+        </div>
+      </a>
+
+    </div>
+
+    <!-- ==========================================
+         ARCHIVE
+         ========================================== -->
+    <div class="section-label section-gap">Archive</div>
+    <div class="bento">
+
+      <a href="#" class="card card--archive">
+        <div class="card-top">
+          <span class="badge badge--archive">Archived</span>
+          <h2>Mission Control</h2>
+        </div>
+      </a>
+
+      <a href="#" class="card card--archive">
+        <div class="card-top">
+          <span class="badge badge--archive">Archived</span>
+          <h2>Automaker</h2>
+        </div>
+      </a>
+
+      <a href="https://github.com/gilesparnell/pirisk" class="card card--archive">
+        <div class="card-top">
+          <span class="badge badge--archive">Archived</span>
+          <h2>PiRisk</h2>
+        </div>
+      </a>
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <span>&copy; 2026 Parnell Systems</span>
+      <span>
+        <a href="https://github.com/gilesparnell">GitHub</a>
+        &nbsp;&middot;&nbsp;
+        <a href="https://gilesparnell.github.io/Claude/">Knowledge Portal</a>
+      </span>
+    </footer>
+
+  </div>
+
+  <!-- Cursor glow effect -->
+  <script>
+    document.querySelectorAll('.card').forEach(card => {
+      card.addEventListener('mousemove', e => {
+        const r = card.getBoundingClientRect();
+        card.style.setProperty('--mouse-x', (e.clientX - r.left) + 'px');
+        card.style.setProperty('--mouse-y', (e.clientY - r.top) + 'px');
+      });
+    });
+  </script>
+
+</body>
+</html>
