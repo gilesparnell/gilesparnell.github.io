@@ -310,8 +310,6 @@
       <span class="brand-text">Parnell Systems</span>
     </a>
     <nav class="header-links">
-      <a href="https://gilesparnell.github.io/Claude/projects.html">Projects</a>
-      <a href="https://gilesparnell.github.io/Claude/">Knowledge Portal</a>
       <a href="https://github.com/gilesparnell">
         <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
         GitHub
@@ -323,12 +321,12 @@
   <section class="hero">
     <span class="eyebrow">gilesparnell.github.io</span>
     <h1>Build. Ship.<br><span>Document.</span></h1>
-    <p class="tagline">AI-powered SaaS for SMEs — voice products, client builds, and the engineering knowledge system that powers it all.</p>
+    <p class="tagline">AI-powered systems, client builds, and portfolio-safe project snapshots. Detailed implementation docs are kept private.</p>
   </section>
 
   <!-- System Map -->
   <div class="map-section">
-    <div class="section-label">System map — click any node to navigate</div>
+    <div class="section-label">System map</div>
     <div class="map-wrap">
       <div class="mermaid">
 flowchart LR
@@ -337,26 +335,19 @@ flowchart LR
     HUB --> WORK["Work"]:::branch
     HUB --> KNOW["Knowledge"]:::branch
 
-    WORK --> PLAT["Platform Intelligence\nVoice AI · Twilio · Internal ops"]:::leaf
-    WORK --> CLI["Client Sites\nRob's Gardens · PiRisk · Moving4U"]:::leaf
-    WORK --> PERS["Personal & Tools\nWLC · Lily · Sprint Tracker"]:::leaf
+    WORK --> PLAT["Platform Work\nPrivate implementation"]:::leaf
+    WORK --> CLI["Client Sites\nSanitized public case studies"]:::leaf
+    WORK --> PERS["Personal & Tools\nSelected public demos"]:::leaf
 
-    KNOW --> SKL["Skills · 23 published"]:::leaf
-    KNOW --> WLK["Walkthroughs & Guides"]:::leaf
-    KNOW --> DEC["Decisions · 19 ADRs"]:::leaf
-    KNOW --> PRJ["All Projects · 22 repos"]:::leaf
+    KNOW --> SKL["Skills\nPrivate library"]:::leaf
+    KNOW --> WLK["Walkthroughs\nPrivate guides"]:::leaf
+    KNOW --> DEC["Decisions\nPrivate records"]:::leaf
+    KNOW --> PRJ["Projects\nPortfolio-safe only"]:::leaf
 
     classDef hub fill:#38bfa0,stroke:#2a8a74,colour:#0a0c10,font-weight:bold
     classDef branch fill:#1a1e28,stroke:#38bfa0,colour:#e8eaf0,font-weight:bold
     classDef leaf fill:#12151c,stroke:#2d3344,colour:#8b92a8
 
-    click PLAT href "https://gilesparnell.github.io/Claude/projects.html"
-    click CLI href "https://gilesparnell.github.io/Claude/projects.html"
-    click PERS href "https://gilesparnell.github.io/Claude/projects.html"
-    click SKL href "https://gilesparnell.github.io/Claude/skills.html"
-    click WLK href "https://gilesparnell.github.io/Claude/walkthroughs.html"
-    click DEC href "https://gilesparnell.github.io/Claude/decisions.html"
-    click PRJ href "https://gilesparnell.github.io/Claude/projects.html"
       </div>
     </div>
   </div>
@@ -364,38 +355,66 @@ flowchart LR
   <!-- Entry Cards -->
   <div class="entries">
 
-    <a href="https://gilesparnell.github.io/Claude/projects.html"
-       class="entry-card entry-card--projects"
+    <a class="entry-card entry-card--projects" href="projects/robs-gardens.html"
        style="--card-glow: rgba(97,153,230,0.18);">
-      <div class="entry-icon">⚡</div>
-      <div class="entry-title">Projects</div>
-      <p class="entry-sub">Every repo across client work, internal platform, and personal projects — with status, last commit, and links to docs.</p>
+      <div class="entry-icon">🌿</div>
+      <div class="entry-title">Rob's Gardens</div>
+      <p class="entry-sub">A marketing website for Rob's Gardens, a garden and maintenance business on Sydney's Northern Beaches, built to win local search and turn visitors into quote requests.</p>
       <div class="entry-pills">
-        <span class="entry-pill">3 Client</span>
-        <span class="entry-pill">9 Internal</span>
-        <span class="entry-pill">8 Personal</span>
-        <span class="entry-pill">22 total repos</span>
+        <span class="entry-pill">React</span>
+        <span class="entry-pill">Vite</span>
+        <span class="entry-pill">Local SEO</span>
       </div>
       <div class="entry-cta">
-        <span class="entry-cta-text">Explore all projects</span>
+        <span class="entry-cta-text">Read case study</span>
         <span class="entry-arrow">→</span>
       </div>
     </a>
 
-    <a href="https://gilesparnell.github.io/Claude/"
-       class="entry-card entry-card--knowledge"
+    <a class="entry-card entry-card--projects" href="projects/whole-life-challenge.html"
+       style="--card-glow: rgba(97,153,230,0.18);">
+      <div class="entry-icon">💪</div>
+      <div class="entry-title">Whole Life Challenge Tracker</div>
+      <p class="entry-sub">A habit-tracking app for small groups running the Whole Life Challenge — daily check-ins, scoring, and an opt-in leaderboard that updates live as people log their day.</p>
+      <div class="entry-pills">
+        <span class="entry-pill">React</span>
+        <span class="entry-pill">Vite</span>
+        <span class="entry-pill">Supabase</span>
+      </div>
+      <div class="entry-cta">
+        <span class="entry-cta-text">Read case study</span>
+        <span class="entry-arrow">→</span>
+      </div>
+    </a>
+
+    <a class="entry-card entry-card--projects" href="projects/parnell-systems-platform.html"
+       style="--card-glow: rgba(97,153,230,0.18);">
+      <div class="entry-icon">🎛️</div>
+      <div class="entry-title">Parnell Systems Platform</div>
+      <p class="entry-sub">An internal operations console for running a voice and messaging product — one place to manage numbers, communication channels, and per-client demo environments.</p>
+      <div class="entry-pills">
+        <span class="entry-pill">Next.js</span>
+        <span class="entry-pill">TypeScript</span>
+        <span class="entry-pill">Postgres</span>
+      </div>
+      <div class="entry-cta">
+        <span class="entry-cta-text">Read case study</span>
+        <span class="entry-arrow">→</span>
+      </div>
+    </a>
+
+    <a class="entry-card entry-card--knowledge" href="https://gilesparnell.github.io/Claude/"
        style="--card-glow: rgba(56,191,160,0.18);">
       <div class="entry-icon">🧠</div>
       <div class="entry-title">Knowledge Portal</div>
-      <p class="entry-sub">The engineering brain of Parnell Systems — skills, walkthroughs, architectural decisions, and reusable patterns.</p>
+      <p class="entry-sub">The engineering knowledge base — reusable, non-client-specific skills, walkthroughs, and decisions.</p>
       <div class="entry-pills">
-        <span class="entry-pill">23 Skills</span>
-        <span class="entry-pill">19 Decisions</span>
+        <span class="entry-pill">Skills</span>
         <span class="entry-pill">Walkthroughs</span>
-        <span class="entry-pill">Templates</span>
+        <span class="entry-pill">Reusable patterns</span>
       </div>
       <div class="entry-cta">
-        <span class="entry-cta-text">Browse the portal</span>
+        <span class="entry-cta-text">Open portal</span>
         <span class="entry-arrow">→</span>
       </div>
     </a>
@@ -406,10 +425,6 @@ flowchart LR
     <span>&copy; 2026 Parnell Systems</span>
     <span>
       <a href="https://github.com/gilesparnell">GitHub</a>
-      &nbsp;&middot;&nbsp;
-      <a href="https://gilesparnell.github.io/Claude/">Knowledge Portal</a>
-      &nbsp;&middot;&nbsp;
-      <a href="https://gilesparnell.github.io/Claude/projects.html">Projects</a>
     </span>
   </footer>
 
