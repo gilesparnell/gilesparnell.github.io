@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projects — Parnell Systems</title>
+  <meta name="description" content="Public case studies from Parnell Systems — client sites and internal products, with implementation kept private.">
+
+  <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap">
+
+  <style>
+    /* =============================================
+       PARNELL SYSTEMS — Projects listing
+       Deep Ocean Tech (matches hub index.html)
+       ============================================= */
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --font-display: 'Satoshi', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-body: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+      --bg-deep:    #0a0c10;
+      --bg-surface: #12151c;
+      --bg-raised:  #1a1e28;
+      --text-primary:   #e8eaf0;
+      --text-secondary: #8b92a8;
+      --text-tertiary:  #4a5068;
+      --accent:         #38bfa0;
+      --accent-light:   #5edcb8;
+      --accent-muted:   rgba(56,191,160,0.15);
+      --accent-glow:    rgba(56,191,160,0.20);
+      --blue-glow:      rgba(97,153,230,0.20);
+      --border:         rgba(255,255,255,0.06);
+      --border-hover:   rgba(255,255,255,0.14);
+      --radius: 20px;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--bg-deep);
+      color: var(--text-primary);
+      line-height: 1.6;
+      letter-spacing: -0.01em;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ---- Mesh background ---- */
+    .mesh-bg { position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
+    .mesh-bg .blob { position: absolute; border-radius: 50%; filter: blur(90px); will-change: transform; }
+    .mesh-bg .blob:nth-child(1) { width: 650px; height: 650px; background: hsla(168,55%,32%,0.35); top: -12%; left: -8%; animation: drift1 20s ease-in-out infinite alternate; }
+    .mesh-bg .blob:nth-child(2) { width: 500px; height: 500px; background: hsla(335,45%,28%,0.25); top: 5%; right: -12%; animation: drift2 24s ease-in-out infinite alternate; }
+    .mesh-bg .blob:nth-child(3) { width: 580px; height: 580px; background: hsla(215,55%,28%,0.28); bottom: -18%; left: 25%; animation: drift3 28s ease-in-out infinite alternate; }
+    @keyframes drift1 { to { transform: translate(90px,70px) scale(1.08); } }
+    @keyframes drift2 { to { transform: translate(-70px,90px) scale(0.92); } }
+    @keyframes drift3 { to { transform: translate(50px,-60px) scale(1.12); } }
+
+    /* ---- Layout ---- */
+    .page {
+      position: relative;
+      z-index: 1;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 3rem 2rem 4rem;
+    }
+
+    /* ---- Header ---- */
+    .site-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 3rem;
+      animation: fadeUp 0.5s ease-out both;
+    }
+    .brand {
+      display: flex; align-items: center; gap: 14px;
+      text-decoration: none; color: inherit;
+    }
+    .brand-mark {
+      width: 42px; height: 42px; border-radius: 12px;
+      background: linear-gradient(135deg, var(--accent), #2a8a74);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-display); font-weight: 900; font-size: 1.2rem;
+      color: #fff; letter-spacing: -0.03em; flex-shrink: 0;
+    }
+    .brand-text {
+      font-family: var(--font-display); font-weight: 700;
+      font-size: 1.25rem; letter-spacing: -0.03em;
+    }
+    .back-link {
+      color: var(--text-secondary); text-decoration: none; font-size: 0.85rem;
+      font-weight: 500; display: flex; align-items: center; gap: 6px; transition: color 0.2s;
+    }
+    .back-link:hover { color: var(--text-primary); }
+
+    /* ---- Hero ---- */
+    .list-hero {
+      margin-bottom: 2.5rem;
+      animation: fadeUp 0.6s 0.05s ease-out both;
+    }
+    .list-hero .eyebrow {
+      display: block; font-size: 0.7rem; font-weight: 600;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 0.8rem;
+    }
+    .list-hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 900; line-height: 1.05; letter-spacing: -0.04em;
+      margin-bottom: 0.9rem;
+    }
+    .list-hero .lede {
+      font-size: clamp(0.95rem, 1.8vw, 1.1rem);
+      color: var(--text-secondary); max-width: 600px; line-height: 1.7;
+    }
+
+    /* ---- Project cards ---- */
+    .entries {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      animation: fadeUp 0.6s 0.15s ease-out both;
+    }
+    .entry-card {
+      background: rgba(255,255,255,0.035);
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem 2rem 1.75rem;
+      text-decoration: none; color: inherit;
+      display: flex; flex-direction: column;
+      position: relative; overflow: hidden;
+      transition: transform 0.45s cubic-bezier(0.16,1,0.3,1),
+                  box-shadow 0.45s cubic-bezier(0.16,1,0.3,1),
+                  border-color 0.4s ease;
+    }
+    .entry-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.10), transparent);
+      pointer-events: none;
+    }
+    .entry-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--border-hover);
+      box-shadow: 0 28px 80px rgba(0,0,0,0.4), 0 0 60px var(--accent-muted);
+    }
+    .entry-icon {
+      width: 52px; height: 52px; border-radius: 14px;
+      background: rgba(97,153,230,0.12);
+      border: 1px solid rgba(97,153,230,0.2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem; margin-bottom: 1.25rem; flex-shrink: 0;
+    }
+    .entry-title {
+      font-family: var(--font-display); font-weight: 900;
+      font-size: 1.5rem; letter-spacing: -0.04em; line-height: 1.1;
+      margin-bottom: 0.5rem;
+    }
+    .entry-sub {
+      color: var(--text-secondary); font-size: 0.9rem; line-height: 1.65;
+      flex: 1; margin-bottom: 1.25rem;
+    }
+    .entry-pills {
+      display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 1.5rem;
+    }
+    .entry-pill {
+      font-size: 0.62rem; font-weight: 600; letter-spacing: 0.06em;
+      padding: 3px 10px; border-radius: 100px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: var(--text-secondary);
+    }
+    .entry-cta {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-top: auto; padding-top: 1.25rem;
+      border-top: 1px solid var(--border);
+    }
+    .entry-cta-text {
+      font-family: var(--font-display); font-weight: 700;
+      font-size: 0.9rem; color: #6199e6; letter-spacing: -0.01em;
+    }
+    .entry-arrow {
+      width: 36px; height: 36px; border-radius: 10px;
+      border: 1px solid var(--border);
+      background: rgba(97,153,230,0.08);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; color: #6199e6;
+      transition: background 0.2s, border-color 0.2s, transform 0.2s;
+    }
+    .entry-card:hover .entry-arrow {
+      background: rgba(97,153,230,0.15);
+      border-color: rgba(97,153,230,0.3);
+      transform: translateX(3px);
+    }
+
+    /* ---- Footer ---- */
+    .site-footer {
+      margin-top: 3.5rem; padding-top: 2rem;
+      border-top: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      font-size: 0.78rem; color: var(--text-tertiary);
+    }
+    .site-footer a {
+      color: var(--text-secondary); text-decoration: none; transition: color 0.2s;
+    }
+    .site-footer a:hover { color: var(--accent); }
+
+    /* ---- Animations ---- */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ---- Responsive ---- */
+    @media (max-width: 700px) {
+      .entries { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 580px) {
+      .page { padding: 2rem 1rem 3rem; }
+      .site-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+      .site-footer { flex-direction: column; gap: 0.75rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="mesh-bg" aria-hidden="true">
+  <div class="blob"></div><div class="blob"></div><div class="blob"></div>
+</div>
+
+<div class="page">
+
+  <header class="site-header">
+    <a href="../index.html" class="brand">
+      <div class="brand-mark">PS</div>
+      <span class="brand-text">Parnell Systems</span>
+    </a>
+    <a href="../index.html" class="back-link">&larr; Back to hub</a>
+  </header>
+
+  <section class="list-hero">
+    <span class="eyebrow">Case studies</span>
+    <h1>Projects</h1>
+    <p class="lede">Public case studies from client builds and internal products. Each covers the problem, the approach, and the outcome — the source code and implementation docs stay private.</p>
+  </section>
+
+  <div class="entries">
+
+    <a class="entry-card" href="robgardens.html">
+      <div class="entry-icon">🌿</div>
+      <div class="entry-title">Rob's Gardens</div>
+      <p class="entry-sub">A marketing website for a garden and maintenance business on Sydney's Northern Beaches, built to win local search and turn visitors into quote requests.</p>
+      <div class="entry-pills">
+        <span class="entry-pill">React</span>
+        <span class="entry-pill">Vite</span>
+        <span class="entry-pill">Local SEO</span>
+      </div>
+      <div class="entry-cta">
+        <span class="entry-cta-text">Read case study</span>
+        <span class="entry-arrow">→</span>
+      </div>
+    </a>
+
+    <a class="entry-card" href="whole-life-challenge.html">
+      <div class="entry-icon">💪</div>
+      <div class="entry-title">Whole Life Challenge Tracker</div>
+      <p class="entry-sub">A habit-tracking app for small groups running the Whole Life Challenge — daily check-ins, scoring, and an opt-in leaderboard that updates live as people log their day.</p>
+      <div class="entry-pills">
+        <span class="entry-pill">React</span>
+        <span class="entry-pill">Vite</span>
+        <span class="entry-pill">Supabase</span>
+      </div>
+      <div class="entry-cta">
+        <span class="entry-cta-text">Read case study</span>
+        <span class="entry-arrow">→</span>
+      </div>
+    </a>
+
+    <a class="entry-card" href="parnell-systems-platform.html">
+      <div class="entry-icon">🎛️</div>
+      <div class="entry-title">Parnell Systems Platform</div>
+      <p class="entry-sub">An internal operations console for running a voice and messaging product — one place to manage numbers, communication channels, and per-client demo environments.</p>
+      <div class="entry-pills">
+        <span class="entry-pill">Next.js</span>
+        <span class="entry-pill">TypeScript</span>
+        <span class="entry-pill">Postgres</span>
+      </div>
+      <div class="entry-cta">
+        <span class="entry-cta-text">Read case study</span>
+        <span class="entry-arrow">→</span>
+      </div>
+    </a>
+
+  </div>
+
+  <footer class="site-footer">
+    <span>&copy; 2026 Parnell Systems</span>
+    <span><a href="../index.html">Back to hub</a></span>
+  </footer>
+
+</div>
+
+</body>
+</html>
