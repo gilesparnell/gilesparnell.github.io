@@ -64,7 +64,14 @@ const STYLE = `
     @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
     @media (max-width: 580px) { .page { padding: 2rem 1rem 3rem; } .site-header { flex-direction: column; align-items: flex-start; gap: 1rem; } .site-footer { flex-direction: column; gap: 0.75rem; text-align: center; } }`;
 
+const GROUP_BACK = {
+  products: ['products.html', 'Products'],
+  clients: ['clients.html', 'Client work'],
+  labs: ['labs.html', 'Labs'],
+};
+
 function renderProjectPage(p) {
+  const [backHref, backLabel] = GROUP_BACK[p.group] || ['index.html', 'All projects'];
   const pills = (p.pills || []).map((t) => `<span class="cs-pill">${esc(t)}</span>`).join('\n      ');
   const note = p.note ? `<p class="cs-note">${esc(p.note)}</p>\n    ` : '';
   return `<!DOCTYPE html>
@@ -94,7 +101,7 @@ ${STYLE}
       <div class="brand-mark">PS</div>
       <span class="brand-text">Parnell Systems</span>
     </a>
-    <a href="index.html" class="back-link">&larr; All projects</a>
+    <a href="${backHref}" class="back-link">&larr; ${esc(backLabel)}</a>
   </header>
 
   <section class="cs-hero">
@@ -142,7 +149,7 @@ ${STYLE}
 const SPEC = [
   // ── Labs / products ──
   {
-    slug: 'sprint-tracker', eyebrow: 'Product', title: 'Sprint Tracker',
+    slug: 'sprint-tracker', group: 'labs', eyebrow: 'Product', title: 'Sprint Tracker',
     lede: 'A sprint and project tracking web app for small teams — plan work into workstreams, track progress, and manage access, with ClickUp sync so it fits an existing workflow.',
     pills: ['Next.js', 'TypeScript', 'Vercel', 'ClickUp API'],
     problem: 'Small teams delivering across several tools lose the thread — status lives in someone’s head, a spreadsheet, or a ticketing tool nobody opens. There was no single, fast answer to “what’s in this sprint and where is it?”',
@@ -150,7 +157,7 @@ const SPEC = [
     outcome: 'A deployable single source of truth for sprint progress — built on Next.js, shipped on Vercel, with authentication, an admin surface, and a clean docs site.',
   },
   {
-    slug: 'habit-tracker', eyebrow: 'Product', title: 'Habit Tracker',
+    slug: 'habit-tracker', group: 'labs', eyebrow: 'Product', title: 'Habit Tracker',
     lede: 'A single-user sobriety tracker built as an installable app — day counters for cutting down on drinking and vaping, designed to open instantly and work offline.',
     pills: ['React', 'Vite', 'Supabase', 'PWA'],
     problem: 'Breaking a habit needs a frictionless daily signal — “how many days am I in?” Most trackers are heavy, cloud-locked, or lose your streak the moment you’re offline. A slip also needs to be handled with care, not punishment.',
@@ -158,7 +165,7 @@ const SPEC = [
     outcome: 'A private, phone-first habit tool that’s always one tap away, keeps working offline, and treats a reset as a fresh start rather than a failure.',
   },
   {
-    slug: 'google-drive-migration', eyebrow: 'Tool', title: 'Google Drive Consolidation',
+    slug: 'google-drive-migration', group: 'labs', eyebrow: 'Tool', title: 'Google Drive Consolidation',
     lede: 'A tool that safely merges the contents of several Google Drive accounts into one — recreating native Google Docs, Sheets, and Slides rather than dumping dead copies.',
     pills: ['Python', 'Google Drive API', 'OAuth'],
     problem: 'Years of files scattered across multiple Google accounts is a genuine mess to consolidate. A naive copy breaks native Docs into unusable exports, loses folder structure, and risks touching the source data — and doing it by hand across thousands of files isn’t realistic.',
@@ -166,7 +173,7 @@ const SPEC = [
     outcome: 'Multiple accounts’ worth of documents consolidated into a single trusted Drive, native files intact and the originals never modified — reversible, auditable, and hands-off.',
   },
   {
-    slug: 'evernote-to-obsidian', eyebrow: 'Tool', title: 'Evernote → Obsidian Knowledge Engine',
+    slug: 'evernote-to-obsidian', group: 'labs', eyebrow: 'Tool', title: 'Evernote → Obsidian Knowledge Engine',
     lede: 'A migration and classification pipeline that turns a decade of unstructured Evernote notes into a linked, auto-categorised Obsidian knowledge graph — running mostly offline.',
     pills: ['Python', 'Local LLM (Gemma)', 'Obsidian', 'pytest'],
     problem: 'Thousands of notes exported from Evernote arrive as a flat, tag-less pile. Sorting them into a usable second brain — by type, project, people, and topic — is a multi-week job by hand, and running cloud AI over that volume is expensive and privacy-hostile.',
@@ -174,7 +181,7 @@ const SPEC = [
     outcome: 'A once-unmanageable note dump became a navigable, auto-linked knowledge graph — categorised, deduplicated, and cross-referenced — with the classification running locally so private notes never leave the machine.',
   },
   {
-    slug: 'granola-sync', eyebrow: 'Tool', title: 'Granola → Obsidian Sync',
+    slug: 'granola-sync', group: 'labs', eyebrow: 'Tool', title: 'Granola → Obsidian Sync',
     lede: 'A macOS background daemon that pulls AI meeting notes from Granola into Obsidian the instant a meeting ends, with attendees and organisation auto-detected.',
     pills: ['Python', 'macOS LaunchAgent', 'Obsidian'],
     problem: 'AI meeting notes are only useful if they land where you actually think — your notes vault — without a manual export every time. Polling an API on a timer is wasteful and laggy, and the notes arrive with no structure to connect them to people or projects.',
@@ -182,7 +189,7 @@ const SPEC = [
     outcome: 'Meeting notes appear in Obsidian automatically, correctly tagged and linked, with zero manual steps — a quiet daemon that keeps a second brain current without ever being opened.',
   },
   {
-    slug: 'resume-builder', eyebrow: 'Product', title: 'AI Résumé & Application Builder',
+    slug: 'resume-builder', group: 'labs', eyebrow: 'Product', title: 'AI Résumé & Application Builder',
     lede: 'A browser-based CV editor that reads a job posting from a URL and generates a tailored professional profile and application packet for it.',
     pills: ['Next.js', 'TypeScript', 'Claude API'],
     problem: 'Tailoring a CV and cover letter to each role is slow, repetitive, and the part most people skip — yet generic applications are exactly what gets filtered out. The context (the specific job) is sitting right there in the posting, unused.',
@@ -190,7 +197,7 @@ const SPEC = [
     outcome: 'The tedious, repeated work of tailoring an application to each role is reduced to pasting a link — producing a role-specific draft in seconds that’s then refined by hand.',
   },
   {
-    slug: 'interview-prep', eyebrow: 'Product', title: 'Interview & Career Compass',
+    slug: 'interview-prep', group: 'labs', eyebrow: 'Product', title: 'Interview & Career Compass',
     lede: 'A structured interview-preparation workspace — a bank of STAR stories, role-discovery exercises, and career-direction tooling, exportable into an Obsidian knowledge base.',
     pills: ['Structured content', 'Obsidian', 'Career frameworks'],
     problem: 'Interview prep is usually ad-hoc: scattered notes, half-remembered examples, and no system for turning experience into crisp, reusable answers. Deciding what role to even aim for is a separate, harder problem that rarely gets structured attention.',
@@ -198,7 +205,7 @@ const SPEC = [
     outcome: 'Interview answers and career thinking captured once as structured, linkable content — ready to draw on for any conversation, and improving with each pass rather than starting from scratch.',
   },
   {
-    slug: 'floor-quotes', eyebrow: 'Product concept', title: 'Floor Quotes',
+    slug: 'floor-quotes', group: 'labs', eyebrow: 'Product concept', title: 'Floor Quotes',
     lede: 'A validated product concept for flooring-quote automation — capture a room, visualise options, estimate material and cost, and turn a walkthrough into a structured quote.',
     pills: ['Product discovery', 'Market validation'],
     problem: 'Local flooring installers quote slowly and inconsistently — measuring by hand, guessing quantities, and losing leads between the site visit and the written quote. The question was whether a “scan a room → quote” product could win in an already-busy space.',
@@ -206,7 +213,7 @@ const SPEC = [
     outcome: 'A disciplined validation pass that concluded the generic visualiser space is crowded and identified a narrower opportunity — a documented decision to park rather than build, which is its own kind of result.',
   },
   {
-    slug: 'pitime', eyebrow: 'Product', title: 'PiTime — Voice Timesheets',
+    slug: 'pitime', group: 'labs', eyebrow: 'Product', title: 'PiTime — Voice Timesheets',
     lede: 'A voice-activated timesheet and invoicing app for independent consultants — speak your hours, and it produces clients, projects, invoices, and a utilisation dashboard.',
     pills: ['Next.js 15', 'TypeScript', 'Turso', 'Drizzle', 'NextAuth'],
     problem: 'Consultants lose billable hours to the friction of time tracking — nobody wants to fill a timesheet grid at the end of a long day, so entries get estimated, delayed, or lost, and invoicing becomes a monthly scramble.',
@@ -215,7 +222,7 @@ const SPEC = [
   },
   // ── Client deliveries (anonymised) ──
   {
-    slug: 'removals-web-presence', eyebrow: 'Client delivery', title: 'Removals Company Web Presence',
+    slug: 'removals-web-presence', group: 'clients', eyebrow: 'Client delivery', title: 'Removals Company Web Presence',
     lede: 'A marketing and lead-capture website for a local removals business — a fast, mobile-first presence built to turn searches into enquiries.',
     pills: ['React', 'Web', 'Lead capture'],
     problem: 'A local removals business needs to be found and to convert — a slow or dated site loses jobs to competitors before a quote is ever requested. The client needed a credible, mobile-first web presence with a clear path to enquiry.',
@@ -224,7 +231,7 @@ const SPEC = [
     note: 'Delivered for a client; identity and specifics anonymised.',
   },
   {
-    slug: 'field-services-automation', eyebrow: 'Client delivery', title: 'Field-Services Automation',
+    slug: 'field-services-automation', group: 'clients', eyebrow: 'Client delivery', title: 'Field-Services Automation',
     lede: 'A workflow-automation MVP for a field-services business, built around ServiceM8 to remove manual admin from the job-to-invoice pipeline.',
     pills: ['ServiceM8', 'Automation', 'Integration'],
     problem: 'A field-services operator was doing repetitive admin by hand — moving job data between systems and chasing the same steps on every job. Manual handoffs are slow, error-prone, and scale badly as the business grows.',
