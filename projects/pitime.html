@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PiTime — Voice Timesheets — Parnell Systems</title>
+  <meta name="description" content="A voice-activated timesheet and invoicing app for independent consultants — speak your hours, and it produces clients, projects, invoices, and a utilisation dashboard.">
+  <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap">
+  <style>
+    /* PARNELL SYSTEMS — Case study detail · Deep Ocean Tech (matches hub index.html) */
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --font-display: 'Satoshi', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-body: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+      --bg-deep: #0a0c10; --bg-surface: #12151c; --bg-raised: #1a1e28;
+      --text-primary: #e8eaf0; --text-secondary: #8b92a8; --text-tertiary: #4a5068;
+      --accent: #38bfa0; --accent-light: #5edcb8; --accent-muted: rgba(56,191,160,0.15);
+      --accent-glow: rgba(56,191,160,0.20); --border: rgba(255,255,255,0.06);
+      --border-hover: rgba(255,255,255,0.14); --radius: 20px;
+    }
+    body { font-family: var(--font-body); background: var(--bg-deep); color: var(--text-primary);
+      line-height: 1.6; letter-spacing: -0.01em; min-height: 100vh; overflow-x: hidden; }
+    .mesh-bg { position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
+    .mesh-bg .blob { position: absolute; border-radius: 50%; filter: blur(90px); will-change: transform; }
+    .mesh-bg .blob:nth-child(1) { width: 650px; height: 650px; background: hsla(168,55%,32%,0.35); top: -12%; left: -8%; animation: drift1 20s ease-in-out infinite alternate; }
+    .mesh-bg .blob:nth-child(2) { width: 500px; height: 500px; background: hsla(335,45%,28%,0.25); top: 5%; right: -12%; animation: drift2 24s ease-in-out infinite alternate; }
+    .mesh-bg .blob:nth-child(3) { width: 580px; height: 580px; background: hsla(215,55%,28%,0.28); bottom: -18%; left: 25%; animation: drift3 28s ease-in-out infinite alternate; }
+    @keyframes drift1 { to { transform: translate(90px,70px) scale(1.08); } }
+    @keyframes drift2 { to { transform: translate(-70px,90px) scale(0.92); } }
+    @keyframes drift3 { to { transform: translate(50px,-60px) scale(1.12); } }
+    .page { position: relative; z-index: 1; max-width: 780px; margin: 0 auto; padding: 3rem 2rem 4rem; }
+    .site-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 3rem; animation: fadeUp 0.5s ease-out both; }
+    .brand { display: flex; align-items: center; gap: 14px; text-decoration: none; color: inherit; }
+    .brand-mark { width: 42px; height: 42px; border-radius: 12px; background: linear-gradient(135deg, var(--accent), #2a8a74);
+      display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-weight: 900; font-size: 1.2rem; color: #fff; letter-spacing: -0.03em; flex-shrink: 0; }
+    .brand-text { font-family: var(--font-display); font-weight: 700; font-size: 1.25rem; letter-spacing: -0.03em; }
+    .back-link { color: var(--text-secondary); text-decoration: none; font-size: 0.85rem; font-weight: 500; display: flex; align-items: center; gap: 6px; transition: color 0.2s; }
+    .back-link:hover { color: var(--text-primary); }
+    .cs-hero { margin-bottom: 2.5rem; animation: fadeUp 0.6s 0.05s ease-out both; }
+    .cs-hero .eyebrow { display: block; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.8rem; }
+    .cs-hero h1 { font-family: var(--font-display); font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 900; line-height: 1.05; letter-spacing: -0.04em; margin-bottom: 1rem; }
+    .cs-hero .lede { font-size: clamp(0.95rem, 1.8vw, 1.1rem); color: var(--text-secondary); max-width: 620px; line-height: 1.7; }
+    .cs-pills { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 1.5rem; }
+    .cs-pill { font-size: 0.62rem; font-weight: 600; letter-spacing: 0.06em; padding: 4px 12px; border-radius: 100px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); color: var(--text-secondary); }
+    .cs-body { animation: fadeUp 0.6s 0.15s ease-out both; }
+    .cs-section { background: rgba(255,255,255,0.025); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem; margin-bottom: 14px; position: relative; }
+    .cs-section::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.09), transparent); pointer-events: none; }
+    .cs-section .label { font-size: 0.65rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.9rem; }
+    .cs-section p { color: var(--text-secondary); font-size: 1rem; line-height: 1.75; }
+    .cs-section p strong { color: var(--text-primary); font-weight: 600; }
+    .cs-note { margin-top: 1.5rem; font-size: 0.85rem; color: var(--text-tertiary); }
+    .cs-note a { color: var(--text-secondary); text-decoration: none; transition: color 0.2s; }
+    .cs-note a:hover { color: var(--accent); }
+    .site-footer { margin-top: 3.5rem; padding-top: 2rem; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; font-size: 0.78rem; color: var(--text-tertiary); }
+    .site-footer a { color: var(--text-secondary); text-decoration: none; transition: color 0.2s; }
+    .site-footer a:hover { color: var(--accent); }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+    @media (max-width: 580px) { .page { padding: 2rem 1rem 3rem; } .site-header { flex-direction: column; align-items: flex-start; gap: 1rem; } .site-footer { flex-direction: column; gap: 0.75rem; text-align: center; } }
+  </style>
+</head>
+<body>
+
+<div class="mesh-bg" aria-hidden="true">
+  <div class="blob"></div><div class="blob"></div><div class="blob"></div>
+</div>
+
+<div class="page">
+
+  <header class="site-header">
+    <a href="../index.html" class="brand">
+      <div class="brand-mark">PS</div>
+      <span class="brand-text">Parnell Systems</span>
+    </a>
+    <a href="index.html" class="back-link">&larr; All projects</a>
+  </header>
+
+  <section class="cs-hero">
+    <span class="eyebrow">Product</span>
+    <h1>PiTime — Voice Timesheets</h1>
+    <p class="lede">A voice-activated timesheet and invoicing app for independent consultants — speak your hours, and it produces clients, projects, invoices, and a utilisation dashboard.</p>
+    <div class="cs-pills">
+      <span class="cs-pill">Next.js 15</span>
+      <span class="cs-pill">TypeScript</span>
+      <span class="cs-pill">Turso</span>
+      <span class="cs-pill">Drizzle</span>
+      <span class="cs-pill">NextAuth</span>
+    </div>
+  </section>
+
+  <div class="cs-body">
+
+    <section class="cs-section">
+      <div class="label">The problem</div>
+      <p>Consultants lose billable hours to the friction of time tracking — nobody wants to fill a timesheet grid at the end of a long day, so entries get estimated, delayed, or lost, and invoicing becomes a monthly scramble.</p>
+    </section>
+
+    <section class="cs-section">
+      <div class="label">What was built</div>
+      <p>A Next.js app where time is entered by voice (OS speech-to-text plus a local fuzzy parser), with client and project management at hourly or daily rates. It generates sequentially-numbered invoices with GST and mileage line items, and a dashboard charts weekly hours, revenue by client, and aged receivables. Access is gated by Google OAuth with an email allowlist.</p>
+    </section>
+
+    <section class="cs-section">
+      <div class="label">The outcome</div>
+      <p>The end-of-day timesheet becomes a sentence spoken aloud, feeding straight into invoices and a live view of utilisation and receivables — the admin a solo consultant most wants to avoid, made almost frictionless.</p>
+    </section>
+
+    <p class="cs-note">Source code and implementation docs for this project are <a href="../private.html">private</a>.</p>
+
+  </div>
+
+  <footer class="site-footer">
+    <span>&copy; 2026 Parnell Systems</span>
+    <span><a href="../index.html">Back to hub</a></span>
+  </footer>
+
+</div>
+
+</body>
+</html>
