@@ -221,6 +221,13 @@
       .site-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
       .site-footer { flex-direction: column; gap: 0.75rem; text-align: center; }
     }
+  
+    /* ---- Project groups (Client work / Labs) ---- */
+    .proj-group { margin-bottom: 3.5rem; scroll-margin-top: 2rem; }
+    .group-head { margin-bottom: 1.5rem; }
+    .group-head .eyebrow { display: block; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.5rem; }
+    .group-head h2 { font-family: var(--font-display); font-size: 1.7rem; font-weight: 800; letter-spacing: -0.03em; }
+    .group-head .group-sub { color: var(--text-secondary); font-size: 0.95rem; margin-top: 0.4rem; max-width: 640px; }
   </style>
 </head>
 <body>
@@ -245,8 +252,13 @@
     <p class="lede">Public case studies from client builds and internal products. Each covers the problem, the approach, and the outcome — the source code and implementation docs stay private.</p>
   </section>
 
-  <div class="entries">
-
+    <section class="proj-group" id="client">
+    <div class="group-head">
+      <span class="eyebrow">Client work</span>
+      <h2>Client work</h2>
+      <p class="group-sub">Websites and automation delivered for real businesses. Client identities are anonymised where the engagement is private.</p>
+    </div>
+    <div class="entries">
     <a class="entry-card" href="robgardens.html">
       <div class="entry-icon">🌿</div>
       <div class="entry-title">Rob's Gardens</div>
@@ -255,6 +267,60 @@
         <span class="entry-pill">React</span>
         <span class="entry-pill">Vite</span>
         <span class="entry-pill">Local SEO</span>
+      </div>
+      <div class="entry-cta">
+        <span class="entry-cta-text">Read case study</span>
+        <span class="entry-arrow">→</span>
+      </div>
+    </a>
+
+    <a class="entry-card" href="removals-web-presence.html">
+      <div class="entry-icon">📦</div>
+      <div class="entry-title">Removals Company Web Presence</div>
+      <p class="entry-sub">A marketing and lead-capture website for a local removals business — a fast, mobile-first presence built to turn searches into enquiries.</p>
+      <div class="entry-pills">
+        <span class="entry-pill">React</span>
+        <span class="entry-pill">Web</span>
+        <span class="entry-pill">Lead capture</span>
+      </div>
+      <div class="entry-cta">
+        <span class="entry-cta-text">Read case study</span>
+        <span class="entry-arrow">→</span>
+      </div>
+    </a>
+
+    <a class="entry-card" href="field-services-automation.html">
+      <div class="entry-icon">🔧</div>
+      <div class="entry-title">Field-Services Automation</div>
+      <p class="entry-sub">A workflow-automation MVP for a field-services business, built around ServiceM8 to remove manual admin from the job-to-invoice pipeline.</p>
+      <div class="entry-pills">
+        <span class="entry-pill">ServiceM8</span>
+        <span class="entry-pill">Automation</span>
+        <span class="entry-pill">Integration</span>
+      </div>
+      <div class="entry-cta">
+        <span class="entry-cta-text">Read case study</span>
+        <span class="entry-arrow">→</span>
+      </div>
+    </a>
+    </div>
+  </section>
+
+  <section class="proj-group" id="labs">
+    <div class="group-head">
+      <span class="eyebrow">Labs</span>
+      <h2>Labs &amp; products</h2>
+      <p class="group-sub">Products, tools, and experiments built end-to-end — the platform behind the voice product, apps, and internal tooling.</p>
+    </div>
+    <div class="entries">
+    <a class="entry-card" href="parnell-systems-platform.html">
+      <div class="entry-icon">🎛️</div>
+      <div class="entry-title">Parnell Systems Platform</div>
+      <p class="entry-sub">An internal operations console for running a voice and messaging product — one place to manage numbers, communication channels, and per-client demo environments.</p>
+      <div class="entry-pills">
+        <span class="entry-pill">Next.js</span>
+        <span class="entry-pill">TypeScript</span>
+        <span class="entry-pill">Postgres</span>
       </div>
       <div class="entry-cta">
         <span class="entry-cta-text">Read case study</span>
@@ -277,14 +343,30 @@
       </div>
     </a>
 
-    <a class="entry-card" href="parnell-systems-platform.html">
-      <div class="entry-icon">🎛️</div>
-      <div class="entry-title">Parnell Systems Platform</div>
-      <p class="entry-sub">An internal operations console for running a voice and messaging product — one place to manage numbers, communication channels, and per-client demo environments.</p>
+    <a class="entry-card" href="pitime.html">
+      <div class="entry-icon">⏱️</div>
+      <div class="entry-title">PiTime — Voice Timesheets</div>
+      <p class="entry-sub">A voice-activated timesheet and invoicing app for independent consultants — speak your hours, and it produces clients, projects, invoices, and a utilisation dashboard.</p>
       <div class="entry-pills">
-        <span class="entry-pill">Next.js</span>
+        <span class="entry-pill">Next.js 15</span>
         <span class="entry-pill">TypeScript</span>
-        <span class="entry-pill">Postgres</span>
+        <span class="entry-pill">Turso</span>
+        <span class="entry-pill">Drizzle</span>
+        <span class="entry-pill">NextAuth</span>
+      </div>
+      <div class="entry-cta">
+        <span class="entry-cta-text">Read case study</span>
+        <span class="entry-arrow">→</span>
+      </div>
+    </a>
+
+    <a class="entry-card" href="floor-quotes.html">
+      <div class="entry-icon">📐</div>
+      <div class="entry-title">Floor Quotes</div>
+      <p class="entry-sub">A validated product concept for flooring-quote automation — capture a room, visualise options, estimate material and cost, and turn a walkthrough into a structured quote.</p>
+      <div class="entry-pills">
+        <span class="entry-pill">Product discovery</span>
+        <span class="entry-pill">Market validation</span>
       </div>
       <div class="entry-cta">
         <span class="entry-cta-text">Read case study</span>
@@ -324,21 +406,6 @@
       </div>
     </a>
 
-    <a class="entry-card" href="google-drive-migration.html">
-      <div class="entry-icon">🗂️</div>
-      <div class="entry-title">Google Drive Consolidation</div>
-      <p class="entry-sub">A tool that safely merges the contents of several Google Drive accounts into one — recreating native Google Docs, Sheets, and Slides rather than dumping dead copies.</p>
-      <div class="entry-pills">
-        <span class="entry-pill">Python</span>
-        <span class="entry-pill">Google Drive API</span>
-        <span class="entry-pill">OAuth</span>
-      </div>
-      <div class="entry-cta">
-        <span class="entry-cta-text">Read case study</span>
-        <span class="entry-arrow">→</span>
-      </div>
-    </a>
-
     <a class="entry-card" href="evernote-to-obsidian.html">
       <div class="entry-icon">🧠</div>
       <div class="entry-title">Evernote → Obsidian Knowledge Engine</div>
@@ -363,6 +430,21 @@
         <span class="entry-pill">Python</span>
         <span class="entry-pill">macOS LaunchAgent</span>
         <span class="entry-pill">Obsidian</span>
+      </div>
+      <div class="entry-cta">
+        <span class="entry-cta-text">Read case study</span>
+        <span class="entry-arrow">→</span>
+      </div>
+    </a>
+
+    <a class="entry-card" href="google-drive-migration.html">
+      <div class="entry-icon">🗂️</div>
+      <div class="entry-title">Google Drive Consolidation</div>
+      <p class="entry-sub">A tool that safely merges the contents of several Google Drive accounts into one — recreating native Google Docs, Sheets, and Slides rather than dumping dead copies.</p>
+      <div class="entry-pills">
+        <span class="entry-pill">Python</span>
+        <span class="entry-pill">Google Drive API</span>
+        <span class="entry-pill">OAuth</span>
       </div>
       <div class="entry-cta">
         <span class="entry-cta-text">Read case study</span>
@@ -399,69 +481,8 @@
         <span class="entry-arrow">→</span>
       </div>
     </a>
-
-    <a class="entry-card" href="floor-quotes.html">
-      <div class="entry-icon">📐</div>
-      <div class="entry-title">Floor Quotes</div>
-      <p class="entry-sub">A validated product concept for flooring-quote automation — capture a room, visualise options, estimate material and cost, and turn a walkthrough into a structured quote.</p>
-      <div class="entry-pills">
-        <span class="entry-pill">Product discovery</span>
-        <span class="entry-pill">Market validation</span>
-      </div>
-      <div class="entry-cta">
-        <span class="entry-cta-text">Read case study</span>
-        <span class="entry-arrow">→</span>
-      </div>
-    </a>
-
-    <a class="entry-card" href="pitime.html">
-      <div class="entry-icon">⏱️</div>
-      <div class="entry-title">PiTime — Voice Timesheets</div>
-      <p class="entry-sub">A voice-activated timesheet and invoicing app for independent consultants — speak your hours, and it produces clients, projects, invoices, and a utilisation dashboard.</p>
-      <div class="entry-pills">
-        <span class="entry-pill">Next.js 15</span>
-        <span class="entry-pill">TypeScript</span>
-        <span class="entry-pill">Turso</span>
-        <span class="entry-pill">Drizzle</span>
-        <span class="entry-pill">NextAuth</span>
-      </div>
-      <div class="entry-cta">
-        <span class="entry-cta-text">Read case study</span>
-        <span class="entry-arrow">→</span>
-      </div>
-    </a>
-
-    <a class="entry-card" href="removals-web-presence.html">
-      <div class="entry-icon">📦</div>
-      <div class="entry-title">Removals Company Web Presence</div>
-      <p class="entry-sub">A marketing and lead-capture website for a local removals business — a fast, mobile-first presence built to turn searches into enquiries.</p>
-      <div class="entry-pills">
-        <span class="entry-pill">React</span>
-        <span class="entry-pill">Web</span>
-        <span class="entry-pill">Lead capture</span>
-      </div>
-      <div class="entry-cta">
-        <span class="entry-cta-text">Read case study</span>
-        <span class="entry-arrow">→</span>
-      </div>
-    </a>
-
-    <a class="entry-card" href="field-services-automation.html">
-      <div class="entry-icon">🔧</div>
-      <div class="entry-title">Field-Services Automation</div>
-      <p class="entry-sub">A workflow-automation MVP for a field-services business, built around ServiceM8 to remove manual admin from the job-to-invoice pipeline.</p>
-      <div class="entry-pills">
-        <span class="entry-pill">ServiceM8</span>
-        <span class="entry-pill">Automation</span>
-        <span class="entry-pill">Integration</span>
-      </div>
-      <div class="entry-cta">
-        <span class="entry-cta-text">Read case study</span>
-        <span class="entry-arrow">→</span>
-      </div>
-    </a>
-
-  </div>
+    </div>
+  </section>
 
   <footer class="site-footer">
     <span>&copy; 2026 Parnell Systems</span>
