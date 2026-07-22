@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Options Cheat Sheet — No. 03</title>
+<link rel="stylesheet" href="assets/style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap">
+  <link rel="stylesheet" href="assets/reader.css">
+</head>
+<body class="reader">
+<div class="reader-bar">
+  <a class="rb-back" href="./">&larr; Options series</a>
+  <div class="rb-title">No. 03 &middot; What Moves the Price</div>
+  <a class="rb-pdf" href="options-cheat-sheet-03-what-moves-the-price.pdf" download>Download PDF &darr;</a>
+</div>
+<div class="reader-scroll">
+
+<!-- ===== PAGE 1 ===== -->
+<section class="page">
+  <div class="runhead"><span>Options Cheat Sheet</span><span>No. 03 · What moves the price</span></div>
+  <div class="masthead">
+    <div style="max-width:120mm;">
+      <div class="kicker">A visual primer · No. 03</div>
+      <h1 class="title">What moves<br><em>the price.</em></h1>
+    </div>
+    <div class="metabox">
+      <div class="hd">Premium, decoded</div>
+      Intrinsic + extrinsic<br>
+      Time · Volatility<br>
+      Right, and still losing<br><br>
+      <div class="hd">One page</div>
+      <div class="hd" style="margin-top:10px;">Read after</div>
+      No. 01 &amp; No. 02
+    </div>
+  </div>
+  <div class="intro">
+    <p class="lead">An option's price isn't a single mysterious number. The <b>premium has an anatomy</b> — two parts, pushed around by two forces: <em>time</em> and <em>volatility</em>. Once you can see those parts, the most confusing beginner experience finally makes sense: how you can call the direction correctly and <b>still lose money.</b></p>
+  </div>
+  <hr class="rule">
+  <div class="sect">
+    <div class="sectlabel">01 /<br>Two<br>parts</div>
+    <h2 class="stitle">Every premium is two parts.</h2>
+    <p>Whatever you pay for an option splits cleanly in two. One part is the value it would have if you exercised it this instant. The other is everything you're paying for the <em>chance</em> that it becomes worth more before it expires.</p>
+
+    <div style="margin:14px 0 6px;">
+      <svg width="100%" height="66" viewBox="0 0 660 66">
+        <text x="0" y="12" class="axcap">A $7.00 PREMIUM · CALL, STRIKE $100, STOCK AT $105</text>
+        <rect x="0" y="20" width="300" height="30" fill="#e8efe6" stroke="#cfe0ce"/>
+        <rect x="300" y="20" width="300" height="30" fill="#f3ece0" stroke="#e6d8bd"/>
+        <line x1="300" y1="16" x2="300" y2="54" stroke="#8c8c85" stroke-width="1" stroke-dasharray="2,2"/>
+        <text x="150" y="39" text-anchor="middle" style="font:600 12px 'Spectral',serif;fill:#2f5a3e;">Intrinsic · $5.00</text>
+        <text x="450" y="39" text-anchor="middle" style="font:600 12px 'Spectral',serif;fill:#a8792f;">Extrinsic (time value) · $2.00</text>
+        <text x="150" y="63" text-anchor="middle" class="axcap">WHAT IT'S WORTH IF EXERCISED NOW</text>
+        <text x="450" y="63" text-anchor="middle" class="axcap">WHAT YOU PAY FOR "MAYBE"</text>
+      </svg>
+    </div>
+
+    <div class="grid2" style="margin-top:12px;">
+      <div class="card green">
+        <div class="lab">The solid part</div>
+        <h4><span class="dot g"></span>Intrinsic value</h4>
+        <p class="small">The real, exercise-it-now payoff. A call struck at $100 with the stock at $105 has $5 of intrinsic — you could buy at $100 and sell at $105. Out-of-the-money options have <b>zero</b> intrinsic.</p>
+      </div>
+      <div class="card amber">
+        <div class="lab">The evaporating part</div>
+        <h4><span class="dot a"></span>Extrinsic (time) value</h4>
+        <p class="small">Everything above intrinsic — the price of possibility. It's largest when there's lots of time and lots of uncertainty, and it melts to exactly <b>zero</b> at expiration. This is the part most beginners are really buying.</p>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span>Options Cheat Sheet · 03</span><span>Educational reference — not investment advice</span></div>
+</section>
+
+<!-- ===== PAGE 2 ===== -->
+<section class="page">
+  <div class="runhead"><span>Options Cheat Sheet</span><span>No. 03 · What moves the price</span></div>
+  <div class="sect">
+    <div class="sectlabel">02 /<br>Intrinsic</div>
+    <h2 class="stitle">Intrinsic value — worth right now.</h2>
+    <p style="max-width:150mm;">The easy half. It's just the moneyness payoff, and it can never be negative — if exercising would lose money, you simply wouldn't, so the floor is zero.</p>
+    <div class="grid2" style="margin-top:10px;">
+      <div class="card">
+        <div class="lab">The formula</div>
+        <p class="small mono" style="margin-bottom:8px;">CALL intrinsic = max(0, &nbsp;spot − strike)<br>PUT&nbsp; intrinsic = max(0, &nbsp;strike − spot)</p>
+        <p class="small" style="margin:0;">At the moment of expiration, <b>all that's left is intrinsic</b> — every scrap of time value is gone. That's why an option's expiry value is fully determined by where the stock lands.</p>
+      </div>
+      <div class="card cream">
+        <div class="lab">Call struck at $100</div>
+        <div class="tscroll"><table class="chain" style="font-size:8.5px;">
+          <tr><th style="text-align:left;">Stock</th><th>Moneyness</th><th>Intrinsic</th></tr>
+          <tr><td style="text-align:left;">$120</td><td>In the money</td><td class="gt">$20</td></tr>
+          <tr><td style="text-align:left;">$105</td><td>In the money</td><td class="gt">$5</td></tr>
+          <tr><td style="text-align:left;">$100</td><td>At the money</td><td>$0</td></tr>
+          <tr><td style="text-align:left;">$95</td><td>Out of the money</td><td>$0</td></tr>
+        </table></div>
+      </div>
+    </div>
+    <hr class="rule">
+    <div class="sectlabel">03 /<br>Extrinsic</div>
+    <h2 class="stitle">Extrinsic value — <em>the price of "maybe."</em></h2>
+    <p style="max-width:150mm;">The interesting half, and the one that trips people up. Extrinsic value is what the market charges for the possibility that an option ends up worth more than it's worth today. Two things inflate it: <b>time remaining</b> and <b>expected movement (volatility)</b>.</p>
+    <div class="grid3" style="margin-top:10px;">
+      <div class="card"><div class="lab">More time</div><p class="small" style="margin:0;">More days = more chances for a favourable move = more extrinsic value. A 90-day option costs more than a 7-day one, all else equal.</p></div>
+      <div class="card"><div class="lab">More volatility</div><p class="small" style="margin:0;">A jumpier stock could travel further, so its options carry fatter extrinsic value. Calm stocks have cheap options.</p></div>
+      <div class="card amber"><div class="lab">The catch</div><p class="small" style="margin:0;">At-the-money options are <b>almost entirely extrinsic</b>. Buy one and you're mostly buying time value — which is guaranteed to decay.</p></div>
+    </div>
+    <div class="callout" style="margin-top:14px;">
+      <div class="tag">The reframe.</div>
+      <p class="small" style="margin:0;">When you <b>buy</b> an option you are usually long time value — you need the stock to move enough, fast enough, to outrun the melt. When you <b>sell</b> one (covered call, cash-secured put) you are short time value — you're being paid to let it melt in your favour. Same coin, two sides — exactly as in No. 01.</p>
+    </div>
+  </div>
+  <div class="foot"><span>Options Cheat Sheet · 03</span><span>Educational reference — not investment advice</span></div>
+</section>
+
+<!-- ===== PAGE 3 ===== -->
+<section class="page">
+  <div class="runhead"><span>Options Cheat Sheet</span><span>No. 03 · What moves the price</span></div>
+  <div class="sect">
+    <div class="sectlabel">04 /<br>Time<br>decay</div>
+    <h2 class="stitle">Time decay melts it — <em>fastest at the end.</em></h2>
+    <p style="max-width:150mm;">Extrinsic value doesn't drain at a steady drip. It clings on early and then falls off a cliff in the final weeks. This accelerating melt is called <b>theta</b>, and it's the single force working against every option buyer, every single day — weekends included.</p>
+
+    <div class="card" style="margin-top:12px;">
+      <div class="lab">How an at-the-money option's time value decays toward expiry</div>
+      <svg width="100%" height="180" viewBox="0 0 640 180">
+        <!-- axes -->
+        <line x1="40" y1="150" x2="620" y2="150" stroke="#cfcdc2" stroke-width="1"/>
+        <line x1="40" y1="20" x2="40" y2="150" stroke="#cfcdc2" stroke-width="1"/>
+        <!-- decay curve: slow then steep -->
+        <path d="M40,30 C220,50 360,72 470,100 C540,120 590,145 610,150" fill="none" stroke="#a8792f" stroke-width="2.5"/>
+        <!-- markers -->
+        <line x1="470" y1="20" x2="470" y2="150" stroke="#c9c7bc" stroke-width="1" stroke-dasharray="3,3"/>
+        <text x="474" y="32" class="axcap">~45 DAYS: DECAY ACCELERATES</text>
+        <text x="44" y="26" class="axcap">TIME VALUE</text>
+        <text x="45" y="164" class="axcap">MORE DAYS LEFT</text>
+        <text x="560" y="164" class="axcap">EXPIRY → 0</text>
+      </svg>
+    </div>
+
+    <div class="grid2" style="margin-top:12px;">
+      <div class="card red"><div class="lab">If you bought the option</div><p class="small" style="margin:0;">Theta is a headwind. Every day the stock does nothing, you lose a little — and you lose it <b>faster</b> as expiry nears. Give yourself time: longer-dated options decay more gently and forgive slow timing.</p></div>
+      <div class="card green"><div class="lab">If you sold the option</div><p class="small" style="margin:0;">Theta is a tailwind. As the writer of a covered call or cash-secured put, decay is exactly what you're harvesting — the option you sold gets cheaper to buy back with each passing day.</p></div>
+    </div>
+    <p class="small" style="margin-top:12px;color:#55554a;"><b>Practical takeaway:</b> buyers should avoid short-dated, at-the-money options as a default — you're standing directly under the fastest part of the melt. Sellers, conversely, often prefer that same 30–45 day window because the decay they collect is richest there.</p>
+  </div>
+  <div class="foot"><span>Options Cheat Sheet · 03</span><span>Educational reference — not investment advice</span></div>
+</section>
+
+<!-- ===== PAGE 4 ===== -->
+<section class="page">
+  <div class="runhead"><span>Options Cheat Sheet</span><span>No. 03 · What moves the price</span></div>
+  <div class="sect">
+    <div class="sectlabel">05 /<br>Vol</div>
+    <h2 class="stitle">Volatility sets the temperature.</h2>
+    <p style="max-width:150mm;">If time is the slow melt, <b>implied volatility</b> is the thermostat — it sets how expensive every option is right now. IV is the market's collective guess at how much the stock will move going forward, baked straight into the premium. It is <em>not</em> a direction; a high-IV stock is simply expected to swing hard, either way.</p>
+
+    <div class="card" style="margin-top:12px;">
+      <div class="lab">Same option, two volatility regimes — the extrinsic value inflates</div>
+      <svg width="100%" height="92" viewBox="0 0 640 92">
+        <text x="0" y="12" class="axcap">CALL · STRIKE $100 · STOCK $100 · 30 DAYS · INTRINSIC = $0, SO IT'S ALL TIME VALUE</text>
+        <!-- low IV bar -->
+        <text x="0" y="42" class="axcap">LOW IV (20%)</text>
+        <rect x="120" y="30" width="120" height="18" fill="#f3ece0" stroke="#e6d8bd"/>
+        <text x="248" y="43" style="font:600 11px 'Spectral',serif;fill:#a8792f;">$2.30</text>
+        <!-- high IV bar -->
+        <text x="0" y="72" class="axcap">HIGH IV (60%)</text>
+        <rect x="120" y="60" width="360" height="18" fill="#f3ece0" stroke="#e6d8bd"/>
+        <text x="488" y="73" style="font:600 11px 'Spectral',serif;fill:#a8792f;">$6.80</text>
+      </svg>
+      <p class="small" style="margin:6px 0 0;color:#55554a;">Nothing changed but the market's expectation of movement — yet the option costs nearly 3× as much. Buy when IV is high and you've overpaid for the "maybe"; that premium can deflate even if the stock cooperates.</p>
+    </div>
+
+    <div class="grid3" style="margin-top:12px;">
+      <div class="card"><div class="lab">IV rises into events</div><p class="small" style="margin:0;">Ahead of earnings or big news, uncertainty spikes and options get expensive — the market is bracing for a move.</p></div>
+      <div class="card red"><div class="lab">IV crush after</div><p class="small" style="margin:0;">Once the news is out, uncertainty vanishes and IV collapses. Premiums deflate fast — the classic trap for event-buyers.</p></div>
+      <div class="card blue"><div class="lab">IV rank / percentile</div><p class="small" style="margin:0;">A gauge of whether today's IV is high or low <em>for this stock</em>. Buyers prefer low; sellers prefer high. Most platforms show it.</p></div>
+    </div>
+
+    <div class="callout" style="margin-top:14px;">
+      <div class="tag">Rule of thumb.</div>
+      <p class="small" style="margin:0;">Think about IV <em>before</em> you trade, not after. As a beginner: be wary of buying options when volatility is unusually high (especially right before earnings), and remember that a covered call or cash-secured put actually <b>benefits</b> from selling that richer premium.</p>
+    </div>
+  </div>
+  <div class="foot"><span>Options Cheat Sheet · 03</span><span>Educational reference — not investment advice</span></div>
+</section>
+
+<!-- ===== PAGE 5 ===== -->
+<section class="page">
+  <div class="runhead"><span>Options Cheat Sheet</span><span>No. 03 · What moves the price</span></div>
+  <div class="sect">
+    <div class="sectlabel">06 /<br>The<br>trap</div>
+    <h2 class="stitle">Why you can be right — <em>and still lose.</em></h2>
+    <p style="max-width:150mm;">This is the lesson the anatomy above is really for. Three forces can quietly beat you even when the stock moves your way. Usually it's a mix of them.</p>
+    <div class="grid3" style="margin-top:10px;">
+      <div class="card red"><div class="lab">Trap 1 · IV crush</div><p class="small" style="margin:0;">You bought before earnings, the stock rose — but IV collapsed and drained more value than the move added. Right direction, lower price.</p></div>
+      <div class="card red"><div class="lab">Trap 2 · Too slow</div><p class="small" style="margin:0;">The move came, but late. Time decay ate the premium while you waited for it. Being right eventually isn't the same as being right in time.</p></div>
+      <div class="card red"><div class="lab">Trap 3 · Not enough</div><p class="small" style="margin:0;">The stock rose, but not past your <b>breakeven</b> (strike + premium). A small favourable move can still leave a buyer underwater.</p></div>
+    </div>
+
+    <div class="card amber" style="margin-top:13px;">
+      <div class="lab">A worked example</div>
+      <p class="small" style="margin:0;">You pay <b>$3.00</b> for a $100 call with 30 days left; breakeven is <b>$103</b>. A week later the stock has ticked up from $100 to $102 — you were right, it rose. But it's still below breakeven, seven days of decay are gone, and IV eased off. The call is now worth <b>$2.60</b>. Correct call, −$0.40. To <em>profit</em>, you needed a move that was bigger, faster, or into cheaper volatility. <span class="mono tiny" style="color:#777;">This is the everyday reality options buyers must plan around.</span></p>
+    </div>
+
+    <hr class="rule">
+    <div class="sectlabel">07 /<br>Terms</div>
+    <h2 class="stitle">Words you'll meet.</h2>
+    <div class="gloss" style="margin-top:8px;">
+      <div><div class="term">Intrinsic value</div><p>Exercise-now worth: max(0, spot−strike) for calls, mirror for puts. All that remains at expiry.</p></div>
+      <div><div class="term">Extrinsic / time value</div><p>Premium above intrinsic — the price of possibility. Decays to zero by expiration.</p></div>
+      <div><div class="term">Theta</div><p>The rate of time decay per day. Negative for buyers, positive for sellers; accelerates near expiry.</p></div>
+      <div><div class="term">Implied volatility (IV)</div><p>The market's expected future movement, priced into the option. Higher IV = pricier options.</p></div>
+      <div><div class="term">Historical volatility</div><p>How much the stock actually moved in the past — a reality check against implied.</p></div>
+      <div><div class="term">IV crush</div><p>The sharp drop in IV (and premiums) once an anticipated event passes.</p></div>
+      <div><div class="term">IV rank / percentile</div><p>Where current IV sits versus this stock's own recent range. A high/low gauge.</p></div>
+      <div><div class="term">Breakeven</div><p>The stock price at which a trade neither makes nor loses at expiry. Long call: strike + premium.</p></div>
+      <div><div class="term">Extrinsic burn</div><p>Informal: the steady loss of time value a buyer suffers just by holding.</p></div>
+    </div>
+  </div>
+  <div class="foot"><span>Options Cheat Sheet · 03</span><span>Educational reference — not investment advice</span></div>
+</section>
+
+</div>
+<nav class="reader-nav">
+<a class="rn-prev" href="02-trading-safely.html"><div class="rn-dir">&larr; Previous</div><div class="rn-ttl">No. 02 &middot; Trading Safely</div></a>
+<a class="rn-next" href="04-the-greeks.html"><div class="rn-dir">Next &rarr;</div><div class="rn-ttl">No. 04 &middot; The Greeks</div></a>
+</nav>
+</body>
+</html>

@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Options Cheat Sheet — No. 05</title>
+<link rel="stylesheet" href="assets/style.css">
+<style>
+.callout-strike{fill:#8f3e2d;font:600 6.5px 'IBM Plex Mono',monospace;letter-spacing:.05em;}
+.pill{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:7px;letter-spacing:.08em;text-transform:uppercase;padding:2px 6px;border-radius:10px;border:1px solid var(--line);color:var(--muted);margin-right:4px;}
+</style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap">
+  <link rel="stylesheet" href="assets/reader.css">
+</head>
+<body class="reader">
+<div class="reader-bar">
+  <a class="rb-back" href="./">&larr; Options series</a>
+  <div class="rb-title">No. 05 &middot; Reading the Chain</div>
+  <a class="rb-pdf" href="options-cheat-sheet-05-reading-the-chain.pdf" download>Download PDF &darr;</a>
+</div>
+<div class="reader-scroll">
+
+<!-- ===== PAGE 1 ===== -->
+<section class="page">
+  <div class="runhead"><span>Options Cheat Sheet</span><span>No. 05 · Reading the chain</span></div>
+  <div class="masthead">
+    <div style="max-width:120mm;">
+      <div class="kicker">A visual primer · No. 05</div>
+      <h1 class="title">Reading<br><em>the chain.</em></h1>
+    </div>
+    <div class="metabox">
+      <div class="hd">The screen you'll live on</div>
+      Strikes · expiries<br>
+      Bid/ask · OI · IV<br>
+      Spotting liquidity<br><br>
+      <div class="hd">One page</div>
+      <div class="hd" style="margin-top:10px;">Read after</div>
+      No. 01 – No. 04
+    </div>
+  </div>
+  <div class="intro">
+    <p class="lead">Everything in this series — strike, premium, moneyness, the Greeks, volatility — shows up in one place on a trading platform: the <b>option chain</b>. At first it's a wall of numbers. It's really just a menu, and once you know the columns you can read any broker's version. Here's the whole thing, decoded.</p>
+  </div>
+  <hr class="rule">
+  <div class="sect">
+    <div class="sectlabel">01 /<br>The<br>layout</div>
+    <h2 class="stitle">Calls on one side, puts on the other, strikes down the middle.</h2>
+    <p style="max-width:158mm;">You first pick an <b>expiration date</b>. The chain then lists every <b>strike</b> for that date down the centre, with <b>calls</b> on the left and <b>puts</b> on the right — a mirror either side of the strike column. Shaded cells are in the money. This is a realistic 30-day chain for a stock trading at <b>$100</b>.</p>
+
+    <div style="margin-top:10px;">
+      <div style="display:flex;justify-content:space-between;margin-bottom:3px;">
+        <span class="sidehdr" style="color:var(--green-ink);">◄ Calls · the right to buy</span>
+        <span class="sidehdr">Expiry: 30 days · stock $100</span>
+        <span class="sidehdr" style="color:var(--red-ink);">Puts · the right to sell ►</span>
+      </div>
+      <div class="tscroll"><table class="chain">
+        <thead>
+          <tr>
+            <th>Δ</th><th>IV</th><th>Vol</th><th>OI</th><th>Bid</th><th>Ask</th>
+            <th style="text-align:center;color:#111;">Strike</th>
+            <th>Bid</th><th>Ask</th><th>OI</th><th>Vol</th><th>IV</th><th>Δ</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="itmc">
+            <td class="callside">.82</td><td class="callside">26%</td><td class="callside">120</td><td class="callside">3.4k</td><td class="callside">11.10</td><td class="callside">11.35</td>
+            <td class="strike">90</td>
+            <td class="putside">0.60</td><td class="putside">0.68</td><td class="putside">4.8k</td><td class="putside">260</td><td class="putside">27%</td><td class="putside">−.18</td>
+          </tr>
+          <tr class="itmc">
+            <td class="callside">.68</td><td class="callside">24%</td><td class="callside">340</td><td class="callside">5.1k</td><td class="callside">6.95</td><td class="callside">7.10</td>
+            <td class="strike">95</td>
+            <td class="putside">1.45</td><td class="putside">1.55</td><td class="putside">6.0k</td><td class="putside">510</td><td class="putside">25%</td><td class="putside">−.32</td>
+          </tr>
+          <tr class="atm">
+            <td>.52</td><td>23%</td><td>1.2k</td><td>8.7k</td><td>3.30</td><td>3.45</td>
+            <td class="strike">100</td>
+            <td>3.25</td><td>3.40</td><td>7.9k</td><td>1.1k</td><td>23%</td><td>−.48</td>
+          </tr>
+          <tr class="itmp">
+            <td class="callside">.34</td><td class="callside">24%</td><td class="callside">890</td><td class="callside">6.2k</td><td class="callside">1.35</td><td class="callside">1.45</td>
+            <td class="strike">105</td>
+            <td class="putside">6.30</td><td class="putside">6.50</td><td class="putside">3.9k</td><td class="putside">300</td><td class="putside">24%</td><td class="putside">−.66</td>
+          </tr>
+          <tr class="itmp">
+            <td class="callside">.19</td><td class="callside">26%</td><td class="callside">420</td><td class="callside">4.0k</td><td class="callside">0.55</td><td class="callside">0.62</td>
+            <td class="strike">110</td>
+            <td class="putside">10.70</td><td class="putside">10.95</td><td class="putside">2.1k</td><td class="putside">90</td><td class="putside">26%</td><td class="putside">−.81</td>
+          </tr>
+        </tbody>
+      </table></div>
+      <div style="display:flex;gap:14px;margin-top:6px;">
+        <span class="tiny" style="color:#55554a;"><span style="display:inline-block;width:9px;height:9px;background:var(--green-panel);border:1px solid var(--green-line);vertical-align:middle;"></span> call in the money</span>
+        <span class="tiny" style="color:#55554a;"><span style="display:inline-block;width:9px;height:9px;background:var(--red-panel);border:1px solid var(--red-line);vertical-align:middle;"></span> put in the money</span>
+        <span class="tiny" style="color:#55554a;"><span style="display:inline-block;width:9px;height:9px;background:#eef0e9;border:1px solid #d8dacf;vertical-align:middle;"></span> at the money</span>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span>Options Cheat Sheet · 05</span><span>Educational reference — not investment advice</span></div>
+</section>
+
+<!-- ===== PAGE 2 ===== -->
+<section class="page">
+  <div class="runhead"><span>Options Cheat Sheet</span><span>No. 05 · Reading the chain</span></div>
+  <div class="sect">
+    <div class="sectlabel">02 /<br>The<br>columns</div>
+    <h2 class="stitle">What every column is telling you.</h2>
+    <p style="max-width:158mm;">Brokers vary the order and let you add or hide columns, but these are the ones that matter. Read them in two groups: <b>price</b> (what you'll pay or receive) and <b>health</b> (whether the option is safe to trade at all).</p>
+
+    <div class="grid2" style="margin-top:12px;">
+      <div>
+        <div class="pill" style="color:var(--green-ink);border-color:var(--green-line);">Price columns</div>
+        <div class="card" style="margin-top:8px;">
+          <div class="rows" style="border-top:none;">
+            <div class="row"><span class="k">Bid</span><span class="v">Highest price a buyer will pay — what you'd <b>receive</b> if selling now.</span></div>
+            <div class="row"><span class="k">Ask</span><span class="v">Lowest price a seller will accept — what you'd <b>pay</b> to buy now.</span></div>
+            <div class="row"><span class="k">Mid</span><span class="v">Midpoint of bid &amp; ask — a fair-value estimate, often where you aim.</span></div>
+            <div class="row"><span class="k">Last</span><span class="v">Price of the most recent actual trade. Can be stale.</span></div>
+            <div class="row"><span class="k">Change</span><span class="v">Move since the prior close. Context, not decision.</span></div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="pill" style="color:var(--blue-ink);border-color:var(--blue-line);">Health &amp; risk columns</div>
+        <div class="card" style="margin-top:8px;">
+          <div class="rows" style="border-top:none;">
+            <div class="row"><span class="k">Volume</span><span class="v"><b>Today's</b> contracts traded. Activity right now.</span></div>
+            <div class="row"><span class="k">Open int. (OI)</span><span class="v">Contracts <b>currently open</b>. Depth of the market.</span></div>
+            <div class="row"><span class="k">IV</span><span class="v">Implied volatility — how pricey the option is (No. 03).</span></div>
+            <div class="row"><span class="k">Delta</span><span class="v">Exposure + rough ITM odds (No. 04). Great for picking a strike.</span></div>
+            <div class="row"><span class="k">Θ / V</span><span class="v">Theta &amp; vega, if shown — your decay and volatility risk.</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="callout" style="margin-top:14px;">
+      <div class="tag">First glance.</div>
+      <p class="small" style="margin:0;">Before anything else, a beginner should look at <b>two</b> columns: the <b>bid–ask spread</b> (is it tight?) and <b>open interest</b> (is it healthy?). Those tell you whether the option is even worth trading before you ever think about the price. The next page is all about them.</p>
+    </div>
+  </div>
+  <div class="foot"><span>Options Cheat Sheet · 05</span><span>Educational reference — not investment advice</span></div>
+</section>
+
+<!-- ===== PAGE 3 ===== -->
+<section class="page">
+  <div class="runhead"><span>Options Cheat Sheet</span><span>No. 05 · Reading the chain</span></div>
+  <div class="sect">
+    <div class="sectlabel">03 /<br>The<br>spread</div>
+    <h2 class="stitle">Bid, ask &amp; the spread — <em>the hidden toll.</em></h2>
+    <p style="max-width:158mm;">You buy at the <b>ask</b> and sell at the <b>bid</b>. The gap between them is the <b>spread</b> — a cost you pay just to get in and out, before the trade even moves. Wide spreads quietly tax every round trip; tight spreads are the mark of a liquid, tradeable option.</p>
+
+    <div class="card" style="margin-top:11px;">
+      <div class="lab">A tight spread vs a wide one — same $3.30 option</div>
+      <svg width="100%" height="96" viewBox="0 0 640 96">
+        <!-- tight -->
+        <text x="0" y="22" class="axcap">TIGHT · LIQUID</text>
+        <line x1="120" y1="18" x2="300" y2="18" stroke="#cfcdc2" stroke-width="1"/>
+        <circle cx="150" cy="18" r="4" fill="#4b7d5b"/><text x="140" y="34" class="axcap">BID 3.30</text>
+        <circle cx="180" cy="18" r="4" fill="#b0503c"/><text x="176" y="10" class="axcap">ASK 3.45</text>
+        <text x="330" y="22" style="font:600 9px 'Spectral',serif;fill:#2f5a3e;">15¢ spread — cheap to trade</text>
+        <!-- wide -->
+        <text x="0" y="70" class="axcap">WIDE · ILLIQUID</text>
+        <line x1="120" y1="66" x2="420" y2="66" stroke="#cfcdc2" stroke-width="1"/>
+        <circle cx="150" cy="66" r="4" fill="#4b7d5b"/><text x="140" y="82" class="axcap">BID 2.80</text>
+        <circle cx="300" cy="66" r="4" fill="#b0503c"/><text x="290" y="58" class="axcap">ASK 3.90</text>
+        <text x="440" y="70" style="font:600 9px 'Spectral',serif;fill:#8f3e2d;">$1.10 spread — you start deep in a hole</text>
+      </svg>
+    </div>
+
+    <div class="grid3" style="margin-top:12px;">
+      <div class="card"><div class="lab">Use limit orders</div><p class="small" style="margin:0;">Never buy "at market" on options. Set a <b>limit</b> near the mid and let the market come to you — market orders on wide spreads get filled at ugly prices.</p></div>
+      <div class="card"><div class="lab">Mind slippage</div><p class="small" style="margin:0;">The difference between the mid you hoped for and the price you actually got. Wide spreads = more slippage on both entry and exit.</p></div>
+      <div class="card amber"><div class="lab">A quick filter</div><p class="small" style="margin:0;">If the spread is more than a few percent of the option's price, or the ask is far above the bid, <b>walk away</b> — there's usually a tighter strike or a more liquid stock.</p></div>
+    </div>
+
+    <hr class="rule">
+    <div class="sectlabel">04 /<br>Vol &amp;<br>OI</div>
+    <h2 class="stitle">Volume vs open interest.</h2>
+    <p style="max-width:158mm;">Two liquidity gauges that people mix up. Together they tell you how easy it'll be to get in and — more importantly — back out.</p>
+    <div class="grid2" style="margin-top:10px;">
+      <div class="card"><div class="lab">Volume</div><p class="small" style="margin:0;"><b>Contracts traded today.</b> A fresh pulse of activity — it resets to zero each morning. High volume means people are trading this strike right now.</p></div>
+      <div class="card"><div class="lab">Open interest</div><p class="small" style="margin:0;"><b>Contracts currently held open.</b> The standing pool of positions. High OI means a deep, established market you can exit into later.</p></div>
+    </div>
+    <p class="small" style="margin-top:10px;color:#55554a;"><b>Rule of thumb:</b> favour strikes with healthy OI (think hundreds-to-thousands, not single digits) <em>and</em> real daily volume. Thin options can be easy to enter and a nightmare to escape.</p>
+  </div>
+  <div class="foot"><span>Options Cheat Sheet · 05</span><span>Educational reference — not investment advice</span></div>
+</section>
+
+<!-- ===== PAGE 4 ===== -->
+<section class="page">
+  <div class="runhead"><span>Options Cheat Sheet</span><span>No. 05 · Reading the chain</span></div>
+  <div class="sect">
+    <div class="sectlabel">05 /<br>Money-<br>ness</div>
+    <h2 class="stitle">Moneyness, at a glance.</h2>
+    <p style="max-width:158mm;">The shading pattern on the chain isn't decoration — it's telling you moneyness. On the call side, strikes <em>below</em> the stock are in the money; on the put side, strikes <em>above</em> it are. They cross at the at-the-money row. Delta is the cleaner readout: the closer to the money, the closer delta is to 0.50.</p>
+    <div class="grid3" style="margin-top:11px;">
+      <div class="card green"><div class="lab">In the money · high delta</div><p class="small" style="margin:0;">Has intrinsic value, moves closely with the stock, costs more. Delta well above 0.50. Behaves the most stock-like.</p></div>
+      <div class="card"><div class="lab">At the money · ~0.50 delta</div><p class="small" style="margin:0;">All time value, maximum gamma and theta. The most "leveraged to a move" — and the most exposed to decay.</p></div>
+      <div class="card amber"><div class="lab">Out of the money · low delta</div><p class="small" style="margin:0;">No intrinsic value, cheap, low odds. Tempting because it's cheap — but it's mostly a bet against decay and time.</p></div>
+    </div>
+
+    <hr class="rule">
+    <div class="sectlabel">06 /<br>Expiry</div>
+    <h2 class="stitle">Choosing the expiration.</h2>
+    <p style="max-width:158mm;">The date you pick first sets how much time — and time value — is in play. Most chains offer weekly and monthly expirations; the countdown is shown as <b>DTE</b> (days to expiry).</p>
+    <div class="grid2" style="margin-top:10px;">
+      <div class="card red"><div class="lab">Very short (0–7 DTE)</div><p class="small" style="margin:0;">Cheap and twitchy — maximum decay and gamma. Popular with gamblers, unforgiving for learners. The series' advice: <b>avoid as a beginner.</b></p></div>
+      <div class="card green"><div class="lab">30–45+ DTE</div><p class="small" style="margin:0;">Enough time to be right without decay racing you, and typically the most liquid monthly strikes. A sensible default window for starter trades.</p></div>
+    </div>
+    <p class="small" style="margin-top:10px;color:#55554a;">Match the expiry to your thesis: if you think a move plays out over a month, don't buy a week of time and force yourself to be right in days.</p>
+  </div>
+  <div class="foot"><span>Options Cheat Sheet · 05</span><span>Educational reference — not investment advice</span></div>
+</section>
+
+<!-- ===== PAGE 5 ===== -->
+<section class="page">
+  <div class="runhead"><span>Options Cheat Sheet</span><span>No. 05 · Reading the chain</span></div>
+  <div class="sect">
+    <div class="sectlabel">07 /<br>Worked<br>read</div>
+    <h2 class="stitle">A worked read — building a safe debit spread.</h2>
+    <p style="max-width:158mm;">Let's turn the page-1 chain into an actual defined-risk trade from No. 02. Say you're mildly bullish on this $100 stock over the next month. Here's the read, step by step.</p>
+
+    <div class="card cream" style="margin-top:11px;">
+      <div class="rows" style="border-top:none;">
+        <div class="row"><span class="k" style="width:20mm;">1 · Expiry</span><span class="v" style="text-align:left;flex:1;">Pick the ~30-day date — enough time, and the most liquid strikes.</span></div>
+        <div class="row"><span class="k" style="width:20mm;">2 · Buy leg</span><span class="v" style="text-align:left;flex:1;">Buy the <b>$100 call</b> at the ask, <b>3.45</b>. Delta ~0.52 — a balanced directional bet.</span></div>
+        <div class="row"><span class="k" style="width:20mm;">3 · Sell leg</span><span class="v" style="text-align:left;flex:1;">Sell the <b>$105 call</b> at the bid, <b>1.35</b>. This caps upside but cuts your cost.</span></div>
+        <div class="row"><span class="k" style="width:20mm;">4 · Net cost</span><span class="v" style="text-align:left;flex:1;">3.45 − 1.35 = <b>2.10 debit</b> → <b>$210</b> per spread. <span class="rt">That's your max loss, fixed.</span></span></div>
+        <div class="row"><span class="k" style="width:20mm;">5 · Max gain</span><span class="v" style="text-align:left;flex:1;">Strike width $5 − $2.10 = <b>$2.90</b> → <span class="gt">$290</span>, if the stock closes at/above $105.</span></div>
+        <div class="row"><span class="k" style="width:20mm;">6 · Health check</span><span class="v" style="text-align:left;flex:1;">Both strikes show tight spreads and OI in the thousands — liquid enough to enter and exit.</span></div>
+      </div>
+    </div>
+    <p class="small" style="margin-top:10px;color:#55554a;">Before clicking, run it past the No. 02 checklist: max loss known ($210), affordable and ≤1–2% of the account, defined-risk, liquid, with an exit plan. Numbers are illustrative — but the <em>reading process</em> is exactly this every time.</p>
+
+    <hr class="rule">
+    <div class="sectlabel">08 /<br>Terms</div>
+    <h2 class="stitle">Words you'll meet.</h2>
+    <div class="gloss" style="margin-top:8px;">
+      <div><div class="term">Option chain</div><p>The full grid of calls and puts across strikes and expirations for one underlying.</p></div>
+      <div><div class="term">Bid / ask</div><p>Sell price / buy price at this moment. You transact against these, not "last".</p></div>
+      <div><div class="term">Spread</div><p>Ask minus bid — the built-in cost of a round trip. Tight = liquid.</p></div>
+      <div><div class="term">Mid</div><p>The midpoint of bid and ask; a fair-value target for limit orders.</p></div>
+      <div><div class="term">Volume</div><p>Contracts traded today at that strike. Resets each session.</p></div>
+      <div><div class="term">Open interest</div><p>Contracts currently open — the depth and staying-power of the market.</p></div>
+      <div><div class="term">Slippage</div><p>The gap between your intended price and the fill you actually get.</p></div>
+      <div><div class="term">Limit order</div><p>An order capped at a price you set. The default, and only, way to trade options carefully.</p></div>
+      <div><div class="term">DTE</div><p>Days to expiration — the countdown shown against each expiry date.</p></div>
+    </div>
+    <div class="callout" style="margin-top:15px;background:#fbfaf6;">
+      <div class="tag">Series close.</div>
+      <p class="small" style="margin:0;">That's the set: <b>No. 01</b> what an option is · <b>No. 02</b> how to trade it safely · <b>No. 03</b> what moves its price · <b>No. 04</b> the Greeks · <b>No. 05</b> reading the chain. Together they're a careful beginner's map — <b>educational, not advice.</b> Practise on paper before risking a cent.</p>
+    </div>
+  </div>
+  <div class="foot"><span>Options Cheat Sheet · 05</span><span>Educational reference — not investment advice</span></div>
+</section>
+
+</div>
+<nav class="reader-nav">
+<a class="rn-prev" href="04-the-greeks.html"><div class="rn-dir">&larr; Previous</div><div class="rn-ttl">No. 04 &middot; The Greeks</div></a>
+<span class="spacer"></span>
+</nav>
+</body>
+</html>

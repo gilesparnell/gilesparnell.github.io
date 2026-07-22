@@ -3,18 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Parnell Systems</title>
-  <meta name="description" content="AI-powered SaaS platform for SMEs. Voice products, client sites, and the engineering knowledge system that powers it all.">
+  <title>Giles Parnell</title>
+  <meta name="description" content="Giles Parnell — personal site. Learning in public (options trading and more) alongside Parnell Systems: AI-powered products, client builds, and engineering knowledge.">
 
   <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&display=swap">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap">
 
   <style>
     /* =============================================
-       PARNELL SYSTEMS HUB
-       Deep Ocean Tech — Two-card hub (Knowledge · Work)
+       GILES PARNELL — personal umbrella
+       Deep Ocean Tech · two pillars (Personal · Parnell Systems)
        ============================================= */
-
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
@@ -31,6 +30,12 @@
       --accent-muted:   rgba(56,191,160,0.15);
       --accent-glow:    rgba(56,191,160,0.20);
       --blue-glow:      rgba(97,153,230,0.20);
+      --amber:          #e0a848;
+      --amber-muted:    rgba(224,168,72,0.14);
+      --amber-glow:     rgba(224,168,72,0.20);
+      --rose:           #c77d8a;
+      --rose-muted:     rgba(199,125,138,0.12);
+      --rose-glow:      rgba(199,125,138,0.18);
       --border:         rgba(255,255,255,0.06);
       --border-hover:   rgba(255,255,255,0.14);
       --radius: 20px;
@@ -50,218 +55,112 @@
     .mesh-bg { position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
     .mesh-bg .blob { position: absolute; border-radius: 50%; filter: blur(90px); will-change: transform; }
     .mesh-bg .blob:nth-child(1) { width: 650px; height: 650px; background: hsla(168,55%,32%,0.35); top: -12%; left: -8%; animation: drift1 20s ease-in-out infinite alternate; }
-    .mesh-bg .blob:nth-child(2) { width: 500px; height: 500px; background: hsla(335,45%,28%,0.25); top: 5%; right: -12%; animation: drift2 24s ease-in-out infinite alternate; }
+    .mesh-bg .blob:nth-child(2) { width: 500px; height: 500px; background: hsla(40,50%,32%,0.20); top: 5%; right: -12%; animation: drift2 24s ease-in-out infinite alternate; }
     .mesh-bg .blob:nth-child(3) { width: 580px; height: 580px; background: hsla(215,55%,28%,0.28); bottom: -18%; left: 25%; animation: drift3 28s ease-in-out infinite alternate; }
-    .mesh-bg .blob:nth-child(4) { width: 400px; height: 400px; background: hsla(40,50%,30%,0.15); bottom: 10%; right: 5%; animation: drift4 22s ease-in-out infinite alternate; }
+    .mesh-bg .blob:nth-child(4) { width: 400px; height: 400px; background: hsla(335,40%,30%,0.14); bottom: 10%; right: 5%; animation: drift4 22s ease-in-out infinite alternate; }
     @keyframes drift1 { to { transform: translate(90px,70px) scale(1.08); } }
     @keyframes drift2 { to { transform: translate(-70px,90px) scale(0.92); } }
     @keyframes drift3 { to { transform: translate(50px,-60px) scale(1.12); } }
     @keyframes drift4 { to { transform: translate(-40px,-50px) scale(1.06); } }
 
     /* ---- Layout ---- */
-    .page {
-      position: relative;
-      z-index: 1;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 3rem 2rem 4rem;
-    }
+    .page { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 3rem 2rem 4rem; }
 
     /* ---- Header ---- */
-    .site-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 3.5rem;
-      animation: fadeUp 0.5s ease-out both;
-    }
-    .brand {
-      display: flex; align-items: center; gap: 14px;
-      text-decoration: none; color: inherit;
-    }
+    .site-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 3.5rem; animation: fadeUp 0.5s ease-out both; }
+    .brand { display: flex; align-items: center; gap: 14px; text-decoration: none; color: inherit; }
     .brand-mark {
       width: 42px; height: 42px; border-radius: 12px;
       background: linear-gradient(135deg, var(--accent), #2a8a74);
       display: flex; align-items: center; justify-content: center;
-      font-family: var(--font-display); font-weight: 900; font-size: 1.2rem;
+      font-family: var(--font-display); font-weight: 900; font-size: 1.1rem;
       color: #fff; letter-spacing: -0.03em; flex-shrink: 0;
     }
-    .brand-text {
-      font-family: var(--font-display); font-weight: 700;
-      font-size: 1.25rem; letter-spacing: -0.03em;
-    }
-    .header-links {
-      display: flex; align-items: center; gap: 1.25rem;
-    }
-    .header-links a {
-      color: var(--text-secondary); text-decoration: none; font-size: 0.85rem;
-      font-weight: 500; display: flex; align-items: center; gap: 6px; transition: color 0.2s;
-    }
+    .brand-text { font-family: var(--font-display); font-weight: 700; font-size: 1.25rem; letter-spacing: -0.03em; }
+    .header-links { display: flex; align-items: center; gap: 1.25rem; }
+    .header-links a { color: var(--text-secondary); text-decoration: none; font-size: 0.85rem; font-weight: 500; display: flex; align-items: center; gap: 6px; transition: color 0.2s; }
     .header-links a:hover { color: var(--text-primary); }
     .header-links svg { width: 18px; height: 18px; fill: currentColor; }
 
     /* ---- Hero ---- */
-    .hero {
-      margin-bottom: 3rem;
-      animation: fadeUp 0.6s 0.05s ease-out both;
-    }
-    .hero .eyebrow {
-      display: block; font-size: 0.7rem; font-weight: 600;
-      letter-spacing: 0.14em; text-transform: uppercase;
-      color: var(--accent); margin-bottom: 0.8rem;
-    }
-    .hero h1 {
-      font-family: var(--font-display);
-      font-size: clamp(2.4rem, 5.5vw, 4rem);
-      font-weight: 900; line-height: 1.05; letter-spacing: -0.04em;
-      margin-bottom: 0.9rem;
-    }
+    .hero { margin-bottom: 3rem; animation: fadeUp 0.6s 0.05s ease-out both; }
+    .hero .eyebrow { display: block; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.8rem; }
+    .hero h1 { font-family: var(--font-display); font-size: clamp(2.4rem, 5.5vw, 4rem); font-weight: 900; line-height: 1.05; letter-spacing: -0.04em; margin-bottom: 0.9rem; }
     .hero h1 span { color: var(--accent); }
-    .hero .tagline {
-      font-size: clamp(0.95rem, 1.8vw, 1.1rem);
-      color: var(--text-secondary); max-width: 540px; line-height: 1.7;
-    }
+    .hero .tagline { font-size: clamp(0.95rem, 1.8vw, 1.1rem); color: var(--text-secondary); max-width: 580px; line-height: 1.7; }
 
-    /* ---- Two big hub cards ---- */
-    .hub-cards {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-      animation: fadeUp 0.6s 0.15s ease-out both;
+    /* ---- Pillar bands ---- */
+    .pillar { margin-bottom: 2.75rem; animation: fadeUp 0.6s 0.15s ease-out both; }
+    .pillar-label {
+      font-family: var(--font-display); font-weight: 700;
+      font-size: 0.76rem; letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--text-tertiary); margin-bottom: 1.1rem;
+      display: flex; align-items: center; gap: 14px;
     }
+    .pillar-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+    .pillar-label .tag { color: var(--text-secondary); }
+
+    /* ---- Hub cards ---- */
+    .hub-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
     .hub-card {
       background: rgba(255,255,255,0.035);
       backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 2.5rem 2.5rem 2rem;
+      border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 2.25rem 2.25rem 1.85rem;
       position: relative; overflow: hidden;
       display: flex; flex-direction: column;
-      transition: transform 0.45s cubic-bezier(0.16,1,0.3,1),
-                  box-shadow 0.45s cubic-bezier(0.16,1,0.3,1),
-                  border-color 0.4s ease;
+      text-decoration: none; color: inherit;
+      transition: transform 0.45s cubic-bezier(0.16,1,0.3,1), box-shadow 0.45s cubic-bezier(0.16,1,0.3,1), border-color 0.4s ease;
     }
-    .hub-card::before {
-      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.10), transparent);
-      pointer-events: none;
-    }
+    .hub-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.10), transparent); pointer-events: none; }
     .hub-card::after {
-      content: '';
-      position: absolute; width: 560px; height: 560px;
+      content: ''; position: absolute; width: 560px; height: 560px;
       background: radial-gradient(circle, var(--card-glow, var(--accent-glow)) 0%, transparent 70%);
-      border-radius: 50%; pointer-events: none; opacity: 0;
-      transition: opacity 0.4s ease;
-      top: var(--mouse-y, 50%); left: var(--mouse-x, 50%);
-      transform: translate(-50%,-50%);
+      border-radius: 50%; pointer-events: none; opacity: 0; transition: opacity 0.4s ease;
+      top: var(--mouse-y, 50%); left: var(--mouse-x, 50%); transform: translate(-50%,-50%);
     }
     .hub-card:hover::after { opacity: 1; }
-    .hub-card:hover {
-      transform: translateY(-4px);
-      border-color: var(--border-hover);
-      box-shadow: 0 28px 80px rgba(0,0,0,0.4), 0 0 70px var(--card-glow, var(--accent-muted));
-    }
+    .hub-card:hover { transform: translateY(-4px); border-color: var(--border-hover); box-shadow: 0 28px 80px rgba(0,0,0,0.4), 0 0 70px var(--card-glow, var(--accent-muted)); }
 
-    .hub-card-head {
-      display: flex; align-items: center; gap: 16px;
-      margin-bottom: 1rem; position: relative; z-index: 1;
-    }
-    .hub-icon {
-      width: 58px; height: 58px; border-radius: 16px;
-      background: var(--accent-muted);
-      border: 1px solid rgba(56,191,160,0.2);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.7rem; flex-shrink: 0;
-    }
-    .hub-card--work .hub-icon {
-      background: rgba(97,153,230,0.12);
-      border-color: rgba(97,153,230,0.22);
-    }
-    .hub-title {
-      font-family: var(--font-display); font-weight: 900;
-      font-size: 2rem; letter-spacing: -0.04em; line-height: 1;
-    }
-    .hub-desc {
-      color: var(--text-secondary); font-size: 0.95rem; line-height: 1.65;
-      margin-bottom: 1.75rem; position: relative; z-index: 1;
-    }
+    .hub-card-head { display: flex; align-items: center; gap: 16px; margin-bottom: 1rem; position: relative; z-index: 1; }
+    .hub-icon { width: 58px; height: 58px; border-radius: 16px; background: var(--accent-muted); border: 1px solid rgba(56,191,160,0.2); display: flex; align-items: center; justify-content: center; font-size: 1.7rem; flex-shrink: 0; }
+    .hub-card--work .hub-icon { background: rgba(97,153,230,0.12); border-color: rgba(97,153,230,0.22); }
+    .hub-card--trading .hub-icon { background: var(--amber-muted); border-color: rgba(224,168,72,0.22); }
+    .hub-card--family .hub-icon { background: var(--rose-muted); border-color: rgba(199,125,138,0.22); }
+    .hub-title { font-family: var(--font-display); font-weight: 900; font-size: 2rem; letter-spacing: -0.04em; line-height: 1; }
+    .hub-desc { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.65; margin-bottom: 1.75rem; position: relative; z-index: 1; }
 
-    .hub-links {
-      display: flex; flex-direction: column; gap: 2px;
-      margin-top: auto; position: relative; z-index: 1;
-    }
-    .hub-link {
-      display: flex; align-items: center; gap: 12px;
-      padding: 0.85rem 0.9rem;
-      border-radius: 12px;
-      text-decoration: none; color: var(--text-primary);
-      border: 1px solid transparent;
-      transition: background 0.2s, border-color 0.2s, transform 0.2s;
-    }
-    .hub-link:hover {
-      background: rgba(56,191,160,0.07);
-      border-color: rgba(56,191,160,0.18);
-    }
-    .hub-card--work .hub-link:hover {
-      background: rgba(97,153,230,0.07);
-      border-color: rgba(97,153,230,0.18);
-    }
-    .hub-link-dot {
-      width: 7px; height: 7px; border-radius: 50%;
-      background: var(--accent); flex-shrink: 0;
-      box-shadow: 0 0 10px var(--accent-glow);
-    }
-    .hub-card--work .hub-link-dot {
-      background: #6199e6; box-shadow: 0 0 10px var(--blue-glow);
-    }
-    .hub-link-label {
-      font-family: var(--font-display); font-weight: 700;
-      font-size: 1rem; letter-spacing: -0.02em; flex: 1;
-    }
-    .hub-link-arrow {
-      color: var(--text-tertiary); font-size: 1rem;
-      transition: transform 0.2s, color 0.2s;
-    }
-    .hub-link:hover .hub-link-arrow {
-      color: var(--accent); transform: translateX(3px);
-    }
+    .hub-links { display: flex; flex-direction: column; gap: 2px; margin-top: auto; position: relative; z-index: 1; }
+    .hub-link { display: flex; align-items: center; gap: 12px; padding: 0.85rem 0.9rem; border-radius: 12px; text-decoration: none; color: var(--text-primary); border: 1px solid transparent; transition: background 0.2s, border-color 0.2s, transform 0.2s; }
+    .hub-link:hover { background: rgba(56,191,160,0.07); border-color: rgba(56,191,160,0.18); }
+    .hub-card--work .hub-link:hover { background: rgba(97,153,230,0.07); border-color: rgba(97,153,230,0.18); }
+    .hub-card--trading .hub-link:hover { background: rgba(224,168,72,0.07); border-color: rgba(224,168,72,0.18); }
+    .hub-card--family .hub-link:hover { background: rgba(199,125,138,0.07); border-color: rgba(199,125,138,0.18); }
+    .hub-link-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); flex-shrink: 0; box-shadow: 0 0 10px var(--accent-glow); }
+    .hub-card--work .hub-link-dot { background: #6199e6; box-shadow: 0 0 10px var(--blue-glow); }
+    .hub-card--trading .hub-link-dot { background: var(--amber); box-shadow: 0 0 10px var(--amber-glow); }
+    .hub-card--family .hub-link-dot { background: var(--rose); box-shadow: 0 0 10px var(--rose-glow); }
+    .hub-link-label { font-family: var(--font-display); font-weight: 700; font-size: 1rem; letter-spacing: -0.02em; flex: 1; }
+    .hub-link-arrow { color: var(--text-tertiary); font-size: 1rem; transition: transform 0.2s, color 0.2s; }
+    .hub-link:hover .hub-link-arrow { color: var(--accent); transform: translateX(3px); }
     .hub-card--work .hub-link:hover .hub-link-arrow { color: #6199e6; }
+    .hub-card--trading .hub-link:hover .hub-link-arrow { color: var(--amber); }
+    .hub-card--family .hub-link:hover .hub-link-arrow { color: var(--rose); }
 
-    /* private link rows: dimmed, lock glyph, no accent */
-    .hub-link--private { opacity: 0.55; }
-    .hub-link--private .hub-link-dot {
-      background: var(--text-tertiary); box-shadow: none;
-    }
-    .hub-link--private:hover {
-      opacity: 0.8;
-      background: rgba(255,255,255,0.03);
-      border-color: rgba(255,255,255,0.08);
-    }
+    .hub-link--private { opacity: 0.6; }
+    .hub-link--private .hub-link-dot { background: var(--text-tertiary); box-shadow: none; }
+    .hub-link--private:hover { opacity: 0.85; background: rgba(255,255,255,0.03); border-color: rgba(255,255,255,0.08); }
     .hub-link--private:hover .hub-link-arrow { color: var(--text-secondary); transform: none; }
     .hub-lock { font-size: 0.85rem; filter: grayscale(0.2); }
 
     /* ---- Footer ---- */
-    .site-footer {
-      margin-top: 3.5rem; padding-top: 2rem;
-      border-top: 1px solid var(--border);
-      display: flex; align-items: center; justify-content: space-between;
-      font-size: 0.78rem; color: var(--text-tertiary);
-    }
-    .site-footer a {
-      color: var(--text-secondary); text-decoration: none; transition: color 0.2s;
-    }
+    .site-footer { margin-top: 3.5rem; padding-top: 2rem; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; font-size: 0.78rem; color: var(--text-tertiary); }
+    .site-footer a { color: var(--text-secondary); text-decoration: none; transition: color 0.2s; }
     .site-footer a:hover { color: var(--accent); }
 
-    /* ---- Animations ---- */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(18px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
 
-    /* ---- Responsive ---- */
-    @media (max-width: 760px) {
-      .hub-cards { grid-template-columns: 1fr; }
-    }
+    @media (max-width: 760px) { .hub-cards { grid-template-columns: 1fr; } }
     @media (max-width: 580px) {
       .page { padding: 2rem 1rem 3rem; }
       .hub-card { padding: 2rem 1.5rem 1.5rem; }
@@ -282,8 +181,8 @@
   <!-- Header -->
   <header class="site-header">
     <a href="https://gilesparnell.github.io/" class="brand">
-      <div class="brand-mark">PS</div>
-      <span class="brand-text">Parnell Systems</span>
+      <div class="brand-mark">GP</div>
+      <span class="brand-text">Giles Parnell</span>
     </a>
     <nav class="header-links">
       <a href="https://github.com/gilesparnell">
@@ -297,85 +196,134 @@
   <section class="hero">
     <span class="eyebrow">gilesparnell.github.io</span>
     <h1>Build. Ship.<br><span>Document.</span></h1>
-    <p class="tagline">AI-powered systems, client builds, and portfolio-safe project snapshots. Detailed implementation docs are kept private.</p>
+    <p class="tagline">The personal home of Giles Parnell — what I'm learning in public, and Parnell Systems, the business: AI-powered products, client builds, and the engineering knowledge behind them.</p>
   </section>
 
-  <!-- Two big hub cards -->
-  <div class="hub-cards">
+  <!-- Pillar 1 · Personal -->
+  <section class="pillar">
+    <div class="pillar-label"><span class="tag">Personal</span></div>
+    <div class="hub-cards">
 
-    <!-- Knowledge -->
-    <div class="hub-card hub-card--knowledge" style="--card-glow: rgba(56,191,160,0.18);">
-      <div class="hub-card-head">
-        <div class="hub-icon">🧠</div>
-        <div class="hub-title">Knowledge</div>
-      </div>
-      <p class="hub-desc">The engineering knowledge base — reusable, non-client-specific patterns, guides, and starters.</p>
-      <div class="hub-links">
-        <a class="hub-link" href="https://gilesparnell.github.io/Claude/skills.html">
-          <span class="hub-link-dot" aria-hidden="true"></span>
-          <span class="hub-link-label">Skills</span>
-          <span class="hub-link-arrow" aria-hidden="true">→</span>
-        </a>
-        <a class="hub-link" href="https://gilesparnell.github.io/Claude/walkthroughs.html">
-          <span class="hub-link-dot" aria-hidden="true"></span>
-          <span class="hub-link-label">Walkthroughs</span>
-          <span class="hub-link-arrow" aria-hidden="true">→</span>
-        </a>
-        <a class="hub-link" href="https://gilesparnell.github.io/Claude/templates.html">
-          <span class="hub-link-dot" aria-hidden="true"></span>
-          <span class="hub-link-label">Templates</span>
-          <span class="hub-link-arrow" aria-hidden="true">→</span>
-        </a>
-        <a class="hub-link hub-link--private" href="private.html" aria-label="Decisions — private">
-          <span class="hub-link-dot" aria-hidden="true"></span>
-          <span class="hub-link-label">Decisions</span>
-          <span class="hub-lock" aria-hidden="true">🔒</span>
-          <span class="hub-link-arrow" aria-hidden="true">→</span>
-        </a>
-      </div>
+      <!-- Trading -->
+      <a class="hub-card hub-card--trading" href="personal/trading/" style="--card-glow: rgba(224,168,72,0.18);">
+        <div class="hub-card-head">
+          <div class="hub-icon">📈</div>
+          <div class="hub-title">Trading</div>
+        </div>
+        <p class="hub-desc">Learning to trade options safely — documented as a visual primer series, one idea at a time.</p>
+        <div class="hub-links">
+          <span class="hub-link">
+            <span class="hub-link-dot" aria-hidden="true"></span>
+            <span class="hub-link-label">Options primer series</span>
+            <span class="hub-link-arrow" aria-hidden="true">→</span>
+          </span>
+          <span class="hub-link">
+            <span class="hub-link-dot" aria-hidden="true"></span>
+            <span class="hub-link-label">Start at No. 01 — At a Glance</span>
+            <span class="hub-link-arrow" aria-hidden="true">→</span>
+          </span>
+        </div>
+      </a>
+
+      <!-- Family & Friends -->
+      <a class="hub-card hub-card--family" href="personal/family/" style="--card-glow: rgba(199,125,138,0.16);">
+        <div class="hub-card-head">
+          <div class="hub-icon">🏡</div>
+          <div class="hub-title">Family &amp; Friends</div>
+        </div>
+        <p class="hub-desc">A private, unlisted corner for the people I share things with directly — here when I send you the link.</p>
+        <div class="hub-links">
+          <span class="hub-link hub-link--private">
+            <span class="hub-link-dot" aria-hidden="true"></span>
+            <span class="hub-link-label">Shared by link only</span>
+            <span class="hub-lock" aria-hidden="true">🔒</span>
+            <span class="hub-link-arrow" aria-hidden="true">→</span>
+          </span>
+        </div>
+      </a>
+
     </div>
+  </section>
 
-    <!-- Work -->
-    <div class="hub-card hub-card--work" style="--card-glow: rgba(97,153,230,0.18);">
-      <div class="hub-card-head">
-        <div class="hub-icon">🛠️</div>
-        <div class="hub-title">Work</div>
+  <!-- Pillar 2 · Parnell Systems -->
+  <section class="pillar">
+    <div class="pillar-label"><span class="tag">Parnell Systems</span> — the business</div>
+    <div class="hub-cards">
+
+      <!-- Knowledge -->
+      <div class="hub-card hub-card--knowledge" style="--card-glow: rgba(56,191,160,0.18);">
+        <div class="hub-card-head">
+          <div class="hub-icon">🧠</div>
+          <div class="hub-title">Knowledge</div>
+        </div>
+        <p class="hub-desc">The engineering knowledge base — reusable, non-client-specific patterns, guides, and starters.</p>
+        <div class="hub-links">
+          <a class="hub-link" href="https://gilesparnell.github.io/Claude/skills.html">
+            <span class="hub-link-dot" aria-hidden="true"></span>
+            <span class="hub-link-label">Skills</span>
+            <span class="hub-link-arrow" aria-hidden="true">→</span>
+          </a>
+          <a class="hub-link" href="https://gilesparnell.github.io/Claude/walkthroughs.html">
+            <span class="hub-link-dot" aria-hidden="true"></span>
+            <span class="hub-link-label">Walkthroughs</span>
+            <span class="hub-link-arrow" aria-hidden="true">→</span>
+          </a>
+          <a class="hub-link" href="https://gilesparnell.github.io/Claude/templates.html">
+            <span class="hub-link-dot" aria-hidden="true"></span>
+            <span class="hub-link-label">Templates</span>
+            <span class="hub-link-arrow" aria-hidden="true">→</span>
+          </a>
+          <a class="hub-link hub-link--private" href="private.html" aria-label="Decisions — private">
+            <span class="hub-link-dot" aria-hidden="true"></span>
+            <span class="hub-link-label">Decisions</span>
+            <span class="hub-lock" aria-hidden="true">🔒</span>
+            <span class="hub-link-arrow" aria-hidden="true">→</span>
+          </a>
+        </div>
       </div>
-      <p class="hub-desc">Client builds and the products, tools, and platform behind them — public case studies, plus the owner-only surfaces.</p>
-      <div class="hub-links">
-        <a class="hub-link" href="projects/products.html">
-          <span class="hub-link-dot" aria-hidden="true"></span>
-          <span class="hub-link-label">Products</span>
-          <span class="hub-link-arrow" aria-hidden="true">→</span>
-        </a>
-        <a class="hub-link" href="projects/clients.html">
-          <span class="hub-link-dot" aria-hidden="true"></span>
-          <span class="hub-link-label">Client work</span>
-          <span class="hub-link-arrow" aria-hidden="true">→</span>
-        </a>
-        <a class="hub-link" href="projects/labs.html">
-          <span class="hub-link-dot" aria-hidden="true"></span>
-          <span class="hub-link-label">Labs</span>
-          <span class="hub-link-arrow" aria-hidden="true">→</span>
-        </a>
-        <a class="hub-link" href="https://parnell-projects.pages.dev/">
-          <span class="hub-link-dot" aria-hidden="true"></span>
-          <span class="hub-link-label">Client status portal</span>
-          <span class="hub-link-arrow" aria-hidden="true">→</span>
-        </a>
-        <a class="hub-link hub-link--private" href="private.html" aria-label="Platform — private">
-          <span class="hub-link-dot" aria-hidden="true"></span>
-          <span class="hub-link-label">Platform</span>
-          <span class="hub-lock" aria-hidden="true">🔒</span>
-          <span class="hub-link-arrow" aria-hidden="true">→</span>
-        </a>
+
+      <!-- Work -->
+      <div class="hub-card hub-card--work" style="--card-glow: rgba(97,153,230,0.18);">
+        <div class="hub-card-head">
+          <div class="hub-icon">🛠️</div>
+          <div class="hub-title">Work</div>
+        </div>
+        <p class="hub-desc">Client builds and the products, tools, and platform behind them — public case studies, plus the owner-only surfaces.</p>
+        <div class="hub-links">
+          <a class="hub-link" href="projects/products.html">
+            <span class="hub-link-dot" aria-hidden="true"></span>
+            <span class="hub-link-label">Products</span>
+            <span class="hub-link-arrow" aria-hidden="true">→</span>
+          </a>
+          <a class="hub-link" href="projects/clients.html">
+            <span class="hub-link-dot" aria-hidden="true"></span>
+            <span class="hub-link-label">Client work</span>
+            <span class="hub-link-arrow" aria-hidden="true">→</span>
+          </a>
+          <a class="hub-link" href="projects/labs.html">
+            <span class="hub-link-dot" aria-hidden="true"></span>
+            <span class="hub-link-label">Labs</span>
+            <span class="hub-link-arrow" aria-hidden="true">→</span>
+          </a>
+          <a class="hub-link" href="https://parnell-projects.pages.dev/">
+            <span class="hub-link-dot" aria-hidden="true"></span>
+            <span class="hub-link-label">Client status portal</span>
+            <span class="hub-link-arrow" aria-hidden="true">→</span>
+          </a>
+          <a class="hub-link hub-link--private" href="private.html" aria-label="Platform — private">
+            <span class="hub-link-dot" aria-hidden="true"></span>
+            <span class="hub-link-label">Platform</span>
+            <span class="hub-lock" aria-hidden="true">🔒</span>
+            <span class="hub-link-arrow" aria-hidden="true">→</span>
+          </a>
+        </div>
       </div>
+
     </div>
-
-  </div>
+  </section>
 
   <footer class="site-footer">
-    <span>&copy; 2026 Parnell Systems</span>
+    <span>&copy; 2026 Giles Parnell</span>
     <span>
       <a href="https://github.com/gilesparnell">GitHub</a>
     </span>
@@ -384,7 +332,6 @@
 </div>
 
 <script>
-  // Cursor glow on hub cards
   document.querySelectorAll('.hub-card').forEach(card => {
     card.addEventListener('mousemove', e => {
       const r = card.getBoundingClientRect();

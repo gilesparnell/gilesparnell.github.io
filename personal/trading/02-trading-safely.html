@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Options Cheat Sheet — No. 02</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+:root{
+  --ink:#1d1d1b;
+  --muted:#8c8c85;
+  --faint:#b7b6ad;
+  --line:#dcdad0;
+  --line2:#e7e5db;
+  --paper:#ffffff;
+  --green:#4b7d5b;
+  --green-ink:#2f5a3e;
+  --green-panel:#e8efe6;
+  --green-line:#cfe0ce;
+  --red:#b0503c;
+  --red-ink:#8f3e2d;
+  --red-panel:#f6e9e3;
+  --red-line:#ecd2c6;
+  --cream:#f3f1e9;
+  --cream-line:#e6e3d6;
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;background:#54534d;}
+body{
+  font-family:'Inter',-apple-system,system-ui,sans-serif;
+  color:var(--ink);
+  -webkit-font-smoothing:antialiased;
+}
+.page{
+  position:relative;
+  width:210mm;
+  min-height:297mm;
+  background:var(--paper);
+  margin:0 auto;
+  padding:16mm 15mm 16mm 15mm;
+  page-break-after:always;
+}
+.page:last-child{page-break-after:auto;}
+
+/* running head */
+.runhead{
+  display:flex;justify-content:space-between;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:8.5px;color:var(--muted);letter-spacing:.02em;
+  padding-bottom:9px;margin-bottom:0;
+}
+
+/* mono helpers */
+.mono{font-family:'IBM Plex Mono',monospace;}
+.serif{font-family:'Spectral',Georgia,serif;}
+.kicker{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:8.5px;letter-spacing:.22em;color:var(--muted);
+  text-transform:uppercase;
+}
+.sectlabel{
+  position:absolute;left:15mm;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:8.5px;letter-spacing:.06em;color:var(--faint);
+  text-transform:uppercase;line-height:1.5;width:22mm;
+}
+.sect{position:relative;padding-left:26mm;}
+
+h1.title{
+  font-family:'Spectral',Georgia,serif;
+  font-weight:400;font-size:52px;line-height:.98;
+  margin:6px 0 0;letter-spacing:-.01em;
+}
+h1.title em{font-style:italic;font-weight:400;}
+h2.stitle{
+  font-family:'Spectral',Georgia,serif;
+  font-weight:500;font-size:23px;line-height:1.12;
+  margin:0 0 8px;letter-spacing:-.01em;
+}
+h2.stitle em{font-style:italic;font-weight:400;color:#555;}
+h3.big{
+  font-family:'Spectral',Georgia,serif;
+  font-weight:400;font-size:28px;margin:0 0 4px;line-height:1;
+}
+p{font-size:10.5px;line-height:1.5;color:#39392f;margin:0 0 8px;}
+p.lead{font-size:11px;color:#4a4a3f;}
+.small{font-size:9px;line-height:1.45;color:#55554a;}
+.tiny{font-size:8px;line-height:1.4;}
+b,strong{font-weight:600;color:var(--ink);}
+.gt{color:var(--green-ink);font-weight:600;}
+.rt{color:var(--red-ink);font-weight:600;}
+hr.rule{border:none;border-top:1px solid var(--line);margin:16px 0;}
+hr.thin{border:none;border-top:1px solid var(--line2);margin:10px 0;}
+
+.masthead{display:flex;justify-content:space-between;align-items:flex-start;}
+.metabox{
+  text-align:right;font-family:'IBM Plex Mono',monospace;
+  font-size:8.5px;line-height:1.7;color:var(--muted);padding-top:6px;
+}
+.metabox .hd{color:var(--ink);font-weight:500;}
+
+.intro{max-width:118mm;margin-top:14px;}
+
+/* two column cards */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:11px;}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;}
+.card{
+  border:1px solid var(--line);border-radius:3px;padding:13px 14px;background:#fff;
+}
+.card.green{background:var(--green-panel);border-color:var(--green-line);}
+.card.red{background:var(--red-panel);border-color:var(--red-line);}
+.card.cream{background:var(--cream);border-color:var(--cream-line);}
+.card .lab{font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;}
+.card h4{font-family:'Spectral',serif;font-weight:500;font-size:16px;margin:0 0 6px;}
+.dot{display:inline-block;width:6px;height:6px;border-radius:50%;vertical-align:middle;margin-right:5px;}
+.dot.g{background:var(--green);}
+.dot.r{background:var(--red);}
+
+/* definition rows inside strategy cards */
+.rows{margin-top:8px;border-top:1px dotted var(--faint);}
+.row{display:flex;justify-content:space-between;gap:8px;padding:4px 0;border-bottom:1px dotted #d9d7cc;}
+.row .k{font-family:'IBM Plex Mono',monospace;font-size:7.6px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);white-space:nowrap;}
+.row .v{font-size:9px;text-align:right;color:#333;}
+.row .v.g{color:var(--green-ink);font-weight:600;}
+.row .v.r{color:var(--red-ink);font-weight:600;}
+
+.callout{
+  border:1px solid var(--line);border-radius:3px;background:var(--cream);
+  padding:12px 15px;display:flex;gap:16px;align-items:flex-start;
+}
+.callout .tag{font-family:'Spectral',serif;font-style:italic;font-size:13px;color:#333;white-space:nowrap;min-width:88px;}
+
+.checklist{list-style:none;margin:0;padding:0;}
+.checklist li{position:relative;padding:7px 0 7px 26px;border-bottom:1px dotted #d9d7cc;font-size:10px;line-height:1.4;}
+.checklist li:before{
+  content:"";position:absolute;left:0;top:7px;width:13px;height:13px;border:1.4px solid var(--green);border-radius:3px;
+}
+.checklist li:after{
+  content:"";position:absolute;left:4px;top:8px;width:4px;height:7px;border:solid var(--green);border-width:0 1.6px 1.6px 0;transform:rotate(40deg);
+}
+.checklist li b{display:block;font-size:10.5px;}
+.checklist li span{color:#5a5a4f;font-size:8.7px;}
+
+.flags{list-style:none;margin:0;padding:0;}
+.flags li{position:relative;padding:6px 0 6px 20px;border-bottom:1px dotted #e2c9bf;font-size:9.4px;line-height:1.42;}
+.flags li:before{content:"\00D7";position:absolute;left:2px;top:5px;color:var(--red);font-weight:700;font-size:12px;font-family:'IBM Plex Mono',monospace;}
+.flags li b{color:var(--red-ink);}
+
+.gloss{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px 22px;}
+.gloss .term{font-family:'Spectral',serif;font-style:italic;font-size:12.5px;margin:0 0 3px;border-top:1px solid var(--line);padding-top:8px;}
+.gloss p{font-size:8.7px;line-height:1.42;color:#55554a;margin:0;}
+
+.foot{
+  position:absolute;left:15mm;right:15mm;bottom:11mm;
+  display:flex;justify-content:space-between;
+  font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--faint);
+  letter-spacing:.06em;border-top:1px solid var(--line);padding-top:7px;
+}
+
+svg{display:block;}
+.axcap{font-family:'IBM Plex Mono',monospace;font-size:6.5px;fill:var(--muted);letter-spacing:.08em;}
+</style>
+  <link rel="stylesheet" href="assets/style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap">
+  <link rel="stylesheet" href="assets/reader.css">
+</head>
+<body class="reader">
+<div class="reader-bar">
+  <a class="rb-back" href="./">&larr; Options series</a>
+  <div class="rb-title">No. 02 &middot; Trading Safely</div>
+  <a class="rb-pdf" href="options-cheat-sheet-02-trading-safely.pdf" download>Download PDF &darr;</a>
+</div>
+<div class="reader-scroll">
+
+<!-- ============ PAGE 1 ============ -->
+<section class="page">
+  <div class="runhead"><span>Options Cheat Sheet</span><span>No. 02 · Trading safely</span></div>
+
+  <div class="masthead">
+    <div style="max-width:120mm;">
+      <div class="kicker">A visual primer · No. 02</div>
+      <h1 class="title">Trading it,<br><em>safely.</em></h1>
+    </div>
+    <div class="metabox">
+      <div class="hd">The safe way in</div>
+      Defined risk first<br>
+      Size · Assign · Check<br>
+      Five starter trades<br><br>
+      <div class="hd">One page</div>
+      <div class="hd" style="margin-top:10px;">Read after</div>
+      No. 01 — the anatomy
+    </div>
+  </div>
+
+  <div class="intro">
+    <p class="lead">No. 01 showed <em>what</em> an option is. This one is about not getting hurt while you learn to trade one. The single idea underneath every page here: <b>decide your worst case before you enter — in dollars — and make it a number you can shrug off.</b> Everything else is detail.</p>
+  </div>
+
+  <hr class="rule">
+
+  <div class="sect">
+    <div class="sectlabel">01 /<br>Risk<br>shape</div>
+    <h2 class="stitle">Before the strategy, know the shape of the risk.</h2>
+    <p>Every options position falls into one of two buckets. This split matters more than bullish-vs-bearish, more than calls-vs-puts. Get it wrong and a single trade can take more than you put in. Get it right and a bad trade is just a bad day.</p>
+
+    <div class="grid2" style="margin-top:12px;">
+      <div class="card green">
+        <div class="lab">The safe bucket</div>
+        <h4><span class="dot g"></span>Defined risk</h4>
+        <p class="small">You know the most you can lose the instant you enter — it's the cash you paid, or a gap you've fully funded. The market can do its worst and your loss still can't exceed that number.</p>
+        <div class="rows">
+          <div class="row"><span class="k">Worst case</span><span class="v g">Known, capped</span></div>
+          <div class="row"><span class="k">Can lose more than you put in?</span><span class="v g">No</span></div>
+          <div class="row"><span class="k">Examples</span><span class="v">Long call · long put · debit spread · cash-secured put · covered call</span></div>
+        </div>
+      </div>
+      <div class="card red">
+        <div class="lab">The danger bucket</div>
+        <h4><span class="dot r"></span>Undefined risk</h4>
+        <p class="small">The loss has no ceiling you controlled up front. Selling a call you don't own shares against is the classic: if the stock triples, your loss triples with it. This is where beginners blow up accounts.</p>
+        <div class="rows">
+          <div class="row"><span class="k">Worst case</span><span class="v r">Open-ended</span></div>
+          <div class="row"><span class="k">Can lose more than you put in?</span><span class="v r">Yes — much more</span></div>
+          <div class="row"><span class="k">Examples</span><span class="v">Naked short call · naked short put · short straddle/strangle</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout" style="margin-top:14px;">
+      <div class="tag">The one rule.</div>
+      <p class="small" style="margin:0;">Until you have real experience and a broker that has approved you for it, <b>trade defined-risk positions only.</b> Brokers gate the dangerous ones behind higher "options approval levels" for exactly this reason — treat that gate as a friend, not an obstacle. Everything on the next pages lives in the safe bucket.</p>
+    </div>
+  </div>
+
+  <div class="foot"><span>Options Cheat Sheet · 02</span><span>Educational reference — not investment advice</span></div>
+</section>
+
+<!-- ============ PAGE 2 ============ -->
+<section class="page">
+  <div class="runhead"><span>Options Cheat Sheet</span><span>No. 02 · Trading safely</span></div>
+
+  <div class="sect">
+    <div class="sectlabel">02 /<br>The<br>safe<br>five</div>
+    <h2 class="stitle">Five positions you can actually start with.</h2>
+    <p style="max-width:150mm;">Each one has a worst case you can write down before you click buy. Two are pure directional bets with a small fixed cost. Two put you to work around shares. One is the cheaper, capped cousin of simply buying a call. The mini-charts show the buyer's/holder's profit at expiration — flat means the loss has stopped.</p>
+
+    <div class="grid2" style="margin-top:12px;">
+
+      <!-- Long call -->
+      <div class="card">
+        <div class="lab">01 · Directional, bullish</div>
+        <h4>Long call</h4>
+        <svg width="100%" height="58" viewBox="0 0 240 58">
+          <line x1="10" y1="44" x2="230" y2="44" stroke="#cfcdc2" stroke-width="1"/>
+          <line x1="120" y1="6" x2="120" y2="52" stroke="#cfcdc2" stroke-width="1" stroke-dasharray="2,2"/>
+          <path d="M10,44 L120,44 L210,12" fill="none" stroke="#4b7d5b" stroke-width="2"/>
+          <text x="118" y="57" class="axcap">K</text>
+        </svg>
+        <p class="small">Pay a premium for the right to buy at the strike. Leveraged upside if the stock rises; the whole cost expires worthless if it doesn't.</p>
+        <div class="rows">
+          <div class="row"><span class="k">Max loss</span><span class="v g">Premium paid — fixed</span></div>
+          <div class="row"><span class="k">Max gain</span><span class="v">Large (stock can keep rising)</span></div>
+          <div class="row"><span class="k">Use when</span><span class="v">You expect a move up, soon</span></div>
+        </div>
+      </div>
+
+      <!-- Long put -->
+      <div class="card">
+        <div class="lab">02 · Directional / insurance</div>
+        <h4>Long put</h4>
+        <svg width="100%" height="58" viewBox="0 0 240 58">
+          <line x1="10" y1="44" x2="230" y2="44" stroke="#cfcdc2" stroke-width="1"/>
+          <line x1="120" y1="6" x2="120" y2="52" stroke="#cfcdc2" stroke-width="1" stroke-dasharray="2,2"/>
+          <path d="M30,12 L120,44 L230,44" fill="none" stroke="#b0503c" stroke-width="2"/>
+          <text x="118" y="57" class="axcap">K</text>
+        </svg>
+        <p class="small">The right to sell at the strike — pays off when the stock falls. Bought against shares you own, it's simply insurance on your holding.</p>
+        <div class="rows">
+          <div class="row"><span class="k">Max loss</span><span class="v g">Premium paid — fixed</span></div>
+          <div class="row"><span class="k">Max gain</span><span class="v">Large (down to a zero stock)</span></div>
+          <div class="row"><span class="k">Use when</span><span class="v">Bearish, or protecting a stock</span></div>
+        </div>
+      </div>
+
+      <!-- Covered call -->
+      <div class="card">
+        <div class="lab">03 · Income on shares you own</div>
+        <h4>Covered call</h4>
+        <svg width="100%" height="58" viewBox="0 0 240 58">
+          <line x1="10" y1="44" x2="230" y2="44" stroke="#cfcdc2" stroke-width="1"/>
+          <line x1="150" y1="6" x2="150" y2="52" stroke="#cfcdc2" stroke-width="1" stroke-dasharray="2,2"/>
+          <path d="M20,50 L150,20 L230,20" fill="none" stroke="#4b7d5b" stroke-width="2"/>
+          <text x="148" y="57" class="axcap">K</text>
+        </svg>
+        <p class="small">Own 100 shares, sell one call against them, keep the premium. It caps your upside above the strike in exchange for income now.</p>
+        <div class="rows">
+          <div class="row"><span class="k">Max loss</span><span class="v r">The stock falling (you own it)</span></div>
+          <div class="row"><span class="k">Max gain</span><span class="v">Premium + rise up to strike</span></div>
+          <div class="row"><span class="k">Use when</span><span class="v">You'd sell at the strike anyway</span></div>
+        </div>
+      </div>
+
+      <!-- Cash-secured put -->
+      <div class="card">
+        <div class="lab">04 · Get paid to maybe buy</div>
+        <h4>Cash-secured put</h4>
+        <svg width="100%" height="58" viewBox="0 0 240 58">
+          <line x1="10" y1="40" x2="230" y2="40" stroke="#cfcdc2" stroke-width="1"/>
+          <line x1="150" y1="6" x2="150" y2="52" stroke="#cfcdc2" stroke-width="1" stroke-dasharray="2,2"/>
+          <path d="M30,10 L150,30 L230,30" fill="none" stroke="#4b7d5b" stroke-width="2"/>
+          <text x="148" y="57" class="axcap">K</text>
+        </svg>
+        <p class="small">Sell a put and set aside the full cash to buy 100 shares at the strike. Keep the premium; if assigned, you buy a stock you already wanted, cheaper.</p>
+        <div class="rows">
+          <div class="row"><span class="k">Max loss</span><span class="v r">Strike − premium (to a $0 stock)</span></div>
+          <div class="row"><span class="k">Max gain</span><span class="v">Premium received</span></div>
+          <div class="row"><span class="k">Use when</span><span class="v">Happy to own at the strike</span></div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="card cream" style="margin-top:11px;">
+      <div class="lab">05 · The capped directional bet</div>
+      <div style="display:flex;gap:16px;align-items:center;">
+        <svg width="150" height="58" viewBox="0 0 240 58" style="flex:none;">
+          <line x1="10" y1="44" x2="230" y2="44" stroke="#cfcdc2" stroke-width="1"/>
+          <line x1="90" y1="6" x2="90" y2="52" stroke="#cfcdc2" stroke-width="1" stroke-dasharray="2,2"/>
+          <line x1="170" y1="6" x2="170" y2="52" stroke="#cfcdc2" stroke-width="1" stroke-dasharray="2,2"/>
+          <path d="M10,44 L90,44 L170,16 L230,16" fill="none" stroke="#4b7d5b" stroke-width="2"/>
+          <text x="82" y="57" class="axcap">buy</text><text x="168" y="57" class="axcap">sell</text>
+        </svg>
+        <div style="flex:1;">
+          <h4 style="margin-bottom:4px;">Vertical (debit) spread</h4>
+          <p class="small" style="margin:0;">Buy a call, sell a higher-strike call in the same expiry (or the put mirror for a bearish view). You give up the runaway upside, but the trade costs far less than a lone call and both your <span class="gt">max gain</span> and <span class="gt">max loss</span> are fixed and known. A great first "structured" trade. <span class="mono tiny" style="color:#777;">Max loss = net paid · Max gain = strike width − net paid.</span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="foot"><span>Options Cheat Sheet · 02</span><span>Educational reference — not investment advice</span></div>
+</section>
+
+<!-- ============ PAGE 3 ============ -->
+<section class="page">
+  <div class="runhead"><span>Options Cheat Sheet</span><span>No. 02 · Trading safely</span></div>
+
+  <div class="sect">
+    <div class="sectlabel">02 /<br>cont.</div>
+    <h3 class="big">When you'd actually reach for each.</h3>
+    <p style="max-width:150mm;">Same starter set, in plain intentions. Notice none of them require you to be right about timing to the day, and none can lose more than a number you set in advance.</p>
+    <div class="grid3" style="margin-top:12px;">
+      <div class="card"><div class="lab" style="color:var(--green-ink)">Long call</div><p class="small" style="margin:0;">"I think it climbs and I want leverage, but I only want to risk a small, fixed ticket." <span class="mono tiny" style="color:#777;">Lose only the premium.</span></p></div>
+      <div class="card"><div class="lab" style="color:var(--red-ink)">Long put</div><p class="small" style="margin:0;">"I'm nervous about a drop — either to profit from it, or to insure shares I'm holding through it." <span class="mono tiny" style="color:#777;">Insurance you can price.</span></p></div>
+      <div class="card"><div class="lab" style="color:var(--green-ink)">Debit spread</div><p class="small" style="margin:0;">"I'm directional but the lone option is pricey — cap my upside to slash the cost and fix the risk." <span class="mono tiny" style="color:#777;">Both ends known.</span></p></div>
+      <div class="card cream"><div class="lab">Covered call</div><p class="small" style="margin:0;">"I own the shares and I'm fine selling at a higher price. Pay me to wait." <span class="mono tiny" style="color:#777;">Income, capped upside.</span></p></div>
+      <div class="card cream"><div class="lab">Cash-secured put</div><p class="small" style="margin:0;">"I want to own this stock a bit cheaper. Pay me while I wait for my price." <span class="mono tiny" style="color:#777;">Cash fully set aside.</span></p></div>
+      <div class="card" style="background:#fbfaf6;"><div class="lab">The Wheel</div><p class="small" style="margin:0;">Cash-secured put → if assigned, own shares → sell covered calls on them → repeat. A popular, fully-defined-risk loop. <span class="mono tiny" style="color:#777;">Built from the two above.</span></p></div>
+    </div>
+
+    <hr class="rule">
+
+    <div class="sectlabel">03 /<br>Sizing</div>
+    <h2 class="stitle">Size it so a total loss doesn't matter.</h2>
+    <p style="max-width:150mm;">The fastest way to survive the learning years is to make each trade too small to hurt. Because defined-risk trades hand you the worst case up front, position sizing becomes simple arithmetic instead of a guess.</p>
+
+    <div class="grid3" style="margin-top:10px;">
+      <div class="card">
+        <div class="lab">The rule of thumb</div>
+        <p class="small" style="margin:0;">Risk no more than <b>1–2% of your account</b> on any single trade. On a $5,000 account, that's $50–$100 of defined max-loss per position — often just one contract.</p>
+      </div>
+      <div class="card">
+        <div class="lab">The arithmetic</div>
+        <p class="small" style="margin:0;"><span class="mono tiny">contracts = risk budget ÷ max-loss per contract.</span> A spread risking $60 fits a $100 budget once. Don't round up "just this once."</p>
+      </div>
+      <div class="card">
+        <div class="lab">The portfolio</div>
+        <p class="small" style="margin:0;">Keep most of the account in cash or a plain index fund. Spread trades across different underlyings and dates. <b>No margin</b> as a beginner.</p>
+      </div>
+    </div>
+
+    <div class="callout" style="margin-top:12px;">
+      <div class="tag">Why so small?</div>
+      <p class="small" style="margin:0;">A string of losses is normal while learning — even good traders have them. Sizing at 1–2% means it takes a genuinely awful run, not one bad week, to dent you. Small size is what keeps you in the game long enough to get good.</p>
+    </div>
+  </div>
+
+  <div class="foot"><span>Options Cheat Sheet · 02</span><span>Educational reference — not investment advice</span></div>
+</section>
+
+<!-- ============ PAGE 4 ============ -->
+<section class="page">
+  <div class="runhead"><span>Options Cheat Sheet</span><span>No. 02 · Trading safely</span></div>
+
+  <div class="sect">
+    <div class="sectlabel">04 /<br>At<br>expiry</div>
+    <h2 class="stitle">Assignment &amp; expiration — <em>what actually happens.</em></h2>
+    <p style="max-width:150mm;">The mechanics that surprise beginners all cluster around the expiration date. None are dangerous inside the safe bucket — but you should know them before they happen to you, not after.</p>
+
+    <div class="grid2" style="margin-top:11px;">
+      <div class="card">
+        <div class="lab">If you're the buyer (long)</div>
+        <p class="small">In the money at expiry, your option is <b>automatically exercised</b> by the broker — a long call turns into 100 purchased shares, a long put into 100 sold. Out of the money, it simply expires worthless and you lose the premium, nothing more.</p>
+        <p class="small" style="margin:0;color:#8f3e2d;"><b>Watch:</b> don't let an ITM option auto-exercise into shares you can't fund. If you only wanted the option's value, <b>close it</b> before expiry instead.</p>
+      </div>
+      <div class="card">
+        <div class="lab">If you're the seller (short leg)</div>
+        <p class="small">You can be <b>assigned</b> any time the option is in the money — occasionally early, not just at expiry. Assignment means you must honour the deal: a short put buys you 100 shares (you set the cash aside), a short call sells your 100 shares.</p>
+        <p class="small" style="margin:0;color:#8f3e2d;"><b>Watch:</b> in a covered call or cash-secured put this is fine — you were ready for it. Only "naked" shorts make assignment scary.</p>
+      </div>
+    </div>
+
+    <div class="grid3" style="margin-top:11px;">
+      <div class="card cream"><div class="lab">Close early</div><p class="small" style="margin:0;">You almost never have to hold to expiry. Buy-to-close or sell-to-close locks in your result and sidesteps assignment guesswork.</p></div>
+      <div class="card cream"><div class="lab">Pin risk</div><p class="small" style="margin:0;">A stock finishing right at the strike leaves you unsure if a short option will be assigned. Avoid it by closing beforehand.</p></div>
+      <div class="card cream"><div class="lab">Expiry cadence</div><p class="small" style="margin:0;">Longer-dated options decay slower and give you room to be wrong on timing. Same-day ("0DTE") options are the opposite — skip them.</p></div>
+    </div>
+
+    <hr class="rule">
+
+    <div class="sectlabel">05 /<br>Check</div>
+    <h2 class="stitle">The pre-trade checklist.</h2>
+    <p>Run every trade past these before you click. If any answer is uncomfortable, the trade isn't ready — and there's always another one tomorrow.</p>
+    <ul class="checklist" style="margin-top:6px;">
+      <li><b>Do I know my max loss in dollars — right now, before entering?</b><span>If you can't state it, don't place it.</span></li>
+      <li><b>Can I lose that amount and genuinely not care?</b><span>It should be ≤ 1–2% of the account.</span></li>
+      <li><b>Is this defined-risk — nothing naked, nothing open-ended?</b><span>Stay in the safe bucket.</span></li>
+      <li><b>Is the option liquid — tight bid/ask, real open interest &amp; volume?</b><span>Wide spreads quietly tax every trade.</span></li>
+      <li><b>Do I have an exit plan — a profit target and a give-up point/date?</b><span>Decide the exits before the emotions arrive.</span></li>
+      <li><b>Am I clear of an earnings report or event I don't understand?</b><span>Binary events wreck option prices in both directions.</span></li>
+      <li><b>Did I paper-trade this style first?</b><span>Rehearse with fake money until the mechanics are boring.</span></li>
+    </ul>
+  </div>
+
+  <div class="foot"><span>Options Cheat Sheet · 02</span><span>Educational reference — not investment advice</span></div>
+</section>
+
+<!-- ============ PAGE 5 ============ -->
+<section class="page">
+  <div class="runhead"><span>Options Cheat Sheet</span><span>No. 02 · Trading safely</span></div>
+
+  <div class="sect">
+    <div class="sectlabel">06 /<br>Red<br>flags</div>
+    <h2 class="stitle">What <em>not</em> to do while you're learning.</h2>
+    <p style="max-width:150mm;">The mistakes below account for most beginner account wipe-outs. None are exotic — they're the tempting shortcuts. Treat this as the "handle with care" label.</p>
+
+    <div class="grid2" style="margin-top:10px;">
+      <ul class="flags">
+        <li><b>Selling naked calls.</b> Truly unlimited loss if the stock runs. The single most dangerous common trade — don't, full stop.</li>
+        <li><b>Going all-in / oversizing.</b> One "sure thing" at 30% of the account is how learning accounts die. Size at 1–2%.</li>
+        <li><b>0DTE lottery tickets.</b> Same-day options are nearly all time-decay and noise. Cheap, thrilling, and a reliable way to donate money.</li>
+        <li><b>Illiquid options.</b> Wide bid/ask spreads and thin open interest mean you overpay to get in and get trapped getting out.</li>
+      </ul>
+      <ul class="flags">
+        <li><b>Buying options right into earnings.</b> Implied volatility collapses after the report ("IV crush") — you can be right on direction and still lose.</li>
+        <li><b>Averaging down on a losing option.</b> Options decay; adding to a loser often just enlarges the loss.</li>
+        <li><b>Selling puts you couldn't afford to be assigned.</b> "Cash-secured" means the cash is really there. Otherwise it's a naked put in disguise.</li>
+        <li><b>Trading money you actually need.</b> Rent and options don't mix. Only ever risk money you can lose.</li>
+      </ul>
+    </div>
+
+    <hr class="rule">
+
+    <div class="sectlabel">07 /<br>Terms</div>
+    <h2 class="stitle">A few safety words you'll meet.</h2>
+    <p>The vocabulary specific to keeping yourself out of trouble — a companion to the glossary in No. 01.</p>
+
+    <div class="gloss" style="margin-top:8px;">
+      <div><div class="term">Defined risk</div><p>A position whose worst-case loss is fixed and known before you enter. The beginner's home.</p></div>
+      <div><div class="term">Undefined / naked risk</div><p>A short option not backed by shares or cash — loss can far exceed the premium. Avoid.</p></div>
+      <div><div class="term">Assignment</div><p>Being required to fulfil a short option: deliver shares (call) or buy them (put) at the strike.</p></div>
+      <div><div class="term">Options approval level</div><p>Tiers your broker grants as you show experience. Higher tiers unlock riskier trades — earn them slowly.</p></div>
+      <div><div class="term">Buying power / margin</div><p>Borrowed capacity to trade. Amplifies losses as much as gains. Leave it off as a beginner.</p></div>
+      <div><div class="term">Liquidity</div><p>How easily you can enter and exit — read from a tight bid/ask spread plus healthy volume and open interest.</p></div>
+      <div><div class="term">IV crush</div><p>The sharp drop in implied volatility (and option prices) after an event like earnings passes.</p></div>
+      <div><div class="term">Paper trading</div><p>Practising with simulated money on a real platform. Do this first, and for longer than feels necessary.</p></div>
+      <div><div class="term">Rolling</div><p>Closing an option and reopening a similar one further out in time or strike — to adjust, not to rescue a bad trade.</p></div>
+    </div>
+
+    <div class="callout" style="margin-top:16px;background:#fbfaf6;">
+      <div class="tag">The short version.</div>
+      <p class="small" style="margin:0;">Trade only what you can lose, only defined-risk, only small — and practise on paper first. Master those four habits and the strategies take care of themselves. <b>Nothing here is a recommendation to trade; it's a map of how to do it more carefully if you choose to.</b></p>
+    </div>
+  </div>
+
+  <div class="foot"><span>Options Cheat Sheet · 02</span><span>Educational reference — not investment advice</span></div>
+</section>
+
+</div>
+<nav class="reader-nav">
+<a class="rn-prev" href="01-at-a-glance.html"><div class="rn-dir">&larr; Previous</div><div class="rn-ttl">No. 01 &middot; At a Glance</div></a>
+<a class="rn-next" href="03-what-moves-the-price.html"><div class="rn-dir">Next &rarr;</div><div class="rn-ttl">No. 03 &middot; What Moves the Price</div></a>
+</nav>
+</body>
+</html>

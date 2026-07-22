@@ -1,0 +1,121 @@
+/* =====================================================================
+   reader.css — turns the print "Options Cheat Sheet" primers into
+   responsive web documents, wrapped in Deep-Ocean site chrome.
+   Loaded AFTER each primer's own styles so these overrides win.
+   ===================================================================== */
+
+:root{
+  --deep:#0a0c10; --surface:#12151c; --raised:#1a1e28;
+  --t-primary:#e8eaf0; --t-secondary:#8b92a8; --t-tertiary:#4a5068;
+  --accent:#38bfa0; --accent-muted:rgba(56,191,160,0.15);
+  --amber:#e0a848; --amber-muted:rgba(224,168,72,0.14);
+  --brdr:rgba(255,255,255,0.08); --brdr-hover:rgba(255,255,255,0.16);
+  --site-display:'Satoshi',-apple-system,BlinkMacSystemFont,sans-serif;
+  --site-body:'Outfit',-apple-system,BlinkMacSystemFont,sans-serif;
+}
+
+/* ---- dark canvas the paper floats on ---- */
+html,body.reader{background:var(--deep) !important;}
+body.reader{
+  margin:0;padding:0;
+  font-family:var(--site-body);
+  color:var(--t-primary);
+  overflow-x:hidden;
+}
+
+/* ---- sticky top bar ---- */
+.reader-bar{
+  position:sticky;top:0;z-index:50;
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:14px clamp(16px,4vw,40px);
+  background:rgba(10,12,16,0.82);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--brdr);
+}
+.reader-bar a{text-decoration:none;color:inherit;}
+.reader-bar .rb-back{
+  display:flex;align-items:center;gap:8px;
+  color:var(--t-secondary);font-size:0.85rem;font-weight:500;transition:color .2s;
+  white-space:nowrap;
+}
+.reader-bar .rb-back:hover{color:var(--t-primary);}
+.reader-bar .rb-title{
+  font-family:var(--site-display);font-weight:700;font-size:0.82rem;letter-spacing:-0.01em;
+  color:var(--t-secondary);text-align:center;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+.reader-bar .rb-pdf{
+  display:flex;align-items:center;gap:7px;white-space:nowrap;
+  font-family:var(--site-display);font-weight:700;font-size:0.8rem;
+  color:var(--accent);
+  border:1px solid rgba(56,191,160,0.28);background:var(--accent-muted);
+  padding:8px 13px;border-radius:10px;transition:all .2s;
+}
+.reader-bar .rb-pdf:hover{background:rgba(56,191,160,0.22);border-color:rgba(56,191,160,0.5);}
+
+/* ---- paper wrapper ---- */
+.reader-scroll{
+  padding:clamp(18px,4vw,44px) clamp(10px,3vw,24px) 60px;
+}
+
+/* ---- the print .page becomes responsive floating paper ---- */
+body.reader .page{
+  color:#1d1d1b;               /* keep paper text ink-dark; the dark canvas color must not leak in */
+  width:100% !important;
+  max-width:940px !important;
+  min-height:0 !important;
+  margin:0 auto 26px !important;
+  padding:clamp(22px,4.5vw,52px) clamp(18px,4.5vw,54px) clamp(30px,5vw,60px) !important;
+  background:#fff !important;
+  border-radius:10px;
+  box-shadow:0 24px 70px rgba(0,0,0,0.45);
+  page-break-after:auto !important;
+  overflow:visible;
+}
+
+/* running head + footer inside the paper: keep, but footer no longer absolute */
+body.reader .runhead{padding-bottom:12px;margin-bottom:6px;border-bottom:1px solid var(--line);}
+body.reader .foot{
+  position:static !important;left:auto;right:auto;bottom:auto;
+  margin-top:26px;
+}
+
+/* section number label: was in the print left margin (absolute) -> inline tag */
+body.reader .sect{padding-left:0 !important;}
+body.reader .sectlabel{
+  position:static !important;width:auto !important;left:auto !important;
+  display:inline-block;margin:0 0 8px;
+  padding:3px 8px;border-radius:5px;
+  background:#f1efe7;color:#9a9a90;line-height:1.35;letter-spacing:.1em;
+}
+
+/* horizontal-scroll wrapper injected around wide tables for mobile */
+.tscroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:2px 0;}
+.tscroll table{min-width:560px;}
+
+/* ---- bottom issue nav ---- */
+.reader-nav{
+  max-width:940px;margin:0 auto;padding:8px clamp(4px,2vw,10px) 20px;
+  display:flex;align-items:stretch;justify-content:space-between;gap:12px;
+}
+.reader-nav a,.reader-nav span.spacer{flex:1;}
+.reader-nav a{
+  text-decoration:none;color:var(--t-primary);
+  background:rgba(255,255,255,0.035);border:1px solid var(--brdr);border-radius:12px;
+  padding:14px 16px;transition:all .25s;display:block;
+}
+.reader-nav a:hover{border-color:var(--brdr-hover);background:rgba(255,255,255,0.06);transform:translateY(-2px);}
+.reader-nav .rn-dir{font-size:0.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--t-tertiary);margin-bottom:4px;}
+.reader-nav .rn-ttl{font-family:var(--site-display);font-weight:700;font-size:0.92rem;letter-spacing:-0.02em;}
+.reader-nav a.rn-next{text-align:right;}
+
+/* ---- responsive: collapse the print multi-column grids ---- */
+@media (max-width:720px){
+  body.reader .grid2,body.reader .grid3,body.reader .grid4{grid-template-columns:1fr !important;}
+  body.reader .masthead{flex-direction:column;gap:14px;}
+  body.reader .metabox{text-align:left;}
+  .reader-bar .rb-title{display:none;}
+}
+@media (max-width:440px){
+  .reader-nav{flex-direction:column;}
+  .reader-nav a.rn-next{text-align:left;}
+}

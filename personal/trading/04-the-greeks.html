@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Options Cheat Sheet — No. 04</title>
+<link rel="stylesheet" href="assets/style.css">
+<style>
+table.greeks{width:100%;border-collapse:collapse;font-size:9px;margin-top:6px;}
+table.greeks th{font-family:'IBM Plex Mono',monospace;font-size:7px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:500;padding:6px 6px;border-bottom:1px solid var(--line);}
+table.greeks td{padding:7px 6px;border-bottom:1px solid var(--line2);text-align:center;font-family:'IBM Plex Mono',monospace;font-size:11px;}
+table.greeks td.pos{color:var(--green-ink);font-weight:600;}
+table.greeks td.neg{color:var(--red-ink);font-weight:600;}
+table.greeks td.name{text-align:left;font-family:'Spectral',serif;font-size:12px;font-weight:500;color:#111;}
+</style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap">
+  <link rel="stylesheet" href="assets/reader.css">
+</head>
+<body class="reader">
+<div class="reader-bar">
+  <a class="rb-back" href="./">&larr; Options series</a>
+  <div class="rb-title">No. 04 &middot; The Greeks</div>
+  <a class="rb-pdf" href="options-cheat-sheet-04-the-greeks.pdf" download>Download PDF &darr;</a>
+</div>
+<div class="reader-scroll">
+
+<!-- ===== PAGE 1 ===== -->
+<section class="page">
+  <div class="runhead"><span>Options Cheat Sheet</span><span>No. 04 · The Greeks</span></div>
+  <div class="masthead">
+    <div style="max-width:120mm;">
+      <div class="kicker">A visual primer · No. 04</div>
+      <h1 class="title">The Greeks,<br><em>as feelings.</em></h1>
+    </div>
+    <div class="metabox">
+      <div class="hd">Sensitivities</div>
+      Delta · Gamma<br>
+      Theta · Vega · Rho<br>
+      How the price reacts<br><br>
+      <div class="hd">One page</div>
+      <div class="hd" style="margin-top:10px;">Read after</div>
+      No. 03 — pricing
+    </div>
+  </div>
+  <div class="intro">
+    <p class="lead">The Greeks sound like advanced maths. They're not. Each one just answers a plain question: <b>"if this one thing moves a little, how much does my option's price move?"</b> You never calculate them — your platform prints them next to every option. Learn to read them as <em>rates</em> and dials, and a position stops being a mystery.</p>
+  </div>
+  <hr class="rule">
+  <div class="sect">
+    <div class="sectlabel">01 /<br>What<br>they<br>are</div>
+    <h2 class="stitle">Five dials on one option.</h2>
+    <p>An option's price is pushed around by a handful of forces — the stock, the clock, and the market's nerves. Each Greek measures sensitivity to exactly one of them, holding the others still.</p>
+    <div class="tscroll"><table class="greeks">
+      <tr><th style="text-align:left;">Greek</th><th style="text-align:left;">Answers the question…</th><th>Reacts to</th></tr>
+      <tr><td class="name">Delta &nbsp;<span class="mono" style="font-size:10px;color:#888;">Δ</span></td><td style="text-align:left;font-family:Inter;font-size:9.5px;">"If the stock moves $1, how much does my option move?"</td><td style="font-family:Inter;font-size:9px;">Stock price</td></tr>
+      <tr><td class="name">Gamma &nbsp;<span class="mono" style="font-size:10px;color:#888;">Γ</span></td><td style="text-align:left;font-family:Inter;font-size:9.5px;">"…and how fast is that delta itself changing?"</td><td style="font-family:Inter;font-size:9px;">Delta</td></tr>
+      <tr><td class="name">Theta &nbsp;<span class="mono" style="font-size:10px;color:#888;">Θ</span></td><td style="text-align:left;font-family:Inter;font-size:9.5px;">"If one day passes and nothing else changes, what do I lose?"</td><td style="font-family:Inter;font-size:9px;">Time</td></tr>
+      <tr><td class="name">Vega &nbsp;<span class="mono" style="font-size:10px;color:#888;">V</span></td><td style="text-align:left;font-family:Inter;font-size:9.5px;">"If implied volatility rises 1%, how much does my option move?"</td><td style="font-family:Inter;font-size:9px;">Volatility</td></tr>
+      <tr><td class="name">Rho &nbsp;<span class="mono" style="font-size:10px;color:#888;">ρ</span></td><td style="text-align:left;font-family:Inter;font-size:9.5px;">"If interest rates shift, how much does my option move?"</td><td style="font-family:Inter;font-size:9px;">Rates</td></tr>
+    </table></div>
+    <div class="callout" style="margin-top:14px;">
+      <div class="tag">The mindset.</div>
+      <p class="small" style="margin:0;">Don't memorise formulas. Learn the <em>direction and size</em> of each dial for the position you hold — "decay hurts me, a bigger stock move helps me, rising volatility helps me a little." That sentence is you reading your Greeks. The next pages give you the feel of each.</p>
+    </div>
+  </div>
+  <div class="foot"><span>Options Cheat Sheet · 04</span><span>Educational reference — not investment advice</span></div>
+</section>
+
+<!-- ===== PAGE 2 ===== -->
+<section class="page">
+  <div class="runhead"><span>Options Cheat Sheet</span><span>No. 04 · The Greeks</span></div>
+  <div class="sect">
+    <div class="sectlabel">02 /<br>Delta</div>
+    <h2 class="stitle">Delta — how much you move with the stock.</h2>
+    <p style="max-width:150mm;">The most useful Greek, and the one to learn first. A call's delta runs from 0 to +1; a put's from 0 to −1. It has three readings at once — and all three are handy.</p>
+
+    <div class="card" style="margin-top:12px;">
+      <div class="lab">A call's delta across moneyness</div>
+      <svg width="100%" height="96" viewBox="0 0 640 96">
+        <line x1="40" y1="70" x2="600" y2="70" stroke="#cfcdc2" stroke-width="1"/>
+        <path d="M40,66 C200,64 260,58 320,40 C380,22 440,16 600,14" fill="none" stroke="#4b7d5b" stroke-width="2.5"/>
+        <line x1="320" y1="12" x2="320" y2="78" stroke="#c9c7bc" stroke-width="1" stroke-dasharray="3,3"/>
+        <text x="300" y="90" class="axcap">AT THE MONEY</text>
+        <text x="44" y="90" class="axcap">DEEP OTM · Δ≈0</text>
+        <text x="540" y="90" class="axcap">DEEP ITM · Δ≈1</text>
+        <text x="330" y="34" class="axcap">Δ≈0.50</text>
+      </svg>
+    </div>
+
+    <div class="grid3" style="margin-top:12px;">
+      <div class="card"><div class="lab">Reading 1 · Rate</div><p class="small" style="margin:0;">A delta of <b>0.50</b> means the option gains about <b>$0.50</b> for every $1 the stock rises (×100 = $50 per contract).</p></div>
+      <div class="card"><div class="lab">Reading 2 · Shares</div><p class="small" style="margin:0;">It's your <b>share-equivalent</b> exposure. A 0.50-delta call behaves like owning ~50 shares right now.</p></div>
+      <div class="card"><div class="lab">Reading 3 · Odds</div><p class="small" style="margin:0;">Roughly the option's <b>chance of finishing in the money</b>. A 0.30 delta ≈ a 30% shot, loosely. A handy gut-check.</p></div>
+    </div>
+    <p class="small" style="margin-top:12px;color:#55554a;"><b>Why it matters for safety:</b> delta tells you your <em>real</em> exposure. A cheap-looking deep-in-the-money call with 0.90 delta moves almost dollar-for-dollar with 90 shares — far more risk than the small premium suggests. Always know the delta, not just the price.</p>
+  </div>
+  <div class="foot"><span>Options Cheat Sheet · 04</span><span>Educational reference — not investment advice</span></div>
+</section>
+
+<!-- ===== PAGE 3 ===== -->
+<section class="page">
+  <div class="runhead"><span>Options Cheat Sheet</span><span>No. 04 · The Greeks</span></div>
+  <div class="sect">
+    <div class="sectlabel">03 /<br>Gamma</div>
+    <h2 class="stitle">Gamma — how fast delta changes.</h2>
+    <p style="max-width:150mm;">If delta is your speed, gamma is your acceleration. It tells you how much delta itself will shift as the stock moves. Gamma is highest for <b>at-the-money options close to expiry</b> — which is exactly why last-week, at-the-money positions feel so wild.</p>
+    <div class="grid2" style="margin-top:11px;">
+      <div class="card"><div class="lab">High gamma</div><p class="small" style="margin:0;">Near expiry, at the money. Delta can swing from 0.3 to 0.7 on a small move — your exposure lurches around and the position whipsaws. Thrilling, and hard to manage.</p></div>
+      <div class="card"><div class="lab">Low gamma</div><p class="small" style="margin:0;">Far from expiry, or deep in/out of the money. Delta drifts slowly, so the position behaves predictably. Calmer — usually better while learning.</p></div>
+    </div>
+    <p class="small" style="margin-top:11px;color:#55554a;"><b>Takeaway:</b> the "cheap" same-day and same-week options that tempt beginners are high-gamma powder kegs. Steadier, longer-dated positions trade a little cost for a lot less lurch.</p>
+
+    <hr class="rule">
+    <div class="sectlabel">04 /<br>Theta</div>
+    <h2 class="stitle">Theta — the daily rent.</h2>
+    <p style="max-width:150mm;">You met this force in No. 03 as time decay; as a Greek it's just the dollar amount of time value that evaporates per day. The sign is what matters: it flips depending on which side you're on.</p>
+    <div class="grid2" style="margin-top:11px;">
+      <div class="card red"><div class="lab">Buyers · theta negative</div><p class="small" style="margin:0;">You <b>pay</b> rent daily. A theta of −0.05 means the option loses ~$5 per contract each day, all else equal — and it speeds up near expiry. The move has to outrun this.</p></div>
+      <div class="card green"><div class="lab">Sellers · theta positive</div><p class="small" style="margin:0;">You <b>collect</b> rent daily. Covered-call and cash-secured-put writers are theta-positive: the passage of time quietly works in their favour.</p></div>
+    </div>
+    <div class="callout" style="margin-top:13px;">
+      <div class="tag">Delta vs theta.</div>
+      <p class="small" style="margin:0;">Most beginner trades are a tug-of-war between these two: delta (your directional gain) pulling one way, theta (decay) dragging the other. Buy an option and you need delta to win the fight before theta wears you down.</p>
+    </div>
+  </div>
+  <div class="foot"><span>Options Cheat Sheet · 04</span><span>Educational reference — not investment advice</span></div>
+</section>
+
+<!-- ===== PAGE 4 ===== -->
+<section class="page">
+  <div class="runhead"><span>Options Cheat Sheet</span><span>No. 04 · The Greeks</span></div>
+  <div class="sect">
+    <div class="sectlabel">05 /<br>Vega</div>
+    <h2 class="stitle">Vega — sensitivity to volatility.</h2>
+    <p style="max-width:150mm;">Vega measures how much your option moves when <b>implied volatility</b> changes by one percentage point. Owning options makes you <b>long vega</b> — you quietly profit if the market grows more fearful, and lose if it calms, even with the stock still.</p>
+    <div class="grid3" style="margin-top:11px;">
+      <div class="card blue"><div class="lab">Long options</div><p class="small" style="margin:0;">Long vega. Rising IV lifts your premium; falling IV (an "IV crush") deflates it. This is the hidden force behind the earnings trap in No. 03.</p></div>
+      <div class="card"><div class="lab">Longer-dated = more vega</div><p class="small" style="margin:0;">The more time on the option, the more a volatility change is worth. Weeklies barely flinch; multi-month options swing on IV.</p></div>
+      <div class="card"><div class="lab">Sellers are short vega</div><p class="small" style="margin:0;">Writers of covered calls / cash-secured puts want IV to fall after they sell — another reason selling into high IV is attractive.</p></div>
+    </div>
+
+    <hr class="rule">
+    <div class="sectlabel">06 /<br>Rho</div>
+    <h2 class="stitle">Rho — sensitivity to interest rates. <em>Usually a footnote.</em></h2>
+    <p style="max-width:150mm;">Rho measures the effect of interest-rate changes. For the short-dated trades a beginner places, it's tiny and safely ignored — it only becomes meaningful for very long-dated options (LEAPS, a year or more out). Know the name; don't lose sleep over it.</p>
+
+    <hr class="rule">
+    <div class="sectlabel">07 /<br>Signs</div>
+    <h2 class="stitle">Who feels what.</h2>
+    <p style="max-width:150mm;">The whole thing on one grid. For each of the four positions from No. 01, this is the <em>sign</em> of each Greek — the direction each dial pushes you. <span class="mono tiny" style="color:#777;">+ helps you as that force rises · − hurts you.</span></p>
+    <div class="tscroll"><table class="greeks" style="margin-top:8px;">
+      <tr><th style="text-align:left;">Position</th><th>Delta</th><th>Gamma</th><th>Theta</th><th>Vega</th><th style="text-align:left;">In one line</th></tr>
+      <tr><td class="name">Long call</td><td class="pos">+</td><td class="pos">+</td><td class="neg">−</td><td class="pos">+</td><td style="text-align:left;font-family:Inter;font-size:8.7px;">Wants up, fast, into rising vol.</td></tr>
+      <tr><td class="name">Long put</td><td class="neg">−</td><td class="pos">+</td><td class="neg">−</td><td class="pos">+</td><td style="text-align:left;font-family:Inter;font-size:8.7px;">Wants down, fast, into rising vol.</td></tr>
+      <tr><td class="name">Short call</td><td class="neg">−</td><td class="neg">−</td><td class="pos">+</td><td class="neg">−</td><td style="text-align:left;font-family:Inter;font-size:8.7px;">Wants flat-to-down, decay, calm.</td></tr>
+      <tr><td class="name">Short put</td><td class="pos">+</td><td class="neg">−</td><td class="pos">+</td><td class="neg">−</td><td style="text-align:left;font-family:Inter;font-size:8.7px;">Wants flat-to-up, decay, calm.</td></tr>
+    </table></div>
+    <p class="small" style="margin-top:10px;color:#55554a;">Notice the symmetry: buyers are <b>+gamma / −theta</b> (they pay for movement), sellers are <b>−gamma / +theta</b> (they're paid to endure it). That single trade-off is most of options in a nutshell.</p>
+  </div>
+  <div class="foot"><span>Options Cheat Sheet · 04</span><span>Educational reference — not investment advice</span></div>
+</section>
+
+<!-- ===== PAGE 5 ===== -->
+<section class="page">
+  <div class="runhead"><span>Options Cheat Sheet</span><span>No. 04 · The Greeks</span></div>
+  <div class="sect">
+    <div class="sectlabel">08 /<br>In<br>practice</div>
+    <h2 class="stitle">The Greeks in your starter trades.</h2>
+    <p style="max-width:150mm;">Tying it back to the safe five from No. 02 — here's which dial helps and which one bites in each.</p>
+    <div class="grid2" style="margin-top:11px;">
+      <div class="card"><div class="lab">Long call / long put</div><p class="small" style="margin:0;"><span class="gt">Helps:</span> delta (your move) and vega (rising IV). <span class="rt">Bites:</span> theta — every quiet day costs you. Give it time and enough expected move to beat the decay.</p></div>
+      <div class="card cream"><div class="lab">Covered call</div><p class="small" style="margin:0;"><span class="gt">Helps:</span> theta — you collect decay on the call you sold, and falling IV helps too. <span class="rt">Bites:</span> a big rally past your strike caps your gain (that's the deal you signed).</p></div>
+      <div class="card cream"><div class="lab">Cash-secured put</div><p class="small" style="margin:0;"><span class="gt">Helps:</span> theta and calming IV. <span class="rt">Bites:</span> a sharp drop — but you set the cash aside to buy, so you were ready. Sell into higher IV for a fatter premium.</p></div>
+      <div class="card green"><div class="lab">Debit spread</div><p class="small" style="margin:0;">Buying one option and selling another <b>nets down</b> your Greeks — less theta bleed and less vega risk than a lone long option. That muting is exactly why it's a gentler first structured trade.</p></div>
+    </div>
+
+    <hr class="rule">
+    <div class="sectlabel">09 /<br>Terms</div>
+    <h2 class="stitle">Words you'll meet.</h2>
+    <div class="gloss" style="margin-top:8px;">
+      <div><div class="term">Delta (Δ)</div><p>Price change per $1 stock move; also share-equivalent exposure and a rough ITM probability. 0→1 calls, 0→−1 puts.</p></div>
+      <div><div class="term">Gamma (Γ)</div><p>How fast delta changes. Highest at-the-money near expiry — the source of last-week whipsaw.</p></div>
+      <div><div class="term">Theta (Θ)</div><p>Time decay per day. Negative for buyers, positive for sellers; accelerates toward expiry.</p></div>
+      <div><div class="term">Vega (V)</div><p>Price change per 1% change in implied volatility. Long options are long vega; bigger for longer-dated.</p></div>
+      <div><div class="term">Rho (ρ)</div><p>Sensitivity to interest rates. Negligible for short-dated trades; matters only for long-dated options.</p></div>
+      <div><div class="term">Long / short vega</div><p>Long vega profits when IV rises (option buyers); short vega profits when IV falls (option sellers).</p></div>
+      <div><div class="term">Net Greeks</div><p>The combined Greeks of a multi-leg position — spreads deliberately offset legs to shrink risk.</p></div>
+      <div><div class="term">Delta-neutral</div><p>A position built so total delta ≈ 0 — no directional bias. An advanced idea; know the term.</p></div>
+      <div><div class="term">LEAPS</div><p>Long-dated options (≈1 year+). The place where vega and rho actually start to matter.</p></div>
+    </div>
+  </div>
+  <div class="foot"><span>Options Cheat Sheet · 04</span><span>Educational reference — not investment advice</span></div>
+</section>
+
+</div>
+<nav class="reader-nav">
+<a class="rn-prev" href="03-what-moves-the-price.html"><div class="rn-dir">&larr; Previous</div><div class="rn-ttl">No. 03 &middot; What Moves the Price</div></a>
+<a class="rn-next" href="05-reading-the-chain.html"><div class="rn-dir">Next &rarr;</div><div class="rn-ttl">No. 05 &middot; Reading the Chain</div></a>
+</nav>
+</body>
+</html>
