@@ -5,81 +5,131 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Options — Learning in public · Giles Parnell</title>
   <meta name="description" content="A visual primer series on options trading — what an option is, how to trade it safely, what moves its price, the Greeks, and reading a chain. Educational, not advice.">
-  <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&display=swap">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
-    :root{
-      --font-display:'Satoshi',-apple-system,BlinkMacSystemFont,sans-serif;
-      --font-body:'Outfit',-apple-system,BlinkMacSystemFont,sans-serif;
-      --bg-deep:#0a0c10;--bg-surface:#12151c;
-      --text-primary:#e8eaf0;--text-secondary:#8b92a8;--text-tertiary:#4a5068;
-      --amber:#e0a848;--amber-light:#f0c576;--amber-muted:rgba(224,168,72,0.14);--amber-glow:rgba(224,168,72,0.20);
-      --border:rgba(255,255,255,0.06);--border-hover:rgba(255,255,255,0.14);--radius:20px;
+    /* =============================================
+       TRADING LANDING — "Console" · dark / warm amber
+       Landing uses the personal warm-Console shell.
+       The reader articles (01–05) keep their own
+       editorial paper theme — do NOT recolour those.
+       ============================================= */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --font-display: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: 'Space Mono', ui-monospace, monospace;
+      --bg:        #0d0a06;
+      --panel:     rgba(255,255,255,0.03);
+      --text:      #f4efe6;
+      --dim:       #ada393;
+      --faint:     #7d7364;
+      --border:    rgba(255,255,255,0.10);
+      --border-hover: rgba(255,255,255,0.16);
+      --accent:    #e6b25a;
+      --accent-light: #f0c576;
+      --accent-deep: #b3812c;
+      --accent-glow: rgba(224,168,72,0.20);
+      --accent-muted: rgba(224,168,72,0.14);
+      --radius: 16px;
     }
-    body{font-family:var(--font-body);background:var(--bg-deep);color:var(--text-primary);line-height:1.6;letter-spacing:-0.01em;min-height:100vh;overflow-x:hidden;}
-    .mesh-bg{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none;}
-    .mesh-bg .blob{position:absolute;border-radius:50%;filter:blur(90px);}
-    .mesh-bg .blob:nth-child(1){width:640px;height:640px;background:hsla(40,60%,32%,0.28);top:-14%;left:-10%;}
-    .mesh-bg .blob:nth-child(2){width:520px;height:520px;background:hsla(168,45%,26%,0.20);top:8%;right:-12%;}
-    .mesh-bg .blob:nth-child(3){width:560px;height:560px;background:hsla(215,50%,26%,0.20);bottom:-18%;left:22%;}
-    .page{position:relative;z-index:1;max-width:1000px;margin:0 auto;padding:3rem 2rem 4rem;}
-    .site-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:3rem;animation:fadeUp .5s ease-out both;}
-    .brand{display:flex;align-items:center;gap:14px;text-decoration:none;color:inherit;}
-    .brand-mark{width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,var(--amber),#b3812c);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:900;font-size:1.05rem;color:#1a1206;letter-spacing:-0.03em;flex-shrink:0;}
-    .brand-text{font-family:var(--font-display);font-weight:700;font-size:1.25rem;letter-spacing:-0.03em;}
-    .back-link{color:var(--text-secondary);text-decoration:none;font-size:0.85rem;font-weight:500;display:flex;align-items:center;gap:6px;transition:color .2s;}
-    .back-link:hover{color:var(--text-primary);}
-    .list-hero{margin-bottom:2rem;animation:fadeUp .6s .05s ease-out both;}
-    .list-hero .eyebrow{display:block;font-size:0.7rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--amber);margin-bottom:0.8rem;}
-    .list-hero h1{font-family:var(--font-display);font-size:clamp(2rem,5vw,3.2rem);font-weight:900;line-height:1.05;letter-spacing:-0.04em;margin-bottom:0.9rem;}
-    .list-hero .lede{font-size:clamp(0.95rem,1.8vw,1.1rem);color:var(--text-secondary);max-width:640px;line-height:1.7;}
-    .disclaimer{display:flex;gap:12px;align-items:flex-start;margin:1.75rem 0 2.5rem;padding:0.9rem 1.1rem;border:1px solid var(--border);border-left:3px solid var(--amber);border-radius:12px;background:rgba(255,255,255,0.025);max-width:680px;animation:fadeUp .6s .1s ease-out both;}
-    .disclaimer .ico{font-size:1rem;}
-    .disclaimer p{font-size:0.82rem;color:var(--text-secondary);line-height:1.55;}
-    .issues{display:flex;flex-direction:column;gap:14px;animation:fadeUp .6s .15s ease-out both;}
-    .issue{display:flex;gap:20px;align-items:center;padding:1.4rem 1.6rem;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:16px;transition:transform .35s cubic-bezier(0.16,1,0.3,1),border-color .3s,background .3s;}
-    .issue:hover{transform:translateY(-3px);border-color:var(--border-hover);background:rgba(224,168,72,0.05);}
-    .issue-num{font-family:var(--font-display);font-weight:900;font-size:1.5rem;letter-spacing:-0.04em;color:var(--amber);width:56px;height:56px;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:var(--amber-muted);border:1px solid rgba(224,168,72,0.22);border-radius:14px;}
-    .issue-body{flex:1;min-width:0;}
-    .issue-title{font-family:var(--font-display);font-weight:700;font-size:1.15rem;letter-spacing:-0.02em;margin-bottom:3px;}
-    .issue-desc{font-size:0.86rem;color:var(--text-secondary);line-height:1.5;}
-    .issue-actions{display:flex;gap:8px;flex-shrink:0;}
-    .btn{display:inline-flex;align-items:center;gap:6px;text-decoration:none;font-family:var(--font-display);font-weight:700;font-size:0.8rem;padding:9px 14px;border-radius:10px;transition:all .2s;white-space:nowrap;}
-    .btn-read{color:#1a1206;background:var(--amber);border:1px solid var(--amber);}
-    .btn-read:hover{background:var(--amber-light);}
-    .btn-pdf{color:var(--text-secondary);background:transparent;border:1px solid var(--border-hover);}
-    .btn-pdf:hover{color:var(--text-primary);border-color:var(--text-tertiary);}
-    .site-footer{margin-top:3.5rem;padding-top:2rem;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;font-size:0.78rem;color:var(--text-tertiary);}
-    .site-footer a{color:var(--text-secondary);text-decoration:none;transition:color .2s;}
-    .site-footer a:hover{color:var(--amber);}
-    @keyframes fadeUp{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
-    @media (max-width:640px){
-      .page{padding:2rem 1rem 3rem;}
-      .issue{flex-wrap:wrap;gap:14px;}
-      .issue-actions{width:100%;}
-      .btn{flex:1;justify-content:center;}
-      .site-header{flex-direction:column;align-items:flex-start;gap:1rem;}
-      .site-footer{flex-direction:column;gap:0.75rem;text-align:center;}
+
+    body {
+      font-family: var(--font-display);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      letter-spacing: -0.01em;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    a { color: inherit; }
+
+    .glow { position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
+    .glow span {
+      position: absolute; width: 820px; height: 820px; border-radius: 50%;
+      top: -340px; left: 50%; margin-left: -410px;
+      background: radial-gradient(circle, var(--accent-glow), transparent 66%);
+      filter: blur(20px); animation: drift 24s ease-in-out infinite alternate;
+    }
+    @keyframes drift { to { transform: translate(60px,-40px) scale(1.12); } }
+
+    .page { position: relative; z-index: 1; max-width: 1000px; margin: 0 auto; padding: 44px 48px 56px; }
+
+    .site-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 48px; animation: fadeUp 0.5s ease-out both; }
+    .brand { display: flex; align-items: center; gap: 14px; text-decoration: none; color: inherit; }
+    .brand-mark {
+      width: 40px; height: 40px; border-radius: 11px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-deep));
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 15px; color: #1a1206; letter-spacing: -0.03em; flex-shrink: 0;
+    }
+    .brand-text { font-weight: 700; font-size: 17px; letter-spacing: -0.02em; }
+    .back-link { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--dim); text-decoration: none; transition: color 0.2s; }
+    .back-link:hover { color: var(--accent); }
+
+    .list-hero { margin-bottom: 26px; animation: fadeUp 0.6s 0.05s ease-out both; }
+    .list-hero .eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 18px; }
+    .list-hero h1 { font-size: clamp(2.4rem, 6vw, 62px); line-height: 0.98; font-weight: 700; letter-spacing: -0.045em; margin-bottom: 18px; }
+    .list-hero .lede { max-width: 660px; font-size: clamp(0.95rem,1.6vw,16px); line-height: 1.7; color: var(--dim); }
+
+    .disclaimer { display: flex; gap: 12px; align-items: flex-start; margin: 26px 0 40px; padding: 14px 16px; border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 12px; background: rgba(255,255,255,0.025); max-width: 700px; animation: fadeUp 0.6s 0.1s ease-out both; }
+    .disclaimer .ico { color: var(--accent); }
+    .disclaimer p { font-family: var(--font-mono); font-size: 12px; line-height: 1.65; color: var(--dim); }
+
+    .issues { display: flex; flex-direction: column; gap: 12px; animation: fadeUp 0.6s 0.15s ease-out both; }
+    .issue { display: flex; gap: 20px; align-items: center; padding: 20px 22px; background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); transition: transform 0.35s cubic-bezier(0.16,1,0.3,1), border-color 0.3s, background 0.3s; }
+    .issue:hover { transform: translateY(-3px); border-color: var(--border-hover); background: rgba(224,168,72,0.06); }
+    .issue-num { font-family: var(--font-mono); font-weight: 700; font-size: 20px; letter-spacing: -0.02em; color: var(--accent); width: 54px; height: 54px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; background: var(--accent-muted); border: 1px solid rgba(224,168,72,0.24); border-radius: 13px; }
+    .issue-body { flex: 1; min-width: 0; }
+    .issue-title { font-weight: 700; font-size: 18px; letter-spacing: -0.02em; margin-bottom: 4px; }
+    .issue-desc { font-size: 13.5px; color: var(--dim); line-height: 1.55; }
+    .issue-actions { display: flex; gap: 8px; flex-shrink: 0; }
+    .btn { display: inline-flex; align-items: center; gap: 6px; text-decoration: none; font-family: var(--font-mono); font-weight: 700; font-size: 11px; letter-spacing: 0.05em; text-transform: uppercase; padding: 10px 14px; border-radius: 10px; transition: all 0.2s; white-space: nowrap; }
+    .btn-read { color: #1a1206; background: var(--accent); border: 1px solid var(--accent); }
+    .btn-read:hover { background: var(--accent-light); }
+    .btn-pdf { color: var(--dim); background: transparent; border: 1px solid var(--border-hover); }
+    .btn-pdf:hover { color: var(--text); border-color: var(--faint); }
+
+    .site-footer { margin-top: 44px; padding-top: 20px; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: #6a6152; }
+    .site-footer a { color: var(--dim); text-decoration: none; transition: color 0.2s; }
+    .site-footer a:hover { color: var(--accent); }
+
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+
+    @media (max-width: 640px) {
+      .page { padding: 36px 20px 44px; }
+      .issue { flex-wrap: wrap; gap: 14px; }
+      .issue-actions { width: 100%; }
+      .btn { flex: 1; justify-content: center; }
+      .site-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+      .site-footer { flex-direction: column; gap: 0.75rem; text-align: center; }
     }
   </style>
 </head>
 <body>
-<div class="mesh-bg" aria-hidden="true"><div class="blob"></div><div class="blob"></div><div class="blob"></div></div>
+
+<div class="glow" aria-hidden="true"><span></span></div>
+
 <div class="page">
+
   <header class="site-header">
-    <a href="../../" class="brand"><div class="brand-mark">GP</div><span class="brand-text">Giles Parnell</span></a>
-    <a href="../" class="back-link">&larr; Personal</a>
+    <a href="../../" class="brand">
+      <div class="brand-mark">GP</div>
+      <span class="brand-text">Giles Parnell</span>
+    </a>
+    <a href="../" class="back-link">← Personal</a>
   </header>
 
   <section class="list-hero">
-    <span class="eyebrow">Personal &middot; Learning in public</span>
+    <div class="eyebrow">Personal · Learning in public</div>
     <h1>Options, from scratch.</h1>
     <p class="lede">A five-part visual primer I'm building as I learn to trade options safely — each issue one idea, told with as little jargon as possible. Read them online, or grab the print-ready PDFs.</p>
   </section>
 
   <div class="disclaimer">
-    <span class="ico">&#9432;</span>
+    <span class="ico">ⓘ</span>
     <p>Educational reference, not investment advice. These are my own learning notes — nothing here is a recommendation to make any trade. Options carry real risk of loss.</p>
   </div>
 
@@ -92,8 +142,8 @@
         <div class="issue-desc">What an option actually is: buyer vs seller, calls vs puts, the four seats you can take, and moneyness.</div>
       </div>
       <div class="issue-actions">
-        <a class="btn btn-read" href="01-at-a-glance.html">Read online &rarr;</a>
-        <a class="btn btn-pdf" href="options-cheat-sheet-01-at-a-glance.pdf" download>PDF &darr;</a>
+        <a class="btn btn-read" href="01-at-a-glance.html">Read →</a>
+        <a class="btn btn-pdf" href="options-cheat-sheet-01-at-a-glance.pdf" download>PDF ↓</a>
       </div>
     </div>
 
@@ -104,8 +154,8 @@
         <div class="issue-desc">Defined-risk starter strategies, position sizing, assignment mechanics, a pre-trade checklist, and the beginner traps to avoid.</div>
       </div>
       <div class="issue-actions">
-        <a class="btn btn-read" href="02-trading-safely.html">Read online &rarr;</a>
-        <a class="btn btn-pdf" href="options-cheat-sheet-02-trading-safely.pdf" download>PDF &darr;</a>
+        <a class="btn btn-read" href="02-trading-safely.html">Read →</a>
+        <a class="btn btn-pdf" href="options-cheat-sheet-02-trading-safely.pdf" download>PDF ↓</a>
       </div>
     </div>
 
@@ -116,8 +166,8 @@
         <div class="issue-desc">Intrinsic vs extrinsic value, time decay, and implied volatility — why you can be right on direction and still lose money.</div>
       </div>
       <div class="issue-actions">
-        <a class="btn btn-read" href="03-what-moves-the-price.html">Read online &rarr;</a>
-        <a class="btn btn-pdf" href="options-cheat-sheet-03-what-moves-the-price.pdf" download>PDF &darr;</a>
+        <a class="btn btn-read" href="03-what-moves-the-price.html">Read →</a>
+        <a class="btn btn-pdf" href="options-cheat-sheet-03-what-moves-the-price.pdf" download>PDF ↓</a>
       </div>
     </div>
 
@@ -128,8 +178,8 @@
         <div class="issue-desc">Delta, gamma, theta, vega and rho as plain-English intuitions — with a sign table across all four positions.</div>
       </div>
       <div class="issue-actions">
-        <a class="btn btn-read" href="04-the-greeks.html">Read online &rarr;</a>
-        <a class="btn btn-pdf" href="options-cheat-sheet-04-the-greeks.pdf" download>PDF &darr;</a>
+        <a class="btn btn-read" href="04-the-greeks.html">Read →</a>
+        <a class="btn btn-pdf" href="options-cheat-sheet-04-the-greeks.pdf" download>PDF ↓</a>
       </div>
     </div>
 
@@ -140,17 +190,19 @@
         <div class="issue-desc">How to read a live option chain column by column, and build a defined-risk debit spread straight from it.</div>
       </div>
       <div class="issue-actions">
-        <a class="btn btn-read" href="05-reading-the-chain.html">Read online &rarr;</a>
-        <a class="btn btn-pdf" href="options-cheat-sheet-05-reading-the-chain.pdf" download>PDF &darr;</a>
+        <a class="btn btn-read" href="05-reading-the-chain.html">Read →</a>
+        <a class="btn btn-pdf" href="options-cheat-sheet-05-reading-the-chain.pdf" download>PDF ↓</a>
       </div>
     </div>
 
   </div>
 
   <footer class="site-footer">
-    <span>&copy; 2026 Giles Parnell</span>
-    <span><a href="../../">Giles Parnell</a> &middot; <a href="../">Personal</a></span>
+    <span>© 2026 Giles Parnell</span>
+    <span><a href="../../">Giles Parnell</a> · <a href="../">Personal</a></span>
   </footer>
+
 </div>
+
 </body>
 </html>

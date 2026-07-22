@@ -1,118 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Floor Quotes — Parnell Systems</title>
-  <meta name="description" content="A validated product concept for flooring-quote automation — capture a room, visualise options, estimate material and cost, and turn a walkthrough into a structured quote.">
-  <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&display=swap">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap">
-  <style>
-    /* PARNELL SYSTEMS — Case study detail · Deep Ocean Tech (matches hub index.html) */
-
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-    :root {
-      --font-display: 'Satoshi', -apple-system, BlinkMacSystemFont, sans-serif;
-      --font-body: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
-      --bg-deep: #0a0c10; --bg-surface: #12151c; --bg-raised: #1a1e28;
-      --text-primary: #e8eaf0; --text-secondary: #8b92a8; --text-tertiary: #4a5068;
-      --accent: #38bfa0; --accent-light: #5edcb8; --accent-muted: rgba(56,191,160,0.15);
-      --accent-glow: rgba(56,191,160,0.20); --border: rgba(255,255,255,0.06);
-      --border-hover: rgba(255,255,255,0.14); --radius: 20px;
-    }
-    body { font-family: var(--font-body); background: var(--bg-deep); color: var(--text-primary);
-      line-height: 1.6; letter-spacing: -0.01em; min-height: 100vh; overflow-x: hidden; }
-    .mesh-bg { position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
-    .mesh-bg .blob { position: absolute; border-radius: 50%; filter: blur(90px); will-change: transform; }
-    .mesh-bg .blob:nth-child(1) { width: 650px; height: 650px; background: hsla(168,55%,32%,0.35); top: -12%; left: -8%; animation: drift1 20s ease-in-out infinite alternate; }
-    .mesh-bg .blob:nth-child(2) { width: 500px; height: 500px; background: hsla(335,45%,28%,0.25); top: 5%; right: -12%; animation: drift2 24s ease-in-out infinite alternate; }
-    .mesh-bg .blob:nth-child(3) { width: 580px; height: 580px; background: hsla(215,55%,28%,0.28); bottom: -18%; left: 25%; animation: drift3 28s ease-in-out infinite alternate; }
-    @keyframes drift1 { to { transform: translate(90px,70px) scale(1.08); } }
-    @keyframes drift2 { to { transform: translate(-70px,90px) scale(0.92); } }
-    @keyframes drift3 { to { transform: translate(50px,-60px) scale(1.12); } }
-    .page { position: relative; z-index: 1; max-width: 780px; margin: 0 auto; padding: 3rem 2rem 4rem; }
-    .site-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 3rem; animation: fadeUp 0.5s ease-out both; }
-    .brand { display: flex; align-items: center; gap: 14px; text-decoration: none; color: inherit; }
-    .brand-mark { width: 42px; height: 42px; border-radius: 12px; background: linear-gradient(135deg, var(--accent), #2a8a74);
-      display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-weight: 900; font-size: 1.2rem; color: #fff; letter-spacing: -0.03em; flex-shrink: 0; }
-    .brand-text { font-family: var(--font-display); font-weight: 700; font-size: 1.25rem; letter-spacing: -0.03em; }
-    .back-link { color: var(--text-secondary); text-decoration: none; font-size: 0.85rem; font-weight: 500; display: flex; align-items: center; gap: 6px; transition: color 0.2s; }
-    .back-link:hover { color: var(--text-primary); }
-    .cs-hero { margin-bottom: 2.5rem; animation: fadeUp 0.6s 0.05s ease-out both; }
-    .cs-hero .eyebrow { display: block; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.8rem; }
-    .cs-hero h1 { font-family: var(--font-display); font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 900; line-height: 1.05; letter-spacing: -0.04em; margin-bottom: 1rem; }
-    .cs-hero .lede { font-size: clamp(0.95rem, 1.8vw, 1.1rem); color: var(--text-secondary); max-width: 620px; line-height: 1.7; }
-    .cs-pills { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 1.5rem; }
-    .cs-pill { font-size: 0.62rem; font-weight: 600; letter-spacing: 0.06em; padding: 4px 12px; border-radius: 100px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); color: var(--text-secondary); }
-    .cs-body { animation: fadeUp 0.6s 0.15s ease-out both; }
-    .cs-section { background: rgba(255,255,255,0.025); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem; margin-bottom: 14px; position: relative; }
-    .cs-section::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.09), transparent); pointer-events: none; }
-    .cs-section .label { font-size: 0.65rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.9rem; }
-    .cs-section p { color: var(--text-secondary); font-size: 1rem; line-height: 1.75; }
-    .cs-section p strong { color: var(--text-primary); font-weight: 600; }
-    .cs-note { margin-top: 1.5rem; font-size: 0.85rem; color: var(--text-tertiary); }
-    .cs-note a { color: var(--text-secondary); text-decoration: none; transition: color 0.2s; }
-    .cs-note a:hover { color: var(--accent); }
-    .site-footer { margin-top: 3.5rem; padding-top: 2rem; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; font-size: 0.78rem; color: var(--text-tertiary); }
-    .site-footer a { color: var(--text-secondary); text-decoration: none; transition: color 0.2s; }
-    .site-footer a:hover { color: var(--accent); }
-    @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
-    @media (max-width: 580px) { .page { padding: 2rem 1rem 3rem; } .site-header { flex-direction: column; align-items: flex-start; gap: 1rem; } .site-footer { flex-direction: column; gap: 0.75rem; text-align: center; } }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Floor Quotes — Parnell Systems</title>
+<meta name="description" content="A validated product concept for flooring-quote automation — capture a room, visualise options, estimate material and cost, and turn a walkthrough into a structured quote.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+  :root{--fd:'Space Grotesk',-apple-system,BlinkMacSystemFont,sans-serif;--fm:'Space Mono',ui-monospace,monospace;--bg:#0a0910;--panel:rgba(255,255,255,0.025);--text:#efedf6;--dim:#9a95b0;--faint:#6d6885;--border:rgba(255,255,255,0.10);--accent:#a58cff;--accent-deep:#6b46d6;--accent-glow:rgba(139,108,240,0.22);--radius:18px;}
+  body{font-family:var(--fd);background:var(--bg);color:var(--text);line-height:1.6;letter-spacing:-0.01em;min-height:100vh;overflow-x:hidden;}
+  a{color:inherit;}
+  .glow{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none;}
+  .glow span{position:absolute;width:820px;height:820px;border-radius:50%;top:-340px;left:50%;margin-left:-410px;background:radial-gradient(circle,var(--accent-glow),transparent 66%);filter:blur(20px);animation:drift 24s ease-in-out infinite alternate;}
+  @keyframes drift{to{transform:translate(60px,-40px) scale(1.12);}}
+  .page{position:relative;z-index:1;max-width:780px;margin:0 auto;padding:44px 40px 56px;}
+  .site-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:56px;animation:fadeUp .5s ease-out both;}
+  .brand{display:flex;align-items:center;gap:14px;text-decoration:none;color:inherit;}
+  .brand-mark{width:40px;height:40px;border-radius:11px;background:linear-gradient(135deg,var(--accent),var(--accent-deep));display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px;color:#0a0910;letter-spacing:-0.03em;flex-shrink:0;}
+  .brand-text{font-weight:700;font-size:17px;letter-spacing:-0.02em;}
+  .back-link{font-family:var(--fm);font-size:12px;letter-spacing:0.06em;text-transform:uppercase;color:var(--dim);text-decoration:none;transition:color .2s;}
+  .back-link:hover{color:var(--accent);}
+  .cs-hero{margin-bottom:2.5rem;animation:fadeUp .6s .05s ease-out both;}
+  .cs-hero .eyebrow{display:block;font-family:var(--fm);font-size:12px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--accent);margin-bottom:18px;}
+  .cs-hero h1{font-size:clamp(2rem,5vw,3.2rem);font-weight:700;line-height:1.03;letter-spacing:-0.045em;margin-bottom:1rem;}
+  .cs-hero .lede{font-size:clamp(0.95rem,1.7vw,1.1rem);color:var(--dim);max-width:620px;line-height:1.7;}
+  .cs-pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:1.5rem;}
+  .cs-pill{font-family:var(--fm);font-size:0.62rem;letter-spacing:0.04em;padding:5px 12px;border-radius:100px;background:rgba(255,255,255,0.05);border:1px solid var(--border);color:var(--dim);}
+  .cs-body{animation:fadeUp .6s .15s ease-out both;}
+  .cs-section{background:var(--panel);-webkit-backdrop-filter:blur(22px);backdrop-filter:blur(22px);border:1px solid var(--border);border-radius:var(--radius);padding:1.9rem;margin-bottom:14px;transition:border-color .3s;}
+  .cs-section:hover{border-color:rgba(165,140,255,0.25);}
+  .cs-section .label{font-family:var(--fm);font-size:0.65rem;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--accent);margin-bottom:0.9rem;}
+  .cs-section p{color:var(--dim);font-size:1rem;line-height:1.75;}
+  .cs-section p strong{color:var(--text);font-weight:600;}
+  .cs-note{margin-top:1.5rem;font-family:var(--fm);font-size:0.8rem;letter-spacing:0.02em;color:var(--faint);}
+  .cs-note a{color:var(--dim);text-decoration:none;transition:color .2s;}
+  .cs-note a:hover{color:var(--accent);}
+  .site-footer{margin-top:3.25rem;padding-top:20px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;font-family:var(--fm);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:#5a5570;}
+  .site-footer a{color:var(--dim);text-decoration:none;transition:color .2s;}
+  .site-footer a:hover{color:var(--accent);}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
+  @media (max-width:580px){.page{padding:36px 22px 44px;}.site-header{flex-direction:column;align-items:flex-start;gap:1rem;}.site-footer{flex-direction:column;gap:0.75rem;text-align:center;}}
+</style>
 </head>
 <body>
-
-<div class="mesh-bg" aria-hidden="true">
-  <div class="blob"></div><div class="blob"></div><div class="blob"></div>
-</div>
-
+<div class="glow" aria-hidden="true"><span></span></div>
 <div class="page">
+<header class="site-header">
+<a href="../index.html" class="brand"><div class="brand-mark">PS</div><span class="brand-text">Parnell Systems</span></a>
+<a href="labs.html" class="back-link">← Labs</a>
+</header>
+<section class="cs-hero">
+<span class="eyebrow">Product concept</span>
+<h1>Floor Quotes</h1>
+<p class="lede">A validated product concept for flooring-quote automation — capture a room, visualise options, estimate material and cost, and turn a walkthrough into a structured quote.</p>
+<div class="cs-pills"><span class="cs-pill">Product discovery</span><span class="cs-pill">Market validation</span></div>
+</section>
+<div class="cs-body">
+<section class="cs-section"><div class="label">The problem</div><p>Local flooring installers quote slowly and inconsistently — measuring by hand, guessing quantities, and losing leads between the site visit and the written quote. The question was whether a “scan a room → quote” product could win in an already-busy space.</p></section>
+<section class="cs-section"><div class="label">What was built</div><p>A concept site articulating the product thesis — quote-ready room capture, product visualisation, quantity and cost estimation, and installer workflow — paired with a market scan to test where a defensible wedge might be: local trades, accurate quantity estimation, and lead qualification.</p></section>
+<section class="cs-section"><div class="label">The outcome</div><p>A disciplined validation pass that concluded the generic visualiser space is crowded and identified a narrower opportunity — a documented decision to park rather than build, which is its own kind of result.</p></section>
 
-  <header class="site-header">
-    <a href="../index.html" class="brand">
-      <div class="brand-mark">PS</div>
-      <span class="brand-text">Parnell Systems</span>
-    </a>
-    <a href="labs.html" class="back-link">&larr; Labs</a>
-  </header>
-
-  <section class="cs-hero">
-    <span class="eyebrow">Product concept</span>
-    <h1>Floor Quotes</h1>
-    <p class="lede">A validated product concept for flooring-quote automation — capture a room, visualise options, estimate material and cost, and turn a walkthrough into a structured quote.</p>
-    <div class="cs-pills">
-      <span class="cs-pill">Product discovery</span>
-      <span class="cs-pill">Market validation</span>
-    </div>
-  </section>
-
-  <div class="cs-body">
-
-    <section class="cs-section">
-      <div class="label">The problem</div>
-      <p>Local flooring installers quote slowly and inconsistently — measuring by hand, guessing quantities, and losing leads between the site visit and the written quote. The question was whether a “scan a room → quote” product could win in an already-busy space.</p>
-    </section>
-
-    <section class="cs-section">
-      <div class="label">What was built</div>
-      <p>A concept site articulating the product thesis — quote-ready room capture, product visualisation, quantity and cost estimation, and installer workflow — paired with a market scan to test where a defensible wedge might be: local trades, accurate quantity estimation, and lead qualification.</p>
-    </section>
-
-    <section class="cs-section">
-      <div class="label">The outcome</div>
-      <p>A disciplined validation pass that concluded the generic visualiser space is crowded and identified a narrower opportunity — a documented decision to park rather than build, which is its own kind of result.</p>
-    </section>
-
-    <p class="cs-note">Source code and implementation docs for this project are <a href="../private.html">private</a>.</p>
-
-  </div>
-
-  <footer class="site-footer">
-    <span>&copy; 2026 Parnell Systems</span>
-    <span><a href="../index.html">Back to hub</a></span>
-  </footer>
-
+<p class="cs-note">Source code and implementation docs for this project are <a href="../private.html">private</a>.</p>
 </div>
-
+<footer class="site-footer"><span>© 2026 Parnell Systems</span><span><a href="../index.html">Back to hub</a></span></footer>
+</div>
 </body>
 </html>

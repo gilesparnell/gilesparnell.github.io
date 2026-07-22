@@ -4,64 +4,113 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Family &amp; Friends · Giles Parnell</title>
-  <!-- unlisted: keep search engines out; this page is shared by link only -->
   <meta name="robots" content="noindex, nofollow">
   <meta name="description" content="A private, unlisted page shared by link only.">
-  <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&display=swap">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
-    :root{
-      --font-display:'Satoshi',-apple-system,BlinkMacSystemFont,sans-serif;
-      --font-body:'Outfit',-apple-system,BlinkMacSystemFont,sans-serif;
-      --bg-deep:#0a0c10;--text-primary:#e8eaf0;--text-secondary:#8b92a8;--text-tertiary:#4a5068;
-      --rose:#c77d8a;--rose-muted:rgba(199,125,138,0.12);
-      --border:rgba(255,255,255,0.06);
+    /* =============================================
+       FAMILY & FRIENDS — "Console" · dark / warm amber
+       Personal warm-Console shell, single flat accent.
+       ============================================= */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --font-display: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: 'Space Mono', ui-monospace, monospace;
+      --bg:        #0d0a06;
+      --text:      #f4efe6;
+      --dim:       #ada393;
+      --faint:     #7d7364;
+      --border:    rgba(255,255,255,0.10);
+      --accent:    #e6b25a;
+      --accent-deep: #b3812c;
+      --accent-glow: rgba(224,168,72,0.18);
+      --accent-muted: rgba(224,168,72,0.14);
     }
-    body{font-family:var(--font-body);background:var(--bg-deep);color:var(--text-primary);line-height:1.6;letter-spacing:-0.01em;min-height:100vh;overflow-x:hidden;}
-    .mesh-bg{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none;}
-    .mesh-bg .blob{position:absolute;border-radius:50%;filter:blur(90px);}
-    .mesh-bg .blob:nth-child(1){width:600px;height:600px;background:hsla(345,40%,32%,0.20);top:-10%;left:-8%;}
-    .mesh-bg .blob:nth-child(2){width:520px;height:520px;background:hsla(40,50%,30%,0.16);bottom:-16%;right:-10%;}
-    .page{position:relative;z-index:1;max-width:760px;margin:0 auto;padding:3rem 2rem 4rem;}
-    .site-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:4rem;}
-    .brand{display:flex;align-items:center;gap:14px;text-decoration:none;color:inherit;}
-    .brand-mark{width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,var(--rose),#9c5866);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:900;font-size:1.05rem;color:#fff;letter-spacing:-0.03em;flex-shrink:0;}
-    .brand-text{font-family:var(--font-display);font-weight:700;font-size:1.25rem;letter-spacing:-0.03em;}
-    .back-link{color:var(--text-secondary);text-decoration:none;font-size:0.85rem;font-weight:500;transition:color .2s;}
-    .back-link:hover{color:var(--text-primary);}
-    .hero{text-align:center;padding:3rem 0;animation:fadeUp .6s ease-out both;}
-    .hero .badge{display:inline-flex;align-items:center;gap:8px;font-size:0.72rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--rose);background:var(--rose-muted);border:1px solid rgba(199,125,138,0.24);padding:6px 14px;border-radius:20px;margin-bottom:1.6rem;}
-    .hero h1{font-family:var(--font-display);font-size:clamp(2rem,5vw,3rem);font-weight:900;line-height:1.06;letter-spacing:-0.04em;margin-bottom:1rem;}
-    .hero p{font-size:1.02rem;color:var(--text-secondary);line-height:1.7;max-width:520px;margin:0 auto;}
-    .note{margin-top:2.5rem;padding:1.1rem 1.3rem;border:1px solid var(--border);border-radius:14px;background:rgba(255,255,255,0.025);font-size:0.83rem;color:var(--text-tertiary);line-height:1.6;text-align:left;max-width:520px;margin-left:auto;margin-right:auto;}
-    .site-footer{margin-top:4rem;padding-top:2rem;border-top:1px solid var(--border);text-align:center;font-size:0.78rem;color:var(--text-tertiary);}
-    .site-footer a{color:var(--text-secondary);text-decoration:none;}
-    .site-footer a:hover{color:var(--rose);}
-    @keyframes fadeUp{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
-    @media (max-width:580px){.page{padding:2rem 1rem 3rem;}.site-header{margin-bottom:2.5rem;}}
+
+    body {
+      font-family: var(--font-display);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      letter-spacing: -0.01em;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    a { color: inherit; }
+
+    .glow { position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
+    .glow span {
+      position: absolute; width: 720px; height: 720px; border-radius: 50%;
+      top: -300px; left: 50%; margin-left: -360px;
+      background: radial-gradient(circle, var(--accent-glow), transparent 66%);
+      filter: blur(20px);
+    }
+
+    .page { position: relative; z-index: 1; max-width: 760px; margin: 0 auto; padding: 44px 48px 56px; }
+
+    .site-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 56px; animation: fadeUp 0.5s ease-out both; }
+    .brand { display: flex; align-items: center; gap: 14px; text-decoration: none; color: inherit; }
+    .brand-mark {
+      width: 40px; height: 40px; border-radius: 11px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-deep));
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 15px; color: #1a1206; letter-spacing: -0.03em; flex-shrink: 0;
+    }
+    .brand-text { font-weight: 700; font-size: 17px; letter-spacing: -0.02em; }
+    .back-link { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--dim); text-decoration: none; transition: color 0.2s; }
+    .back-link:hover { color: var(--accent); }
+
+    .hero { text-align: center; padding: 40px 0; animation: fadeUp 0.6s ease-out both; }
+    .hero .badge { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); background: var(--accent-muted); border: 1px solid rgba(224,168,72,0.26); padding: 6px 14px; border-radius: 100px; margin-bottom: 26px; }
+    .hero h1 { font-size: clamp(2rem, 5vw, 52px); line-height: 1.0; font-weight: 700; letter-spacing: -0.045em; margin-bottom: 18px; }
+    .hero p { font-size: 16px; color: var(--dim); line-height: 1.7; max-width: 520px; margin: 0 auto; }
+    .note { margin: 40px auto 0; padding: 18px 20px; border: 1px solid var(--border); border-radius: 14px; background: rgba(255,255,255,0.025); font-size: 13px; color: var(--faint); line-height: 1.65; text-align: left; max-width: 520px; }
+    .note strong { color: var(--dim); }
+    .note code { font-family: var(--font-mono); font-size: 12px; color: var(--accent); }
+
+    .site-footer { margin-top: 56px; padding-top: 20px; border-top: 1px solid var(--border); text-align: center; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: #6a6152; }
+    .site-footer a { color: var(--dim); text-decoration: none; transition: color 0.2s; }
+    .site-footer a:hover { color: var(--accent); }
+
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+
+    @media (max-width: 580px) {
+      .page { padding: 36px 20px 44px; }
+      .site-header { margin-bottom: 32px; }
+    }
   </style>
 </head>
 <body>
-<div class="mesh-bg" aria-hidden="true"><div class="blob"></div><div class="blob"></div></div>
+
+<div class="glow" aria-hidden="true"><span></span></div>
+
 <div class="page">
+
   <header class="site-header">
-    <a href="../../" class="brand"><div class="brand-mark">GP</div><span class="brand-text">Giles Parnell</span></a>
-    <a href="../" class="back-link">&larr; Personal</a>
+    <a href="../../" class="brand">
+      <div class="brand-mark">GP</div>
+      <span class="brand-text">Giles Parnell</span>
+    </a>
+    <a href="../" class="back-link">← Personal</a>
   </header>
 
   <section class="hero">
-    <span class="badge">&#128274; Unlisted &middot; shared by link</span>
+    <span class="badge">🔒 Unlisted · shared by link</span>
     <h1>Family &amp; Friends</h1>
     <p>This is a private corner I share directly with people close to me. There's nothing here yet — it's the placeholder for whatever I want to send your way: photos, notes, plans, the odd useful thing.</p>
     <div class="note">
-      <strong style="color:var(--text-secondary);">A note on privacy:</strong> this page isn't linked from anywhere public and is marked <span style="font-family:monospace;">noindex</span> so it won't show up in search. That keeps it out of sight, but it isn't a login — anyone who has the exact link can open it. I'll keep genuinely private things off here until it's properly gated.
+      <strong>A note on privacy:</strong> this page isn't linked from anywhere public and is marked <code>noindex</code> so it won't show up in search. That keeps it out of sight, but it isn't a login — anyone who has the exact link can open it. I'll keep genuinely private things off here until it's properly gated.
     </div>
   </section>
 
   <footer class="site-footer">
-    <span>&copy; 2026 Giles Parnell &middot; <a href="../">Personal</a></span>
+    <span>© 2026 Giles Parnell · <a href="../">Personal</a></span>
   </footer>
+
 </div>
+
 </body>
 </html>
