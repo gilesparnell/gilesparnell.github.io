@@ -69,3 +69,19 @@ test('SPEC: covers the 11 planned projects with required fields', () => {
     assert.ok(['clients', 'labs'].includes(p.group), `${p.slug} bad group: ${p.group}`);
   }
 });
+
+// Guard: the deployed projects/*.html are the 1C Console redesign, but this
+// script's STYLE/template still emit the old Deep Ocean theme. Until Claude
+// Design lands the Console template (docs/DESIGN-HANDOVER.md), regenerating
+// must be refused so the live design can't be clobbered.
+test('build: refuses to regenerate while the template is stale', () => {
+  const { build } = require('./build-project-pages');
+  assert.throws(() => build(), /Deep Ocean.*Console|stale/i);
+});
+
+test('CLI: exits non-zero with a pointer to the design handover', () => {
+  const { spawnSync } = require('node:child_process');
+  const r = spawnSync(process.execPath, [require.resolve('./build-project-pages')], { encoding: 'utf8' });
+  assert.notEqual(r.status, 0);
+  assert.match(r.stderr, /DESIGN-HANDOVER/);
+});

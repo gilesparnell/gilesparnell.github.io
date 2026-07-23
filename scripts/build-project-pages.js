@@ -241,7 +241,20 @@ const SPEC = [
   },
 ];
 
+// The deployed projects/*.html are the 1C Console redesign (docs/DESIGN-HANDOVER.md),
+// but STYLE/renderProjectPage above still emit the old Deep Ocean template.
+// Claude Design flips this to false when the Console template lands here.
+const TEMPLATE_IS_STALE = true;
+
 function build({ root } = {}) {
+  if (TEMPLATE_IS_STALE) {
+    throw new Error(
+      'build-project-pages: this template still emits the old Deep Ocean theme; ' +
+      'regenerating would overwrite the deployed 1C Console pages. ' +
+      'See docs/DESIGN-HANDOVER.md — Claude Design sets TEMPLATE_IS_STALE = false ' +
+      'once the Console template lands.'
+    );
+  }
   const ROOT = root || path.join(__dirname, '..');
   const OUT = path.join(ROOT, 'projects');
   fs.mkdirSync(OUT, { recursive: true });
@@ -254,7 +267,13 @@ function build({ root } = {}) {
 module.exports = { renderProjectPage, SPEC, build };
 
 if (require.main === module) {
-  const files = build();
-  console.log(`Wrote ${files.length} project pages:`);
-  files.forEach((f) => console.log('  projects/' + f));
+  try {
+    const files = build();
+    console.log(`Wrote ${files.length} project pages:`);
+    files.forEach((f) => console.log('  projects/' + f));
+  } catch (err) {
+    console.error(err.message);
+    console.error('Refusing to write. See docs/DESIGN-HANDOVER.md.');
+    process.exit(1);
+  }
 }
