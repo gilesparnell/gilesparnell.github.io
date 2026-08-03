@@ -67,6 +67,7 @@
     td{padding:11px 14px;border-top:1px solid var(--line);vertical-align:top;color:var(--ink2)}
     td:first-child{color:var(--navy);font-weight:650;white-space:nowrap}
     .table-scroll{overflow-x:auto}
+    table.wrapfirst td:first-child{white-space:normal;min-width:220px}
     .pill{display:inline-block;font-size:11.5px;font-weight:650;padding:2px 10px;border-radius:99px;white-space:nowrap;margin-left:6px}
     .pill.core{background:var(--violet-bg);color:var(--violet-text)}
 
@@ -79,6 +80,18 @@
 
     a{color:var(--teal-dark);text-decoration:none;font-weight:550}
     a:hover{text-decoration:underline}
+
+    .toc{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px 24px;margin:0 0 8px}
+    .toc .label{font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--teal-dark);margin-bottom:10px}
+    .toc ol{list-style:none;columns:2;column-gap:28px}
+    @media(max-width:640px){.toc ol{columns:1}}
+    .toc li{padding:4px 0;break-inside:avoid;font-size:14.5px}
+    .toc a{color:var(--ink);font-weight:550;text-decoration:none}
+    .toc a:hover{color:var(--teal-dark);text-decoration:underline}
+    .toc .n{color:var(--teal-dark);font-weight:700;margin-right:8px;font-size:12.5px}
+    .totoc{float:right;font-size:12px;font-weight:600;color:var(--ink3);text-decoration:none;letter-spacing:.06em;text-transform:uppercase;margin-top:6px}
+    .totoc:hover{color:var(--teal-dark)}
+    html{scroll-behavior:smooth}
     .footer{margin-top:56px;padding-top:20px;border-top:1px solid var(--line);font-size:13.5px;color:var(--ink3)}
   </style>
 </head>
@@ -94,8 +107,29 @@
 
   <div class="page">
 
+    <nav class="toc" id="toc">
+      <div class="label">Contents</div>
+      <ol>
+        <li><a href="#s01"><span class="n">01</span>The problem: silo sprawl</a></li>
+        <li><a href="#s02"><span class="n">02</span>The idea: connect, don't centralise</a></li>
+        <li><a href="#s03"><span class="n">03</span>Problem → fabric answer</a></li>
+        <li><a href="#s04"><span class="n">04</span>The GCP implementation</a></li>
+        <li><a href="#s05"><span class="n">05</span>The AWS equivalent</a></li>
+        <li><a href="#s06"><span class="n">06</span>Fabric vs mesh vs lakehouse — 20-second answers</a></li>
+        <li><a href="#s07"><span class="n">07</span>Where the idea came from</a></li>
+        <li><a href="#s08"><span class="n">08</span>The vendor landscape</a></li>
+        <li><a href="#s09"><span class="n">09</span>Pros, cons, and honest criticisms</a></li>
+        <li><a href="#s10"><span class="n">10</span>Fabric vs the alternatives — decision view</a></li>
+        <li><a href="#s11"><span class="n">11</span>The rollout programme — what a fabric build actually looks like</a></li>
+        <li><a href="#s12"><span class="n">12</span>Programme rescue — reading a failing fabric</a></li>
+        <li><a href="#s13"><span class="n">13</span>The rescue playbook — questions first, then moves</a></li>
+        <li><a href="#s14"><span class="n">14</span>The delivery leader's lens</a></li>
+      </ol>
+    </nav>
+
+
     <!-- ============ 1. THE PROBLEM ============ -->
-    <h2><span class="num">01</span>The problem: silo sprawl</h2>
+    <h2 id="s01"><a class="totoc" href="#toc">↑ contents</a><span class="num">01</span>The problem: silo sprawl</h2>
     <p class="lede">Every acquisition, department, and era of technology leaves behind another data store — each with its own copies, its own access rules, and its own version of the truth.</p>
 
     <div class="figure">
@@ -176,7 +210,7 @@
     <div class="callout"><strong>Why it matters now:</strong> GenAI made this worse and more urgent. Models are only as good as the data you can find, trust, and legally use — so the silo problem became the blocker for every AI initiative on the roadmap.</div>
 
     <!-- ============ 2. THE IDEA ============ -->
-    <h2><span class="num">02</span>The idea: connect, don't centralise</h2>
+    <h2 id="s02"><a class="totoc" href="#toc">↑ contents</a><span class="num">02</span>The idea: connect, don't centralise</h2>
     <p class="lede">Decades of "migrate everything into one platform" programmes failed — there's always a next silo. The fabric inverts the approach: <strong>leave data where it lives</strong>, and weave one intelligent layer across all of it, driven by metadata.</p>
 
     <div class="figure">
@@ -299,7 +333,7 @@
     </div>
 
     <!-- ============ 3. HOW IT SOLVES ============ -->
-    <h2><span class="num">03</span>Problem → fabric answer</h2>
+    <h2 id="s03"><a class="totoc" href="#toc">↑ contents</a><span class="num">03</span>Problem → fabric answer</h2>
     <div class="table-scroll">
     <table>
       <thead><tr><th>Silo-world pain</th><th>Fabric mechanism that answers it</th></tr></thead>
@@ -315,7 +349,7 @@
     </div>
 
     <!-- ============ 4. PLATFORMS ============ -->
-    <h2><span class="num">04</span>The GCP implementation</h2>
+    <h2 id="s04"><a class="totoc" href="#toc">↑ contents</a><span class="num">04</span>The GCP implementation</h2>
     <p class="lede">Google's fabric story centres on <strong>Dataplex</strong> — the catalogue/governance plane — over BigQuery and BigLake.</p>
     <div class="table-scroll">
     <table>
@@ -334,7 +368,7 @@
     </table>
     </div>
 
-    <h2><span class="num">05</span>The AWS equivalent</h2>
+    <h2 id="s05"><a class="totoc" href="#toc">↑ contents</a><span class="num">05</span>The AWS equivalent</h2>
     <p class="lede">AWS assembles the same fabric from more, smaller parts — Glue and Lake Formation carry the metadata + governance load, with DataZone as the newer business-facing catalogue.</p>
     <div class="table-scroll">
     <table>
@@ -356,14 +390,14 @@
     <div class="callout"><strong>Cross-cloud cheat:</strong> Dataplex ≈ Glue Catalogue + Lake Formation + DataZone. BigQuery ≈ Redshift/Athena. Dataflow ≈ Glue ETL/Kinesis Data Analytics. Pub/Sub ≈ Kinesis. Analytics Hub ≈ DataZone's data-product exchange. Same fabric, different lego.</div>
 
     <!-- ============ 5. DISTINCTIONS ============ -->
-    <h2><span class="num">06</span>Fabric vs mesh vs lakehouse — 20-second answers</h2>
+    <h2 id="s06"><a class="totoc" href="#toc">↑ contents</a><span class="num">06</span>Fabric vs mesh vs lakehouse — 20-second answers</h2>
     <div class="grid2">
       <div class="mini"><h3><span class="k" style="color:var(--violet-text)">≠</span>Data mesh</h3><p><strong>Mesh is organisational</strong> — domain teams own their data as products. <strong>Fabric is technological</strong> — the metadata layer that makes any operating model workable. They're complementary: a mesh usually runs <em>on</em> a fabric.</p></div>
       <div class="mini"><h3><span class="k" style="color:var(--violet-text)">≠</span>Lakehouse</h3><p>A <strong>storage architecture</strong> — warehouse features (ACID, governance) on lake economics via open table formats. A lakehouse is one (big) node the fabric connects; it doesn't solve discovery or estate-wide governance by itself.</p></div>
     </div>
 
     <!-- ============ 7. HISTORY ============ -->
-    <h2><span class="num">07</span>Where the idea came from</h2>
+    <h2 id="s07"><a class="totoc" href="#toc">↑ contents</a><span class="num">07</span>Where the idea came from</h2>
     <p class="lede">"Data fabric" wasn't invented in one paper — it's the convergence of three older threads, renamed and upgraded by metadata.</p>
     <div class="table-scroll">
     <table>
@@ -380,7 +414,7 @@
     </div>
 
     <!-- ============ 8. VENDORS ============ -->
-    <h2><span class="num">08</span>The vendor landscape</h2>
+    <h2 id="s08"><a class="totoc" href="#toc">↑ contents</a><span class="num">08</span>The vendor landscape</h2>
     <p class="lede">Beyond the hyperscalers (§04–05), a whole market claims the fabric label — knowing who plays where signals real domain awareness.</p>
     <div class="table-scroll">
     <table>
@@ -401,7 +435,7 @@
     <div class="callout"><strong>Name-drop wisely:</strong> "fabric" is also a marketing umbrella — the same word sells Microsoft's SaaS bundle, Informatica's integration suite, and NetApp's storage. Saying <em>"fabric is a pattern, not a product — most real estates assemble it from a catalogue, a governance plane, and federation"</em> instantly separates you from candidates who think it's something you buy in a box.</div>
 
     <!-- ============ 9. PROS & CONS ============ -->
-    <h2><span class="num">09</span>Pros, cons, and honest criticisms</h2>
+    <h2 id="s09"><a class="totoc" href="#toc">↑ contents</a><span class="num">09</span>Pros, cons, and honest criticisms</h2>
     <div class="grid2">
       <div class="mini"><h3 style="color:var(--teal-dark)">✓ No big-bang migration</h3><p>Value starts while legacy stays running — incremental onboarding, retire systems on merit, not on faith.</p></div>
       <div class="mini"><h3 style="color:var(--teal-dark)">✓ Governance that scales</h3><p>Policy defined once beats policy re-implemented per silo — the only workable answer at regulatory scale.</p></div>
@@ -415,7 +449,7 @@
     <div class="callout"><strong>The mesh-camp critique (worth acknowledging in interviews):</strong> data-mesh advocates argue fabric is too technology-centric — a central platform team's dream that under-invests in domain accountability. The mature answer: they're solving different layers of the same problem, and serious estates end up with both — fabric tech, mesh operating model.</div>
 
     <!-- ============ 10. VS ALTERNATIVES ============ -->
-    <h2><span class="num">10</span>Fabric vs the alternatives — decision view</h2>
+    <h2 id="s10"><a class="totoc" href="#toc">↑ contents</a><span class="num">10</span>Fabric vs the alternatives — decision view</h2>
     <div class="table-scroll">
     <table>
       <thead><tr><th>Approach</th><th>Core move</th><th>Wins when</th><th>Breaks when</th></tr></thead>
@@ -430,8 +464,131 @@
     </table>
     </div>
 
-    <!-- ============ 11. DELIVERY LENS ============ -->
-    <h2><span class="num">11</span>The delivery leader's lens</h2>
+    <!-- ============ 11. ROLLOUT PROGRAMME ============ -->
+    <h2 id="s11"><a class="totoc" href="#toc">↑ contents</a><span class="num">11</span>The rollout programme — what a fabric build actually looks like</h2>
+    <p class="lede">Not a platform project with a go-live — a multi-stream programme that earns adoption wave by wave. The cardinal rule: <strong>ship a thin vertical slice first</strong>, then scale by onboarding waves.</p>
+
+    <div class="figure">
+      <svg viewBox="0 0 900 470" role="img" aria-label="Data fabric programme plan: streams across phases">
+        <defs>
+          <marker id="arrP" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
+            <path d="M0,0 L8,4.5 L0,9" fill="none" stroke="#0e8f83" stroke-width="1.5"/>
+          </marker>
+        </defs>
+        <!-- phase headers -->
+        <g font-weight="700" font-size="12.5">
+          <text x="235" y="34" fill="#0a6e65" text-anchor="middle">PHASE 1 · FOUNDATIONS (wks 1–8)</text>
+          <text x="512" y="34" fill="#0a6e65" text-anchor="middle">PHASE 2 · FIRST SLICE (wks 6–16)</text>
+          <text x="760" y="34" fill="#0a6e65" text-anchor="middle">PHASE 3 · WAVES (quarterly)</text>
+        </g>
+        <line x1="380" y1="20" x2="380" y2="450" stroke="#dde5ea" stroke-width="1.5"/>
+        <line x1="645" y1="20" x2="645" y2="450" stroke="#dde5ea" stroke-width="1.5"/>
+
+        <!-- stream labels -->
+        <g font-size="11.5" font-weight="700" fill="#4a5d6b">
+          <text x="18" y="80">GOVERNANCE</text>
+          <text x="18" y="160">PLATFORM</text>
+          <text x="18" y="240">ONBOARDING</text>
+          <text x="18" y="320">ADOPTION</text>
+          <text x="18" y="400">PROGRAMME</text>
+        </g>
+
+        <!-- governance stream -->
+        <rect x="120" y="55" width="240" height="42" rx="8" fill="#efedf7" stroke="#6b5fa8"/>
+        <text x="240" y="73" fill="#0e2233" font-size="11.5" font-weight="600" text-anchor="middle">Operating model: owners, stewards,</text>
+        <text x="240" y="88" fill="#4a5d6b" font-size="11" text-anchor="middle">policy taxonomy, decision rights</text>
+        <rect x="395" y="55" width="230" height="42" rx="8" fill="#ffffff" stroke="#6b5fa8"/>
+        <text x="510" y="73" fill="#0e2233" font-size="11.5" font-weight="600" text-anchor="middle">Contracts + quality gates live</text>
+        <text x="510" y="88" fill="#4a5d6b" font-size="11" text-anchor="middle">on the slice's datasets only</text>
+        <rect x="660" y="55" width="215" height="42" rx="8" fill="#ffffff" stroke="#6b5fa8"/>
+        <text x="767" y="73" fill="#0e2233" font-size="11.5" font-weight="600" text-anchor="middle">Policy scaled per wave;</text>
+        <text x="767" y="88" fill="#4a5d6b" font-size="11" text-anchor="middle">stewardship becomes BAU</text>
+
+        <!-- platform stream -->
+        <rect x="120" y="135" width="240" height="42" rx="8" fill="#ffffff" stroke="#b7c3cc"/>
+        <text x="240" y="153" fill="#0e2233" font-size="11.5" font-weight="600" text-anchor="middle">Catalogue + lineage + access</text>
+        <text x="240" y="168" fill="#4a5d6b" font-size="11" text-anchor="middle">plane stood up (thin, not gold-plated)</text>
+        <rect x="395" y="135" width="230" height="42" rx="8" fill="#ffffff" stroke="#b7c3cc"/>
+        <text x="510" y="153" fill="#0e2233" font-size="11.5" font-weight="600" text-anchor="middle">Federation + pipelines for</text>
+        <text x="510" y="168" fill="#4a5d6b" font-size="11" text-anchor="middle">the slice; SLOs measured</text>
+        <rect x="660" y="135" width="215" height="42" rx="8" fill="#ffffff" stroke="#b7c3cc"/>
+        <text x="767" y="153" fill="#0e2233" font-size="11.5" font-weight="600" text-anchor="middle">Hardening, cost controls,</text>
+        <text x="767" y="168" fill="#4a5d6b" font-size="11" text-anchor="middle">self-service tooling</text>
+
+        <!-- onboarding stream: the slice highlighted -->
+        <rect x="395" y="215" width="230" height="42" rx="8" fill="#e8f5f3" stroke="#0e8f83" stroke-width="2"/>
+        <text x="510" y="233" fill="#0a6e65" font-size="11.5" font-weight="700" text-anchor="middle">★ ONE use case end-to-end:</text>
+        <text x="510" y="248" fill="#0a6e65" font-size="11" text-anchor="middle">2–3 sources → catalogue → consumer</text>
+        <rect x="660" y="215" width="215" height="42" rx="8" fill="#ffffff" stroke="#b7c3cc"/>
+        <text x="767" y="233" fill="#0e2233" font-size="11.5" font-weight="600" text-anchor="middle">Source waves by value:</text>
+        <text x="767" y="248" fill="#4a5d6b" font-size="11" text-anchor="middle">repeatable onboarding kit</text>
+
+        <!-- adoption stream -->
+        <rect x="395" y="295" width="230" height="42" rx="8" fill="#ffffff" stroke="#b7c3cc"/>
+        <text x="510" y="313" fill="#0e2233" font-size="11.5" font-weight="600" text-anchor="middle">First consumers live; their story</text>
+        <text x="510" y="328" fill="#4a5d6b" font-size="11" text-anchor="middle">becomes the internal sales pitch</text>
+        <rect x="660" y="295" width="215" height="42" rx="8" fill="#ffffff" stroke="#b7c3cc"/>
+        <text x="767" y="313" fill="#0e2233" font-size="11.5" font-weight="600" text-anchor="middle">Enablement, training, adoption</text>
+        <text x="767" y="328" fill="#4a5d6b" font-size="11" text-anchor="middle">metrics drive the waves</text>
+
+        <!-- programme stream -->
+        <rect x="120" y="375" width="240" height="42" rx="8" fill="#fdf3e0" stroke="#e8c98a"/>
+        <text x="240" y="393" fill="#8a5f14" font-size="11.5" font-weight="700" text-anchor="middle">Governance rhythm from day 1:</text>
+        <text x="240" y="408" fill="#8a5f14" font-size="11" text-anchor="middle">steering, WBR, risk + decision log</text>
+        <rect x="395" y="375" width="230" height="42" rx="8" fill="#fdf3e0" stroke="#e8c98a"/>
+        <text x="510" y="393" fill="#8a5f14" font-size="11.5" font-weight="600" text-anchor="middle">Value metrics reported:</text>
+        <text x="510" y="408" fill="#8a5f14" font-size="11" text-anchor="middle">time-to-data, adoption, quality</text>
+        <rect x="660" y="375" width="215" height="42" rx="8" fill="#fdf3e0" stroke="#e8c98a"/>
+        <text x="767" y="393" fill="#8a5f14" font-size="11.5" font-weight="600" text-anchor="middle">Wave go/no-go gates;</text>
+        <text x="767" y="408" fill="#8a5f14" font-size="11" text-anchor="middle">benefits tracked to exec board</text>
+
+        <!-- slice arrow -->
+        <path d="M240,97 C300,140 380,190 393,232" stroke="#0e8f83" stroke-width="1.6" fill="none" marker-end="url(#arrP)" stroke-dasharray="4 3"/>
+        <text x="450" y="452" fill="#7b8b96" font-size="11.5" text-anchor="middle">★ teal = the thin vertical slice — the programme's credibility engine · amber = the delivery governance spine</text>
+      </svg>
+      <div class="figcap">Fig 3 — five streams, three phases: governance and platform start together; everything converges on one end-to-end slice before scaling</div>
+    </div>
+
+    <div class="callout"><strong>Why slice-first beats platform-first:</strong> the #1 fabric failure mode is 12 months of platform build with zero consumers — governance debated in the abstract, value invisible, sponsors gone by month 9. One working slice forces every hard question early (ownership, contracts, access, performance) on a scope small enough to fix, and buys the political capital the waves need.</div>
+
+    <!-- ============ 12. RESCUE ============ -->
+    <h2 id="s12"><a class="totoc" href="#toc">↑ contents</a><span class="num">12</span>Programme rescue — reading a failing fabric</h2>
+    <p class="lede">Fabric programmes rarely fail loudly — they fail quietly, in recognisable signatures. Diagnosis first; the fix follows from which signature you find.</p>
+    <div class="table-scroll">
+    <table class="wrapfirst">
+      <thead><tr><th>Failure signature</th><th>What you'll observe</th><th>Rescue priority</th></tr></thead>
+      <tbody>
+        <tr><td>Platform-first drift</td><td>Impressive infra, no consumers; demos show tooling, never a business outcome</td><td>Stop platform scope. Force one slice to a real consumer in 60–90 days — nothing else earns headcount until it lands.</td></tr>
+        <tr><td>Catalogue ghost town</td><td>Catalogue deployed; nobody publishes, nobody searches; metadata stale within weeks</td><td>Ownership, not features: named owners for the top 20 datasets, stewardship in role descriptions, publishing wired into the pipeline path so it can't be skipped.</td></tr>
+        <tr><td>Governance theatre</td><td>Policies documented, boards meet — but access still granted ad hoc and quality unmeasured</td><td>Pick 3 policies that matter (PII access, quality SLAs, retention); enforce them in tooling on slice datasets; retire the paper.</td></tr>
+        <tr><td>Onboarding stall</td><td>First sources took months each; wave plan assumes weeks; backlog quietly growing</td><td>Treat onboarding as a product: repeatable kit (templates, contracts, runbook), measure cost-per-source, industrialise before scaling the promise.</td></tr>
+        <tr><td>Exec confidence gone</td><td>Steering skipped by seniors, funding challenged, five competing status decks</td><td>Re-baseline honestly: one truth deck, credible dates with change control, a visible quick win inside 6 weeks — confidence follows evidence, not promises.</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <!-- ============ 13. PROBING QUESTIONS + TACTICS ============ -->
+    <h2 id="s13"><a class="totoc" href="#toc">↑ contents</a><span class="num">13</span>The rescue playbook — questions first, then moves</h2>
+    <p class="lede">The first two weeks are diagnosis. These questions find where truth lives — and each maps to a tactical move.</p>
+    <div class="table-scroll">
+    <table class="wrapfirst">
+      <thead><tr><th>Probing question</th><th>What it exposes</th><th>Tactical move that follows</th></tr></thead>
+      <tbody>
+        <tr><td>"Show me the last consumer who got value — walk me through their journey end-to-end."</td><td>Whether anything real has shipped, and where the journey breaks</td><td>If no answer exists: declare the slice; scope it to 2–3 sources and one named consumer.</td></tr>
+        <tr><td>"Who owns this dataset — and what happens when its quality drops?"</td><td>Whether ownership is real or nominal</td><td>Ownership register for the top 20 datasets; unowned = flagged red at steering until claimed.</td></tr>
+        <tr><td>"How does a decision get made here — show me the last three big ones."</td><td>Decision rights and traceability (usually the rot's centre)</td><td>Decision log + decision-rights matrix; steering redesigned so risks arrive with costed options.</td></tr>
+        <tr><td>"What does it cost, in days, to onboard one source — and is it getting cheaper?"</td><td>Whether the scaling promise is arithmetic or hope</td><td>Onboarding kit + cost-per-source metric on the WBR; no wave commitments until the number trends down.</td></tr>
+        <tr><td>"Which report do the execs actually trust?"</td><td>Reporting fragmentation and where confidence leaks</td><td>One flash report, one truth deck; kill the competing versions in week one.</td></tr>
+        <tr><td>"What did the programme promise at funding — and what's been quietly dropped?"</td><td>The gap between the business case and the plan of record</td><td>Honest re-baseline with change control; scope drops become recorded decisions, not silent drift.</td></tr>
+        <tr><td>"Where's the AI stream getting its data today?"</td><td>Whether AI work is on-fabric or scraping around it (a quiet indictment)</td><td>Route one AI use case through the fabric as a second slice — it's the sharpest proof the fabric works.</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <div class="callout"><strong>Sequencing logic (why this order):</strong> truth before plans (you can't re-baseline what you can't see) → ownership before tooling (features without owners decay) → one slice before waves (credibility funds scale) → rhythm throughout (WBR + decision log from day one, because the rescue itself must be visibly governed — the programme's governance is the product).</div>
+
+    <!-- ============ 14. DELIVERY LENS ============ -->
+    <h2 id="s14"><a class="totoc" href="#toc">↑ contents</a><span class="num">14</span>The delivery leader's lens</h2>
     <p class="lede">Why this pattern is as much a governance programme as an engineering one.</p>
     <p>A fabric programme succeeds or fails on exactly the things delivery governance cares about: <strong>ownership</strong> (every dataset needs an accountable owner or the catalogue is a graveyard), <strong>contracts</strong> (producers keeping schema/quality promises — and a process for when they break), <strong>traceability</strong> (lineage is to data what a decision log is to a programme), and <strong>adoption</strong> (a fabric nobody publishes to is shelfware — the operating rhythm that gets teams onboarding datasets is the delivery job).</p>
     <p>That's why these transformations run as <strong>multi-stream programmes</strong> — platform build, source onboarding waves, governance uplift, AI enablement — with heavy cross-stream dependencies. The architecture is the easy half; the governance maturity to operate it is where programmes wobble, and where delivery leadership earns its keep.</p>
