@@ -124,6 +124,7 @@
         <li><a href="#s12"><span class="n">12</span>Programme rescue — reading a failing fabric</a></li>
         <li><a href="#s13"><span class="n">13</span>The rescue playbook — questions first, then moves</a></li>
         <li><a href="#s14"><span class="n">14</span>The delivery leader's lens</a></li>
+        <li><a href="#s15"><span class="n">15</span>How it's actually wired — the technical planes</a></li>
       </ol>
     </nav>
 
@@ -592,6 +593,107 @@
     <p class="lede">Why this pattern is as much a governance programme as an engineering one.</p>
     <p>A fabric programme succeeds or fails on exactly the things delivery governance cares about: <strong>ownership</strong> (every dataset needs an accountable owner or the catalogue is a graveyard), <strong>contracts</strong> (producers keeping schema/quality promises — and a process for when they break), <strong>traceability</strong> (lineage is to data what a decision log is to a programme), and <strong>adoption</strong> (a fabric nobody publishes to is shelfware — the operating rhythm that gets teams onboarding datasets is the delivery job).</p>
     <p>That's why these transformations run as <strong>multi-stream programmes</strong> — platform build, source onboarding waves, governance uplift, AI enablement — with heavy cross-stream dependencies. The architecture is the easy half; the governance maturity to operate it is where programmes wobble, and where delivery leadership earns its keep.</p>
+
+    <!-- ============ 15. TECHNICAL WIRING ============ -->
+    <h2 id="s15"><a class="totoc" href="#toc">↑ contents</a><span class="num">15</span>How it's actually wired — the technical planes</h2>
+    <p class="lede">The fabric is a layer of indirection, but <strong>not a middleware box in the data path</strong>. It's a control plane of four cooperating parts; enforcement is pushed down into the engines, and queries never flow "through" the fabric itself.</p>
+
+    <div class="tldr">
+      <div class="label">Roles, not products</div>
+      <p>In Fig 2, the bottom row is <strong>where data rests</strong> (supply) and the top row is <strong>workloads that read it</strong> (demand). One product can play both roles — BigQuery is a store <em>and</em> the engine an analyst's dashboard queries. The fabric is the governed market between supply and demand: consumers ask for "customer revenue, governed", not "the table in warehouse X".</p>
+    </div>
+
+    <div class="figure">
+      <svg viewBox="0 0 900 430" role="img" aria-label="Control plane vs data path in a data fabric">
+        <defs>
+          <marker id="arrD" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
+            <path d="M0,0 L8,4.5 L0,9" fill="none" stroke="#0e8f83" stroke-width="1.6"/>
+          </marker>
+          <marker id="arrC" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
+            <path d="M0,0 L8,4.5 L0,9" fill="none" stroke="#6b5fa8" stroke-width="1.5"/>
+          </marker>
+        </defs>
+
+        <!-- CONTROL PLANE column (left) -->
+        <rect x="30" y="24" width="270" height="382" rx="14" fill="#efedf7" stroke="#6b5fa8" stroke-width="1.6"/>
+        <text x="52" y="52" fill="#5a4f96" font-size="12.5" font-weight="700" letter-spacing="1.5">CONTROL PLANE — "the brain"</text>
+
+        <rect x="52" y="66" width="226" height="72" rx="9" fill="#ffffff" stroke="#6b5fa8"/>
+        <text x="165" y="88" fill="#0e2233" font-size="12.5" font-weight="600" text-anchor="middle">Metadata plane · catalogue</text>
+        <text x="165" y="105" fill="#4a5d6b" font-size="10.5" text-anchor="middle">crawlers harvest schemas + usage;</text>
+        <text x="165" y="119" fill="#4a5d6b" font-size="10.5" text-anchor="middle">active metadata auto-tags (PII, staleness)</text>
+
+        <rect x="52" y="150" width="226" height="72" rx="9" fill="#ffffff" stroke="#6b5fa8"/>
+        <text x="165" y="172" fill="#0e2233" font-size="12.5" font-weight="600" text-anchor="middle">Policy plane</text>
+        <text x="165" y="189" fill="#4a5d6b" font-size="10.5" text-anchor="middle">authored once, centrally —</text>
+        <text x="165" y="203" fill="#4a5d6b" font-size="10.5" text-anchor="middle">enforced locally in each engine</text>
+
+        <rect x="52" y="234" width="226" height="72" rx="9" fill="#ffffff" stroke="#6b5fa8"/>
+        <text x="165" y="256" fill="#0e2233" font-size="12.5" font-weight="600" text-anchor="middle">Lineage plane</text>
+        <text x="165" y="273" fill="#4a5d6b" font-size="10.5" text-anchor="middle">harvested from query logs + pipeline</text>
+        <text x="165" y="287" fill="#4a5d6b" font-size="10.5" text-anchor="middle">manifests (OpenLineage) into a graph</text>
+
+        <rect x="52" y="318" width="226" height="72" rx="9" fill="#ffffff" stroke="#6b5fa8"/>
+        <text x="165" y="340" fill="#0e2233" font-size="12.5" font-weight="600" text-anchor="middle">Contracts + quality</text>
+        <text x="165" y="357" fill="#4a5d6b" font-size="10.5" text-anchor="middle">schema registry + automated checks —</text>
+        <text x="165" y="371" fill="#4a5d6b" font-size="10.5" text-anchor="middle">a broken promise fails the pipeline</text>
+
+        <!-- DATA PATH (right) -->
+        <text x="620" y="52" fill="#0a6e65" font-size="12.5" font-weight="700" letter-spacing="1.5" text-anchor="middle">DATA PATH — where queries actually run</text>
+
+        <rect x="420" y="66" width="400" height="54" rx="10" fill="#ffffff" stroke="#b7c3cc" stroke-width="1.3"/>
+        <text x="620" y="88" fill="#0e2233" font-size="13" font-weight="600" text-anchor="middle">Consumers</text>
+        <text x="620" y="105" fill="#4a5d6b" font-size="10.5" text-anchor="middle">BI · notebooks · data APIs · semantic layer — several doors, one brain</text>
+
+        <rect x="420" y="170" width="185" height="70" rx="10" fill="#e8f5f3" stroke="#0e8f83" stroke-width="1.5"/>
+        <text x="512" y="192" fill="#0a6e65" font-size="12.5" font-weight="700" text-anchor="middle">Federation engine</text>
+        <text x="512" y="209" fill="#4a5d6b" font-size="10.5" text-anchor="middle">one SQL, predicates pushed</text>
+        <text x="512" y="223" fill="#4a5d6b" font-size="10.5" text-anchor="middle">down to sources · cold data</text>
+
+        <rect x="635" y="170" width="185" height="70" rx="10" fill="#e8f5f3" stroke="#0e8f83" stroke-width="1.5"/>
+        <text x="727" y="192" fill="#0a6e65" font-size="12.5" font-weight="700" text-anchor="middle">Pipelines · materialise</text>
+        <text x="727" y="209" fill="#4a5d6b" font-size="10.5" text-anchor="middle">CDC/batch copy into the</text>
+        <text x="727" y="223" fill="#4a5d6b" font-size="10.5" text-anchor="middle">warehouse · hot data</text>
+
+        <rect x="420" y="300" width="400" height="54" rx="10" fill="#ffffff" stroke="#b7c3cc" stroke-width="1.3"/>
+        <text x="620" y="322" fill="#0e2233" font-size="13" font-weight="600" text-anchor="middle">Sources &amp; stores</text>
+        <text x="620" y="339" fill="#4a5d6b" font-size="10" text-anchor="middle">warehouse · lake · legacy · SaaS · streams — each enforces pushed-down policy</text>
+
+        <!-- data path arrows -->
+        <g stroke="#0e8f83" stroke-width="1.8" fill="none">
+          <path d="M512,120 L512,166" marker-end="url(#arrD)"/>
+          <path d="M727,120 L727,166" marker-end="url(#arrD)"/>
+          <path d="M512,240 L512,296" marker-end="url(#arrD)"/>
+          <path d="M727,240 L727,296" marker-end="url(#arrD)"/>
+        </g>
+
+        <!-- control plane arrows (dashed, configuring) -->
+        <g stroke="#6b5fa8" stroke-width="1.4" fill="none" stroke-dasharray="5 4">
+          <path d="M300,102 C360,110 380,140 416,188" marker-end="url(#arrC)"/>
+          <path d="M300,186 C350,195 380,210 416,215" marker-end="url(#arrC)"/>
+          <path d="M300,190 C380,230 400,290 416,318" marker-end="url(#arrC)"/>
+        </g>
+        <text x="352" y="152" fill="#5a4f96" font-size="10.5" font-weight="600" transform="rotate(-14 352 152)">configures ▸</text>
+        <text x="352" y="262" fill="#5a4f96" font-size="10.5" font-weight="600" transform="rotate(18 352 262)">enforces ▸</text>
+
+        <text x="450" y="416" fill="#7b8b96" font-size="11.5" text-anchor="middle">violet dashed = control (metadata + policy configure the engines) · teal solid = the data path (queries never route through the fabric)</text>
+      </svg>
+      <div class="figcap">Fig 4 — control plane vs data path: the fabric is DNS + IAM for data, not a proxy carrying the packets</div>
+    </div>
+
+    <div class="callout"><strong>Why this matters in an architecture conversation:</strong> "doesn't the abstraction layer kill performance?" is the standard objection. The answer: the fabric isn't in the query path — policies are enforced <em>by</em> each engine, and access is either federated with predicate push-down (cold data) or materialised via pipelines (hot data), chosen per dataset on cost and SLO evidence. That federate-vs-materialise call is a running engineering judgement, not a one-off.</div>
+
+    <h3 style="font-size:17px;font-weight:650;color:var(--navy);margin:30px 0 6px">Technical specifics by rollout phase</h3>
+    <div class="table-scroll">
+    <table class="wrapfirst">
+      <thead><tr><th>Phase</th><th>The technical work</th><th>One-way doors — decide early, on the record</th></tr></thead>
+      <tbody>
+        <tr><td><strong>1 · Foundations</strong></td><td>Private connectivity to every source (VPC peering, on-prem interconnects, service accounts, secrets); IdP groups mapped to data roles; catalogue crawlers per source type; Terraform/IaC + CI/CD from day one — the phase-3 onboarding kit <em>is</em> these modules, productised.</td><td>RBAC vs ABAC policy model (retrofitting ABAC means re-tagging the estate) · classification taxonomy · table format (Iceberg/Delta) · data residency + KMS strategy. Network lead times are the schedule's silent killer — order firewall changes in week 1.</td></tr>
+        <tr><td><strong>2 · First slice</strong></td><td>CDC vs batch ingestion for the 2–3 slice sources; executable data contracts (schema registry + automated quality gates that fail the pipeline, not a document); security proven end-to-end — a real consumer's query hitting policy-enforced views, audit logs flowing; lineage + per-query cost telemetry on from the start.</td><td>The federate-vs-materialise call per dataset, measured against latency/freshness SLOs on real workloads — the slice is where federation's true cost is learned. Retrofitting lineage or cost telemetry later is misery; wire them now.</td></tr>
+        <tr><td><strong>3 · Waves</strong></td><td>Onboarding kit as a product (templated IaC + pipeline + contract scaffolds, runbook) with measured cost-per-source; operational hardening — SLOs, alerting, incident runbooks, DR posture, query quotas + chargeback; governance as automation: policy-as-code, scheduled PII scans, access-request workflow with approval SLAs.</td><td>No wave commitments until cost-per-source trends down. Metadata quality (% datasets with named owners, catalogue freshness) joins the WBR — the fabric's own health is now a product you operate.</td></tr>
+      </tbody>
+    </table>
+    </div>
 
     <div class="footer">gilesparnell.github.io · knowledge / data-fabric · hand-built SVG, no generators</div>
   </div>
