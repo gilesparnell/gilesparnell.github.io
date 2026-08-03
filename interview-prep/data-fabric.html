@@ -362,8 +362,76 @@
       <div class="mini"><h3><span class="k" style="color:var(--violet-text)">≠</span>Lakehouse</h3><p>A <strong>storage architecture</strong> — warehouse features (ACID, governance) on lake economics via open table formats. A lakehouse is one (big) node the fabric connects; it doesn't solve discovery or estate-wide governance by itself.</p></div>
     </div>
 
-    <!-- ============ 6. DELIVERY LENS ============ -->
-    <h2><span class="num">07</span>The delivery leader's lens</h2>
+    <!-- ============ 7. HISTORY ============ -->
+    <h2><span class="num">07</span>Where the idea came from</h2>
+    <p class="lede">"Data fabric" wasn't invented in one paper — it's the convergence of three older threads, renamed and upgraded by metadata.</p>
+    <div class="table-scroll">
+    <table>
+      <thead><tr><th>Era</th><th>What happened</th></tr></thead>
+      <tbody>
+        <tr><td>1990s–2000s</td><td><strong>Enterprise Data Warehouse era</strong> — "copy everything into one governed store." Worked until data volume, variety, and SaaS sprawl outran any single store.</td></tr>
+        <tr><td>Mid-2000s</td><td><strong>Data virtualisation</strong> (Composite Software, Denodo) — "query it where it lives" arrives, but without governance or discovery around it.</td></tr>
+        <tr><td>2010s</td><td><strong>Data lake era</strong> — cheap storage for everything raw; many became ungoverned "data swamps." The pain that made governance the headline problem.</td></tr>
+        <tr><td>~2016</td><td>Forrester analysts coin <strong>"big data fabric"</strong>; NetApp uses "data fabric" for hybrid-cloud storage (a different, infrastructure-level meaning — still causes confusion).</td></tr>
+        <tr><td>2019–2022</td><td><strong>Gartner era:</strong> data fabric named a top strategic technology trend (2022), redefined around <strong>active metadata</strong> — the catalogue stops being documentation and starts driving automation.</td></tr>
+        <tr><td>2023–now</td><td><strong>GenAI forcing function</strong> — every vendor rebrands toward fabric (Microsoft literally names its analytics platform "Fabric"); AI-readiness becomes the business case that finally funds governance.</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <!-- ============ 8. VENDORS ============ -->
+    <h2><span class="num">08</span>The vendor landscape</h2>
+    <p class="lede">Beyond the hyperscalers (§04–05), a whole market claims the fabric label — knowing who plays where signals real domain awareness.</p>
+    <div class="table-scroll">
+    <table>
+      <thead><tr><th>Vendor</th><th>Angle on the fabric</th></tr></thead>
+      <tbody>
+        <tr><td>Microsoft Fabric</td><td>The boldest branding: an all-in-one SaaS analytics platform (OneLake + Synapse + Power BI lineage) — fabric as a single product rather than a layer over your estate.</td></tr>
+        <tr><td>Informatica</td><td>The incumbent: IDMC cloud platform with CLAIRE (metadata AI) — strongest at enterprise integration + data quality; common in banks.</td></tr>
+        <tr><td>IBM</td><td>Cloud Pak for Data — fabric as the official architecture story; heavy in regulated industries.</td></tr>
+        <tr><td>Talend / Qlik</td><td>Sold literally as "Talend Data Fabric" — integration + quality + governance mid-market suite.</td></tr>
+        <tr><td>Denodo</td><td>The virtualisation specialist — strongest pure "query in place" engine; often one component inside a larger fabric.</td></tr>
+        <tr><td>Collibra · Alation · Atlan</td><td>The catalogue/governance layer specialists — Collibra (governance workflows), Alation (analyst-friendly catalogue), Atlan ("active metadata" — the newest thinking).</td></tr>
+        <tr><td>Palantir Foundry</td><td>Fabric-adjacent: an opinionated end-to-end platform with an ontology layer — powerful, walled-garden trade-off.</td></tr>
+        <tr><td>K2view · Cinchy</td><td>Niche approaches — entity-centric fabric (K2view: assemble data per business entity in real time) and "dataware" collaboration (Cinchy).</td></tr>
+        <tr><td>Databricks · Snowflake</td><td>Lakehouse platforms growing fabric features — Unity Catalogue and Horizon respectively: catalogue + governance within their own walls, federation reaching outward.</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <div class="callout"><strong>Name-drop wisely:</strong> "fabric" is also a marketing umbrella — the same word sells Microsoft's SaaS bundle, Informatica's integration suite, and NetApp's storage. Saying <em>"fabric is a pattern, not a product — most real estates assemble it from a catalogue, a governance plane, and federation"</em> instantly separates you from candidates who think it's something you buy in a box.</div>
+
+    <!-- ============ 9. PROS & CONS ============ -->
+    <h2><span class="num">09</span>Pros, cons, and honest criticisms</h2>
+    <div class="grid2">
+      <div class="mini"><h3 style="color:var(--teal-dark)">✓ No big-bang migration</h3><p>Value starts while legacy stays running — incremental onboarding, retire systems on merit, not on faith.</p></div>
+      <div class="mini"><h3 style="color:var(--teal-dark)">✓ Governance that scales</h3><p>Policy defined once beats policy re-implemented per silo — the only workable answer at regulatory scale.</p></div>
+      <div class="mini"><h3 style="color:var(--teal-dark)">✓ AI-ready by construction</h3><p>Discoverable, permissioned, lineage-backed data is precisely what GenAI programmes stall without.</p></div>
+      <div class="mini"><h3 style="color:var(--teal-dark)">✓ Buys optionality</h3><p>Consumers bind to the fabric, not to sources — swapping a warehouse or absorbing an acquisition stops being a consumer-facing event.</p></div>
+      <div class="mini"><h3 style="color:var(--coral)">× Metadata garbage-in</h3><p>The fabric is only as good as its metadata. Auto-discovery gets you 60%; the rest is curation work organisations chronically underfund.</p></div>
+      <div class="mini"><h3 style="color:var(--coral)">× Integration complexity</h3><p>Assembling catalogue + governance + federation from multiple vendors is its own programme — the fabric can become the next silo of effort.</p></div>
+      <div class="mini"><h3 style="color:var(--coral)">× Federation isn't free</h3><p>Query-in-place performs worse than co-located data for heavy analytics — real fabrics still move hot data; judgement required.</p></div>
+      <div class="mini"><h3 style="color:var(--coral)">× Doesn't fix ownership</h3><p>The sharpest criticism: a fabric makes ownership <em>visible</em>, but only the operating model makes it <em>real</em>. Tech without stewardship = an expensive, accurate map of chaos.</p></div>
+    </div>
+    <div class="callout"><strong>The mesh-camp critique (worth acknowledging in interviews):</strong> data-mesh advocates argue fabric is too technology-centric — a central platform team's dream that under-invests in domain accountability. The mature answer: they're solving different layers of the same problem, and serious estates end up with both — fabric tech, mesh operating model.</div>
+
+    <!-- ============ 10. VS ALTERNATIVES ============ -->
+    <h2><span class="num">10</span>Fabric vs the alternatives — decision view</h2>
+    <div class="table-scroll">
+    <table>
+      <thead><tr><th>Approach</th><th>Core move</th><th>Wins when</th><th>Breaks when</th></tr></thead>
+      <tbody>
+        <tr><td>Central warehouse</td><td>Copy everything into one governed store</td><td>Bounded scope, stable sources, strong modelling discipline</td><td>Source sprawl outruns the copy pipelines; SaaS + streams never fit</td></tr>
+        <tr><td>Data lake</td><td>Land everything raw, decide later</td><td>Cheap retention, exploratory workloads</td><td>"Later" never comes — becomes the swamp that created the governance crisis</td></tr>
+        <tr><td>Lakehouse</td><td>Warehouse guarantees on lake storage</td><td>One-platform estates, greenfield analytics</td><td>It's still one node — doesn't govern the 40 systems around it</td></tr>
+        <tr><td>Data mesh</td><td>Domains own data as products</td><td>Strong domain teams, product culture, exec patience</td><td>Without platform tooling it's governance-by-hope; heavy org change</td></tr>
+        <tr><td>Point-to-point</td><td>Build a pipeline per need</td><td>Small estates, few consumers</td><td>N×M explosion — the Fig 1 spaghetti; where most enterprises actually are</td></tr>
+        <tr><td><strong>Data fabric</strong></td><td>Metadata layer over data left in place</td><td>Large heterogeneous estates, regulatory pressure, AI ambitions</td><td>Metadata underfunded, vendor sprawl, or ownership culture never lands</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <!-- ============ 11. DELIVERY LENS ============ -->
+    <h2><span class="num">11</span>The delivery leader's lens</h2>
     <p class="lede">Why this pattern is as much a governance programme as an engineering one.</p>
     <p>A fabric programme succeeds or fails on exactly the things delivery governance cares about: <strong>ownership</strong> (every dataset needs an accountable owner or the catalogue is a graveyard), <strong>contracts</strong> (producers keeping schema/quality promises — and a process for when they break), <strong>traceability</strong> (lineage is to data what a decision log is to a programme), and <strong>adoption</strong> (a fabric nobody publishes to is shelfware — the operating rhythm that gets teams onboarding datasets is the delivery job).</p>
     <p>That's why these transformations run as <strong>multi-stream programmes</strong> — platform build, source onboarding waves, governance uplift, AI enablement — with heavy cross-stream dependencies. The architecture is the easy half; the governance maturity to operate it is where programmes wobble, and where delivery leadership earns its keep.</p>

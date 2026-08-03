@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 560" role="img" aria-label="Diagram of the data fabric layered architecture">
+<rect width="900" height="560" fill="#f7f9fa"/>
+        <defs>
+          <marker id="arrV" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
+            <path d="M0,0 L8,4.5 L0,9" fill="none" stroke="#6b5fa8" stroke-width="1.5"/>
+          </marker>
+          <marker id="arrT" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
+            <path d="M0,0 L8,4.5 L0,9" fill="none" stroke="#0e8f83" stroke-width="1.5"/>
+          </marker>
+        </defs>
+
+        <!-- consumers -->
+        <g>
+          <rect x="70" y="20" width="230" height="54" rx="10" fill="#ffffff" stroke="#b7c3cc" stroke-width="1.3"/>
+          <text x="185" y="43" fill="#0e2233" font-size="13.5" font-weight="600" text-anchor="middle">Analytics &amp; BI</text>
+          <text x="185" y="61" fill="#4a5d6b" font-size="10.5" text-anchor="middle">one governed view of truth</text>
+          <rect x="335" y="20" width="230" height="54" rx="10" fill="#ffffff" stroke="#b7c3cc" stroke-width="1.3"/>
+          <text x="450" y="43" fill="#0e2233" font-size="13.5" font-weight="600" text-anchor="middle">AI / GenAI</text>
+          <text x="450" y="61" fill="#4a5d6b" font-size="10.5" text-anchor="middle">trusted, permissioned data</text>
+          <rect x="600" y="20" width="230" height="54" rx="10" fill="#ffffff" stroke="#b7c3cc" stroke-width="1.3"/>
+          <text x="715" y="43" fill="#0e2233" font-size="13.5" font-weight="600" text-anchor="middle">Data products</text>
+          <text x="715" y="61" fill="#4a5d6b" font-size="10.5" text-anchor="middle">sellable feeds &amp; APIs</text>
+        </g>
+
+        <!-- arrows down to fabric -->
+        <g stroke="#0e8f83" stroke-width="1.6" fill="none">
+          <path d="M185,74 L185,118" marker-end="url(#arrT)"/>
+          <path d="M450,74 L450,118" marker-end="url(#arrT)"/>
+          <path d="M715,74 L715,118" marker-end="url(#arrT)"/>
+        </g>
+        <rect x="255" y="94" width="390" height="20" rx="6" fill="#f7f9fa" opacity="0.92"/>
+        <text x="450" y="108" fill="#0a6e65" font-size="11.5" font-weight="600" text-anchor="middle">one front door — search it, query it, subscribe to it</text>
+
+        <!-- FABRIC layer -->
+        <g>
+          <rect x="55" y="122" width="790" height="240" rx="14" fill="#efedf7" stroke="#6b5fa8" stroke-width="1.6"/>
+          <text x="80" y="150" fill="#5a4f96" font-size="13" font-weight="700" letter-spacing="2">THE DATA FABRIC — METADATA-DRIVEN LAYER</text>
+
+          <rect x="80" y="168" width="176" height="80" rx="9" fill="#ffffff" stroke="#6b5fa8"/>
+          <text x="168" y="192" fill="#0e2233" font-size="13" font-weight="600" text-anchor="middle">Catalogue &amp; discovery</text>
+          <text x="168" y="210" fill="#4a5d6b" font-size="10.5" text-anchor="middle">searchable inventory of</text>
+          <text x="168" y="225" fill="#4a5d6b" font-size="10.5" text-anchor="middle">every dataset + owners</text>
+
+          <rect x="272" y="168" width="176" height="80" rx="9" fill="#ffffff" stroke="#6b5fa8"/>
+          <text x="360" y="192" fill="#0e2233" font-size="13" font-weight="600" text-anchor="middle">Governance &amp; policy</text>
+          <text x="360" y="210" fill="#4a5d6b" font-size="10.5" text-anchor="middle">access, quality, privacy —</text>
+          <text x="360" y="225" fill="#4a5d6b" font-size="10.5" text-anchor="middle">defined once, enforced everywhere</text>
+
+          <rect x="464" y="168" width="176" height="80" rx="9" fill="#ffffff" stroke="#6b5fa8"/>
+          <text x="552" y="192" fill="#0e2233" font-size="13" font-weight="600" text-anchor="middle">Lineage</text>
+          <text x="552" y="210" fill="#4a5d6b" font-size="10.5" text-anchor="middle">every figure traceable</text>
+          <text x="552" y="225" fill="#4a5d6b" font-size="10.5" text-anchor="middle">back to its sources</text>
+
+          <rect x="656" y="168" width="170" height="80" rx="9" fill="#ffffff" stroke="#6b5fa8"/>
+          <text x="741" y="192" fill="#0e2233" font-size="13" font-weight="600" text-anchor="middle">Unified access</text>
+          <text x="741" y="210" fill="#4a5d6b" font-size="10.5" text-anchor="middle">query in place — federation,</text>
+          <text x="741" y="225" fill="#4a5d6b" font-size="10.5" text-anchor="middle">virtualisation, APIs</text>
+
+          <rect x="80" y="262" width="176" height="80" rx="9" fill="#ffffff" stroke="#6b5fa8" stroke-dasharray="5 4" stroke-width="1.6"/>
+          <text x="168" y="286" fill="#0e2233" font-size="13" font-weight="600" text-anchor="middle">Active metadata</text>
+          <text x="168" y="304" fill="#4a5d6b" font-size="10.5" text-anchor="middle">the "brain": auto-classify,</text>
+          <text x="168" y="319" fill="#4a5d6b" font-size="10.5" text-anchor="middle">tag, recommend, alert</text>
+
+          <rect x="272" y="262" width="176" height="80" rx="9" fill="#ffffff" stroke="#6b5fa8"/>
+          <text x="360" y="286" fill="#0e2233" font-size="13" font-weight="600" text-anchor="middle">Pipelines &amp; movement</text>
+          <text x="360" y="304" fill="#4a5d6b" font-size="10.5" text-anchor="middle">batch + streaming, only</text>
+          <text x="360" y="319" fill="#4a5d6b" font-size="10.5" text-anchor="middle">moving data when it earns it</text>
+
+          <rect x="464" y="262" width="176" height="80" rx="9" fill="#ffffff" stroke="#6b5fa8"/>
+          <text x="552" y="286" fill="#0e2233" font-size="13" font-weight="600" text-anchor="middle">Data contracts</text>
+          <text x="552" y="304" fill="#4a5d6b" font-size="10.5" text-anchor="middle">producers promise schema +</text>
+          <text x="552" y="319" fill="#4a5d6b" font-size="10.5" text-anchor="middle">quality; breaking = a breach</text>
+
+          <rect x="656" y="262" width="170" height="80" rx="9" fill="#ffffff" stroke="#6b5fa8"/>
+          <text x="741" y="286" fill="#0e2233" font-size="13" font-weight="600" text-anchor="middle">Semantic layer</text>
+          <text x="741" y="304" fill="#4a5d6b" font-size="10.5" text-anchor="middle">"revenue" means one thing</text>
+          <text x="741" y="319" fill="#4a5d6b" font-size="10.5" text-anchor="middle">everywhere it's used</text>
+        </g>
+
+        <!-- arrows down to sources -->
+        <g stroke="#6b5fa8" stroke-width="1.5" fill="none">
+          <path d="M150,362 L150,406" marker-end="url(#arrV)"/>
+          <path d="M330,362 L330,406" marker-end="url(#arrV)"/>
+          <path d="M510,362 L510,406" marker-end="url(#arrV)"/>
+          <path d="M690,362 L690,406" marker-end="url(#arrV)"/>
+        </g>
+        <rect x="265" y="382" width="370" height="20" rx="6" fill="#f7f9fa" opacity="0.92"/>
+        <text x="450" y="396" fill="#5a4f96" font-size="11.5" font-weight="600" text-anchor="middle">connects to sources in place — no big-bang migration</text>
+
+        <!-- sources -->
+        <g>
+          <rect x="80" y="410" width="150" height="80" rx="10" fill="#ffffff" stroke="#b7c3cc" stroke-width="1.3"/>
+          <text x="155" y="436" fill="#0e2233" font-size="13" font-weight="600" text-anchor="middle">Warehouse</text>
+          <text x="155" y="454" fill="#4a5d6b" font-size="10.5" text-anchor="middle">stays for curated,</text>
+          <text x="155" y="469" fill="#4a5d6b" font-size="10.5" text-anchor="middle">high-value analytics</text>
+          <rect x="260" y="410" width="150" height="80" rx="10" fill="#ffffff" stroke="#b7c3cc" stroke-width="1.3"/>
+          <text x="335" y="436" fill="#0e2233" font-size="13" font-weight="600" text-anchor="middle">Lake / lakehouse</text>
+          <text x="335" y="454" fill="#4a5d6b" font-size="10.5" text-anchor="middle">cheap storage for raw</text>
+          <text x="335" y="469" fill="#4a5d6b" font-size="10.5" text-anchor="middle">+ open table formats</text>
+          <rect x="440" y="410" width="150" height="80" rx="10" fill="#ffffff" stroke="#b7c3cc" stroke-width="1.3"/>
+          <text x="515" y="436" fill="#0e2233" font-size="13" font-weight="600" text-anchor="middle">Legacy / on-prem</text>
+          <text x="515" y="454" fill="#4a5d6b" font-size="10.5" text-anchor="middle">wrapped + catalogued,</text>
+          <text x="515" y="469" fill="#4a5d6b" font-size="10.5" text-anchor="middle">retired on merit</text>
+          <rect x="620" y="410" width="150" height="80" rx="10" fill="#ffffff" stroke="#b7c3cc" stroke-width="1.3"/>
+          <text x="695" y="436" fill="#0e2233" font-size="13" font-weight="600" text-anchor="middle">SaaS + streams</text>
+          <text x="695" y="454" fill="#4a5d6b" font-size="10.5" text-anchor="middle">connected live,</text>
+          <text x="695" y="469" fill="#4a5d6b" font-size="10.5" text-anchor="middle">not exported nightly</text>
+        </g>
+
+        <text x="450" y="530" fill="#7b8b96" font-size="11.5" text-anchor="middle">solid = core fabric plane · dashed = the differentiator (metadata doing the work)</text>
+      </svg>
