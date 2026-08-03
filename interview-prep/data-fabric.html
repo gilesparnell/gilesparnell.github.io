@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Fabric — the pattern, the problem, the platforms</title>
+  <meta name="description" content="A visual explainer of the Data Fabric architecture pattern: the silo problem it solves, how a metadata-driven layer solves it, and the GCP and AWS products that implement it.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    /* Self-contained page in the Console idiom (black / white / violet).
+       Does not import or alter the shared hub shell. */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --font-display: 'Space Grotesk', -apple-system, sans-serif;
+      --font-mono: 'Space Mono', ui-monospace, monospace;
+      --bg: #0a0910;
+      --panel: rgba(255,255,255,0.025);
+      --text: #efedf6;
+      --dim: #9a95b0;
+      --faint: #6d6885;
+      --border: rgba(255,255,255,0.10);
+      --accent: #a58cff;
+      --accent-deep: #6b46d6;
+      --accent-glow: rgba(139,108,240,0.22);
+      --teal: #38bfa0;
+      --amber: #d9a441;
+      --coral: #e0596b;
+      --radius: 18px;
+    }
+    body {
+      font-family: var(--font-display);
+      background: var(--bg); color: var(--text);
+      line-height: 1.65; letter-spacing: -0.01em;
+      min-height: 100vh; overflow-x: hidden;
+    }
+    a { color: var(--accent); }
+    .glow { position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
+    .glow span {
+      position: absolute; width: 820px; height: 820px; border-radius: 50%;
+      top: -320px; left: 50%; margin-left: -410px;
+      background: radial-gradient(circle, var(--accent-glow), transparent 66%);
+      filter: blur(20px);
+    }
+    .page { position: relative; z-index: 1; max-width: 980px; margin: 0 auto; padding: 40px 28px 80px; }
+    .crumb { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--faint); margin-bottom: 40px; }
+    .crumb a { color: var(--faint); text-decoration: none; }
+    .crumb a:hover { color: var(--accent); }
+    .eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; }
+    h1 { font-size: clamp(30px, 5vw, 44px); font-weight: 700; letter-spacing: -0.03em; line-height: 1.12; margin-bottom: 16px; }
+    .lede { color: var(--dim); font-size: 18px; max-width: 62ch; margin-bottom: 8px; }
+    h2 { font-size: 24px; font-weight: 700; letter-spacing: -0.02em; margin: 64px 0 6px; }
+    h2 .num { font-family: var(--font-mono); font-size: 14px; color: var(--accent); margin-right: 10px; }
+    .sub { color: var(--faint); font-size: 14.5px; margin-bottom: 22px; max-width: 68ch; }
+    p { margin-bottom: 14px; max-width: 72ch; }
+    .figure {
+      background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 22px 18px 10px; margin: 22px 0 10px; overflow-x: auto;
+    }
+    .figure svg { display: block; width: 100%; height: auto; min-width: 620px; }
+    .figcap { font-family: var(--font-mono); font-size: 11.5px; color: var(--faint); text-transform: uppercase; letter-spacing: 0.08em; padding: 10px 6px 12px; }
+    .callout {
+      border-left: 3px solid var(--accent); background: var(--panel);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 16px 20px; margin: 22px 0; color: var(--dim); max-width: 72ch;
+    }
+    .callout strong { color: var(--text); }
+    table { width: 100%; border-collapse: collapse; margin: 20px 0 8px; font-size: 14.5px; }
+    th { font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--faint); text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--border); }
+    td { padding: 12px; border-bottom: 1px solid var(--border); vertical-align: top; color: var(--dim); }
+    td:first-child { color: var(--text); font-weight: 500; white-space: nowrap; }
+    tr:hover td { background: rgba(255,255,255,0.02); }
+    .pill { display: inline-block; font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.06em; text-transform: uppercase; border: 1px solid var(--border); border-radius: 999px; padding: 2px 10px; margin: 2px 4px 2px 0; color: var(--dim); white-space: nowrap; }
+    .pill--core { border-color: var(--accent); color: var(--accent); }
+    .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin: 20px 0; }
+    @media (max-width: 760px) { .grid2 { grid-template-columns: 1fr; } }
+    .mini {
+      background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px 20px;
+    }
+    .mini h3 { font-size: 15px; margin-bottom: 6px; }
+    .mini h3 .k { font-family: var(--font-mono); color: var(--accent); font-size: 12px; margin-right: 8px; }
+    .mini p { font-size: 13.5px; color: var(--dim); margin: 0; }
+    .foot { margin-top: 70px; padding-top: 22px; border-top: 1px solid var(--border); font-family: var(--font-mono); font-size: 11.5px; color: var(--faint); text-transform: uppercase; letter-spacing: 0.08em; }
+    /* SVG text defaults */
+    text { font-family: 'Space Grotesk', sans-serif; }
+    .mono-t { font-family: 'Space Mono', monospace; }
+  </style>
+</head>
+<body>
+  <div class="glow"><span></span></div>
+  <div class="page">
+    <nav class="crumb"><a href="../index.html">← gilesparnell.github.io</a> &nbsp;/&nbsp; knowledge &nbsp;/&nbsp; data fabric</nav>
+
+    <div class="eyebrow">Architecture pattern · Interview-grade explainer</div>
+    <h1>Data Fabric</h1>
+    <p class="lede">Large organisations don't have <em>a</em> data platform — they have dozens, accumulated over decades. A data fabric is the architecture pattern that stops fighting that reality: leave the data where it lives, and build one <strong>metadata-driven layer</strong> that finds, governs, and serves all of it.</p>
+
+    <!-- ============ 1. THE PROBLEM ============ -->
+    <h2><span class="num">01</span>The problem: silo sprawl</h2>
+    <p class="sub">Every acquisition, department, and era of technology leaves behind another data store — each with its own copies, its own access rules, and its own version of the truth.</p>
+
+    <div class="figure">
+      <svg viewBox="0 0 900 420" role="img" aria-label="Diagram of point-to-point data silo sprawl">
+        <defs>
+          <marker id="arrR" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
+            <path d="M0,0 L8,4.5 L0,9" fill="none" stroke="#e0596b" stroke-width="1.4"/>
+          </marker>
+        </defs>
+        <!-- consumers row -->
+        <g>
+          <rect x="60" y="24" width="180" height="56" rx="12" fill="rgba(255,255,255,0.03)" stroke="#6d6885"/>
+          <text x="150" y="48" fill="#efedf6" font-size="14" font-weight="600" text-anchor="middle">Analytics / BI</text>
+          <text x="150" y="66" fill="#9a95b0" font-size="11" text-anchor="middle">reports, dashboards</text>
+
+          <rect x="360" y="24" width="180" height="56" rx="12" fill="rgba(255,255,255,0.03)" stroke="#6d6885"/>
+          <text x="450" y="48" fill="#efedf6" font-size="14" font-weight="600" text-anchor="middle">Data science / AI</text>
+          <text x="450" y="66" fill="#9a95b0" font-size="11" text-anchor="middle">models, GenAI</text>
+
+          <rect x="660" y="24" width="180" height="56" rx="12" fill="rgba(255,255,255,0.03)" stroke="#6d6885"/>
+          <text x="750" y="48" fill="#efedf6" font-size="14" font-weight="600" text-anchor="middle">Data products</text>
+          <text x="750" y="66" fill="#9a95b0" font-size="11" text-anchor="middle">customer-facing feeds</text>
+        </g>
+
+        <!-- spaghetti connectors -->
+        <g stroke="#e0596b" stroke-width="1.3" fill="none" opacity="0.75">
+          <path d="M110,80 C90,190 120,230 150,300" marker-end="url(#arrR)"/>
+          <path d="M150,80 C210,180 320,180 385,300" marker-end="url(#arrR)"/>
+          <path d="M190,80 C300,200 520,170 610,300" marker-end="url(#arrR)"/>
+          <path d="M420,80 C330,190 220,210 175,300" marker-end="url(#arrR)"/>
+          <path d="M450,80 C450,180 420,220 400,300" marker-end="url(#arrR)"/>
+          <path d="M480,80 C560,180 640,200 660,300" marker-end="url(#arrR)"/>
+          <path d="M720,80 C620,200 480,220 420,300" marker-end="url(#arrR)"/>
+          <path d="M760,80 C780,180 800,220 810,300" marker-end="url(#arrR)"/>
+          <path d="M700,80 C520,240 260,240 190,300" marker-end="url(#arrR)"/>
+        </g>
+        <text x="450" y="205" fill="#e0596b" font-size="12.5" text-anchor="middle" class="mono-t">every consumer × every source = its own pipeline, its own copy, its own rules</text>
+
+        <!-- sources row -->
+        <g>
+          <rect x="60" y="300" width="140" height="86" rx="12" fill="rgba(255,255,255,0.03)" stroke="#6d6885"/>
+          <text x="130" y="326" fill="#efedf6" font-size="13.5" font-weight="600" text-anchor="middle">Warehouse</text>
+          <text x="130" y="344" fill="#9a95b0" font-size="10.5" text-anchor="middle">finance data,</text>
+          <text x="130" y="359" fill="#9a95b0" font-size="10.5" text-anchor="middle">nightly batch</text>
+
+          <rect x="235" y="300" width="140" height="86" rx="12" fill="rgba(255,255,255,0.03)" stroke="#6d6885"/>
+          <text x="305" y="326" fill="#efedf6" font-size="13.5" font-weight="600" text-anchor="middle">Data lake</text>
+          <text x="305" y="344" fill="#9a95b0" font-size="10.5" text-anchor="middle">raw files, logs,</text>
+          <text x="305" y="359" fill="#9a95b0" font-size="10.5" text-anchor="middle">unclear ownership</text>
+
+          <rect x="410" y="300" width="140" height="86" rx="12" fill="rgba(255,255,255,0.03)" stroke="#6d6885"/>
+          <text x="480" y="326" fill="#efedf6" font-size="13.5" font-weight="600" text-anchor="middle">Legacy on-prem</text>
+          <text x="480" y="344" fill="#9a95b0" font-size="10.5" text-anchor="middle">mainframe extracts,</text>
+          <text x="480" y="359" fill="#9a95b0" font-size="10.5" text-anchor="middle">Java ETL jobs</text>
+
+          <rect x="585" y="300" width="140" height="86" rx="12" fill="rgba(255,255,255,0.03)" stroke="#6d6885"/>
+          <text x="655" y="326" fill="#efedf6" font-size="13.5" font-weight="600" text-anchor="middle">SaaS apps</text>
+          <text x="655" y="344" fill="#9a95b0" font-size="10.5" text-anchor="middle">CRM, ERP,</text>
+          <text x="655" y="359" fill="#9a95b0" font-size="10.5" text-anchor="middle">market feeds</text>
+
+          <rect x="760" y="300" width="110" height="86" rx="12" fill="rgba(255,255,255,0.03)" stroke="#6d6885"/>
+          <text x="815" y="326" fill="#efedf6" font-size="13.5" font-weight="600" text-anchor="middle">Streams</text>
+          <text x="815" y="344" fill="#9a95b0" font-size="10.5" text-anchor="middle">events,</text>
+          <text x="815" y="359" fill="#9a95b0" font-size="10.5" text-anchor="middle">real-time ticks</text>
+        </g>
+      </svg>
+      <div class="figcap">Fig 1 — point-to-point sprawl: N consumers × M silos, each line a bespoke pipeline someone maintains</div>
+    </div>
+
+    <div class="grid2">
+      <div class="mini"><h3><span class="k">×</span>Nobody can find data</h3><p>Discovery is tribal knowledge. "Ask Dave, he built that extract in 2019."</p></div>
+      <div class="mini"><h3><span class="k">×</span>Copies drift</h3><p>The same "customer" exists in five stores with three definitions. Which number goes to the board?</p></div>
+      <div class="mini"><h3><span class="k">×</span>No lineage</h3><p>A regulator (or an exec) asks "where did this figure come from?" — and the honest answer takes three weeks.</p></div>
+      <div class="mini"><h3><span class="k">×</span>Governance per silo</h3><p>Access, quality, and privacy rules are re-implemented — differently — in every system. Audit is a nightmare.</p></div>
+    </div>
+
+    <div class="callout"><strong>Why it matters now:</strong> GenAI made this worse and more urgent. Models are only as good as the data you can find, trust, and legally use — so the silo problem became the blocker for every AI initiative on the roadmap.</div>
+
+    <!-- ============ 2. THE IDEA ============ -->
+    <h2><span class="num">02</span>The idea: connect, don't centralise</h2>
+    <p class="sub">Decades of "migrate everything into one platform" programmes failed — there's always a next silo. The fabric inverts the approach: <strong>leave data where it lives</strong>, and weave one intelligent layer across all of it, driven by metadata.</p>
+
+    <div class="figure">
+      <svg viewBox="0 0 900 560" role="img" aria-label="Diagram of the data fabric layered architecture">
+        <defs>
+          <marker id="arrV" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
+            <path d="M0,0 L8,4.5 L0,9" fill="none" stroke="#a58cff" stroke-width="1.5"/>
+          </marker>
+          <marker id="arrT" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
+            <path d="M0,0 L8,4.5 L0,9" fill="none" stroke="#38bfa0" stroke-width="1.5"/>
+          </marker>
+        </defs>
+
+        <!-- consumers -->
+        <g>
+          <rect x="70" y="20" width="230" height="54" rx="12" fill="rgba(255,255,255,0.03)" stroke="#6d6885"/>
+          <text x="185" y="43" fill="#efedf6" font-size="13.5" font-weight="600" text-anchor="middle">Analytics &amp; BI</text>
+          <text x="185" y="61" fill="#9a95b0" font-size="10.5" text-anchor="middle">one governed view of truth</text>
+          <rect x="335" y="20" width="230" height="54" rx="12" fill="rgba(255,255,255,0.03)" stroke="#6d6885"/>
+          <text x="450" y="43" fill="#efedf6" font-size="13.5" font-weight="600" text-anchor="middle">AI / GenAI</text>
+          <text x="450" y="61" fill="#9a95b0" font-size="10.5" text-anchor="middle">trusted, permissioned data</text>
+          <rect x="600" y="20" width="230" height="54" rx="12" fill="rgba(255,255,255,0.03)" stroke="#6d6885"/>
+          <text x="715" y="43" fill="#efedf6" font-size="13.5" font-weight="600" text-anchor="middle">Data products</text>
+          <text x="715" y="61" fill="#9a95b0" font-size="10.5" text-anchor="middle">sellable feeds &amp; APIs</text>
+        </g>
+
+        <!-- one clean arrow set down to fabric -->
+        <g stroke="#38bfa0" stroke-width="1.6" fill="none">
+          <path d="M185,74 L185,118" marker-end="url(#arrT)"/>
+          <path d="M450,74 L450,118" marker-end="url(#arrT)"/>
+          <path d="M715,74 L715,118" marker-end="url(#arrT)"/>
+        </g>
+        <text x="450" y="106" fill="#38bfa0" font-size="11.5" text-anchor="middle" class="mono-t">one front door — search it, query it, subscribe to it</text>
+
+        <!-- FABRIC layer -->
+        <g>
+          <rect x="55" y="122" width="790" height="240" rx="16" fill="rgba(139,108,240,0.07)" stroke="#a58cff" stroke-width="1.6"/>
+          <text x="80" y="150" fill="#a58cff" font-size="13" font-weight="700" letter-spacing="2" class="mono-t">THE DATA FABRIC — metadata-driven layer</text>
+
+          <!-- fabric components -->
+          <rect x="80" y="168" width="176" height="80" rx="10" fill="rgba(255,255,255,0.04)" stroke="#a58cff"/>
+          <text x="168" y="192" fill="#efedf6" font-size="13" font-weight="600" text-anchor="middle">Catalogue &amp; discovery</text>
+          <text x="168" y="210" fill="#9a95b0" font-size="10.5" text-anchor="middle">searchable inventory of</text>
+          <text x="168" y="225" fill="#9a95b0" font-size="10.5" text-anchor="middle">every dataset + owners</text>
+
+          <rect x="272" y="168" width="176" height="80" rx="10" fill="rgba(255,255,255,0.04)" stroke="#a58cff"/>
+          <text x="360" y="192" fill="#efedf6" font-size="13" font-weight="600" text-anchor="middle">Governance &amp; policy</text>
+          <text x="360" y="210" fill="#9a95b0" font-size="10.5" text-anchor="middle">access, quality, privacy —</text>
+          <text x="360" y="225" fill="#9a95b0" font-size="10.5" text-anchor="middle">defined once, enforced everywhere</text>
+
+          <rect x="464" y="168" width="176" height="80" rx="10" fill="rgba(255,255,255,0.04)" stroke="#a58cff"/>
+          <text x="552" y="192" fill="#efedf6" font-size="13" font-weight="600" text-anchor="middle">Lineage</text>
+          <text x="552" y="210" fill="#9a95b0" font-size="10.5" text-anchor="middle">every figure traceable</text>
+          <text x="552" y="225" fill="#9a95b0" font-size="10.5" text-anchor="middle">back to its sources</text>
+
+          <rect x="656" y="168" width="170" height="80" rx="10" fill="rgba(255,255,255,0.04)" stroke="#a58cff"/>
+          <text x="741" y="192" fill="#efedf6" font-size="13" font-weight="600" text-anchor="middle">Unified access</text>
+          <text x="741" y="210" fill="#9a95b0" font-size="10.5" text-anchor="middle">query in place — federation,</text>
+          <text x="741" y="225" fill="#9a95b0" font-size="10.5" text-anchor="middle">virtualisation, APIs</text>
+
+          <rect x="80" y="262" width="176" height="80" rx="10" fill="rgba(255,255,255,0.04)" stroke="#a58cff" stroke-dasharray="5 4"/>
+          <text x="168" y="286" fill="#efedf6" font-size="13" font-weight="600" text-anchor="middle">Active metadata</text>
+          <text x="168" y="304" fill="#9a95b0" font-size="10.5" text-anchor="middle">the "brain": auto-classify,</text>
+          <text x="168" y="319" fill="#9a95b0" font-size="10.5" text-anchor="middle">tag, recommend, alert</text>
+
+          <rect x="272" y="262" width="176" height="80" rx="10" fill="rgba(255,255,255,0.04)" stroke="#a58cff"/>
+          <text x="360" y="286" fill="#efedf6" font-size="13" font-weight="600" text-anchor="middle">Pipelines &amp; movement</text>
+          <text x="360" y="304" fill="#9a95b0" font-size="10.5" text-anchor="middle">batch + streaming, only</text>
+          <text x="360" y="319" fill="#9a95b0" font-size="10.5" text-anchor="middle">moving data when it earns it</text>
+
+          <rect x="464" y="262" width="176" height="80" rx="10" fill="rgba(255,255,255,0.04)" stroke="#a58cff"/>
+          <text x="552" y="286" fill="#efedf6" font-size="13" font-weight="600" text-anchor="middle">Data contracts</text>
+          <text x="552" y="304" fill="#9a95b0" font-size="10.5" text-anchor="middle">producers promise schema +</text>
+          <text x="552" y="319" fill="#9a95b0" font-size="10.5" text-anchor="middle">quality; breaking = a breach</text>
+
+          <rect x="656" y="262" width="170" height="80" rx="10" fill="rgba(255,255,255,0.04)" stroke="#a58cff"/>
+          <text x="741" y="286" fill="#efedf6" font-size="13" font-weight="600" text-anchor="middle">Semantic layer</text>
+          <text x="741" y="304" fill="#9a95b0" font-size="10.5" text-anchor="middle">"revenue" means one thing</text>
+          <text x="741" y="319" fill="#9a95b0" font-size="10.5" text-anchor="middle">everywhere it's used</text>
+        </g>
+
+        <!-- arrows down to sources -->
+        <g stroke="#a58cff" stroke-width="1.5" fill="none">
+          <path d="M150,362 L150,406" marker-end="url(#arrV)"/>
+          <path d="M330,362 L330,406" marker-end="url(#arrV)"/>
+          <path d="M510,362 L510,406" marker-end="url(#arrV)"/>
+          <path d="M690,362 L690,406" marker-end="url(#arrV)"/>
+        </g>
+        <text x="450" y="394" fill="#a58cff" font-size="11.5" text-anchor="middle" class="mono-t">connects to sources in place — no big-bang migration</text>
+
+        <!-- sources -->
+        <g>
+          <rect x="80" y="410" width="150" height="80" rx="12" fill="rgba(255,255,255,0.03)" stroke="#6d6885"/>
+          <text x="155" y="436" fill="#efedf6" font-size="13" font-weight="600" text-anchor="middle">Warehouse</text>
+          <text x="155" y="454" fill="#9a95b0" font-size="10.5" text-anchor="middle">stays for curated,</text>
+          <text x="155" y="469" fill="#9a95b0" font-size="10.5" text-anchor="middle">high-value analytics</text>
+          <rect x="260" y="410" width="150" height="80" rx="12" fill="rgba(255,255,255,0.03)" stroke="#6d6885"/>
+          <text x="335" y="436" fill="#efedf6" font-size="13" font-weight="600" text-anchor="middle">Lake / lakehouse</text>
+          <text x="335" y="454" fill="#9a95b0" font-size="10.5" text-anchor="middle">cheap storage for raw</text>
+          <text x="335" y="469" fill="#9a95b0" font-size="10.5" text-anchor="middle">+ open table formats</text>
+          <rect x="440" y="410" width="150" height="80" rx="12" fill="rgba(255,255,255,0.03)" stroke="#6d6885"/>
+          <text x="515" y="436" fill="#efedf6" font-size="13" font-weight="600" text-anchor="middle">Legacy / on-prem</text>
+          <text x="515" y="454" fill="#9a95b0" font-size="10.5" text-anchor="middle">wrapped + catalogued,</text>
+          <text x="515" y="469" fill="#9a95b0" font-size="10.5" text-anchor="middle">retired on merit</text>
+          <rect x="620" y="410" width="150" height="80" rx="12" fill="rgba(255,255,255,0.03)" stroke="#6d6885"/>
+          <text x="695" y="436" fill="#efedf6" font-size="13" font-weight="600" text-anchor="middle">SaaS + streams</text>
+          <text x="695" y="454" fill="#9a95b0" font-size="10.5" text-anchor="middle">connected live,</text>
+          <text x="695" y="469" fill="#9a95b0" font-size="10.5" text-anchor="middle">not exported nightly</text>
+        </g>
+
+        <text x="450" y="530" fill="#6d6885" font-size="11.5" text-anchor="middle" class="mono-t">solid = core fabric plane · dashed = the differentiator (metadata doing the work)</text>
+      </svg>
+      <div class="figcap">Fig 2 — the fabric: one governed layer over data left in place; consumers get one front door</div>
+    </div>
+
+    <div class="callout"><strong>The one-sentence version:</strong> a data fabric is to your data estate what a single air-traffic-control tower is to a sky full of planes — nothing has to land at one airport, but everything becomes visible, governed, and routable from one place.</div>
+
+    <!-- ============ 3. HOW IT SOLVES ============ -->
+    <h2><span class="num">03</span>Problem → fabric answer</h2>
+    <table>
+      <thead><tr><th>Silo-world pain</th><th>Fabric mechanism that answers it</th></tr></thead>
+      <tbody>
+        <tr><td>Can't find data</td><td><strong>Catalogue + active metadata</strong> — every dataset indexed, tagged, owned, searchable like a product catalogue.</td></tr>
+        <tr><td>Can't trust data</td><td><strong>Lineage + data contracts + quality monitoring</strong> — provenance is traceable; producers are accountable for what they publish.</td></tr>
+        <tr><td>Can't access data (or access is a free-for-all)</td><td><strong>Policy defined once, enforced everywhere</strong> — role- and attribute-based rules follow the data across every engine.</td></tr>
+        <tr><td>Endless bespoke pipelines</td><td><strong>Unified access</strong> — federation/virtualisation lets consumers query in place; you build pipelines only where they pay for themselves.</td></tr>
+        <tr><td>Five definitions of "revenue"</td><td><strong>Semantic layer</strong> — business terms defined once, bound to the underlying data.</td></tr>
+        <tr><td>AI projects stall on data readiness</td><td><strong>Governed self-service</strong> — models and agents get discoverable, permissioned, lineage-backed data instead of scraped copies.</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ============ 4. PLATFORMS ============ -->
+    <h2><span class="num">04</span>The GCP implementation</h2>
+    <p class="sub">Google's fabric story centres on <strong>Dataplex</strong> — the catalogue/governance plane — over BigQuery and BigLake.</p>
+    <table>
+      <thead><tr><th>Product</th><th>Role in the fabric</th></tr></thead>
+      <tbody>
+        <tr><td>Dataplex <span class="pill pill--core">fabric core</span></td><td>The fabric plane itself: unified catalogue, data discovery, quality checks, lineage, and centralised policy across lakes + warehouses.</td></tr>
+        <tr><td>BigQuery</td><td>Serverless warehouse — the analytical workhorse; also queries external data via BigLake without moving it.</td></tr>
+        <tr><td>BigLake</td><td>Storage abstraction: one access + governance model over open-format files (Iceberg/Parquet) and warehouse tables.</td></tr>
+        <tr><td>Dataflow</td><td>Managed batch + streaming pipelines (Apache Beam) — the movement layer when data does need to move.</td></tr>
+        <tr><td>Pub/Sub</td><td>Event backbone for real-time ingestion — ticks, transactions, telemetry.</td></tr>
+        <tr><td>Cloud Composer</td><td>Orchestration (managed Airflow) — schedules and sequences the pipeline estate.</td></tr>
+        <tr><td>Analytics Hub</td><td>Data sharing/exchange — publish governed datasets internally or to partners (the "data product" storefront).</td></tr>
+        <tr><td>Vertex AI</td><td>ML/GenAI platform consuming fabric-governed data; feature store + model governance.</td></tr>
+        <tr><td>Looker</td><td>BI with a semantic modelling layer (LookML) — one definition of each metric.</td></tr>
+      </tbody>
+    </table>
+
+    <h2><span class="num">05</span>The AWS equivalent</h2>
+    <p class="sub">AWS assembles the same fabric from more, smaller parts — Glue and Lake Formation carry the metadata + governance load, with DataZone as the newer business-facing catalogue.</p>
+    <table>
+      <thead><tr><th>Product</th><th>Role in the fabric</th></tr></thead>
+      <tbody>
+        <tr><td>AWS Glue <span class="pill pill--core">fabric core</span></td><td>ETL + the <strong>Glue Data Catalogue</strong> — the central technical metadata store; crawlers auto-discover schemas across sources.</td></tr>
+        <tr><td>Lake Formation <span class="pill pill--core">fabric core</span></td><td>Governance plane: fine-grained (table/column/row) permissions defined once, enforced across Athena, Redshift, EMR, and more.</td></tr>
+        <tr><td>Amazon DataZone</td><td>Business-facing catalogue + data-product portal — discovery, access requests, and project workspaces with governance built in.</td></tr>
+        <tr><td>Amazon S3</td><td>The storage substrate — the lake almost everything else sits over.</td></tr>
+        <tr><td>Athena</td><td>Serverless SQL with <strong>federated query</strong> — query S3 and external sources in place.</td></tr>
+        <tr><td>Redshift (+ Spectrum)</td><td>Warehouse; Spectrum extends queries over S3 data without loading it.</td></tr>
+        <tr><td>Kinesis / MSK</td><td>Streaming backbone (Kinesis or managed Kafka) for real-time feeds.</td></tr>
+        <tr><td>SageMaker</td><td>ML/GenAI platform consuming governed data (AWS is folding DataZone + analytics into the "next-gen SageMaker" umbrella).</td></tr>
+        <tr><td>QuickSight</td><td>BI on top, with Q for natural-language querying.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout"><strong>Cross-cloud cheat:</strong> Dataplex ≈ Glue Catalogue + Lake Formation + DataZone. BigQuery ≈ Redshift/Athena. Dataflow ≈ Glue ETL/Kinesis Data Analytics. Pub/Sub ≈ Kinesis. Analytics Hub ≈ DataZone's data-product exchange. Same fabric, different lego.</div>
+
+    <!-- ============ 5. DISTINCTIONS ============ -->
+    <h2><span class="num">06</span>Fabric vs mesh vs lakehouse — 20-second answers</h2>
+    <div class="grid2">
+      <div class="mini"><h3><span class="k">≠</span>Data mesh</h3><p><strong>Mesh is organisational</strong> — domain teams own their data as products. <strong>Fabric is technological</strong> — the metadata layer that makes any operating model workable. They're complementary: a mesh usually runs <em>on</em> a fabric.</p></div>
+      <div class="mini"><h3><span class="k">≠</span>Lakehouse</h3><p>A <strong>storage architecture</strong> — warehouse features (ACID, governance) on lake economics via open table formats. A lakehouse is one (big) node the fabric connects; it doesn't solve discovery or estate-wide governance by itself.</p></div>
+    </div>
+
+    <!-- ============ 6. DELIVERY LENS ============ -->
+    <h2><span class="num">07</span>The delivery leader's lens</h2>
+    <p class="sub">Why this pattern is as much a governance programme as an engineering one.</p>
+    <p>A fabric programme succeeds or fails on exactly the things delivery governance cares about: <strong>ownership</strong> (every dataset needs an accountable owner or the catalogue is a graveyard), <strong>contracts</strong> (producers keeping schema/quality promises — and a process for when they break), <strong>traceability</strong> (lineage is to data what a decision log is to a programme), and <strong>adoption</strong> (a fabric nobody publishes to is shelfware — the operating rhythm that gets teams onboarding datasets is the delivery job).</p>
+    <p>That's why these transformations run as <strong>multi-stream programmes</strong> — platform build, source onboarding waves, governance uplift, AI enablement — with heavy cross-stream dependencies. The architecture is the easy half; the governance maturity to operate it is where programmes wobble, and where delivery leadership earns its keep.</p>
+
+    <div class="foot">gilesparnell.github.io · knowledge / data-fabric · hand-built SVG, no generators</div>
+  </div>
+</body>
+</html>
