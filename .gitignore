@@ -1,1 +1,4 @@
 .DS_Store
+
+# session handoff notes stay untracked (Giles's decision, 2026-07-23)
+docs/handoff/
