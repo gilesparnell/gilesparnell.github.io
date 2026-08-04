@@ -77,8 +77,13 @@
           <td>Silo sprawl: N consumers × M data stores, each with its own copies, access rules, and version of the truth. The fabric leaves data in place and governs it through one metadata-driven layer.</td>
         </tr>
         <tr>
+          <td><a href="event-driven-architecture.html">Event-Driven Architecture</a></td>
+          <td><span class="stage">Foundations</span><br>The communication backbone of a modern estate — the from-first-principles page: how systems historically talked, what kept breaking, and why the event log fixed it.</td>
+          <td>Request/response used for everything: a tangle of direct connections, cascading failures down waiting chains, overnight-batch stale data, and no history of how state got the way it is.</td>
+        </tr>
+        <tr>
           <td><a href="event-driven-agents.html">Event-Driven Agents</a></td>
-          <td><span class="stage">Scale → AI workstreams</span><br>Coordination backbone for agentic AI — how single agents become governable multi-agent systems once GenAI initiatives move past the pilot.</td>
+          <td><span class="stage">Scale → AI workstreams</span><br>Coordination backbone for agentic AI — how single agents become governable multi-agent systems once GenAI initiatives move past the pilot. Builds on the EDA page.</td>
           <td>Agents wired together with rigid request/response APIs collapse under coupling, stale data, and unrecoverable failures. Event streams give them decoupling, replayable recovery, and an audit trail in one move.</td>
         </tr>
       </tbody>

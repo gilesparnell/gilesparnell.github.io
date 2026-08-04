@@ -1,0 +1,75 @@
+<svg viewBox="0 0 920 430" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Anatomy of an event log: producers append events to a topic, events are numbered and never edited, consumers read at their own pace and can rewind" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif">
+  <defs>
+    <marker id="la" markerWidth="10" markerHeight="8" refX="8" refY="4" orient="auto">
+      <path d="M0,0 L9,4 L0,8 Z" fill="#4a5d6b"/>
+    </marker>
+    <marker id="lt" markerWidth="10" markerHeight="8" refX="8" refY="4" orient="auto">
+      <path d="M0,0 L9,4 L0,8 Z" fill="#0e8f83"/>
+    </marker>
+    <marker id="lv" markerWidth="10" markerHeight="8" refX="8" refY="4" orient="auto">
+      <path d="M0,0 L9,4 L0,8 Z" fill="#6b5fa8"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="920" height="430" rx="18" fill="#f7f9fa" stroke="#dde5ea"/>
+
+  <!-- producers -->
+  <rect x="30" y="120" width="120" height="42" rx="9" fill="#ffffff" stroke="#0e2233" stroke-width="1.3"/>
+  <text x="90" y="146" text-anchor="middle" font-size="12.5" font-weight="600" fill="#0e2233">Producer</text>
+  <rect x="30" y="185" width="120" height="42" rx="9" fill="#ffffff" stroke="#0e2233" stroke-width="1.3"/>
+  <text x="90" y="211" text-anchor="middle" font-size="12.5" font-weight="600" fill="#0e2233">Producer</text>
+  <text x="90" y="250" text-anchor="middle" font-size="10.5" fill="#7b8b96">systems that announce</text>
+  <text x="90" y="264" text-anchor="middle" font-size="10.5" fill="#7b8b96">"this just happened"</text>
+
+  <line x1="150" y1="141" x2="216" y2="165" stroke="#0e8f83" stroke-width="1.4" marker-end="url(#lt)"/>
+  <line x1="150" y1="206" x2="216" y2="185" stroke="#0e8f83" stroke-width="1.4" marker-end="url(#lt)"/>
+  <text x="183" y="140" text-anchor="middle" font-size="10.5" fill="#0a6e65" font-weight="600">append</text>
+
+  <!-- the topic / log -->
+  <rect x="222" y="130" width="440" height="120" rx="12" fill="#efedf7" stroke="#6b5fa8" stroke-width="1.4"/>
+  <text x="442" y="118" text-anchor="middle" font-size="12" font-weight="700" fill="#5a4f96">TOPIC — "orders" (a named, numbered diary of events)</text>
+
+  <!-- event cells -->
+  <g font-size="11" font-weight="600">
+    <rect x="240" y="155" width="52" height="46" rx="6" fill="#ffffff" stroke="#6b5fa8" stroke-width="1.1"/>
+    <text x="266" y="175" text-anchor="middle" fill="#0e2233">#0</text>
+    <text x="266" y="192" text-anchor="middle" font-size="9" fill="#7b8b96" font-weight="400">placed</text>
+    <rect x="300" y="155" width="52" height="46" rx="6" fill="#ffffff" stroke="#6b5fa8" stroke-width="1.1"/>
+    <text x="326" y="175" text-anchor="middle" fill="#0e2233">#1</text>
+    <text x="326" y="192" text-anchor="middle" font-size="9" fill="#7b8b96" font-weight="400">paid</text>
+    <rect x="360" y="155" width="52" height="46" rx="6" fill="#ffffff" stroke="#6b5fa8" stroke-width="1.1"/>
+    <text x="386" y="175" text-anchor="middle" fill="#0e2233">#2</text>
+    <text x="386" y="192" text-anchor="middle" font-size="9" fill="#7b8b96" font-weight="400">packed</text>
+    <rect x="420" y="155" width="52" height="46" rx="6" fill="#ffffff" stroke="#6b5fa8" stroke-width="1.1"/>
+    <text x="446" y="175" text-anchor="middle" fill="#0e2233">#3</text>
+    <text x="446" y="192" text-anchor="middle" font-size="9" fill="#7b8b96" font-weight="400">shipped</text>
+    <rect x="480" y="155" width="52" height="46" rx="6" fill="#ffffff" stroke="#6b5fa8" stroke-width="1.1"/>
+    <text x="506" y="175" text-anchor="middle" fill="#0e2233">#4</text>
+    <text x="506" y="192" text-anchor="middle" font-size="9" fill="#7b8b96" font-weight="400">delivered</text>
+    <rect x="540" y="155" width="52" height="46" rx="6" fill="#ffffff" stroke="#6b5fa8" stroke-width="1.1" stroke-dasharray="4 3"/>
+    <text x="566" y="182" text-anchor="middle" fill="#7b8b96">#5…</text>
+  </g>
+  <text x="442" y="232" text-anchor="middle" font-size="10.5" fill="#5a4f96">events are only ever added at the end — never edited, never deleted</text>
+
+  <!-- consumers -->
+  <rect x="740" y="95" width="150" height="42" rx="9" fill="#ffffff" stroke="#0e2233" stroke-width="1.3"/>
+  <text x="815" y="115" text-anchor="middle" font-size="12" font-weight="600" fill="#0e2233">Consumer A</text>
+  <text x="815" y="130" text-anchor="middle" font-size="9.5" fill="#7b8b96">shipping — is at #4</text>
+  <line x1="536" y1="150" x2="736" y2="112" stroke="#4a5d6b" stroke-width="1.3" marker-end="url(#la)"/>
+
+  <rect x="740" y="175" width="150" height="42" rx="9" fill="#ffffff" stroke="#0e2233" stroke-width="1.3"/>
+  <text x="815" y="195" text-anchor="middle" font-size="12" font-weight="600" fill="#0e2233">Consumer B</text>
+  <text x="815" y="210" text-anchor="middle" font-size="9.5" fill="#7b8b96">analytics — is at #2</text>
+  <line x1="416" y1="208" x2="736" y2="196" stroke="#4a5d6b" stroke-width="1.3" marker-end="url(#la)"/>
+
+  <rect x="740" y="255" width="150" height="42" rx="9" fill="#ffffff" stroke="#0e2233" stroke-width="1.3"/>
+  <text x="815" y="275" text-anchor="middle" font-size="12" font-weight="600" fill="#0e2233">Consumer C</text>
+  <text x="815" y="290" text-anchor="middle" font-size="9.5" fill="#7b8b96">new — starts at #0</text>
+  <path d="M 736 276 C 500 330, 300 300, 266 208" fill="none" stroke="#6b5fa8" stroke-width="1.4" stroke-dasharray="5 4" marker-end="url(#lv)"/>
+  <text x="490" y="330" text-anchor="middle" font-size="10.5" fill="#5a4f96" font-weight="600">replay — a new (or recovering) consumer rewinds and re-reads history</text>
+
+  <text x="815" y="320" text-anchor="middle" font-size="10.5" fill="#7b8b96">each reader keeps its own</text>
+  <text x="815" y="334" text-anchor="middle" font-size="10.5" fill="#7b8b96">bookmark (its "offset")</text>
+
+  <text x="460" y="398" text-anchor="middle" font-size="11.5" fill="#7b8b96">the producers never know who is reading — that's the decoupling, and the numbered history is the audit trail</text>
+</svg>

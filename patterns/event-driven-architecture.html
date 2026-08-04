@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Event-Driven Architecture — from first principles</title>
+  <meta name="description" content="A from-scratch explainer of event-driven architecture: how systems used to talk, what kept breaking, and the specific problem the event log was invented to solve.">
+  <style>
+    /* Light reader theme — matches /Claude/downloads/getting-started-with-claude.html */
+    :root{
+      --navy:#0e2233;
+      --navy2:#16344d;
+      --teal:#0e8f83;
+      --teal-bg:#e8f5f3;
+      --teal-dark:#0a6e65;
+      --amber-bg:#fdf3e0;
+      --amber-border:#e8c98a;
+      --amber-text:#8a5f14;
+      --violet:#6b5fa8;
+      --violet-bg:#efedf7;
+      --violet-text:#5a4f96;
+      --coral:#c9445a;
+      --ink:#1d2b36;
+      --ink2:#4a5d6b;
+      --ink3:#7b8b96;
+      --line:#dde5ea;
+      --bg:#f7f9fa;
+      --card:#ffffff;
+      --code-bg:#f0f4f6;
+    }
+    *{margin:0;padding:0;box-sizing:border-box}
+    html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+    body{
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+      background:var(--bg);color:var(--ink);line-height:1.6;font-size:16px;
+    }
+    .page{max-width:860px;margin:0 auto;padding:0 20px 72px}
+
+    .hero{background:var(--navy);color:#fff;padding:48px 20px 44px;margin-bottom:36px}
+    .hero-inner{max-width:860px;margin:0 auto}
+    .hero .crumb{font-size:12px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:22px}
+    .hero .crumb a{color:#8fc6bf;text-decoration:none;font-weight:600}
+    .hero .crumb a:hover{text-decoration:underline}
+    .hero .eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#8fc6bf;font-weight:600;margin-bottom:14px}
+    .hero h1{font-size:32px;line-height:1.25;font-weight:700;letter-spacing:-.01em;margin-bottom:14px}
+    .hero p{color:#b8c9d4;font-size:17px;max-width:60ch}
+
+    h2{font-size:22px;font-weight:700;letter-spacing:-.01em;margin:52px 0 8px;color:var(--navy)}
+    h2 .num{color:var(--teal-dark);font-size:15px;margin-right:8px}
+    h3{font-size:16.5px;font-weight:650;color:var(--navy);margin:26px 0 6px}
+    p.lede{color:var(--ink2);margin-bottom:20px;max-width:70ch}
+    p{margin-bottom:14px;max-width:72ch}
+    strong{font-weight:650;color:var(--navy)}
+
+    .figure{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px 16px 6px;margin:20px 0 8px;overflow-x:auto}
+    .figure img{display:block;width:100%;height:auto;min-width:620px}
+    .figcap{font-size:12px;color:var(--ink3);text-transform:uppercase;letter-spacing:.08em;font-weight:600;padding:10px 6px 12px}
+
+    .tldr{background:var(--teal-bg);border-left:4px solid var(--teal);border-radius:0 10px 10px 0;padding:18px 22px;margin:20px 0;max-width:none}
+    .tldr .label{font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--teal-dark);margin-bottom:8px}
+    .tldr p{margin-bottom:10px;max-width:none}
+    .tldr p:last-child{margin-bottom:0}
+
+    .callout{background:var(--amber-bg);border:1px solid var(--amber-border);border-radius:10px;padding:16px 18px;margin:18px 0;font-size:15px;max-width:none}
+    .callout strong{color:var(--amber-text)}
+
+    table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin:18px 0 6px;font-size:15px}
+    th{background:var(--navy);color:#fff;text-align:left;padding:11px 14px;font-weight:600;font-size:13.5px}
+    td{padding:11px 14px;border-top:1px solid var(--line);vertical-align:top;color:var(--ink2)}
+    td:first-child{color:var(--navy);font-weight:650;white-space:nowrap}
+    .table-scroll{overflow-x:auto}
+    table.wrapfirst td:first-child{white-space:normal;min-width:200px}
+
+    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:20px 0}
+    @media(max-width:640px){.grid2{grid-template-columns:1fr}}
+    .mini{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 20px}
+    .mini h3{font-size:15.5px;font-weight:650;color:var(--navy);margin:0 0 6px}
+    .mini h3 .k{color:var(--teal-dark);margin-right:6px}
+    .mini h3 .kx{color:var(--coral);margin-right:6px}
+    .mini p{font-size:14.5px;color:var(--ink2);margin:0 0 8px;max-width:none}
+    .mini p:last-child{margin-bottom:0}
+
+    .era{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 22px;margin:0 0 14px;position:relative}
+    .era .when{display:inline-block;font-size:11.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--violet-text);background:var(--violet-bg);border-radius:99px;padding:2px 10px;margin-bottom:8px}
+    .era h3{margin:0 0 6px}
+    .era p{font-size:15px;color:var(--ink2);margin-bottom:8px;max-width:none}
+    .era p:last-child{margin-bottom:0}
+    .era .broke{font-size:14.5px;padding:10px 14px;background:#faf0f1;border:1px solid #eccdd3;border-radius:8px;color:var(--ink2);max-width:none}
+    .era .broke strong{color:var(--coral)}
+
+    .say{background:var(--code-bg);border:1px solid var(--line);border-radius:8px;padding:12px 14px;font-size:14.5px;color:var(--ink);margin:6px 0 14px;max-width:none}
+    .say .lbl{font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--ink3);display:block;margin-bottom:5px}
+
+    a{color:var(--teal-dark);text-decoration:none;font-weight:550}
+    a:hover{text-decoration:underline}
+
+    .toc{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px 24px;margin:0 0 8px}
+    .toc .label{font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--teal-dark);margin-bottom:10px}
+    .toc ol{list-style:none;columns:2;column-gap:28px}
+    @media(max-width:640px){.toc ol{columns:1}}
+    .toc li{padding:4px 0;break-inside:avoid;font-size:14.5px}
+    .toc a{color:var(--ink);font-weight:550;text-decoration:none}
+    .toc a:hover{color:var(--teal-dark);text-decoration:underline}
+    .toc .n{color:var(--teal-dark);font-weight:700;margin-right:8px;font-size:12.5px}
+    .totoc{float:right;font-size:12px;font-weight:600;color:var(--ink3);text-decoration:none;letter-spacing:.06em;text-transform:uppercase;margin-top:6px}
+    .totoc:hover{color:var(--teal-dark)}
+    .footer{margin-top:56px;padding-top:20px;border-top:1px solid var(--line);font-size:13.5px;color:var(--ink3)}
+  </style>
+</head>
+<body>
+  <div class="hero">
+    <div class="hero-inner">
+      <nav class="crumb"><a href="../index.html">← gilesparnell.github.io</a> &nbsp;·&nbsp; knowledge / <a href="index.html">patterns</a> / event-driven architecture</nav>
+      <div class="eyebrow">Architecture pattern · From first principles</div>
+      <h1>Event-Driven Architecture</h1>
+      <p>For fifty years, software mostly talked by <strong style="color:#fff">asking and waiting</strong> — like a phone call. This page explains why that kept breaking as systems multiplied, and how a simple idea — <strong style="color:#fff">announce what happened, let others listen</strong> — became the backbone of modern platforms.</p>
+    </div>
+  </div>
+
+  <div class="page">
+
+    <nav class="toc" id="toc">
+      <div class="label">Contents</div>
+      <ol>
+        <li><a href="#s01"><span class="n">01</span>The phone-call model — and why it's everywhere</a></li>
+        <li><a href="#s02"><span class="n">02</span>Forty years of workarounds — a short history</a></li>
+        <li><a href="#s03"><span class="n">03</span>The problems, named precisely</a></li>
+        <li><a href="#s04"><span class="n">04</span>The flip: from asking to announcing</a></li>
+        <li><a href="#s05"><span class="n">05</span>The event log — the machinery underneath</a></li>
+        <li><a href="#s06"><span class="n">06</span>What you get for free</a></li>
+        <li><a href="#s07"><span class="n">07</span>What it costs — the honest trade-offs</a></li>
+        <li><a href="#s08"><span class="n">08</span>Where you've already seen it</a></li>
+        <li><a href="#s09"><span class="n">09</span>Glossary — plain-English definitions</a></li>
+      </ol>
+    </nav>
+
+    <div class="tldr">
+      <div class="label">The short version</div>
+      <p><strong>The old way:</strong> when system A needs something from system B, it calls B directly and waits for the answer. Simple with two systems. With fifty, you get a tangle of direct connections where everything depends on everything, one slow system stalls the chain, and data is copied around until nobody knows which copy is right.</p>
+      <p><strong>The event-driven way:</strong> when something happens (an order is placed, a payment clears), the system that saw it happen posts a small fact — an <strong>event</strong> — to a shared, append-only log. Any system that cares subscribes and reacts in its own time. Nobody calls anybody. The log keeps the full history, so you can replay the past, recover from failures, and audit every decision.</p>
+    </div>
+
+    <!-- ============ 01 PHONE-CALL MODEL ============ -->
+    <h2 id="s01"><a class="totoc" href="#toc">↑ contents</a><span class="num">01</span>The phone-call model — and why it's everywhere</h2>
+    <p class="lede">Before you can see what event-driven fixes, you need to see what it replaces — and why the thing it replaces was a perfectly reasonable idea.</p>
+
+    <p>Most software communication is <strong>request/response</strong>: system A sends a request to system B, then waits for B's answer before doing anything else. Every website you've used works this way — your browser asks a server for a page, the server responds. It's a phone call: you dial, you wait for them to pick up, you talk, you hang up.</p>
+    <p>This model is popular because it's <strong>easy to reason about</strong>. The question and the answer happen together, in order. If something goes wrong you get an error straight back. For one caller and one callee, there is nothing wrong with it — and for simple lookups ("what's this customer's address?") it is still the right tool today.</p>
+    <p>The trouble starts when it becomes the <em>only</em> tool. A modern company runs dozens or hundreds of systems — orders, payments, inventory, shipping, fraud checks, analytics, marketing. When they all talk by calling each other directly, three things happen, and they happen to every organisation, every time:</p>
+
+    <div class="grid2">
+      <div class="mini"><h3><span class="kx">1</span>The tangle</h3><p>Every pair of systems that needs to talk gets its own bespoke connection. Five systems can need up to 10 connections; twenty can need 190. Each one is code somebody wrote, nobody documented, and everybody is afraid to touch.</p></div>
+      <div class="mini"><h3><span class="kx">2</span>The waiting chain</h3><p>A calls B, B calls C, C calls D. Your request is now only as fast as the slowest link — and if D is down, the failure travels all the way back up the chain. One sick service makes the whole company look broken.</p></div>
+      <div class="mini"><h3><span class="kx">3</span>The knowledge burden</h3><p>To call system B, system A has to know B exists, where it lives, and what its interface looks like. Multiply that by every pair, and changing anything means coordinating everyone. This is what architects mean by <strong>tight coupling</strong>.</p></div>
+      <div class="mini"><h3><span class="kx">4</span>The lost history</h3><p>Request/response systems usually store only the <em>current</em> state — the balance is $90. Yesterday it was $100, but that fact was overwritten. When the numbers look wrong, there's no record of how they got that way.</p></div>
+    </div>
+
+    <!-- ============ 02 HISTORY ============ -->
+    <h2 id="s02"><a class="totoc" href="#toc">↑ contents</a><span class="num">02</span>Forty years of workarounds — a short history</h2>
+    <p class="lede">The industry didn't jump straight to event streams. It tried three big workarounds first, and each one taught a lesson. This history is worth knowing because you'll meet all of these systems, still alive, inside any large enterprise.</p>
+
+    <div class="era">
+      <span class="when">1980s–1990s · The batch era</span>
+      <h3>Nightly file transfers</h3>
+      <p>Systems exchanged data by writing big files to disc overnight — "every night at 2am, export all of today's orders and load them into the warehouse." Simple, robust, and still everywhere in banking.</p>
+      <p class="broke"><strong>What broke:</strong> everything ran on yesterday's data. A decision made at 3pm used the world as it looked last night. Batch is why "the report doesn't match the system" is a sentence every large company has said.</p>
+    </div>
+
+    <div class="era">
+      <span class="when">1990s–2000s · Early messaging</span>
+      <h3>Message queues (MQ)</h3>
+      <p>The first real move away from phone calls: system A drops a message in a queue, system B picks it up when ready. The caller no longer waits — a genuine improvement, and queues like IBM MQ still run core banking today.</p>
+      <p class="broke"><strong>What broke:</strong> a queue is a hand-off between <em>one</em> sender and <em>one</em> receiver, and once a message is consumed it's <em>gone</em>. Ten systems want the same order data? Ten queues. Need to re-process last week? Too late — the messages were deleted on delivery. No shared history, and the tangle came back, just with queues instead of calls.</p>
+    </div>
+
+    <div class="era">
+      <span class="when">2000s · The SOA era</span>
+      <h3>The Enterprise Service Bus (ESB)</h3>
+      <p>Idea: stop wiring systems to each other and route everything through one smart middleman that translates formats, applies rules, and orchestrates workflows. On the whiteboard, it looks like the diagram on the right of §04 — one hub, spokes around it.</p>
+      <p class="broke"><strong>What broke:</strong> all the intelligence moved <em>into the middleman</em>. The ESB became the most complicated system in the company — a bottleneck, a single point of failure, and the thing every project queued behind ("the bus team can fit you in next quarter"). The lesson the industry took away: <strong>keep the pipes dumb; keep the smarts at the endpoints.</strong></p>
+    </div>
+
+    <div class="era">
+      <span class="when">2010s · The microservices era</span>
+      <h3>Small services, old habit</h3>
+      <p>Companies broke their big applications ("monoliths") into many small independent services so teams could build and release without waiting on each other. The decomposition worked.</p>
+      <p class="broke"><strong>What broke:</strong> the services still talked by phone call — synchronous REST APIs. The result got a name: the <strong>distributed monolith</strong>. All the coupling of the old system, plus network failures in between every function call. The waiting-chain and tangle problems from §01, at scale.</p>
+    </div>
+
+    <div class="era">
+      <span class="when">2011 → · The log era</span>
+      <h3>Kafka, and the problem it was actually built for</h3>
+      <p>At LinkedIn, dozens of systems (search, recommendations, analytics, monitoring…) all needed the same activity data — every click, view, and connection. Wiring each producer of data to each consumer was the N×M tangle again, and their batch pipelines meant the data arrived hours late.</p>
+      <p>Their answer, open-sourced as <strong>Apache Kafka</strong>, was almost embarrassingly simple: put <strong>one shared, append-only log</strong> in the middle. Producers write facts to the end of it; any number of consumers read at their own pace; the log <em>keeps</em> everything, so readers can rewind. It combined the queue's "don't wait" with something no queue had — <strong>durable, replayable history that many readers can share</strong>.</p>
+    </div>
+
+    <div class="callout"><strong>The through-line:</strong> every era was chasing the same two things — <em>stop making systems wait for each other</em>, and <em>stop making every system know about every other system</em>. The event log is the first design that delivers both without creating a smart middleman that becomes the new problem.</div>
+
+    <!-- ============ 03 PROBLEMS NAMED ============ -->
+    <h2 id="s03"><a class="totoc" href="#toc">↑ contents</a><span class="num">03</span>The problems, named precisely</h2>
+    <p class="lede">The same four failures keep appearing in the history above. Here they are with their proper names — these are the words that make the rest of the pattern make sense.</p>
+
+    <div class="table-scroll">
+    <table class="wrapfirst">
+      <thead><tr><th>The name</th><th>What it means, plainly</th><th>What it feels like in a real programme</th></tr></thead>
+      <tbody>
+        <tr><td>Tight coupling</td><td>Systems know too much about each other, so changing one forces changes in others.</td><td>"We can't touch the pricing service until the checkout team, the app team, and the partner API all agree." Nothing ships.</td></tr>
+        <tr><td>Cascading failure</td><td>In a chain of synchronous calls, one failure travels: D goes down, so C times out, so B times out, so A shows an error.</td><td>A minor internal service has an incident and the customer-facing site goes down with it. The post-mortem is always the same diagram.</td></tr>
+        <tr><td>Stale data</td><td>Decisions made on data that was true yesterday (batch) or minutes ago (caches), not now.</td><td>Two dashboards disagree; the fraud model scores a transaction against last night's account state; "which number is right?" meetings.</td></tr>
+        <tr><td>Lost history</td><td>Only current state is stored; how it got that way was overwritten along the way.</td><td>An auditor (or regulator) asks "why did the system make this decision on 12 March?" and the honest answer is "we can't reconstruct it."</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <!-- ============ 04 THE FLIP ============ -->
+    <h2 id="s04"><a class="totoc" href="#toc">↑ contents</a><span class="num">04</span>The flip: from asking to announcing</h2>
+    <p class="lede">Event-driven architecture is one change of direction, applied consistently.</p>
+
+    <p>An <strong>event</strong> is a small record of a fact: <em>"order #1042 was placed at 14:03."</em> Not a command, not a question — just something that happened, written down. Facts have a useful property: they're true forever. The order <em>was</em> placed at 14:03; nothing that happens later changes that.</p>
+    <p>In an event-driven system, when something happens, the system that saw it <strong>announces it</strong> by writing an event to a shared broker — and then gets on with its life. It doesn't know or care who's listening. Systems that care <strong>subscribe</strong> and react in their own time.</p>
+    <p>The everyday analogy: a team that works by <strong>phone calls</strong> versus a team that works in a <strong>group chat</strong>. With phone calls, telling five people means five calls, each interrupting someone, each failing if they don't pick up. In the group chat you post once — "the release is done" — and everyone reads it when they're ready. New team member? They scroll back and catch up on history. Nobody had to know who needed the information.</p>
+
+    <div class="figure">
+      <img src="assets/eda-before-after.svg" alt="Left: five systems connected by a tangle of direct calls. Right: the same five systems connected through one event broker, with far fewer connections">
+      <div class="figcap">The same five systems, wired both ways — the connection count is the whole argument</div>
+    </div>
+
+    <div class="say"><span class="lbl">The line to say</span>"Request/response asks a question and waits. Event-driven states a fact and moves on. Everything else about the pattern — the decoupling, the resilience, the audit trail — falls out of that one flip."</div>
+
+    <!-- ============ 05 THE LOG ============ -->
+    <h2 id="s05"><a class="totoc" href="#toc">↑ contents</a><span class="num">05</span>The event log — the machinery underneath</h2>
+    <p class="lede">The broker in the middle isn't magic — it's a very disciplined diary. Four ideas explain essentially all of Kafka (and its cloud cousins, Google Pub/Sub and AWS Kinesis).</p>
+
+    <div class="figure">
+      <img src="assets/eda-log-anatomy.svg" alt="Producers append numbered events to a topic; consumers read at their own pace, each keeping its own offset; a new consumer replays history from the start">
+      <div class="figcap">One topic, three readers, three different positions — and a rewind</div>
+    </div>
+
+    <div class="grid2">
+      <div class="mini"><h3><span class="k">1</span>Topics — named diaries</h3><p>Events are organised into <strong>topics</strong> by subject: an "orders" topic, a "payments" topic. Producers append to the end; the log never edits or deletes what's written. (For volume, a topic is split into <strong>partitions</strong> — parallel lanes that let many readers share the work.)</p></div>
+      <div class="mini"><h3><span class="k">2</span>Offsets — every reader keeps its own bookmark</h3><p>Each event gets a sequence number. Each consumer tracks which number it has read up to — its <strong>offset</strong>. Readers go at their own pace, and a slow reader never slows a fast one, because reading doesn't remove anything.</p></div>
+      <div class="mini"><h3><span class="k">3</span>Replay — the killer feature</h3><p>Because nothing is deleted, any consumer can rewind to an earlier offset and re-read. Crashed halfway through? Resume from your bookmark. New system joining? Start from zero and build your view from history. Found a bug in last week's processing? Fix it and replay the week.</p></div>
+      <div class="mini"><h3><span class="k">4</span>Consumer groups — teamwork for readers</h3><p>Several copies of the same service can form a <strong>consumer group</strong>: the platform shares the partitions among them, and if one copy dies, its share is automatically handed to the others. Scaling and failover, built into the infrastructure instead of your code.</p></div>
+    </div>
+
+    <div class="callout"><strong>Pattern, not product:</strong> Kafka is the reference implementation, but the pattern implements the same way on Google Cloud <strong>Pub/Sub</strong>, AWS <strong>Kinesis</strong>, or Azure <strong>Event Hubs</strong>. If a conversation is GCP-shaped, "Pub/Sub for the log, Dataflow for stream processing" is the translation.</div>
+
+    <!-- ============ 06 WHAT YOU GET ============ -->
+    <h2 id="s06"><a class="totoc" href="#toc">↑ contents</a><span class="num">06</span>What you get for free</h2>
+    <p class="lede">Each §03 problem has a direct answer — not from extra code, but from the shape of the architecture.</p>
+
+    <div class="table-scroll">
+    <table class="wrapfirst">
+      <thead><tr><th>The old problem</th><th>The event-driven answer</th></tr></thead>
+      <tbody>
+        <tr><td>Tight coupling — everyone knows everyone</td><td>Producers only know the topic. You can add, replace, or remove consumers without telling anyone. The 190-connection tangle becomes 20 connections to one broker.</td></tr>
+        <tr><td>Cascading failure — one slow link stalls the chain</td><td>Nobody waits for anybody. If shipping is down for an hour, orders keep flowing into the log; shipping catches up from its bookmark when it recovers. Failures are contained and self-healing, not contagious.</td></tr>
+        <tr><td>Stale data — decisions on yesterday's world</td><td>Consumers see events seconds after they happen, not after tonight's batch. "Real-time" stops being a project and becomes the default.</td></tr>
+        <tr><td>Lost history — state overwrote its own past</td><td>The log <em>is</em> the history: every fact, in order, with timestamps. For auditors and regulators, "show me exactly what the system knew when it decided" has a mechanical answer.</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <!-- ============ 07 COSTS ============ -->
+    <h2 id="s07"><a class="totoc" href="#toc">↑ contents</a><span class="num">07</span>What it costs — the honest trade-offs</h2>
+    <p class="lede">No pattern is free, and knowing the costs is what separates "read a blog post" from "has thought about it".</p>
+
+    <div class="grid2">
+      <div class="mini"><h3><span class="kx">1</span>Eventual consistency</h3><p>Announcing takes a moment to propagate — for a few seconds, different systems may hold slightly different views of the world. Usually fine (shipping can learn about an order two seconds late), but anything needing an instant authoritative answer — "did this payment clear, yes or no, right now?" — still wants request/response.</p></div>
+      <div class="mini"><h3><span class="kx">2</span>Harder to follow</h3><p>With phone calls you can trace one request down a call stack. With events, the "flow" is spread across systems reacting to each other, so answering "what happened to order 1042?" needs tracing tools and event IDs that tie the story together. Debugging is different, and teams must learn it.</p></div>
+      <div class="mini"><h3><span class="kx">3</span>Duplicates happen</h3><p>The platform promises "at-least-once" delivery — in failure cases a consumer may see the same event twice. Handlers must be <strong>idempotent</strong>: processing the same event twice has the same effect as once ("set status to shipped", not "add one to the ship count").</p></div>
+      <div class="mini"><h3><span class="kx">4</span>It's overkill for small things</h3><p>A simple app with one database doesn't need an event backbone. The pattern earns its complexity when <em>many</em> systems need the <em>same</em> facts at <em>different</em> times — which is exactly the situation every large enterprise is in, and most startups aren't yet.</p></div>
+    </div>
+
+    <div class="say"><span class="lbl">The line to say</span>"Event-driven doesn't replace request/response — it replaces request/response being used for <em>everything</em>. Queries that need an immediate answer stay synchronous; facts that many systems care about become events."</div>
+
+    <!-- ============ 08 SEEN IT ============ -->
+    <h2 id="s08"><a class="totoc" href="#toc">↑ contents</a><span class="num">08</span>Where you've already seen it</h2>
+    <p class="lede">The pattern is older than software — and once you see it, you see it everywhere.</p>
+
+    <p><strong>A bank ledger is an event log.</strong> Accountants worked this out centuries ago: never erase, only append. Your balance isn't a number stored somewhere that gets overwritten — it's the <em>result of replaying</em> every deposit and withdrawal since the account opened. When something looks wrong, the ledger is the audit trail. Double-entry bookkeeping is event sourcing with a quill.</p>
+    <p><strong>A rideshare trip is a stream of events.</strong> Ride requested → driver assigned → driver arriving → trip started → trip ended → payment settled. The app on your phone, the driver's app, pricing, fraud checks, and the driver-payout system are all consumers of the same event stream, each reacting to the parts they care about at their own pace.</p>
+    <p><strong>Netflix, LinkedIn, banks' fraud systems</strong> — anywhere a click needs to influence a recommendation, a feed, or a risk score within seconds, there is an event backbone underneath. This is also the foundation the AI-agent world is now building on — that story is the companion page: <a href="event-driven-agents.html">Event-Driven Agents</a>.</p>
+
+    <!-- ============ 09 GLOSSARY ============ -->
+    <h2 id="s09"><a class="totoc" href="#toc">↑ contents</a><span class="num">09</span>Glossary — plain-English definitions</h2>
+    <p class="lede">The terms above, gathered for quick revision.</p>
+
+    <div class="table-scroll">
+    <table>
+      <thead><tr><th>Term</th><th>Plain English</th></tr></thead>
+      <tbody>
+        <tr><td>Request/response</td><td>The phone call: ask, wait, get an answer. Still right for queries needing an immediate answer.</td></tr>
+        <tr><td>Event</td><td>A small, permanent record of a fact: "order #1042 was placed at 14:03."</td></tr>
+        <tr><td>Producer / consumer</td><td>A system that writes events / a system that reads and reacts to them. The same system is often both.</td></tr>
+        <tr><td>Broker</td><td>The shared infrastructure holding the logs — Kafka, Pub/Sub, Kinesis, Event Hubs.</td></tr>
+        <tr><td>Topic</td><td>A named event diary for one subject ("orders"). Split into partitions for parallelism.</td></tr>
+        <tr><td>Offset</td><td>A consumer's bookmark — the position in the log it has read up to.</td></tr>
+        <tr><td>Replay</td><td>Rewinding to an earlier offset and re-reading history — the recovery, onboarding, and bug-fix superpower.</td></tr>
+        <tr><td>Consumer group</td><td>Copies of one service sharing a topic's partitions; the platform rebalances work when members join or die.</td></tr>
+        <tr><td>Tight / loose coupling</td><td>How much systems must know about each other. Events buy loose coupling: producers know only the topic.</td></tr>
+        <tr><td>Eventual consistency</td><td>Different systems briefly hold slightly different views while events propagate — the main price of the pattern.</td></tr>
+        <tr><td>Idempotent</td><td>Safe to apply twice: handling a duplicate event changes nothing the second time.</td></tr>
+        <tr><td>Dead-letter queue</td><td>The "needs a human" tray — where events that repeatedly fail processing get parked for review instead of being lost.</td></tr>
+        <tr><td>Event sourcing</td><td>Storing the events as the source of truth and computing current state by replaying them — the bank-ledger idea, formalised.</td></tr>
+        <tr><td>Stream processing</td><td>Continuously transforming or joining events as they flow (Flink, Dataflow) rather than in nightly batches.</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <p style="margin-top:28px">Next in this series: <a href="event-driven-agents.html">Event-Driven Agents</a> — what happens when the consumers on the log can reason. Related: <a href="data-fabric.html">Data Fabric</a> — the governance layer over the data these events flow through.</p>
+
+    <div class="footer">gilesparnell.github.io · knowledge / patterns · written 4 Aug 2026</div>
+  </div>
+</body>
+</html>

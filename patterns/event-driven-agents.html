@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Event-Driven Agents — the patterns behind multi-agent AI</title>
-  <meta name="description" content="A crib sheet for event-driven design in agentic AI: the anatomy of an agent, the four multi-agent patterns, and the governance questions a delivery leader asks.">
+  <title>Event-Driven Agents — AI agents on an event backbone</title>
+  <meta name="description" content="A plain-language explainer of agentic AI on event-driven architecture: what an agent is made of, why the old wiring fails for agents, and the four coordination patterns.">
   <style>
     /* Light reader theme — matches /Claude/downloads/getting-started-with-claude.html */
     :root{
@@ -47,6 +47,7 @@
 
     h2{font-size:22px;font-weight:700;letter-spacing:-.01em;margin:52px 0 8px;color:var(--navy)}
     h2 .num{color:var(--teal-dark);font-size:15px;margin-right:8px}
+    h3{font-size:16.5px;font-weight:650;color:var(--navy);margin:26px 0 6px}
     p.lede{color:var(--ink2);margin-bottom:20px;max-width:70ch}
     p{margin-bottom:14px;max-width:72ch}
     strong{font-weight:650;color:var(--navy)}
@@ -73,14 +74,18 @@
     .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:20px 0}
     @media(max-width:640px){.grid2{grid-template-columns:1fr}}
     .mini{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 20px}
-    .mini h3{font-size:15.5px;font-weight:650;color:var(--navy);margin-bottom:6px}
+    .mini h3{font-size:15.5px;font-weight:650;color:var(--navy);margin:0 0 6px}
     .mini h3 .k{color:var(--teal-dark);margin-right:6px}
+    .mini h3 .kx{color:var(--coral);margin-right:6px}
     .mini p{font-size:14.5px;color:var(--ink2);margin:0 0 8px;max-width:none}
     .mini p:last-child{margin-bottom:0}
     .mini .tag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--violet-text);background:var(--violet-bg);border-radius:99px;padding:2px 10px;margin-bottom:8px}
 
     .say{background:var(--code-bg);border:1px solid var(--line);border-radius:8px;padding:12px 14px;font-size:14.5px;color:var(--ink);margin:6px 0 14px;max-width:none}
     .say .lbl{font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--ink3);display:block;margin-bottom:5px}
+
+    .preread{background:var(--violet-bg);border:1px solid #cdc7e6;border-radius:10px;padding:16px 18px;margin:18px 0;font-size:15px;max-width:none}
+    .preread strong{color:var(--violet-text)}
 
     a{color:var(--teal-dark);text-decoration:none;font-weight:550}
     a:hover{text-decoration:underline}
@@ -102,9 +107,9 @@
   <div class="hero">
     <div class="hero-inner">
       <nav class="crumb"><a href="../index.html">← gilesparnell.github.io</a> &nbsp;·&nbsp; knowledge / <a href="index.html">patterns</a> / event-driven agents</nav>
-      <div class="eyebrow">Architecture pattern · Interview-grade crib sheet</div>
-      <h1>Event-Driven Design for AI Agents</h1>
-      <p>AI agents are <strong style="color:#fff">microservices that reason</strong>. One agent is easy; a fleet of them coordinating over rigid request/response APIs collapses under its own wiring. The answer is the same shift microservices made a decade ago: <strong style="color:#fff">communicate through event streams</strong>, not direct calls.</p>
+      <div class="eyebrow">Architecture pattern · Plain-language explainer</div>
+      <h1>Event-Driven Agents</h1>
+      <p>An AI agent is a programme that can <strong style="color:#fff">decide its own next step</strong>. That makes it powerful — and hard to wire into an organisation safely. The good news: the wiring problem was already solved, a decade ago, for ordinary software. Agents just <strong style="color:#fff">inherit the answer</strong>.</p>
     </div>
   </div>
 
@@ -113,85 +118,96 @@
     <nav class="toc" id="toc">
       <div class="label">Contents</div>
       <ol>
-        <li><a href="#s01"><span class="n">01</span>The three waves — why "agentic" is different</a></li>
-        <li><a href="#s02"><span class="n">02</span>Anatomy of an agent — nine components</a></li>
-        <li><a href="#s03"><span class="n">03</span>Why event-driven — the microservices lesson</a></li>
-        <li><a href="#s04"><span class="n">04</span>The four multi-agent patterns</a></li>
-        <li><a href="#s05"><span class="n">05</span>The delivery leader's lens — governing agents</a></li>
-        <li><a href="#s06"><span class="n">06</span>Mapped to a real build — voice agents</a></li>
-        <li><a href="#s07"><span class="n">07</span>Glossary — terms that buy credibility</a></li>
-        <li><a href="#s08"><span class="n">08</span>Source, and an honest read of it</a></li>
+        <li><a href="#s01"><span class="n">01</span>Read this first — the foundation</a></li>
+        <li><a href="#s02"><span class="n">02</span>What "agentic AI" actually means</a></li>
+        <li><a href="#s03"><span class="n">03</span>What an agent is made of — nine parts</a></li>
+        <li><a href="#s04"><span class="n">04</span>Do agents need a brand-new architecture? No.</a></li>
+        <li><a href="#s05"><span class="n">05</span>The four coordination patterns</a></li>
+        <li><a href="#s06"><span class="n">06</span>The delivery leader's lens — keeping agents governable</a></li>
+        <li><a href="#s07"><span class="n">07</span>Mapped to a real build — voice agents</a></li>
+        <li><a href="#s08"><span class="n">08</span>Glossary — the agent-specific terms</a></li>
+        <li><a href="#s09"><span class="n">09</span>Source, and an honest read of it</a></li>
       </ol>
     </nav>
 
     <div class="tldr">
       <div class="label">The short version</div>
-      <p><strong>Agents don't fail on intelligence; they fail on infrastructure.</strong> A capable model wired to stale data over brittle point-to-point APIs makes confident decisions about a world that no longer exists.</p>
-      <p><strong>Event-driven architecture is the fix</strong>: agents consume and emit events through streams, which buys loose coupling, replayable failure recovery, horizontal scale, and decisions made on live data. The four coordination patterns in §04 all reduce to "swap direct calls for topics".</p>
+      <p><strong>An agent is only as good as the information reaching it.</strong> A clever model wired to yesterday's data over brittle direct connections makes confident decisions about a world that no longer exists — and when many agents need to work together, direct wiring collapses exactly the way it did for ordinary services.</p>
+      <p><strong>The fix isn't new.</strong> Connect agents through an event log — the same pattern that already runs modern platforms. Agents announce what they've done as events and react to events from others. That one choice buys live data, automatic recovery, easy scaling, and (crucially for AI) a complete audit trail of every decision.</p>
     </div>
 
-    <!-- ============ 01 THREE WAVES ============ -->
-    <h2 id="s01"><a class="totoc" href="#toc">↑ contents</a><span class="num">01</span>The three waves — why "agentic" is different</h2>
-    <p class="lede">The one-paragraph history that frames every agent conversation.</p>
+    <!-- ============ 01 READ FIRST ============ -->
+    <h2 id="s01"><a class="totoc" href="#toc">↑ contents</a><span class="num">01</span>Read this first — the foundation</h2>
+    <p class="lede">This page stands on another one.</p>
+
+    <div class="preread"><strong>Prerequisite:</strong> <a href="event-driven-architecture.html">Event-Driven Architecture — from first principles</a> explains, slowly and with history, why systems stopped talking by "phone call" (request/response) and started talking through a shared event log — the tangle of direct connections, the cascading failures, the stale batch data, and how the log fixes each one. Everything below assumes those ideas. If terms like <em>topic</em>, <em>offset</em>, <em>replay</em>, or <em>consumer group</em> aren't comfortable yet, read that page first — this one will feel easy afterwards.</div>
+
+    <p>The sixty-second recap, if you've read it: systems used to call each other directly and wait for answers. That created <strong>tight coupling</strong> (everyone must know everyone), <strong>cascading failures</strong> (one slow system stalls the chain), and <strong>stale data</strong> (overnight batch copies). The fix was to have systems <strong>announce facts as events</strong> to a shared, append-only log; anyone who cares subscribes and reacts at their own pace, and the log keeps the full replayable history.</p>
+
+    <!-- ============ 02 WHAT AGENTIC MEANS ============ -->
+    <h2 id="s02"><a class="totoc" href="#toc">↑ contents</a><span class="num">02</span>What "agentic AI" actually means</h2>
+    <p class="lede">"Agent" gets used loosely. Here's the precise version, via the three waves of AI.</p>
 
     <div class="table-scroll">
     <table>
-      <thead><tr><th>Wave</th><th>What it is</th><th>Its limit</th></tr></thead>
+      <thead><tr><th>Wave</th><th>What it is</th><th>Where it falls short</th></tr></thead>
       <tbody>
-        <tr><td>Predictive AI</td><td>Traditional ML — bespoke models for narrow tasks (churn scoring, fraud flags), trained per domain.</td><td>Every new problem starts from scratch. Rigid, slow to adopt, expensive to repurpose.</td></tr>
-        <tr><td>Generative AI</td><td>Foundation models (LLMs) — general-purpose, reusable across domains. RAG bolts on your data at prompt time.</td><td>Frozen in time and workflow-rigid: every execution path is predefined. RAG retrieves; it doesn't decide.</td></tr>
-        <tr><td>Agentic AI</td><td>Systems that <strong>act</strong> — the LLM drives the control flow, choosing steps, tools, and collaborators at runtime.</td><td>Needs infrastructure: fresh data, coordination, governance. That's what this page is about.</td></tr>
+        <tr><td>Predictive AI</td><td>Traditional machine learning: build one custom model per narrow task — score credit risk, flag fraud, forecast demand.</td><td>Each model is a one-off. New problem, new model, built from scratch. Slow and expensive to spread across a business.</td></tr>
+        <tr><td>Generative AI</td><td>Large language models (LLMs): one general-purpose model that can write, summarise, and answer across many domains. "RAG" feeds it your own documents at question time.</td><td>It only ever <em>responds</em>. Every workflow around it is still hard-coded by a developer: fetch this, then ask that, then return the answer. The path is fixed.</td></tr>
+        <tr><td>Agentic AI</td><td>Systems where the model <strong>chooses the path</strong>: what to look up, which tool to call, what to do next, when to hand off to another agent — decided at runtime, not written in advance.</td><td>Nothing, if it's fed and governed well — that's the point of this page. Fed badly, it's a fast, confident liability.</td></tr>
       </tbody>
     </table>
     </div>
 
-    <div class="say"><span class="lbl">The line to say</span>"The control logic moved out of the code and into the model. Traditional apps hard-code the workflow; an agent decides its own next step at runtime. That flexibility is the value — and it's also exactly why coordination and governance become the delivery problem."</div>
+    <p>The one-sentence version of the whole shift: <strong>the control logic moved out of the code and into the model.</strong> In every previous wave, a developer decided the sequence of steps and the model filled in one of them. In an agentic system, the model decides the sequence. That's what makes agents flexible — and it's exactly why feeding them fresh data and governing their behaviour becomes the central engineering problem rather than an afterthought.</p>
 
-    <!-- ============ 02 ANATOMY ============ -->
-    <h2 id="s02"><a class="totoc" href="#toc">↑ contents</a><span class="num">02</span>Anatomy of an agent — nine components</h2>
-    <p class="lede">Every agent framework re-implements the same nine parts. Knowing the parts lets you decompose any vendor's "agent platform" pitch into things you already understand.</p>
+    <div class="say"><span class="lbl">The line to say</span>"The control logic moved out of the code and into the model. That flexibility is the value — and it's also exactly why coordination and governance become the delivery problem."</div>
+
+    <!-- ============ 03 ANATOMY ============ -->
+    <h2 id="s03"><a class="totoc" href="#toc">↑ contents</a><span class="num">03</span>What an agent is made of — nine parts</h2>
+    <p class="lede">Strip the branding off any vendor's "agent platform" and you find the same nine parts. Knowing them means you can decompose any pitch into things you already understand.</p>
 
     <div class="figure">
-      <img src="assets/agent-anatomy.svg" alt="Anatomy of an agent: events in, perceive, reason with LLM, plan, act, backed by memory and tools, with a learning feedback loop, events out">
+      <img src="assets/agent-anatomy.svg" alt="Anatomy of an agent: events in, perceive, reason with an LLM, plan, act, backed by memory and tools, with a learning feedback loop, events out">
       <div class="figcap">The agent loop — perceive → reason → plan → act, backed by memory and tools</div>
     </div>
 
     <div class="table-scroll">
     <table>
-      <thead><tr><th>Component</th><th>What it does</th><th>Concretely</th></tr></thead>
+      <thead><tr><th>Part</th><th>What it does, plainly</th><th>Concretely</th></tr></thead>
       <tbody>
-        <tr><td>Persona</td><td>The agent's job description, embedded in the system prompt. Shapes every response.</td><td>"You are a lead-qualification specialist…"</td></tr>
-        <tr><td>Perception</td><td>Sensory input — how the agent learns what's happening.</td><td>APIs, user input, and (the point of this page) event streams.</td></tr>
-        <tr><td>Reasoning</td><td>Decides what to do next, powered by the LLM.</td><td>The model call at the heart of the loop.</td></tr>
-        <tr><td>Memory</td><td>Retains context across interactions — distinct from learning.</td><td>Short-term: session buffer. Long-term: a vector store for semantic recall.</td></tr>
-        <tr><td>Planning</td><td>Breaks the goal into ordered, prioritised steps.</td><td>Task decomposition before any action fires.</td></tr>
-        <tr><td>Action</td><td>Executes in the world; handlers validate the outcomes.</td><td>Send the message, update the record, place the call.</td></tr>
-        <tr><td>Learning</td><td>Improves from feedback — usually by adapting context, not retraining weights.</td><td>Feed outcomes back into the prompt assembly; cheaper than fine-tuning.</td></tr>
-        <tr><td>Coordination</td><td>How agents share work and context in a multi-agent system.</td><td>The event streams and patterns in §04.</td></tr>
-        <tr><td>Tool interface</td><td>The bridge to specialised capability.</td><td>APIs, databases, MCP servers — a plugin surface, extended without redeploying.</td></tr>
+        <tr><td>Persona</td><td>The agent's job description, written into its system prompt. It shapes every response the model gives.</td><td>"You are a lead-qualification specialist for a B2B software company…"</td></tr>
+        <tr><td>Perception</td><td>How the agent finds out what's happening — its senses.</td><td>User messages, API results, and (the point of this page) events arriving on a stream.</td></tr>
+        <tr><td>Reasoning</td><td>Deciding what to do next. This is the LLM call at the heart of the loop.</td><td>"Given this new order and what I know, should I approve, escalate, or ask for more information?"</td></tr>
+        <tr><td>Memory</td><td>What the agent retains between interactions — distinct from learning.</td><td>Short-term: the current conversation. Long-term: a searchable store of past interactions and facts (usually a vector database).</td></tr>
+        <tr><td>Planning</td><td>Breaking a goal into ordered steps before acting.</td><td>"To answer this, I need to: look up the account, check the policy, then draft the reply."</td></tr>
+        <tr><td>Action</td><td>Actually doing things in the world — and checking they worked.</td><td>Send the email, update the record, book the meeting; then validate the result.</td></tr>
+        <tr><td>Learning</td><td>Getting better from feedback — usually by feeding outcomes back into the agent's context, which is far cheaper than retraining the model itself.</td><td>"Last time this kind of lead was rejected for X — factor that in."</td></tr>
+        <tr><td>Coordination</td><td>How multiple agents share work and context.</td><td>The event streams and the four patterns in §05.</td></tr>
+        <tr><td>Tool interface</td><td>The agent's bridge to specialised capabilities it doesn't have itself.</td><td>APIs, databases, calculators, other software — a plug-in surface that can grow without rebuilding the agent.</td></tr>
       </tbody>
     </table>
     </div>
 
-    <!-- ============ 03 WHY EVENT-DRIVEN ============ -->
-    <h2 id="s03"><a class="totoc" href="#toc">↑ contents</a><span class="num">03</span>Why event-driven — the microservices lesson</h2>
-    <p class="lede">This is an argument by history, and it lands well with engineers because they lived it.</p>
+    <!-- ============ 04 NO NEW PATTERN ============ -->
+    <h2 id="s04"><a class="totoc" href="#toc">↑ contents</a><span class="num">04</span>Do agents need a brand-new architecture? No.</h2>
+    <p class="lede">This is the question the whole topic turns on — and the answer is the most reassuring fact in the field.</p>
 
-    <p>Monoliths broke apart into microservices to decouple teams — then point-to-point API integration quietly rebuilt the coupling as an N×M mesh of direct calls. The industry's fix was <strong>event-driven architecture</strong>: services publish what happened to a broker (Kafka being the reference implementation) and anyone who cares subscribes. Producers don't know their consumers exist.</p>
-    <p>Agents hit the identical wall, with two aggravations: they're <strong>stateful</strong> (memory and context, not just request handling) and they're <strong>non-deterministic</strong> (they choose their own next step). Rigid synchronous wiring fails faster for agents than it did for services.</p>
+    <p>When agents arrived, teams did the obvious thing: wired them together with direct API calls, the same "phone call" style the <a href="event-driven-architecture.html">foundations page</a> describes. Agent A calls agent B and waits; B calls a data service and waits; everything is chained, synchronous, and hand-wired. And the old failures returned on schedule — the tangle, the waiting chains, the stale inputs — because none of those problems were ever about what the systems <em>were</em>. They were about how the systems <em>talked</em>.</p>
+    <p>Two things make the old failures <em>worse</em> for agents than they were for ordinary services:</p>
 
     <div class="grid2">
-      <div class="mini"><h3><span class="k">01</span>Asynchronous processing</h3><p>Agents work as events arrive instead of blocking on synchronous calls — no bottleneck at the slowest link in a chain.</p></div>
-      <div class="mini"><h3><span class="k">02</span>Loose coupling</h3><p>Agents interact via streams, not direct dependencies. Adding or replacing an agent doesn't rewire the system.</p></div>
-      <div class="mini"><h3><span class="k">03</span>Fault recovery by replay</h3><p>Events live in an immutable log. A failed agent replays from its last offset and resumes — recovery is a property of the platform, not bespoke code.</p></div>
-      <div class="mini"><h3><span class="k">04</span>Decisions on live data</h3><p>Batch pipelines mean agents act on yesterday. Streams mean the freshest state — which for an autonomous actor is a safety property, not a nicety.</p></div>
+      <div class="mini"><h3><span class="kx">1</span>Agents carry state</h3><p>An ordinary service handles a request and forgets it. An agent carries memory and context between steps. When a stateless service crashes you retry the request; when an agent crashes mid-task, you need to restore <em>what it knew</em> — which demands the replayable history a log provides and a request/response chain doesn't.</p></div>
+      <div class="mini"><h3><span class="kx">2</span>Agents are non-deterministic</h3><p>Ordinary code follows the path you wrote, so you can predict which calls it makes. An agent <em>chooses</em> its path at runtime — you genuinely don't know in advance which tools it will call or in what order. Hand-wiring every possible connection is a losing game; a shared log where anyone can react to anything is the only wiring that keeps up.</p></div>
     </div>
 
-    <div class="say"><span class="lbl">The line to say</span>"Agents are microservices that reason. We spent a decade learning not to wire microservices together with synchronous point-to-point calls — the same lesson applies, and it applies harder because agents are stateful and non-deterministic."</div>
+    <p>So the industry's emerging answer is <strong>not a new pattern</strong> — it's recognising that agents are a new kind of participant on an old, battle-tested backbone. An agent that perceives events, reasons, and then announces its results as new events is, from the infrastructure's point of view, just another producer and consumer. Everything the log already provided — decoupling, replay, scaling via consumer groups, ordered history — transfers to agents unchanged. What <em>is</em> new sits at a different layer: the consumer can now reason, which changes governance (§06), not plumbing.</p>
 
-    <!-- ============ 04 FOUR PATTERNS ============ -->
-    <h2 id="s04"><a class="totoc" href="#toc">↑ contents</a><span class="num">04</span>The four multi-agent patterns</h2>
-    <p class="lede">Four canonical shapes for agent coordination. The event-driven twist is the same every time: <strong>replace direct connections with topics</strong>, and inherit the platform's scaling, load-balancing, and recovery machinery for free.</p>
+    <div class="say"><span class="lbl">The line to say</span>"Agents are microservices that reason. We spent a decade learning not to wire microservices together with synchronous point-to-point calls — the same lesson applies to agents, and it applies harder, because agents are stateful and non-deterministic. The architecture isn't new; the participant is."</div>
+
+    <!-- ============ 05 FOUR PATTERNS ============ -->
+    <h2 id="s05"><a class="totoc" href="#toc">↑ contents</a><span class="num">05</span>The four coordination patterns</h2>
+    <p class="lede">When several agents work together, their teamwork takes one of four classic shapes — all four borrowed from decades of distributed computing, none invented for AI. The event-driven move is the same each time: <strong>replace every direct connection with a topic on the log</strong>, and the platform's scaling and recovery machinery comes free.</p>
 
     <div class="figure">
       <img src="assets/agent-patterns.svg" alt="Four multi-agent patterns drawn as event-driven systems: orchestrator-worker, hierarchical, blackboard, and market-based">
@@ -202,109 +218,107 @@
       <div class="mini">
         <span class="tag">Most common</span>
         <h3>1 · Orchestrator–Worker</h3>
-        <p>A central agent decomposes work and assigns it; specialist workers execute. Distributed computing's master–worker, reborn.</p>
-        <p><strong>Event-driven twist:</strong> the orchestrator keys tasks across partitions of one topic; workers form a consumer group. Kafka's rebalance protocol then does the load-balancing, scaling, and failure re-assignment the orchestrator would otherwise hand-roll.</p>
-        <p><strong>Fits:</strong> decomposable work with one accountable brain — research fan-out, document pipelines, coding agents.</p>
+        <p><strong>The shape:</strong> one "manager" agent breaks the job into tasks and hands them out; specialist "worker" agents execute them.</p>
+        <p><strong>Event-driven version:</strong> the manager posts tasks to one topic; the workers form a consumer group on it and post results to a results topic. The platform shares the work out, and if a worker dies its tasks are automatically reassigned — the manager never has to track who's alive.</p>
+        <p><strong>Good for:</strong> work that splits cleanly with one accountable brain — research fan-outs, document pipelines.</p>
       </div>
       <div class="mini">
         <span class="tag">Complex programmes</span>
         <h3>2 · Hierarchical</h3>
-        <p>Agents in layers; each level oversees the one below. It's orchestrator–worker applied <strong>recursively</strong> — every non-leaf node orchestrates its own subtree.</p>
-        <p><strong>Event-driven twist:</strong> objectives flow down through per-level topics, results flow back up through response topics. Layers can be re-staffed without touching the core logic.</p>
-        <p><strong>Fits:</strong> big problems that decompose naturally — a programme with workstreams, an org chart of agents.</p>
+        <p><strong>The shape:</strong> agents in layers, like an org chart — each level breaks work down for the level below and rolls results back up.</p>
+        <p><strong>Event-driven version:</strong> it's orchestrator–worker applied at every level: objectives flow down through per-level topics, results flow back up through response topics. Layers can be re-staffed or scaled without touching the rest.</p>
+        <p><strong>Good for:</strong> big problems that decompose naturally — a programme with workstreams, in agent form.</p>
       </div>
       <div class="mini">
         <span class="tag">Shared context</span>
         <h3>3 · Blackboard</h3>
-        <p>Specialists collaborate through a shared knowledge base — each posts findings, each reads what others posted. Classic in robotics and diagnosis systems.</p>
-        <p><strong>Event-driven twist:</strong> the blackboard <em>is</em> a topic. Publishing a finding is an event; subscribing is how an agent watches for relevant context. The stream doubles as a shared memory layer with full history.</p>
-        <p><strong>Fits:</strong> problems where no one owns the whole answer — incident diagnosis, multi-perspective analysis.</p>
+        <p><strong>The shape:</strong> specialists gather around a shared noticeboard — each posts what it discovers, each reads what others posted, and the solution assembles collectively. No manager.</p>
+        <p><strong>Event-driven version:</strong> the blackboard <em>is</em> a topic. Posting a finding is publishing an event; watching for relevant context is subscribing. Because the log keeps history, the noticeboard doubles as shared memory that latecomers can catch up on.</p>
+        <p><strong>Good for:</strong> problems no single agent can own — incident diagnosis, multi-angle analysis.</p>
       </div>
       <div class="mini">
         <span class="tag">Decentralised</span>
         <h3>4 · Market-based</h3>
-        <p>Agents compete or negotiate — bidding for tasks and resources. Used in trading, logistics, and distributed optimisation.</p>
-        <p><strong>Event-driven twist:</strong> bids and asks are events on topics; a market-maker service matches them. This kills the quadratic peer-to-peer mesh — thousands of agents interact through one event log.</p>
-        <p><strong>Fits:</strong> resource allocation under competition — pricing, capacity, scheduling.</p>
+        <p><strong>The shape:</strong> agents compete — bidding for tasks or resources like traders in a market, with a matcher pairing bids to asks.</p>
+        <p><strong>Event-driven version:</strong> bids and asks are events on their own topics; a market-maker service matches them and posts transactions. Thousands of agents can trade through one event log with no peer-to-peer wiring at all.</p>
+        <p><strong>Good for:</strong> allocating scarce resources under competition — pricing, capacity, scheduling.</p>
       </div>
     </div>
 
-    <div class="callout"><strong>Interview shortcut:</strong> if you can name the pattern and then say what the topic layout is (one keyed task topic + consumer group; per-level topics; a single blackboard topic; bid/ask/transaction topics), you sound like you've built one — because that's the actual design decision.</div>
+    <div class="callout"><strong>Interview shortcut:</strong> naming the pattern is table stakes; naming the <em>topic layout</em> is what sounds like experience. Orchestrator–worker = one task topic + consumer group. Hierarchical = topics per level. Blackboard = one shared topic. Market = bid, ask, and transaction topics. That layout <em>is</em> the design decision.</div>
 
-    <!-- ============ 05 DELIVERY LENS ============ -->
-    <h2 id="s05"><a class="totoc" href="#toc">↑ contents</a><span class="num">05</span>The delivery leader's lens — governing agents</h2>
-    <p class="lede">An agentic workstream is still a delivery workstream. These are the questions that keep it governable — and what the event-driven answer looks like.</p>
+    <!-- ============ 06 DELIVERY LENS ============ -->
+    <h2 id="s06"><a class="totoc" href="#toc">↑ contents</a><span class="num">06</span>The delivery leader's lens — keeping agents governable</h2>
+    <p class="lede">An agent workstream is still a delivery workstream. These are the questions to keep asking — and how the event-driven design answers each one.</p>
 
     <div class="table-scroll">
     <table class="wrapfirst">
       <thead><tr><th>The question you ask</th><th>Why it matters</th><th>The event-driven answer</th></tr></thead>
       <tbody>
-        <tr><td>How fresh is the data an agent decides on?</td><td>An autonomous actor on stale data is a liability that acts confidently.</td><td>Stream processing over batch: agents consume live state, and "shift-left" processing enriches data close to the source.</td></tr>
-        <tr><td>What happens when an agent fails mid-task?</td><td>Failures are inevitable; unrecoverable ones are a design choice.</td><td>Immutable log + offsets: replay from the last known-good point. Idempotent processing stops retries double-firing actions.</td></tr>
-        <tr><td>Where does a human get pulled in?</td><td>Guardrails are a governance artefact, not a nice-to-have.</td><td>Dead-letter queues: events an agent can't safely handle are parked for human review instead of guessed at.</td></tr>
-        <tr><td>Can we audit why an agent did what it did?</td><td>Regulated environments need decision traceability — for agents as much as people.</td><td>The event log is the audit trail: every input an agent saw and every action it emitted is recorded, in order, replayable.</td></tr>
-        <tr><td>Who is allowed to see what?</td><td>Agents touch sensitive data at machine speed; access errors scale the same way.</td><td>Stream governance: schema enforcement, lineage tracking, field-level access control, retention policies for GDPR-class rules.</td></tr>
-        <tr><td>What does validation look like before rollout?</td><td>"It demoed well" is not a production gate for a non-deterministic system.</td><td>Stage gates with evals: measured behaviour on recorded event streams before an agent earns write-access to real systems.</td></tr>
+        <tr><td>How fresh is the data this agent decides on?</td><td>An autonomous system acting on yesterday's data is a liability that acts confidently.</td><td>Agents consume live streams, not overnight batch copies — decisions are made against the world as it is now.</td></tr>
+        <tr><td>What happens when an agent fails mid-task?</td><td>Failures are inevitable; <em>unrecoverable</em> failures are a design choice.</td><td>Replay: the agent rewinds to its last bookmark in the log and resumes. Idempotent handlers stop a retried event double-firing an action.</td></tr>
+        <tr><td>Where does a human get pulled in?</td><td>"Human in the loop" has to be a mechanism, not a slideware promise.</td><td>The dead-letter queue: events an agent can't handle safely get parked in a "needs a human" tray instead of guessed at.</td></tr>
+        <tr><td>Can we audit why the agent did what it did?</td><td>Regulated industries must reconstruct decisions — for agents just as for staff.</td><td>The log <em>is</em> the audit trail: every input the agent saw and every action it announced, in order, timestamped, replayable.</td></tr>
+        <tr><td>Who is allowed to see what?</td><td>Agents touch sensitive data at machine speed; so do their mistakes.</td><td>Governance on the stream itself: enforced schemas, lineage tracking, field-level access control, retention rules for privacy law.</td></tr>
+        <tr><td>What's the bar before an agent goes live?</td><td>"It demoed well" is not a production gate for a system that chooses its own steps.</td><td>Evals on recorded streams: replay real history against the new agent and measure its behaviour <em>before</em> it earns write-access to anything.</td></tr>
       </tbody>
     </table>
     </div>
 
-    <div class="say"><span class="lbl">The line to say</span>"Agentic AI doesn't need less delivery governance because it's clever — it needs more, because it's non-deterministic. The event log is your friend: it's the audit trail, the recovery mechanism, and the eval dataset in one."</div>
+    <div class="say"><span class="lbl">The line to say</span>"Agentic AI doesn't need less delivery governance because it's clever — it needs more, because it's non-deterministic. The event log is your friend: it's the audit trail, the recovery mechanism, and the test dataset, all in one."</div>
 
-    <!-- ============ 06 REAL BUILD ============ -->
-    <h2 id="s06"><a class="totoc" href="#toc">↑ contents</a><span class="num">06</span>Mapped to a real build — voice agents in production</h2>
-    <p class="lede">The anatomy in §02 isn't theoretical — here's the same skeleton mapped onto a production voice-AI platform I founded and ran (multi-tenant AI receptionists for SMBs, orchestrating specialised agents per call).</p>
+    <!-- ============ 07 REAL BUILD ============ -->
+    <h2 id="s07"><a class="totoc" href="#toc">↑ contents</a><span class="num">07</span>Mapped to a real build — voice agents in production</h2>
+    <p class="lede">The nine parts from §03 aren't theory. Here they are mapped onto a production system I founded and ran: a voice-AI platform answering phone calls for small businesses, with multiple specialised agents cooperating on every call.</p>
 
     <div class="table-scroll">
     <table>
-      <thead><tr><th>Component</th><th>In the voice platform</th></tr></thead>
+      <thead><tr><th>Part</th><th>In the voice platform</th></tr></thead>
       <tbody>
-        <tr><td>Persona</td><td>Per-tenant receptionist persona — the business's tone, services, and rules, injected as the system prompt.</td></tr>
-        <tr><td>Perception</td><td>Live telephony events: speech-to-text streams, call state, DTMF, SMS webhooks.</td></tr>
-        <tr><td>Reasoning</td><td>LLM turn-by-turn under hard latency budgets — model choice per step is a cost/latency trade-off you manage, not a default.</td></tr>
-        <tr><td>Memory</td><td>Short-term: the call transcript. Long-term: caller history and tenant knowledge base.</td></tr>
-        <tr><td>Action + tools</td><td>Booking, message-taking, transfers — via telephony and calendar APIs, each action validated before confirming to the caller.</td></tr>
-        <tr><td>Coordination</td><td>An orchestrator routes each call across specialised agents (intent, booking, fallback) — orchestrator–worker in miniature.</td></tr>
-        <tr><td>Governance</td><td>Call recording consent, per-tenant data isolation, and cost-per-call telemetry — driving a 93% unit-cost reduction ($0.18/min → $0.0126/min) without quality loss.</td></tr>
+        <tr><td>Persona</td><td>Each business gets its own receptionist persona — tone, services, rules — injected as the system prompt.</td></tr>
+        <tr><td>Perception</td><td>Live telephony events: speech-to-text as the caller talks, call state changes, incoming SMS.</td></tr>
+        <tr><td>Reasoning</td><td>An LLM call every conversational turn, under a hard latency budget — a caller won't wait three seconds. Model choice per step is a live cost/speed trade-off.</td></tr>
+        <tr><td>Memory</td><td>Short-term: the transcript of this call. Long-term: the caller's history and the business's knowledge base.</td></tr>
+        <tr><td>Action + tools</td><td>Booking appointments, taking messages, transferring calls — through calendar and telephony APIs, each action checked before the agent confirms it to the caller.</td></tr>
+        <tr><td>Coordination</td><td>An orchestrator routes each call moment across specialist agents (intent detection, booking, fallback) — orchestrator–worker in miniature.</td></tr>
+        <tr><td>Governance</td><td>Recording consent, strict per-business data isolation, and cost telemetry per call — which drove a 93% unit-cost reduction ($0.18/min → $0.0126/min) with no quality loss.</td></tr>
       </tbody>
     </table>
     </div>
 
-    <p>The honest scale caveat: an SMB voice platform doesn't need Kafka — a call is one bounded event stream and the patterns fit in-process. The point of the mapping is that <strong>the vocabulary transfers</strong>: the same nine components and the same governance questions apply whether the fleet is three agents on a phone call or three hundred across an enterprise.</p>
+    <p>The honest caveat: a small-business voice platform doesn't need Kafka — one phone call is a naturally bounded stream, and the patterns fit in ordinary code. The point of the mapping is that <strong>the vocabulary transfers exactly</strong>: the same nine parts and the same six governance questions apply whether it's three agents on a phone call or three hundred across an enterprise.</p>
 
-    <!-- ============ 07 GLOSSARY ============ -->
-    <h2 id="s07"><a class="totoc" href="#toc">↑ contents</a><span class="num">07</span>Glossary — terms that buy credibility</h2>
-    <p class="lede">Fifteen-second definitions, in the order you're likely to need them.</p>
+    <!-- ============ 08 GLOSSARY ============ -->
+    <h2 id="s08"><a class="totoc" href="#toc">↑ contents</a><span class="num">08</span>Glossary — the agent-specific terms</h2>
+    <p class="lede">The streaming terms (topic, offset, replay, consumer group, idempotent, dead-letter queue) live in the <a href="event-driven-architecture.html#s09">foundations glossary</a>. These are the agent-side additions.</p>
 
     <div class="table-scroll">
     <table>
-      <thead><tr><th>Term</th><th>What it means</th></tr></thead>
+      <thead><tr><th>Term</th><th>Plain English</th></tr></thead>
       <tbody>
-        <tr><td>Compound AI</td><td>An LLM composed with retrieval, logic, and validation layers — the system, not the model, is the product.</td></tr>
-        <tr><td>Agentic RAG</td><td>RAG where the agent decides what to retrieve and when, rather than following a fixed retrieve-then-answer path.</td></tr>
-        <tr><td>Multi-agent system (MAS)</td><td>Specialised agents collaborating (or competing) on a problem no single agent can own end-to-end.</td></tr>
-        <tr><td>Topic / partition</td><td>A named event stream; partitions split it for parallelism, with ordering preserved per key.</td></tr>
-        <tr><td>Consumer group</td><td>A set of workers sharing a topic; the platform balances partitions across them and re-assigns on failure.</td></tr>
-        <tr><td>Replay / offset</td><td>Because the log is immutable, any consumer can re-read from a saved position — the recovery and audit primitive.</td></tr>
-        <tr><td>Idempotent processing</td><td>Designing handlers so a retried event doesn't double-fire the action.</td></tr>
-        <tr><td>Dead-letter queue</td><td>Where unprocessable events go for human review instead of being dropped or guessed at.</td></tr>
-        <tr><td>Stream governance</td><td>Schema enforcement, lineage, access control, and retention applied to data in motion.</td></tr>
-        <tr><td>Shift-left (data)</td><td>Process and validate data close to its source, before it fans out — cheaper and fresher than fixing it downstream.</td></tr>
-        <tr><td>Stream processing</td><td>Transforming/joining events in motion (Flink is the reference engine) so agents receive enriched context, not raw feeds.</td></tr>
-        <tr><td>Agent frameworks</td><td>LangGraph, AutoGen, CrewAI — the orchestration layer; the streaming platform sits underneath as transport and memory.</td></tr>
+        <tr><td>LLM</td><td>Large language model — the general-purpose reasoning engine (Claude, GPT, Gemini) that powers an agent's "decide what next" step.</td></tr>
+        <tr><td>RAG</td><td>Retrieval-Augmented Generation: fetch relevant documents and give them to the model along with the question, so it answers from your data instead of memory.</td></tr>
+        <tr><td>Agentic RAG</td><td>RAG where the <em>agent</em> decides what to look up and when — retrieval becomes a choice, not a fixed pipeline step.</td></tr>
+        <tr><td>Compound AI</td><td>The realisation that the product is a <em>system</em> — model + retrieval + logic + validation — not a bare model.</td></tr>
+        <tr><td>Multi-agent system (MAS)</td><td>Several specialised agents cooperating (or competing) on a problem too big for one.</td></tr>
+        <tr><td>Non-deterministic</td><td>Doesn't take the same path every run — the model chooses steps at runtime. The property that makes evals and audit trails mandatory.</td></tr>
+        <tr><td>Vector database</td><td>A store that finds items by <em>meaning</em> rather than exact keywords — the usual home for an agent's long-term memory.</td></tr>
+        <tr><td>Evals</td><td>Structured tests for AI behaviour: run the agent on known scenarios (ideally replayed real history) and score the outcomes before granting it real-world access.</td></tr>
+        <tr><td>Agent frameworks</td><td>LangGraph, AutoGen, CrewAI — libraries for building the agent loop itself; the event backbone sits underneath as transport and memory.</td></tr>
+        <tr><td>Stream processing</td><td>Continuously transforming events as they flow (Flink, Google Dataflow) so agents receive enriched, contextual input rather than raw feeds.</td></tr>
       </tbody>
     </table>
     </div>
 
-    <!-- ============ 08 SOURCE ============ -->
-    <h2 id="s08"><a class="totoc" href="#toc">↑ contents</a><span class="num">08</span>Source, and an honest read of it</h2>
+    <!-- ============ 09 SOURCE ============ -->
+    <h2 id="s09"><a class="totoc" href="#toc">↑ contents</a><span class="num">09</span>Source, and an honest read of it</h2>
     <p class="lede">This page distils <em>A Guide to Event-Driven Design for Agents and Multi-Agent Systems</em> — Sean Falconer, Confluent, 2025 (<a href="https://assets.confluent.io/m/7d45554d056501e1/original/20250423-EB-Event-Driven_Design_for_Agents.pdf">the ebook PDF</a>).</p>
 
-    <div class="callout"><strong>Read it knowingly:</strong> it's vendor content. The agent anatomy, the microservices argument, and the four patterns are genuinely useful and vendor-neutral; the conclusion — that you need Confluent's managed platform — is the pitch. The event-driven concepts implement identically on any streaming stack: Kafka, Pub/Sub, Kinesis, or Flink-on-anything. Separating the pattern from the product is itself a useful thing to be able to do out loud.</div>
+    <div class="callout"><strong>Read it knowingly:</strong> it's vendor content. The agent anatomy, the microservices argument, and the four patterns are genuinely useful and vendor-neutral; the conclusion — that you need Confluent's managed platform — is the pitch. The concepts implement identically on any streaming stack: Kafka, Google Pub/Sub, AWS Kinesis, or Flink on any of them. Being able to separate the pattern from the product is itself a credibility signal.</div>
 
-    <p>Related on this site: <a href="data-fabric.html">Data Fabric</a> — the governance-first data layer these agent systems consume from; the two patterns meet exactly where agents need findable, permissioned, lineage-backed data.</p>
+    <p>The series: <a href="event-driven-architecture.html">Event-Driven Architecture</a> (the foundation under this page) · <a href="data-fabric.html">Data Fabric</a> (the governance layer over the data agents consume — the fabric is what the agents eat).</p>
 
-    <div class="footer">gilesparnell.github.io · knowledge / patterns · distilled 4 Aug 2026</div>
+    <div class="footer">gilesparnell.github.io · knowledge / patterns · rewritten for depth 4 Aug 2026</div>
   </div>
 </body>
 </html>
