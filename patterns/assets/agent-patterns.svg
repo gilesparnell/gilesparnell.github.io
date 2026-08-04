@@ -1,0 +1,146 @@
+<svg viewBox="0 0 920 700" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The four multi-agent design patterns as event-driven systems: orchestrator-worker, hierarchical, blackboard, and market-based" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif">
+  <defs>
+    <marker id="pa" markerWidth="10" markerHeight="8" refX="8" refY="4" orient="auto">
+      <path d="M0,0 L9,4 L0,8 Z" fill="#4a5d6b"/>
+    </marker>
+    <marker id="pv" markerWidth="10" markerHeight="8" refX="8" refY="4" orient="auto">
+      <path d="M0,0 L9,4 L0,8 Z" fill="#6b5fa8"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="920" height="700" rx="18" fill="#f7f9fa" stroke="#dde5ea"/>
+
+  <!-- ============ Q1: ORCHESTRATOR-WORKER (top-left) ============ -->
+  <g transform="translate(14,14)">
+    <rect x="0" y="0" width="440" height="330" rx="14" fill="#ffffff" stroke="#dde5ea"/>
+    <text x="20" y="30" font-size="14" font-weight="700" fill="#0e2233">1 · Orchestrator–Worker</text>
+    <text x="20" y="48" font-size="11" fill="#7b8b96">one brain assigns, many hands execute</text>
+
+    <rect x="150" y="60" width="140" height="40" rx="9" fill="#e8f5f3" stroke="#0e8f83" stroke-width="1.4"/>
+    <text x="220" y="85" text-anchor="middle" font-size="12.5" font-weight="600" fill="#0a6e65">Orchestrator</text>
+
+    <line x1="220" y1="100" x2="220" y2="126" stroke="#4a5d6b" stroke-width="1.4" marker-end="url(#pa)"/>
+
+    <rect x="90" y="130" width="260" height="38" rx="8" fill="#efedf7" stroke="#6b5fa8" stroke-width="1.2"/>
+    <line x1="177" y1="136" x2="177" y2="162" stroke="#cdc7e6" stroke-width="1.5"/>
+    <line x1="264" y1="136" x2="264" y2="162" stroke="#cdc7e6" stroke-width="1.5"/>
+    <text x="220" y="153" text-anchor="middle" font-size="11" font-weight="600" fill="#5a4f96">task topic · keyed partitions</text>
+
+    <line x1="150" y1="168" x2="105" y2="196" stroke="#4a5d6b" stroke-width="1.3" marker-end="url(#pa)"/>
+    <line x1="220" y1="168" x2="220" y2="196" stroke="#4a5d6b" stroke-width="1.3" marker-end="url(#pa)"/>
+    <line x1="290" y1="168" x2="335" y2="196" stroke="#4a5d6b" stroke-width="1.3" marker-end="url(#pa)"/>
+
+    <rect x="40" y="200" width="110" height="38" rx="8" fill="#ffffff" stroke="#0e2233" stroke-width="1.3"/>
+    <text x="95" y="224" text-anchor="middle" font-size="12" font-weight="600" fill="#0e2233">Worker A</text>
+    <rect x="165" y="200" width="110" height="38" rx="8" fill="#ffffff" stroke="#0e2233" stroke-width="1.3"/>
+    <text x="220" y="224" text-anchor="middle" font-size="12" font-weight="600" fill="#0e2233">Worker B</text>
+    <rect x="290" y="200" width="110" height="38" rx="8" fill="#ffffff" stroke="#0e2233" stroke-width="1.3"/>
+    <text x="345" y="224" text-anchor="middle" font-size="12" font-weight="600" fill="#0e2233">Worker C</text>
+
+    <line x1="95" y1="238" x2="130" y2="266" stroke="#4a5d6b" stroke-width="1.2" marker-end="url(#pa)"/>
+    <line x1="220" y1="242" x2="220" y2="266" stroke="#4a5d6b" stroke-width="1.2" marker-end="url(#pa)"/>
+    <line x1="345" y1="238" x2="310 " y2="266" stroke="#4a5d6b" stroke-width="1.2" marker-end="url(#pa)"/>
+    <rect x="120" y="270" width="200" height="26" rx="7" fill="#efedf7" stroke="#6b5fa8" stroke-width="1.1"/>
+    <text x="220" y="287" text-anchor="middle" font-size="10.5" font-weight="600" fill="#5a4f96">results topic</text>
+    <text x="220" y="316" text-anchor="middle" font-size="10.5" fill="#7b8b96">workers form one consumer group — the platform balances load and replaces failures</text>
+    <path d="M 322 273 C 418 258, 430 120, 296 78" fill="none" stroke="#6b5fa8" stroke-width="1.2" stroke-dasharray="4 3" marker-end="url(#pv)"/>
+  </g>
+
+  <!-- ============ Q2: HIERARCHICAL (top-right) ============ -->
+  <g transform="translate(466,14)">
+    <rect x="0" y="0" width="440" height="330" rx="14" fill="#ffffff" stroke="#dde5ea"/>
+    <text x="20" y="30" font-size="14" font-weight="700" fill="#0e2233">2 · Hierarchical</text>
+    <text x="20" y="48" font-size="11" fill="#7b8b96">orchestrator–worker, applied recursively — every layer delegates</text>
+
+    <rect x="150" y="60" width="140" height="38" rx="9" fill="#e8f5f3" stroke="#0e8f83" stroke-width="1.4"/>
+    <text x="220" y="84" text-anchor="middle" font-size="12.5" font-weight="600" fill="#0a6e65">Top-level agent</text>
+
+    <line x1="220" y1="98" x2="220" y2="118" stroke="#4a5d6b" stroke-width="1.3" marker-end="url(#pa)"/>
+    <rect x="90" y="122" width="260" height="28" rx="7" fill="#efedf7" stroke="#6b5fa8" stroke-width="1.1"/>
+    <text x="220" y="140" text-anchor="middle" font-size="10.5" font-weight="600" fill="#5a4f96">objectives topic</text>
+
+    <line x1="160" y1="150" x2="140" y2="172" stroke="#4a5d6b" stroke-width="1.3" marker-end="url(#pa)"/>
+    <line x1="280" y1="150" x2="300" y2="172" stroke="#4a5d6b" stroke-width="1.3" marker-end="url(#pa)"/>
+    <rect x="70" y="176" width="130" height="38" rx="8" fill="#ffffff" stroke="#0e2233" stroke-width="1.3"/>
+    <text x="135" y="200" text-anchor="middle" font-size="12" font-weight="600" fill="#0e2233">Mid-level agent</text>
+    <rect x="240" y="176" width="130" height="38" rx="8" fill="#ffffff" stroke="#0e2233" stroke-width="1.3"/>
+    <text x="305" y="200" text-anchor="middle" font-size="12" font-weight="600" fill="#0e2233">Mid-level agent</text>
+
+    <line x1="220" y1="214" x2="220" y2="234" stroke="#4a5d6b" stroke-width="1.3" marker-end="url(#pa)"/>
+    <rect x="90" y="238" width="260" height="26" rx="7" fill="#efedf7" stroke="#6b5fa8" stroke-width="1.1"/>
+    <text x="220" y="255" text-anchor="middle" font-size="10.5" font-weight="600" fill="#5a4f96">sub-task topics</text>
+
+    <line x1="160" y1="264" x2="145" y2="282" stroke="#4a5d6b" stroke-width="1.2" marker-end="url(#pa)"/>
+    <line x1="280" y1="264" x2="295" y2="282" stroke="#4a5d6b" stroke-width="1.2" marker-end="url(#pa)"/>
+    <rect x="90" y="286" width="110" height="32" rx="8" fill="#ffffff" stroke="#0e2233" stroke-width="1.2"/>
+    <text x="145" y="307" text-anchor="middle" font-size="11.5" font-weight="600" fill="#0e2233">Leaf agent</text>
+    <rect x="240" y="286" width="110" height="32" rx="8" fill="#ffffff" stroke="#0e2233" stroke-width="1.2"/>
+    <text x="295" y="307" text-anchor="middle" font-size="11.5" font-weight="600" fill="#0e2233">Leaf agent</text>
+  </g>
+
+  <!-- ============ Q3: BLACKBOARD (bottom-left) ============ -->
+  <g transform="translate(14,356)">
+    <rect x="0" y="0" width="440" height="330" rx="14" fill="#ffffff" stroke="#dde5ea"/>
+    <text x="20" y="30" font-size="14" font-weight="700" fill="#0e2233">3 · Blackboard</text>
+    <text x="20" y="48" font-size="11" fill="#7b8b96">shared working memory — specialists collaborate through one stream</text>
+
+    <rect x="140" y="150" width="160" height="66" rx="10" fill="#efedf7" stroke="#6b5fa8" stroke-width="1.4"/>
+    <line x1="160" y1="168" x2="280" y2="168" stroke="#cdc7e6" stroke-width="2"/>
+    <line x1="160" y1="182" x2="280" y2="182" stroke="#cdc7e6" stroke-width="2"/>
+    <line x1="160" y1="196" x2="280" y2="196" stroke="#cdc7e6" stroke-width="2"/>
+    <text x="220" y="236" text-anchor="middle" font-size="11" font-weight="600" fill="#5a4f96">blackboard topic — the shared memory layer</text>
+
+    <rect x="155" y="62" width="130" height="36" rx="8" fill="#ffffff" stroke="#0e2233" stroke-width="1.3"/>
+    <text x="220" y="85" text-anchor="middle" font-size="12" font-weight="600" fill="#0e2233">Agent 1</text>
+    <line x1="210" y1="98" x2="210" y2="144" stroke="#4a5d6b" stroke-width="1.2" marker-end="url(#pa)"/>
+    <line x1="230" y1="146" x2="230" y2="102" stroke="#4a5d6b" stroke-width="1.2" marker-end="url(#pa)"/>
+
+    <rect x="20" y="160" width="100" height="36" rx="8" fill="#ffffff" stroke="#0e2233" stroke-width="1.3"/>
+    <text x="70" y="183" text-anchor="middle" font-size="12" font-weight="600" fill="#0e2233">Agent 2</text>
+    <line x1="120" y1="170" x2="134" y2="170" stroke="#4a5d6b" stroke-width="1.2" marker-end="url(#pa)"/>
+    <line x1="134" y1="188" x2="120" y2="188" stroke="#4a5d6b" stroke-width="1.2" marker-end="url(#pa)"/>
+
+    <rect x="320" y="160" width="100" height="36" rx="8" fill="#ffffff" stroke="#0e2233" stroke-width="1.3"/>
+    <text x="370" y="183" text-anchor="middle" font-size="12" font-weight="600" fill="#0e2233">Agent 3</text>
+    <line x1="320" y1="170" x2="306" y2="170" stroke="#4a5d6b" stroke-width="1.2" marker-end="url(#pa)"/>
+    <line x1="306" y1="188" x2="320" y2="188" stroke="#4a5d6b" stroke-width="1.2" marker-end="url(#pa)"/>
+
+    <text x="220" y="290" text-anchor="middle" font-size="10.5" fill="#7b8b96">every agent publishes findings as events; every agent subscribes to what's relevant</text>
+  </g>
+
+  <!-- ============ Q4: MARKET-BASED (bottom-right) ============ -->
+  <g transform="translate(466,356)">
+    <rect x="0" y="0" width="440" height="330" rx="14" fill="#ffffff" stroke="#dde5ea"/>
+    <text x="20" y="30" font-size="14" font-weight="700" fill="#0e2233">4 · Market-based</text>
+    <text x="20" y="48" font-size="11" fill="#7b8b96">agents bid and negotiate — a market maker matches events</text>
+
+    <rect x="30" y="70" width="110" height="36" rx="8" fill="#ffffff" stroke="#0e2233" stroke-width="1.3"/>
+    <text x="85" y="93" text-anchor="middle" font-size="12" font-weight="600" fill="#0e2233">Solver A</text>
+    <rect x="30" y="140" width="110" height="36" rx="8" fill="#ffffff" stroke="#0e2233" stroke-width="1.3"/>
+    <text x="85" y="163" text-anchor="middle" font-size="12" font-weight="600" fill="#0e2233">Solver B</text>
+    <rect x="30" y="210" width="110" height="36" rx="8" fill="#ffffff" stroke="#0e2233" stroke-width="1.3"/>
+    <text x="85" y="233" text-anchor="middle" font-size="12" font-weight="600" fill="#0e2233">Solver C</text>
+
+    <rect x="190" y="88" width="120" height="30" rx="7" fill="#efedf7" stroke="#6b5fa8" stroke-width="1.1"/>
+    <text x="250" y="107" text-anchor="middle" font-size="10.5" font-weight="600" fill="#5a4f96">bid topic</text>
+    <rect x="190" y="180" width="120" height="30" rx="7" fill="#efedf7" stroke="#6b5fa8" stroke-width="1.1"/>
+    <text x="250" y="199" text-anchor="middle" font-size="10.5" font-weight="600" fill="#5a4f96">ask topic</text>
+
+    <line x1="140" y1="95" x2="184" y2="100" stroke="#4a5d6b" stroke-width="1.2" marker-end="url(#pa)"/>
+    <line x1="140" y1="160" x2="184" y2="120" stroke="#4a5d6b" stroke-width="1.2" marker-end="url(#pa)"/>
+    <line x1="140" y1="228" x2="184" y2="200" stroke="#4a5d6b" stroke-width="1.2" marker-end="url(#pa)"/>
+
+    <rect x="340" y="120" width="80" height="66" rx="10" fill="#e8f5f3" stroke="#0e8f83" stroke-width="1.4"/>
+    <text x="380" y="148" text-anchor="middle" font-size="11.5" font-weight="600" fill="#0a6e65">Market</text>
+    <text x="380" y="164" text-anchor="middle" font-size="11.5" font-weight="600" fill="#0a6e65">maker</text>
+
+    <line x1="310" y1="103" x2="345" y2="122" stroke="#4a5d6b" stroke-width="1.2" marker-end="url(#pa)"/>
+    <line x1="310" y1="195" x2="345" y2="180" stroke="#4a5d6b" stroke-width="1.2" marker-end="url(#pa)"/>
+
+    <line x1="375" y1="186" x2="315" y2="252" stroke="#4a5d6b" stroke-width="1.2" marker-end="url(#pa)"/>
+    <rect x="190" y="256" width="120" height="28" rx="7" fill="#efedf7" stroke="#6b5fa8" stroke-width="1.1"/>
+    <text x="250" y="274" text-anchor="middle" font-size="10.5" font-weight="600" fill="#5a4f96">transactions topic</text>
+    <path d="M 186 270 C 100 270, 60 265, 60 250" fill="none" stroke="#6b5fa8" stroke-width="1.2" stroke-dasharray="4 3" marker-end="url(#pv)"/>
+    <text x="220" y="312" text-anchor="middle" font-size="10.5" fill="#7b8b96">solvers listen for matched transactions and adjust strategy</text>
+  </g>
+</svg>

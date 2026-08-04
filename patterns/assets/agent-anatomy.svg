@@ -1,0 +1,78 @@
+<svg viewBox="0 0 920 460" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Anatomy of an AI agent: events flow in, the agent perceives, reasons with an LLM, plans, and acts, backed by memory and tools, emitting events out" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif">
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="8" refX="8" refY="4" orient="auto">
+      <path d="M0,0 L9,4 L0,8 Z" fill="#4a5d6b"/>
+    </marker>
+    <marker id="arrT" markerWidth="10" markerHeight="8" refX="8" refY="4" orient="auto">
+      <path d="M0,0 L9,4 L0,8 Z" fill="#0e8f83"/>
+    </marker>
+  </defs>
+
+  <!-- canvas -->
+  <rect x="0" y="0" width="920" height="460" rx="18" fill="#f7f9fa" stroke="#dde5ea"/>
+
+  <!-- events in -->
+  <rect x="24" y="192" width="92" height="70" rx="10" fill="#e8f5f3" stroke="#0e8f83" stroke-width="1.3"/>
+  <line x1="40" y1="208" x2="100" y2="208" stroke="#0e8f83" stroke-width="2" opacity="0.55"/>
+  <line x1="40" y1="222" x2="100" y2="222" stroke="#0e8f83" stroke-width="2" opacity="0.55"/>
+  <line x1="40" y1="236" x2="100" y2="236" stroke="#0e8f83" stroke-width="2" opacity="0.55"/>
+  <text x="70" y="284" text-anchor="middle" font-size="11" fill="#0a6e65" font-weight="600">EVENTS IN</text>
+  <line x1="116" y1="227" x2="164" y2="227" stroke="#0e8f83" stroke-width="1.5" marker-end="url(#arrT)"/>
+
+  <!-- agent boundary -->
+  <rect x="140" y="62" width="590" height="336" rx="16" fill="none" stroke="#0e2233" stroke-width="1.4" stroke-dasharray="7 5"/>
+  <text x="162" y="92" font-size="11" fill="#0e2233" font-weight="700" letter-spacing="1.5">THE AGENT</text>
+  <text x="252" y="92" font-size="11" fill="#7b8b96">— persona: its job description, set in the system prompt</text>
+
+  <!-- spine: perceive → reason → plan → act -->
+  <rect x="170" y="200" width="110" height="54" rx="10" fill="#ffffff" stroke="#0e2233" stroke-width="1.4"/>
+  <text x="225" y="223" text-anchor="middle" font-size="14" font-weight="600" fill="#0e2233">Perceive</text>
+  <text x="225" y="241" text-anchor="middle" font-size="10.5" fill="#7b8b96">sense inputs</text>
+
+  <rect x="316" y="200" width="110" height="54" rx="10" fill="#ffffff" stroke="#0e2233" stroke-width="1.4"/>
+  <text x="371" y="223" text-anchor="middle" font-size="14" font-weight="600" fill="#0e2233">Reason</text>
+  <text x="371" y="241" text-anchor="middle" font-size="10.5" fill="#7b8b96">decide what next</text>
+  <rect x="394" y="188" width="44" height="22" rx="11" fill="#efedf7" stroke="#6b5fa8" stroke-width="1.2"/>
+  <text x="416" y="203" text-anchor="middle" font-size="10.5" font-weight="700" fill="#5a4f96">LLM</text>
+
+  <rect x="462" y="200" width="110" height="54" rx="10" fill="#ffffff" stroke="#0e2233" stroke-width="1.4"/>
+  <text x="517" y="223" text-anchor="middle" font-size="14" font-weight="600" fill="#0e2233">Plan</text>
+  <text x="517" y="241" text-anchor="middle" font-size="10.5" fill="#7b8b96">break into steps</text>
+
+  <rect x="608" y="200" width="100" height="54" rx="10" fill="#ffffff" stroke="#0e2233" stroke-width="1.4"/>
+  <text x="658" y="223" text-anchor="middle" font-size="14" font-weight="600" fill="#0e2233">Act</text>
+  <text x="658" y="241" text-anchor="middle" font-size="10.5" fill="#7b8b96">execute + validate</text>
+
+  <line x1="280" y1="227" x2="310" y2="227" stroke="#4a5d6b" stroke-width="1.4" marker-end="url(#arr)"/>
+  <line x1="426" y1="227" x2="456" y2="227" stroke="#4a5d6b" stroke-width="1.4" marker-end="url(#arr)"/>
+  <line x1="572" y1="227" x2="602" y2="227" stroke="#4a5d6b" stroke-width="1.4" marker-end="url(#arr)"/>
+
+  <!-- learning feedback arc -->
+  <path d="M 658 196 C 620 128, 440 122, 380 192" fill="none" stroke="#d9a441" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#arr)"/>
+  <text x="520" y="138" text-anchor="middle" font-size="11" fill="#8a5f14" font-weight="600">learn — feed outcomes back into context</text>
+
+  <!-- memory -->
+  <rect x="316" y="312" width="256" height="58" rx="10" fill="#ffffff" stroke="#0e2233" stroke-width="1.4"/>
+  <text x="444" y="335" text-anchor="middle" font-size="13.5" font-weight="600" fill="#0e2233">Memory</text>
+  <text x="444" y="353" text-anchor="middle" font-size="10.5" fill="#7b8b96">short-term: session · long-term: vector store</text>
+  <line x1="400" y1="308" x2="384" y2="260" stroke="#4a5d6b" stroke-width="1.3" marker-end="url(#arr)"/>
+  <line x1="360" y1="262" x2="376" y2="310" stroke="#4a5d6b" stroke-width="1.3" marker-end="url(#arr)"/>
+
+  <!-- tools -->
+  <rect x="608" y="312" width="100" height="58" rx="10" fill="#ffffff" stroke="#0e2233" stroke-width="1.4"/>
+  <text x="658" y="335" text-anchor="middle" font-size="13.5" font-weight="600" fill="#0e2233">Tools</text>
+  <text x="658" y="353" text-anchor="middle" font-size="10.5" fill="#7b8b96">APIs · systems</text>
+  <line x1="668" y1="308" x2="668" y2="262" stroke="#4a5d6b" stroke-width="1.3" marker-end="url(#arr)"/>
+  <line x1="648" y1="260" x2="648" y2="306" stroke="#4a5d6b" stroke-width="1.3" marker-end="url(#arr)"/>
+
+  <!-- events out -->
+  <line x1="708" y1="227" x2="796" y2="227" stroke="#0e8f83" stroke-width="1.5" marker-end="url(#arrT)"/>
+  <rect x="802" y="192" width="92" height="70" rx="10" fill="#e8f5f3" stroke="#0e8f83" stroke-width="1.3"/>
+  <line x1="818" y1="208" x2="878" y2="208" stroke="#0e8f83" stroke-width="2" opacity="0.55"/>
+  <line x1="818" y1="222" x2="878" y2="222" stroke="#0e8f83" stroke-width="2" opacity="0.55"/>
+  <line x1="818" y1="236" x2="878" y2="236" stroke="#0e8f83" stroke-width="2" opacity="0.55"/>
+  <text x="848" y="284" text-anchor="middle" font-size="11" fill="#0a6e65" font-weight="600">EVENTS OUT</text>
+
+  <!-- coordination note -->
+  <text x="435" y="432" text-anchor="middle" font-size="11.5" fill="#7b8b96">In a multi-agent system, <tspan font-weight="600" fill="#4a5d6b">coordination</tspan> is the ninth component — agents share context and divide work through the event streams.</text>
+</svg>
