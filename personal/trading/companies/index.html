@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Companies under the lens — Trading · Giles Parnell</title>
+  <meta name="description" content="Write-ups of firms selling training, funding or signals to retail traders — read properly and checked against the public registers. Educational, not advice.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    /* =============================================
+       COMPANIES LANDING — "Console" · dark / warm amber
+       Sibling of options/ under the trading hub.
+       Same list pattern as the primer landing so the
+       two children read as a pair.
+       ============================================= */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --font-display: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: 'Space Mono', ui-monospace, monospace;
+      --bg:        #0d0a06;
+      --panel:     rgba(255,255,255,0.03);
+      --text:      #f4efe6;
+      --dim:       #ada393;
+      --faint:     #7d7364;
+      --border:    rgba(255,255,255,0.10);
+      --border-hover: rgba(255,255,255,0.16);
+      --accent:    #e6b25a;
+      --accent-light: #f0c576;
+      --accent-deep: #b3812c;
+      --accent-glow: rgba(224,168,72,0.20);
+      --accent-muted: rgba(224,168,72,0.14);
+      --radius: 16px;
+    }
+
+    body {
+      font-family: var(--font-display);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      letter-spacing: -0.01em;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    a { color: inherit; }
+
+    .glow { position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
+    .glow span {
+      position: absolute; width: 820px; height: 820px; border-radius: 50%;
+      top: -340px; left: 50%; margin-left: -410px;
+      background: radial-gradient(circle, var(--accent-glow), transparent 66%);
+      filter: blur(20px); animation: drift 24s ease-in-out infinite alternate;
+    }
+    @keyframes drift { to { transform: translate(60px,-40px) scale(1.12); } }
+
+    .page { position: relative; z-index: 1; max-width: 1000px; margin: 0 auto; padding: 44px 48px 56px; }
+
+    .site-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 48px; animation: fadeUp 0.5s ease-out both; }
+    .brand { display: flex; align-items: center; gap: 14px; text-decoration: none; color: inherit; }
+    .brand-mark {
+      width: 40px; height: 40px; border-radius: 11px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-deep));
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 15px; color: #1a1206; letter-spacing: -0.03em; flex-shrink: 0;
+    }
+    .brand-text { font-weight: 700; font-size: 17px; letter-spacing: -0.02em; }
+    .back-link { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--dim); text-decoration: none; transition: color 0.2s; }
+    .back-link:hover { color: var(--accent); }
+
+    .list-hero { margin-bottom: 26px; animation: fadeUp 0.6s 0.05s ease-out both; }
+    .list-hero .eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 18px; }
+    .list-hero h1 { font-size: clamp(2.4rem, 6vw, 62px); line-height: 0.98; font-weight: 700; letter-spacing: -0.045em; margin-bottom: 18px; }
+    .list-hero .lede { max-width: 680px; font-size: clamp(0.95rem,1.6vw,16px); line-height: 1.7; color: var(--dim); }
+
+    .disclaimer { display: flex; gap: 12px; align-items: flex-start; margin: 26px 0 40px; padding: 14px 16px; border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 12px; background: rgba(255,255,255,0.025); max-width: 720px; animation: fadeUp 0.6s 0.1s ease-out both; }
+    .disclaimer .ico { color: var(--accent); }
+    .disclaimer p { font-family: var(--font-mono); font-size: 12px; line-height: 1.65; color: var(--dim); }
+
+    .method { font-size: 13.5px; line-height: 1.7; color: var(--dim); max-width: 680px; margin-bottom: 34px; animation: fadeUp 0.6s 0.12s ease-out both; }
+    .method strong { color: var(--text); font-weight: 700; }
+
+    .issues { display: flex; flex-direction: column; gap: 12px; animation: fadeUp 0.6s 0.15s ease-out both; }
+    .issue { display: flex; gap: 20px; align-items: center; padding: 20px 22px; background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); transition: transform 0.35s cubic-bezier(0.16,1,0.3,1), border-color 0.3s, background 0.3s; }
+    .issue:hover { transform: translateY(-3px); border-color: var(--border-hover); background: rgba(224,168,72,0.06); }
+    .issue-num { font-family: var(--font-mono); font-weight: 700; font-size: 20px; letter-spacing: -0.02em; color: var(--accent); width: 54px; height: 54px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; background: var(--accent-muted); border: 1px solid rgba(224,168,72,0.24); border-radius: 13px; }
+    .issue-body { flex: 1; min-width: 0; }
+    .issue-title { font-weight: 700; font-size: 18px; letter-spacing: -0.02em; margin-bottom: 4px; }
+    .issue-desc { font-size: 13.5px; color: var(--dim); line-height: 1.55; }
+    .issue-actions { display: flex; gap: 8px; flex-shrink: 0; }
+    .btn { display: inline-flex; align-items: center; gap: 6px; text-decoration: none; font-family: var(--font-mono); font-weight: 700; font-size: 11px; letter-spacing: 0.05em; text-transform: uppercase; padding: 10px 14px; border-radius: 10px; transition: all 0.2s; white-space: nowrap; }
+    .btn-read { color: #1a1206; background: var(--accent); border: 1px solid var(--accent); }
+    .btn-read:hover { background: var(--accent-light); }
+
+    .site-footer { margin-top: 44px; padding-top: 20px; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: #6a6152; }
+    .site-footer a { color: var(--dim); text-decoration: none; transition: color 0.2s; }
+    .site-footer a:hover { color: var(--accent); }
+
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+
+    @media (max-width: 640px) {
+      .page { padding: 36px 20px 44px; }
+      .issue { flex-wrap: wrap; gap: 14px; }
+      .issue-actions { width: 100%; }
+      .btn { flex: 1; justify-content: center; }
+      .site-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+      .site-footer { flex-direction: column; gap: 0.75rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="glow" aria-hidden="true"><span></span></div>
+
+<div class="page">
+
+  <header class="site-header">
+    <a href="../../../" class="brand">
+      <div class="brand-mark">GP</div>
+      <span class="brand-text">Giles Parnell</span>
+    </a>
+    <a href="../" class="back-link">← Trading</a>
+  </header>
+
+  <section class="list-hero">
+    <div class="eyebrow">Trading · Under the lens</div>
+    <h1>Companies.</h1>
+    <p class="lede">Firms that sell training, funding or signals to retail traders. Someone asks me to look at one, so I read the site properly and check it against the public registers — then write down what I found.</p>
+  </section>
+
+  <div class="disclaimer">
+    <span class="ico">ⓘ</span>
+    <p>My own notes on publicly available information. General information, not financial advice, and not a recommendation to use or avoid any firm. Verify everything independently before committing money.</p>
+  </div>
+
+  <p class="method">Each write-up follows the same shape: <strong>what's actually on offer</strong>, stripped of marketing; <strong>where it's genuinely strong</strong>; <strong>where it should give you pause</strong>; and a short list of <strong>questions to ask before any money moves</strong>. Affiliate review sites are excluded on purpose — most earn a commission on sign-ups. Where I've drawn an inference rather than verified a fact, I say so.</p>
+
+  <div class="issues">
+
+    <div class="issue">
+      <div class="issue-num">01</div>
+      <div class="issue-body">
+        <div class="issue-title">Lepus Proprietary Trading</div>
+        <div class="issue-desc">A Melbourne firm selling trader training plus a “funding challenge” that asks for A$2,000 of your own money. Sane rules and a real regulatory footprint — against a 50% split, no published pricing, and an entity younger than it reads.</div>
+      </div>
+      <div class="issue-actions">
+        <a class="btn btn-read" href="lepus-proprietary-trading.html">Read →</a>
+      </div>
+    </div>
+
+  </div>
+
+  <footer class="site-footer">
+    <span>© 2026 Giles Parnell</span>
+    <span><a href="../../../">Giles Parnell</a> · <a href="../../">Personal</a> · <a href="../">Trading</a></span>
+  </footer>
+
+</div>
+
+</body>
+</html>

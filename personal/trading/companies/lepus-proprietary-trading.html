@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lepus Proprietary Trading — a look at the offer · Giles Parnell</title>
+  <meta name="description" content="An independent read of Lepus Proprietary Trading: what's actually on offer, what the ASIC and ABR public registers say, and six questions worth asking first. Educational, not advice.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    /* =============================================
+       COMPANIES — firm write-up page
+       Warm "Console" shell, same tokens as the
+       trading landing. Self-contained by the same
+       convention as every other hand-authored page.
+       Deliberately NOT the editorial reader theme —
+       these are notes on firms, not cheat sheets,
+       and must not pull assets/reader.css (that
+       stylesheet is shared with the five PDFs).
+       ============================================= */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --font-display: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: 'Space Mono', ui-monospace, monospace;
+      --bg:        #0d0a06;
+      --panel:     rgba(255,255,255,0.03);
+      --text:      #f4efe6;
+      --dim:       #ada393;
+      --faint:     #7d7364;
+      --border:    rgba(255,255,255,0.10);
+      --border-hover: rgba(255,255,255,0.16);
+      --accent:    #e6b25a;
+      --accent-light: #f0c576;
+      --accent-deep: #b3812c;
+      --accent-glow: rgba(224,168,72,0.20);
+      --accent-muted: rgba(224,168,72,0.14);
+      --flag:       #e08a72;
+      --flag-muted: rgba(224,138,114,0.13);
+      --radius: 16px;
+    }
+
+    body {
+      font-family: var(--font-display);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      letter-spacing: -0.01em;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    a { color: inherit; }
+
+    .glow { position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
+    .glow span {
+      position: absolute; width: 820px; height: 820px; border-radius: 50%;
+      top: -340px; left: 50%; margin-left: -410px;
+      background: radial-gradient(circle, var(--accent-glow), transparent 66%);
+      filter: blur(20px); animation: drift 24s ease-in-out infinite alternate;
+    }
+    @keyframes drift { to { transform: translate(60px,-40px) scale(1.12); } }
+
+    .page { position: relative; z-index: 1; max-width: 860px; margin: 0 auto; padding: 44px 48px 56px; }
+
+    .site-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 48px; animation: fadeUp 0.5s ease-out both; }
+    .brand { display: flex; align-items: center; gap: 14px; text-decoration: none; color: inherit; }
+    .brand-mark {
+      width: 40px; height: 40px; border-radius: 11px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-deep));
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 15px; color: #1a1206; letter-spacing: -0.03em; flex-shrink: 0;
+    }
+    .brand-text { font-weight: 700; font-size: 17px; letter-spacing: -0.02em; }
+    .back-link { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--dim); text-decoration: none; transition: color 0.2s; }
+    .back-link:hover { color: var(--accent); }
+
+    .list-hero { margin-bottom: 26px; animation: fadeUp 0.6s 0.05s ease-out both; }
+    .list-hero .eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 18px; }
+    .list-hero h1 { font-size: clamp(2.1rem, 5.4vw, 52px); line-height: 1.02; font-weight: 700; letter-spacing: -0.045em; margin-bottom: 18px; }
+    .list-hero .lede { max-width: 660px; font-size: clamp(0.95rem,1.6vw,16px); line-height: 1.7; color: var(--dim); }
+
+    .disclaimer { display: flex; gap: 12px; align-items: flex-start; margin: 26px 0 40px; padding: 14px 16px; border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 12px; background: rgba(255,255,255,0.025); max-width: 700px; animation: fadeUp 0.6s 0.1s ease-out both; }
+    .disclaimer .ico { color: var(--accent); }
+    .disclaimer p { font-family: var(--font-mono); font-size: 12px; line-height: 1.65; color: var(--dim); }
+
+    /* ---- article rhythm ---- */
+    .prose { animation: fadeUp 0.6s 0.15s ease-out both; }
+    .prose h2 {
+      font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--accent); font-weight: 700;
+      margin: 52px 0 18px; padding-bottom: 12px; border-bottom: 1px solid var(--border);
+    }
+    .prose h2:first-child { margin-top: 0; }
+    .prose p { font-size: 15.5px; line-height: 1.72; color: var(--dim); margin-bottom: 14px; max-width: 680px; }
+    .prose p strong { color: var(--text); font-weight: 700; }
+
+    .verdict { padding: 22px 24px; background: var(--accent-muted); border: 1px solid rgba(224,168,72,0.24); border-radius: var(--radius); margin-bottom: 8px; }
+    .verdict p { color: var(--dim); margin-bottom: 12px; }
+    .verdict p:last-child { margin-bottom: 0; }
+    .verdict .lead { font-size: 18px; font-weight: 700; letter-spacing: -0.02em; color: var(--text); line-height: 1.45; }
+
+    /* ---- the two-product model ---- */
+    .issues { display: flex; flex-direction: column; gap: 12px; margin: 20px 0 8px; }
+    .issue { display: flex; gap: 20px; align-items: flex-start; padding: 20px 22px; background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); transition: border-color 0.3s, background 0.3s; }
+    .issue:hover { border-color: var(--border-hover); background: rgba(224,168,72,0.06); }
+    .issue-num { font-family: var(--font-mono); font-weight: 700; font-size: 20px; letter-spacing: -0.02em; color: var(--accent); width: 54px; height: 54px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; background: var(--accent-muted); border: 1px solid rgba(224,168,72,0.24); border-radius: 13px; }
+    .issue-body { flex: 1; min-width: 0; }
+    .issue-title { font-weight: 700; font-size: 18px; letter-spacing: -0.02em; margin-bottom: 6px; }
+    .issue-desc { font-size: 13.5px; color: var(--dim); line-height: 1.65; }
+    .issue-desc strong { color: var(--text); font-weight: 700; }
+
+    /* ---- callout ---- */
+    .callout { margin: 22px 0; padding: 18px 20px; border: 1px solid var(--border); border-left: 3px solid var(--flag); border-radius: 12px; background: rgba(255,255,255,0.025); max-width: 720px; }
+    .callout .k { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--flag); font-weight: 700; display: block; margin-bottom: 8px; }
+    .callout p { font-size: 14.5px; margin: 0; }
+
+    /* ---- findings ---- */
+    .findings { list-style: none; margin: 4px 0 0; }
+    .findings li { display: grid; grid-template-columns: 30px 1fr; gap: 2px 14px; padding: 16px 0; border-bottom: 1px solid var(--border); }
+    .findings li:last-child { border-bottom: 0; }
+    .findings .mark {
+      grid-row: span 2; width: 30px; height: 30px; border-radius: 9px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-mono); font-size: 14px; font-weight: 700;
+    }
+    .good .mark { color: var(--accent); background: var(--accent-muted); border: 1px solid rgba(224,168,72,0.24); }
+    .bad  .mark { color: var(--flag);   background: var(--flag-muted);   border: 1px solid rgba(224,138,114,0.24); }
+    .findings .t { display: block; font-weight: 700; font-size: 15.5px; letter-spacing: -0.02em; line-height: 1.35; }
+    .findings .d { font-size: 13.5px; color: var(--dim); line-height: 1.65; padding-top: 4px; }
+    .findings .d strong { color: var(--text); font-weight: 700; }
+    .kind { display: block; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 700; margin-bottom: 4px; }
+    .kind-good { color: var(--accent); }
+    .kind-bad { color: var(--flag); }
+
+    /* ---- questions ---- */
+    ol.qs { counter-reset: q; list-style: none; margin: 20px 0 0; }
+    ol.qs li { counter-increment: q; position: relative; padding: 16px 0 16px 46px; border-bottom: 1px solid var(--border); font-size: 15px; line-height: 1.65; color: var(--dim); }
+    ol.qs li:last-child { border-bottom: 0; }
+    ol.qs li::before {
+      content: counter(q,decimal-leading-zero);
+      position: absolute; left: 0; top: 16px;
+      font-family: var(--font-mono); font-size: 12px; font-weight: 700; color: var(--accent);
+      width: 30px; height: 30px; display: flex; align-items: center; justify-content: center;
+      background: var(--accent-muted); border: 1px solid rgba(224,168,72,0.24); border-radius: 9px;
+    }
+    .key { display: inline-block; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 700; color: var(--flag); background: var(--flag-muted); border: 1px solid rgba(224,138,114,0.24); border-radius: 6px; padding: 2px 7px; margin-left: 8px; vertical-align: 1px; }
+
+    /* ---- sources ---- */
+    details { margin-top: 34px; padding: 18px 20px; background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); }
+    summary { cursor: pointer; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--dim); font-weight: 700; list-style: none; }
+    summary::-webkit-details-marker { display: none; }
+    summary::before { content: "▸  "; color: var(--accent); }
+    details[open] summary::before { content: "▾  "; }
+    details ul { margin: 16px 0 0; padding-left: 20px; }
+    details li { font-size: 13.5px; line-height: 1.6; color: var(--dim); margin-bottom: 8px; word-break: break-word; }
+    details .note { font-size: 13px; color: var(--faint); line-height: 1.65; margin-top: 14px; }
+
+    .site-footer { margin-top: 44px; padding-top: 20px; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: #6a6152; }
+    .site-footer a { color: var(--dim); text-decoration: none; transition: color 0.2s; }
+    .site-footer a:hover { color: var(--accent); }
+
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+
+    @media (max-width: 640px) {
+      .page { padding: 36px 20px 44px; }
+      .site-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+      .issue { flex-wrap: wrap; gap: 14px; }
+      .prose p, .findings .d { font-size: 15px; }
+      .site-footer { flex-direction: column; gap: 0.75rem; text-align: center; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .glow span { animation: none; }
+      .list-hero, .disclaimer, .prose, .site-header { animation: none; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="glow" aria-hidden="true"><span></span></div>
+
+<div class="page">
+
+  <header class="site-header">
+    <a href="../../../" class="brand">
+      <div class="brand-mark">GP</div>
+      <span class="brand-text">Giles Parnell</span>
+    </a>
+    <a href="./" class="back-link">← Companies</a>
+  </header>
+
+  <section class="list-hero">
+    <div class="eyebrow">Companies · No. 01</div>
+    <h1>Lepus Proprietary&nbsp;Trading</h1>
+    <p class="lede">An Australian firm offering trader training and a “funding challenge”. A friend asked me to look at it, so I read the site properly and checked it against the public registers. Here's what's actually on offer, and the six questions worth asking before any money moves.</p>
+  </section>
+
+  <div class="disclaimer">
+    <span class="ico">ⓘ</span>
+    <p>My own notes, based on publicly available records as at August 2026. General information, not financial advice, and not a recommendation to trade or not to trade. Verify everything independently before committing money.</p>
+  </div>
+
+  <div class="prose">
+
+    <h2>The short version</h2>
+    <div class="verdict">
+      <p class="lead">It isn't a scam. But it also isn't what “prop firm” normally means, and the marketing leans on that gap.</p>
+      <p>Read it as a paid trading course that may lead to a funded account — not as a funding opportunity. Judge it on whether the education is worth the price, because on profit split, transparency and company age it loses to the offshore competition, and it asks for $2,000 of your real money that they don't.</p>
+    </div>
+
+    <h2>What's actually on offer</h2>
+    <p>Two products bolted together:</p>
+
+    <div class="issues">
+      <div class="issue">
+        <div class="issue-num">01</div>
+        <div class="issue-body">
+          <div class="issue-title">Paid training and mentoring</div>
+          <div class="issue-desc">A 16+ module course with the head trader, one-to-one sessions, a Discord community and monthly boardroom sessions. The price is not published anywhere on the site — you book a call to find out.</div>
+        </div>
+      </div>
+      <div class="issue">
+        <div class="issue-num">02</div>
+        <div class="issue-body">
+          <div class="issue-title">The “Funding Challenge” — no participation fee</div>
+          <div class="issue-desc">You open a live retail account with OX Securities, deposit a minimum of <strong>A$2,000 of your own money</strong>, and trade it for <strong>three months</strong> at 1:30 leverage. Pass, and you're offered a funded account at a <strong>50% profit split</strong>.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <span class="k">The bit that matters</span>
+      <p>This is not the FTMO-style model, where you pay a fee and risk only that fee on a simulated account. Your own capital is genuinely at risk in a live market account. “No participation fee”, “no maximum drawdown” and “no minimum targets” all sound generous — but you don't need a drawdown rule when the money being drawn down belongs to the trader.</p>
+    </div>
+
+    <h2>Where it's genuinely strong</h2>
+    <ul class="findings good">
+      <li>
+        <span class="mark" aria-hidden="true">+</span>
+        <span><span class="kind kind-good">Strength</span><span class="t">A real regulatory footprint</span></span>
+        <span class="d">Wolverton Investment Group Pty Ltd, ACN 639 257 613, Corporate Authorised Representative 1314535, a Melbourne street address and a named principal with a public profile. Most offshore prop shops have none of that.</span>
+      </li>
+      <li>
+        <span class="mark" aria-hidden="true">+</span>
+        <span><span class="kind kind-good">Strength</span><span class="t">The rules are sane, not predatory</span></span>
+        <span class="d">No trailing drawdown, no consistency rule, no 30-day profit target, no clause engineered to void a payout. Grid and martingale banned, five open trades maximum, FXBlue monitoring. That reads as a firm assessing skill, not one designing failure.</span>
+      </li>
+      <li>
+        <span class="mark" aria-hidden="true">+</span>
+        <span><span class="kind kind-good">Strength</span><span class="t">Your $2,000 stays yours</span></span>
+        <span class="d">If you aren't selected, you withdraw whatever's left. No non-refundable fee burned — unlike serial challenge-retakers spending $500 a go.</span>
+      </li>
+      <li>
+        <span class="mark" aria-hidden="true">+</span>
+        <span><span class="kind kind-good">Strength</span><span class="t">Three months of live trading is a better filter</span></span>
+        <span class="d">More meaningful than a ten-day simulated sprint, and arguably better for the trader's development too.</span>
+      </li>
+      <li>
+        <span class="mark" aria-hidden="true">+</span>
+        <span><span class="kind kind-good">Strength</span><span class="t">The education looks like the real product</span></span>
+        <span class="d">And by most accounts it's competently delivered, in Australian hours, by an actual named person.</span>
+      </li>
+    </ul>
+
+    <h2>Where it should give you pause</h2>
+    <ul class="findings bad">
+      <li>
+        <span class="mark" aria-hidden="true">!</span>
+        <span><span class="kind kind-bad">Concern</span><span class="t">50% split is half the market rate</span></span>
+        <span class="d">FTMO, FundedNext and similar pay 80–95%. You're paying a 30–45 point premium for the training and the Australian wrapper.</span>
+      </li>
+      <li>
+        <span class="mark" aria-hidden="true">!</span>
+        <span><span class="kind kind-bad">Concern</span><span class="t">The company is far newer than it reads</span></span>
+        <span class="d">ABN Lookup shows the ABN active only from <strong>30 January 2025</strong>, and both business names — “Lepus Prop” and “Wolverton Investment Group” — registered <strong>18 September 2025</strong>. The “operating since 2013 / 10+ year track record” line that circulates on third-party sites doesn't appear on the register, and I couldn't find it on the firm's own site either. Whatever the history behind it, the current trading entity is under a year old.</span>
+      </li>
+      <li>
+        <span class="mark" aria-hidden="true">!</span>
+        <span><span class="kind kind-bad">Concern</span><span class="t">The AFSL isn't theirs</span></span>
+        <span class="d">AFSL 460940 belongs to AFSL Holdings Australia Pty Ltd, a dealer group that authorises third parties. Lepus is one Corporate Authorised Representative among many. That's legal and common — but “AFSL 460940” on the site reads as though Lepus is licensed. It isn't, and the authorisation covers financial product advice and arranging to deal, which is not the same as being licensed to run a funded-trader programme.</span>
+      </li>
+      <li>
+        <span class="mark" aria-hidden="true">!</span>
+        <span><span class="kind kind-bad">Concern</span><span class="t">An obvious conflict goes unaddressed</span></span>
+        <span class="d">A firm that routes every applicant into one named broker for a minimum of three months has a plausible revenue line in introducing-broker rebates on trading volume. I have no evidence either way — what I can verify is that <strong>no commission or rebate disclosure appears anywhere on the site</strong>, and that's a question with a one-sentence answer. If such an arrangement does exist, the firm earns whether or not anyone passes, which sits badly against “the firm is only profitable once the trader is.”</span>
+      </li>
+      <li>
+        <span class="mark" aria-hidden="true">!</span>
+        <span><span class="kind kind-bad">Concern</span><span class="t">No pricing published, anywhere</span></span>
+        <span class="d">Not for the course, the coaching, or the in-office sessions. “We do not intend to profit from educating you and thus charge an extremely fair price” is a sentence doing a lot of work with no number attached. Pricing that requires a booked call is a sales-funnel pattern.</span>
+      </li>
+      <li>
+        <span class="mark" aria-hidden="true">!</span>
+        <span><span class="kind kind-bad">Concern</span><span class="t">The funded-account terms are invisible</span></span>
+        <span class="d">What capital, whose money, what platform, what payout mechanics, what contract — none of it is on the site. That's $2,000 and three months committed to an outcome whose terms you haven't seen.</span>
+      </li>
+      <li>
+        <span class="mark" aria-hidden="true">!</span>
+        <span><span class="kind kind-bad">Concern</span><span class="t">OX Securities is a mixed bag</span></span>
+        <span class="d">ASIC-regulated in Australia, but it also runs a St Vincent &amp; the Grenadines entity, has recurring reports of withdrawal delays and a US$40 wire fee, and was added to the CFTC RED List in May 2025 for servicing US clients while unregistered. Which entity holds the $2,000 matters a great deal.</span>
+      </li>
+      <li>
+        <span class="mark" aria-hidden="true">!</span>
+        <span><span class="kind kind-bad">Concern</span><span class="t">The numbers contradict each other</span></span>
+        <span class="d">The traders page advertises “no experience necessary” alongside earning “up to 80% of the performance”. The challenge page says 50%. Those two figures should not disagree.</span>
+      </li>
+    </ul>
+
+    <h2>Six questions to ask first</h2>
+    <p>Get every one of these <strong>in writing</strong>, not on a call, before paying anything or depositing anything.</p>
+
+    <ol class="qs">
+      <li>Do you receive any commission, rebate or introducing-broker payment from OX Securities based on my trading volume? How much per lot? <span class="key">Decisive</span></li>
+      <li>Which OX Securities entity holds my account — the ASIC-licensed Australian one, or the St Vincent one?</li>
+      <li>What is the total cost of the training, and is completing it a prerequisite for entering the Funding Challenge?</li>
+      <li>Send me the funded-trader agreement now, before I deposit. What capital, what platform, what payout schedule, what termination rights?</li>
+      <li>How many people have started the Funding Challenge, how many were funded, and how many have actually been paid out? <span class="key">Decisive</span></li>
+      <li>What are the real selection criteria after three months, given there are no minimum targets?</li>
+    </ol>
+
+    <div class="callout">
+      <span class="k">How to read the answers</span>
+      <p>Questions 1 and 5 decide it. A firm confident in its own model answers both without friction. Evasion on either — particularly the payout numbers — is your answer.</p>
+    </div>
+
+    <h2>The bottom line</h2>
+    <p>If you want structured education, in your own timezone, from a real named person, and you'd pay for that on its own merits, this is a reasonable place to spend money — provided the price turns out to be reasonable once they tell you what it is.</p>
+    <p>If what you actually want is funded trading capital, it's the wrong door. You'd be handing over $2,000 of live risk and three months for half the split the offshore firms pay, from an entity registered under a year ago, on terms you won't see until after you've committed.</p>
+    <p><strong>Nothing here says don't do it. It says don't do it blind.</strong></p>
+
+    <details>
+      <summary>Sources and how this was checked</summary>
+      <ul>
+        <li>Lepus Proprietary Trading — Funding Challenge, Traders and Trader Coaching pages (lepusproprietarytrading.com.au)</li>
+        <li>ABN Lookup — Wolverton Investment Group Pty Ltd, ABN 31 639 257 613 (abr.business.gov.au)</li>
+        <li>ASIC AFS Licensee record — AFSL 460940, AFSL Holdings Australia Pty Ltd</li>
+        <li>ASIC Authorised Representative Register — CAR 1314535</li>
+        <li>OX Securities regulatory records, including the CFTC RED List entry of May 2025</li>
+      </ul>
+      <p class="note">Affiliate review sites were excluded on purpose. Most earn a commission on sign-ups, and several repeat an unverified “founded 2013” claim that the public registers don't support. Where I've drawn an inference rather than verified a fact, I've said so in the text.</p>
+    </details>
+
+  </div>
+
+  <footer class="site-footer">
+    <span>© 2026 Giles Parnell</span>
+    <span><a href="../../../">Giles Parnell</a> · <a href="../../">Personal</a> · <a href="../">Trading</a> · <a href="./">Companies</a></span>
+  </footer>
+
+</div>
+
+</body>
+</html>
