@@ -3,17 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Options — Learning in public · Giles Parnell</title>
-  <meta name="description" content="A visual primer series on options trading — what an option is, how to trade it safely, what moves its price, the Greeks, and reading a chain. Educational, not advice.">
+  <title>Trading — Learning in public · Giles Parnell</title>
+  <meta name="description" content="Learning to trade, in public — a visual options primer built one idea at a time.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
   <style>
     /* =============================================
-       TRADING LANDING — "Console" · dark / warm amber
-       Landing uses the personal warm-Console shell.
-       The reader articles (01–05) keep their own
-       editorial paper theme — do NOT recolour those.
+       TRADING HUB — "Console" · dark / warm amber
+       A thin section index. One child today:
+         options/    — the five-issue primer landing
+       The reader articles (01–05) and their PDFs stay
+       at this level so their published URLs hold. They
+       keep their own editorial paper theme — do NOT
+       recolour those.
+       Panel pattern mirrors /personal/index.html so the
+       two hubs read as siblings.
        ============================================= */
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -21,18 +26,15 @@
       --font-display: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
       --font-mono: 'Space Mono', ui-monospace, monospace;
       --bg:        #0d0a06;
-      --panel:     rgba(255,255,255,0.03);
+      --panel:     rgba(255,255,255,0.025);
       --text:      #f4efe6;
       --dim:       #ada393;
       --faint:     #7d7364;
       --border:    rgba(255,255,255,0.10);
-      --border-hover: rgba(255,255,255,0.16);
       --accent:    #e6b25a;
-      --accent-light: #f0c576;
       --accent-deep: #b3812c;
       --accent-glow: rgba(224,168,72,0.20);
-      --accent-muted: rgba(224,168,72,0.14);
-      --radius: 16px;
+      --radius: 18px;
     }
 
     body {
@@ -55,9 +57,21 @@
     }
     @keyframes drift { to { transform: translate(60px,-40px) scale(1.12); } }
 
+    .ticker {
+      position: relative; z-index: 1;
+      display: flex; gap: 34px; flex-wrap: wrap;
+      padding: 14px 40px;
+      border-bottom: 1px solid var(--border);
+      background: rgba(255,255,255,0.02);
+      font-family: var(--font-mono); font-size: 11px;
+      letter-spacing: 0.08em; text-transform: uppercase; color: var(--faint);
+      animation: fadeUp 0.5s ease-out both;
+    }
+    .ticker .live { color: var(--accent); }
+
     .page { position: relative; z-index: 1; max-width: 1000px; margin: 0 auto; padding: 44px 48px 56px; }
 
-    .site-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 48px; animation: fadeUp 0.5s ease-out both; }
+    .site-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 56px; animation: fadeUp 0.5s ease-out both; }
     .brand { display: flex; align-items: center; gap: 14px; text-decoration: none; color: inherit; }
     .brand-mark {
       width: 40px; height: 40px; border-radius: 11px;
@@ -69,28 +83,32 @@
     .back-link { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--dim); text-decoration: none; transition: color 0.2s; }
     .back-link:hover { color: var(--accent); }
 
-    .list-hero { margin-bottom: 26px; animation: fadeUp 0.6s 0.05s ease-out both; }
-    .list-hero .eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 18px; }
-    .list-hero h1 { font-size: clamp(2.4rem, 6vw, 62px); line-height: 0.98; font-weight: 700; letter-spacing: -0.045em; margin-bottom: 18px; }
-    .list-hero .lede { max-width: 660px; font-size: clamp(0.95rem,1.6vw,16px); line-height: 1.7; color: var(--dim); }
+    .hero { margin-bottom: 48px; animation: fadeUp 0.6s 0.05s ease-out both; }
+    .hero .eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 18px; }
+    .hero h1 { font-size: clamp(2.4rem, 6vw, 62px); line-height: 0.98; font-weight: 700; letter-spacing: -0.045em; margin-bottom: 18px; }
+    .hero .tagline { max-width: 640px; font-size: clamp(0.95rem,1.6vw,16px); line-height: 1.7; color: var(--dim); }
 
-    .disclaimer { display: flex; gap: 12px; align-items: flex-start; margin: 26px 0 40px; padding: 14px 16px; border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 12px; background: rgba(255,255,255,0.025); max-width: 700px; animation: fadeUp 0.6s 0.1s ease-out both; }
+    .disclaimer { display: flex; gap: 12px; align-items: flex-start; margin: 26px 0 0; padding: 14px 16px; border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 12px; background: rgba(255,255,255,0.025); max-width: 700px; animation: fadeUp 0.6s 0.1s ease-out both; }
     .disclaimer .ico { color: var(--accent); }
     .disclaimer p { font-family: var(--font-mono); font-size: 12px; line-height: 1.65; color: var(--dim); }
 
-    .issues { display: flex; flex-direction: column; gap: 12px; animation: fadeUp 0.6s 0.15s ease-out both; }
-    .issue { display: flex; gap: 20px; align-items: center; padding: 20px 22px; background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); transition: transform 0.35s cubic-bezier(0.16,1,0.3,1), border-color 0.3s, background 0.3s; }
-    .issue:hover { transform: translateY(-3px); border-color: var(--border-hover); background: rgba(224,168,72,0.06); }
-    .issue-num { font-family: var(--font-mono); font-weight: 700; font-size: 20px; letter-spacing: -0.02em; color: var(--accent); width: 54px; height: 54px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; background: var(--accent-muted); border: 1px solid rgba(224,168,72,0.24); border-radius: 13px; }
-    .issue-body { flex: 1; min-width: 0; }
-    .issue-title { font-weight: 700; font-size: 18px; letter-spacing: -0.02em; margin-bottom: 4px; }
-    .issue-desc { font-size: 13.5px; color: var(--dim); line-height: 1.55; }
-    .issue-actions { display: flex; gap: 8px; flex-shrink: 0; }
-    .btn { display: inline-flex; align-items: center; gap: 6px; text-decoration: none; font-family: var(--font-mono); font-weight: 700; font-size: 11px; letter-spacing: 0.05em; text-transform: uppercase; padding: 10px 14px; border-radius: 10px; transition: all 0.2s; white-space: nowrap; }
-    .btn-read { color: #1a1206; background: var(--accent); border: 1px solid var(--accent); }
-    .btn-read:hover { background: var(--accent-light); }
-    .btn-pdf { color: var(--dim); background: transparent; border: 1px solid var(--border-hover); }
-    .btn-pdf:hover { color: var(--text); border-color: var(--faint); }
+    .panels { display: grid; grid-template-columns: 1fr; gap: 20px; max-width: 620px; animation: fadeUp 0.6s 0.15s ease-out both; }
+    .panel {
+      border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 30px 30px 26px; background: var(--panel);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+      display: flex; flex-direction: column; text-decoration: none; color: inherit;
+      transition: border-color 0.3s, transform 0.4s cubic-bezier(0.16,1,0.3,1);
+    }
+    .panel:hover { border-color: rgba(230,178,90,0.4); transform: translateY(-3px); }
+    .panel-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; }
+    .panel-num { font-family: var(--font-mono); font-size: 46px; font-weight: 700; letter-spacing: -0.04em; color: rgba(230,178,90,0.3); }
+    .panel-tag { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint); border: 1px solid var(--border); padding: 4px 10px; border-radius: 100px; }
+    .panel-title { font-size: 28px; font-weight: 700; letter-spacing: -0.03em; margin-bottom: 10px; }
+    .panel-desc { font-size: 13px; line-height: 1.7; color: var(--dim); margin-bottom: 24px; }
+    .panel-foot { margin-top: auto; display: flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
+    .panel:hover .arrow { transform: translateX(4px); }
+    .arrow { transition: transform 0.2s; }
 
     .site-footer { margin-top: 44px; padding-top: 20px; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: #6a6152; }
     .site-footer a { color: var(--dim); text-decoration: none; transition: color 0.2s; }
@@ -98,11 +116,9 @@
 
     @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
 
-    @media (max-width: 640px) {
-      .page { padding: 36px 20px 44px; }
-      .issue { flex-wrap: wrap; gap: 14px; }
-      .issue-actions { width: 100%; }
-      .btn { flex: 1; justify-content: center; }
+    @media (max-width: 820px) {
+      .page { padding: 36px 22px 44px; }
+      .ticker { padding: 12px 22px; gap: 20px; }
       .site-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
       .site-footer { flex-direction: column; gap: 0.75rem; text-align: center; }
     }
@@ -111,6 +127,12 @@
 <body>
 
 <div class="glow" aria-hidden="true"><span></span></div>
+
+<div class="ticker" aria-hidden="true">
+  <span class="live">● trading</span>
+  <span>learning in public</span>
+  <span>options primer · 5 parts</span>
+</div>
 
 <div class="page">
 
@@ -122,79 +144,29 @@
     <a href="../" class="back-link">← Personal</a>
   </header>
 
-  <section class="list-hero">
+  <section class="hero">
     <div class="eyebrow">Personal · Learning in public</div>
-    <h1>Options, from scratch.</h1>
-    <p class="lede">A five-part visual primer I'm building as I learn to trade options safely — each issue one idea, told with as little jargon as possible. Read them online, or grab the print-ready PDFs.</p>
+    <h1>Trading.</h1>
+    <p class="tagline">Teaching myself to trade options safely, and writing down what I find on the way — the mechanics of the instrument, one idea at a time.</p>
   </section>
+
+  <div class="panels">
+
+    <a class="panel" href="options/">
+      <div class="panel-head">
+        <span class="panel-num">01</span>
+        <span class="panel-tag">Five issues</span>
+      </div>
+      <div class="panel-title">The options primer</div>
+      <p class="panel-desc">A visual series built one idea at a time — what an option is, how to trade it safely, what moves its price, the Greeks, and reading a live chain. Read online or download the print-ready PDFs.</p>
+      <div class="panel-foot"><span>Open the series</span><span class="arrow">→</span></div>
+    </a>
+
+  </div>
 
   <div class="disclaimer">
     <span class="ico">ⓘ</span>
-    <p>Educational reference, not investment advice. These are my own learning notes — nothing here is a recommendation to make any trade. Options carry real risk of loss.</p>
-  </div>
-
-  <div class="issues">
-
-    <div class="issue">
-      <div class="issue-num">01</div>
-      <div class="issue-body">
-        <div class="issue-title">At a Glance</div>
-        <div class="issue-desc">What an option actually is: buyer vs seller, calls vs puts, the four seats you can take, and moneyness.</div>
-      </div>
-      <div class="issue-actions">
-        <a class="btn btn-read" href="01-at-a-glance.html">Read →</a>
-        <a class="btn btn-pdf" href="options-cheat-sheet-01-at-a-glance.pdf" download>PDF ↓</a>
-      </div>
-    </div>
-
-    <div class="issue">
-      <div class="issue-num">02</div>
-      <div class="issue-body">
-        <div class="issue-title">Trading Safely</div>
-        <div class="issue-desc">Defined-risk starter strategies, position sizing, assignment mechanics, a pre-trade checklist, and the beginner traps to avoid.</div>
-      </div>
-      <div class="issue-actions">
-        <a class="btn btn-read" href="02-trading-safely.html">Read →</a>
-        <a class="btn btn-pdf" href="options-cheat-sheet-02-trading-safely.pdf" download>PDF ↓</a>
-      </div>
-    </div>
-
-    <div class="issue">
-      <div class="issue-num">03</div>
-      <div class="issue-body">
-        <div class="issue-title">What Moves the Price</div>
-        <div class="issue-desc">Intrinsic vs extrinsic value, time decay, and implied volatility — why you can be right on direction and still lose money.</div>
-      </div>
-      <div class="issue-actions">
-        <a class="btn btn-read" href="03-what-moves-the-price.html">Read →</a>
-        <a class="btn btn-pdf" href="options-cheat-sheet-03-what-moves-the-price.pdf" download>PDF ↓</a>
-      </div>
-    </div>
-
-    <div class="issue">
-      <div class="issue-num">04</div>
-      <div class="issue-body">
-        <div class="issue-title">The Greeks</div>
-        <div class="issue-desc">Delta, gamma, theta, vega and rho as plain-English intuitions — with a sign table across all four positions.</div>
-      </div>
-      <div class="issue-actions">
-        <a class="btn btn-read" href="04-the-greeks.html">Read →</a>
-        <a class="btn btn-pdf" href="options-cheat-sheet-04-the-greeks.pdf" download>PDF ↓</a>
-      </div>
-    </div>
-
-    <div class="issue">
-      <div class="issue-num">05</div>
-      <div class="issue-body">
-        <div class="issue-title">Reading the Chain</div>
-        <div class="issue-desc">How to read a live option chain column by column, and build a defined-risk debit spread straight from it.</div>
-      </div>
-      <div class="issue-actions">
-        <a class="btn btn-read" href="05-reading-the-chain.html">Read →</a>
-        <a class="btn btn-pdf" href="options-cheat-sheet-05-reading-the-chain.pdf" download>PDF ↓</a>
-      </div>
-    </div>
-
+    <p>Educational reference, not investment advice. These are my own notes — nothing here is a recommendation to make any trade, or to use or avoid any firm. Trading carries real risk of loss.</p>
   </div>
 
   <footer class="site-footer">
