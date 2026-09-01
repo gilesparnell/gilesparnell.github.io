@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Options Cheat Sheet — No. 07</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+:root{
+  --ink:#1d1d1b;
+  --muted:#8c8c85;
+  --faint:#b7b6ad;
+  --line:#dcdad0;
+  --line2:#e7e5db;
+  --paper:#ffffff;
+  --green:#4b7d5b;
+  --green-ink:#2f5a3e;
+  --green-panel:#e8efe6;
+  --green-line:#cfe0ce;
+  --red:#b0503c;
+  --red-ink:#8f3e2d;
+  --red-panel:#f6e9e3;
+  --red-line:#ecd2c6;
+  --cream:#f3f1e9;
+  --cream-line:#e6e3d6;
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;background:#54534d;}
+body{
+  font-family:'Inter',-apple-system,system-ui,sans-serif;
+  color:var(--ink);
+  -webkit-font-smoothing:antialiased;
+}
+.page{
+  position:relative;
+  width:210mm;
+  min-height:297mm;
+  background:var(--paper);
+  margin:0 auto;
+  padding:16mm 15mm 16mm 15mm;
+  page-break-after:always;
+}
+.page:last-child{page-break-after:auto;}
+
+.runhead{
+  display:flex;justify-content:space-between;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:8.5px;color:var(--muted);letter-spacing:.02em;
+  padding-bottom:9px;margin-bottom:0;
+}
+
+.mono{font-family:'IBM Plex Mono',monospace;}
+.serif{font-family:'Spectral',Georgia,serif;}
+.kicker{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:8.5px;letter-spacing:.22em;color:var(--muted);
+  text-transform:uppercase;
+}
+.sectlabel{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:8.5px;letter-spacing:.06em;color:var(--faint);
+  text-transform:uppercase;line-height:1.5;
+  margin-bottom:4px;
+}
+
+h1.title{
+  font-family:'Spectral',Georgia,serif;
+  font-weight:400;font-size:52px;line-height:.98;
+  margin:6px 0 0;letter-spacing:-.01em;
+}
+h1.title em{font-style:italic;font-weight:400;}
+h2.stitle{
+  font-family:'Spectral',Georgia,serif;
+  font-weight:500;font-size:23px;line-height:1.12;
+  margin:0 0 8px;letter-spacing:-.01em;
+}
+h2.stitle em{font-style:italic;font-weight:400;color:#555;}
+h3.big{
+  font-family:'Spectral',Georgia,serif;
+  font-weight:400;font-size:28px;margin:0 0 4px;line-height:1;
+}
+p{font-size:10.5px;line-height:1.5;color:#39392f;margin:0 0 8px;}
+p.lead{font-size:11px;color:#4a4a3f;}
+.small{font-size:9px;line-height:1.45;color:#55554a;}
+.tiny{font-size:8px;line-height:1.4;}
+b,strong{font-weight:600;color:var(--ink);}
+.gt{color:var(--green-ink);font-weight:600;}
+.rt{color:var(--red-ink);font-weight:600;}
+hr.rule{border:none;border-top:1px solid var(--line);margin:16px 0;}
+hr.thin{border:none;border-top:1px solid var(--line2);margin:10px 0;}
+
+.masthead{display:flex;justify-content:space-between;align-items:flex-start;}
+.metabox{
+  text-align:right;font-family:'IBM Plex Mono',monospace;
+  font-size:8.5px;line-height:1.7;color:var(--muted);padding-top:6px;
+}
+.metabox .hd{color:var(--ink);font-weight:500;}
+
+.intro{max-width:118mm;margin-top:14px;}
+
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:11px;}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;}
+.card{
+  border:1px solid var(--line);border-radius:3px;padding:13px 14px;background:#fff;
+}
+.card.green{background:var(--green-panel);border-color:var(--green-line);}
+.card.red{background:var(--red-panel);border-color:var(--red-line);}
+.card.cream{background:var(--cream);border-color:var(--cream-line);}
+.card .lab{font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;}
+.card h4{font-family:'Spectral',serif;font-weight:500;font-size:16px;margin:0 0 6px;}
+.dot{display:inline-block;width:6px;height:6px;border-radius:50%;vertical-align:middle;margin-right:5px;}
+.dot.g{background:var(--green);}
+.dot.r{background:var(--red);}
+
+.rows{margin-top:8px;border-top:1px dotted var(--faint);}
+.row{display:flex;justify-content:space-between;gap:8px;padding:4px 0;border-bottom:1px dotted #d9d7cc;}
+.row .k{font-family:'IBM Plex Mono',monospace;font-size:7.6px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);white-space:nowrap;}
+.row .v{font-size:9px;text-align:right;color:#333;}
+.row .v.g{color:var(--green-ink);font-weight:600;}
+.row .v.r{color:var(--red-ink);font-weight:600;}
+
+.callout{
+  border:1px solid var(--line);border-radius:3px;background:var(--cream);
+  padding:12px 15px;display:flex;gap:16px;align-items:flex-start;
+}
+.callout .tag{font-family:'Spectral',serif;font-style:italic;font-size:13px;color:#333;white-space:nowrap;min-width:88px;}
+
+.checklist{list-style:none;margin:0;padding:0;}
+.checklist li{position:relative;padding:7px 0 7px 26px;border-bottom:1px dotted #d9d7cc;font-size:10px;line-height:1.4;}
+.checklist li:before{
+  content:"";position:absolute;left:0;top:7px;width:13px;height:13px;border:1.4px solid var(--green);border-radius:3px;
+}
+.checklist li:after{
+  content:"";position:absolute;left:4px;top:8px;width:4px;height:7px;border:solid var(--green);border-width:0 1.6px 1.6px 0;transform:rotate(40deg);
+}
+.checklist li b{display:block;font-size:10.5px;}
+.checklist li span{color:#5a5a4f;font-size:8.7px;}
+
+.flags{list-style:none;margin:0;padding:0;}
+.flags li{position:relative;padding:6px 0 6px 20px;border-bottom:1px dotted #e2c9bf;font-size:9.4px;line-height:1.42;}
+.flags li:before{content:"\00D7";position:absolute;left:2px;top:5px;color:var(--red);font-weight:700;font-size:12px;font-family:'IBM Plex Mono',monospace;}
+.flags li b{color:var(--red-ink);}
+
+.gloss{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px 22px;}
+.gloss .term{font-family:'Spectral',serif;font-style:italic;font-size:12.5px;margin:0 0 3px;border-top:1px solid var(--line);padding-top:8px;}
+.gloss p{font-size:8.7px;line-height:1.42;color:#55554a;margin:0;}
+
+/* decision matrix */
+.matrix{width:100%;border-collapse:collapse;margin-top:4px;}
+.matrix th{
+  font-family:'IBM Plex Mono',monospace;font-size:7.6px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--muted);text-align:left;font-weight:500;
+  padding:0 8px 6px 0;border-bottom:1px solid var(--line);
+}
+.matrix td{
+  font-size:9.4px;line-height:1.4;color:#39392f;
+  padding:7px 8px 7px 0;border-bottom:1px dotted #d9d7cc;vertical-align:top;
+}
+.matrix td.act{font-family:'IBM Plex Mono',monospace;font-size:8.4px;letter-spacing:.06em;
+  text-transform:uppercase;font-weight:500;white-space:nowrap;}
+.matrix td.act.g{color:var(--green-ink);}
+.matrix td.act.r{color:var(--red-ink);}
+
+/* fill-in rules table */
+.ruletbl{width:100%;border-collapse:collapse;margin-top:6px;}
+.ruletbl th{
+  font-family:'IBM Plex Mono',monospace;font-size:7.6px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--muted);text-align:left;font-weight:500;
+  padding:0 8px 6px 0;border-bottom:1px solid var(--line);
+}
+.ruletbl td{font-size:9.2px;line-height:1.42;color:#39392f;padding:7px 8px 7px 0;
+  border-bottom:1px dotted #d9d7cc;vertical-align:top;}
+.ruletbl td.fill{border-bottom:1px solid var(--faint);min-width:34mm;}
+.ruletbl .ph{color:var(--faint);font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:.06em;}
+
+.goldrule{
+  border:1.4px solid #d9b878;border-radius:4px;background:#fbf4e6;
+  padding:11px 16px;margin:14px 0 0;text-align:center;
+}
+.goldrule .gr-lab{font-family:'IBM Plex Mono',monospace;font-size:7.6px;letter-spacing:.2em;
+  text-transform:uppercase;color:#a8802f;margin-bottom:5px;}
+.goldrule .gr-text{font-family:'Spectral',serif;font-weight:600;font-size:17px;line-height:1.25;
+  color:#463819;margin:0;}
+.goldrule .gr-sub{font-size:8.8px;line-height:1.45;color:#6b5a38;margin:6px 0 0;}
+
+.foot{
+  position:absolute;left:15mm;right:15mm;bottom:11mm;
+  display:flex;justify-content:space-between;
+  font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--faint);
+  letter-spacing:.06em;border-top:1px solid var(--line);padding-top:7px;
+}
+
+svg{display:block;}
+.axcap{font-family:'IBM Plex Mono',monospace;font-size:6.5px;fill:var(--muted);letter-spacing:.08em;}
+</style>
+  <link rel="stylesheet" href="assets/style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap">
+  <link rel="stylesheet" href="assets/reader.css">
+</head>
+<body class="reader">
+<div class="reader-bar">
+  <a class="rb-back" href="options/">&larr; Options series</a>
+  <div class="rb-title">No. 07 &middot; Two Lanes</div>
+</div>
+<div class="reader-scroll">
+
+<!-- ============ PAGE 1 ============ -->
+<section class="page">
+  <div class="runhead"><span>Options Cheat Sheet</span><span>No. 07 &middot; Two lanes</span></div>
+
+  <div class="masthead">
+    <div style="max-width:120mm;">
+      <div class="kicker">A visual primer &middot; No. 07</div>
+      <h1 class="title">Two lanes,<br><em>one account.</em></h1>
+    </div>
+    <div class="metabox">
+      <div class="hd">Lane A</div>
+      Shares you want<br>
+      Cash-secured puts<br><br>
+      <div class="hd">Lane B</div>
+      Income only<br>
+      Defined-risk spreads<br><br>
+      <div class="hd">Four pages</div>
+      <div class="hd" style="margin-top:10px;">Read after</div>
+      No. 06 &mdash; owning &amp; earning
+    </div>
+  </div>
+
+  <div class="intro">
+    <p class="lead">There are two different reasons to sell an option, and they need <em>opposite</em> rules. One is about buying companies you want at a price you chose. The other is about collecting income from companies you have no wish to own. <b>On the screen they look almost identical &mdash; which is exactly why people get hurt.</b></p>
+    <p class="small">Run them as separate businesses. Different instruments, different cash limits, different definitions of a good day. The rest of this issue is how each one works and how you keep them apart.</p>
+  </div>
+
+  <div class="goldrule">
+    <div class="gr-lab">The test that sorts every trade</div>
+    <p class="gr-text">&ldquo;If I&rsquo;m assigned these shares, am I pleased?&rdquo;</p>
+    <p class="gr-sub">Yes &rarr; Lane A. Sell a plain put, back it with real cash, and welcome the shares. No &rarr; Lane B. Never sell a plain put here &mdash; use a spread so the loss has a floor. Answer honestly before you look at the premium, because the premium will always argue for yes.</p>
+  </div>
+
+  <hr class="rule">
+
+  <div class="sectlabel">01 / Side by side</div>
+  <h2 class="stitle">The same screen, two different businesses.</h2>
+
+  <table class="matrix">
+    <thead>
+      <tr><th style="width:22%"></th><th style="width:39%">Lane A &mdash; conviction</th><th>Lane B &mdash; income</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><b>What it&rsquo;s for</b></td><td>Buying companies you want, cheaper than today, and being paid to wait.</td><td>Collecting premium from companies you have no wish to hold.</td></tr>
+      <tr><td><b>What you sell</b></td><td class="act g">A plain put, backed by cash</td><td class="act g">A put spread (two legs)</td></tr>
+      <tr><td><b>Being assigned</b></td><td class="gt">A good outcome. You wanted the shares.</td><td class="rt">A bad outcome. Structure it so it costs little.</td></tr>
+      <tr><td><b>Cash tied up</b></td><td>The full strike &times; 100. A $100 stock is $10,000.</td><td>Only the gap between the two strikes, less what you were paid.</td></tr>
+      <tr><td><b>Worst case</b></td><td>Large, but you end up owning something you chose.</td><td>Small and known before you enter &mdash; but you just lose it.</td></tr>
+      <tr><td><b>How often it wins</b></td><td>Usually. And a &ldquo;loss&rdquo; is a purchase.</td><td>Usually. And a loss is simply a loss.</td></tr>
+      <tr><td><b>Number of names</b></td><td>Few. Companies you have actually researched.</td><td>More, and deliberately spread out.</td></tr>
+      <tr><td><b>Success looks like</b></td><td>Shares accumulated at good prices, or premium while you wait.</td><td>Steady small credits, no single trade mattering much.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout" style="margin-top:14px;">
+    <div class="tag">The real danger.</div>
+    <p class="small" style="margin:0;">It is not Lane B going wrong &mdash; that is bounded by design. <b>It is Lane A creeping.</b> A company you half-like, at a premium too good to pass up, sold as a plain put because that is what you are used to. Then you are assigned, and you own something you never actually wanted, with the full cash committed. Every trade belongs to one lane. Decide which before you open the chain, not after.</p>
+  </div>
+
+  <div class="foot"><span>Options Cheat Sheet &middot; 07</span><span>Educational reference &mdash; not investment advice</span></div>
+</section>
+
+<!-- ============ PAGE 2 ============ -->
+<section class="page">
+  <div class="runhead"><span>Options Cheat Sheet</span><span>No. 07 &middot; Two lanes</span></div>
+
+  <div class="sectlabel">02 / Lane A</div>
+  <h2 class="stitle">Companies you want. The full cycle.</h2>
+  <p>This is the wheel from No. 06, run deliberately rather than mechanically. The whole thing rests on one honest answer: you would be content to own this company at this price.</p>
+
+  <div class="grid2" style="margin-top:10px;">
+    <div class="card cream">
+      <div class="lab">Step 01</div>
+      <h4>Name your buying price</h4>
+      <p class="small" style="margin:0;">Not a strike &mdash; a price. What would you genuinely be happy to pay for 100 shares? Subtract the premium you&rsquo;ll collect and that is your real cost. Work backwards from the price you want, never forwards from the premium on offer.</p>
+    </div>
+    <div class="card cream">
+      <div class="lab">Step 02</div>
+      <h4>Sell the put, park the cash</h4>
+      <p class="small" style="margin:0;">Collect the premium. Then set the full assignment amount aside <em>in your own accounting</em>. The broker will only hold a fraction &mdash; that is your problem to manage, not theirs.</p>
+    </div>
+    <div class="card green">
+      <div class="lab">Step 03a &mdash; it stays up</div>
+      <h4>Nothing happens</h4>
+      <p class="small" style="margin:0;">The contract expires. You keep the premium and buy nothing. The cash is released and you can do it again. This is the most common outcome by a wide margin.</p>
+    </div>
+    <div class="card green">
+      <div class="lab">Step 03b &mdash; it falls</div>
+      <h4>You are assigned</h4>
+      <p class="small" style="margin:0;">100 shares arrive at the strike. Your real cost is the strike minus the premium. This is not a failure &mdash; it is the outcome you agreed to and, in this lane, wanted.</p>
+    </div>
+  </div>
+
+  <div class="grid2" style="margin-top:11px;">
+    <div class="card">
+      <div class="lab">Step 04</div>
+      <h4>Now sell calls against them</h4>
+      <p class="small" style="margin:0;">You own 100 shares, so you can sell a call and collect again. Keep the strike comfortably above your cost, so that if the shares are taken you are selling at a profit rather than locking in a loss.</p>
+    </div>
+    <div class="card">
+      <div class="lab">Step 05</div>
+      <h4>Called away, or kept</h4>
+      <p class="small" style="margin:0;">Above the strike, the shares go and you are back to cash with three lots of profit. Below it, you keep the shares and the premium, and sell another call. Either is fine.</p>
+    </div>
+  </div>
+
+  <hr class="rule">
+
+  <div class="sectlabel">03 / When Lane A goes wrong</div>
+  <h2 class="stitle">The shares arrive, and keep falling.</h2>
+  <p>This is the outcome worth rehearsing in advance, because it is the one that tests whether the conviction was real.</p>
+  <p class="small">You are assigned at $95 on a stock that keeps sliding to $70. You now own 100 shares showing a $2,500 paper loss. Nothing has gone wrong <em>mechanically</em> &mdash; the trade did exactly what it said it would. What has happened is that you now hold the company, which is what you said you wanted.</p>
+
+  <ul class="checklist" style="margin-top:8px;">
+    <li><b>Do nothing.</b><span>If the reason you wanted the company still holds, a lower price is not new information &mdash; it is the situation you signed up for.</span></li>
+    <li><b>Sell calls above your cost, not above the market.</b><span>Tempting to write a $75 call for a fat premium. If it is called away you have crystallised the loss. Patience costs premium; it protects the position.</span></li>
+    <li><b>Decide whether the story changed.</b><span>A falling price is not itself a reason to sell. A changed business is. Separate the two before acting.</span></li>
+    <li><b>Do not average down automatically.</b><span>Selling another put to &ldquo;improve the average&rdquo; doubles a position that is already going against you. That is the concentration trap in No. 06.</span></li>
+  </ul>
+
+  <div class="foot"><span>Options Cheat Sheet &middot; 07</span><span>Educational reference &mdash; not investment advice</span></div>
+</section>
+
+<!-- ============ PAGE 3 ============ -->
+<section class="page">
+  <div class="runhead"><span>Options Cheat Sheet</span><span>No. 07 &middot; Two lanes</span></div>
+
+  <div class="sectlabel">04 / Lane B</div>
+  <h2 class="stitle">Companies you don&rsquo;t want. Cap the damage.</h2>
+  <p>Here, being handed the shares is the thing you are trying to avoid. So you build the position with a floor under it: <b>sell one put, and at the same time buy a cheaper put lower down.</b> The one you sell earns the income. The one you buy is the safety net.</p>
+
+  <div style="margin:12px 0 4px;"><svg viewBox="0 0 620 190" width="100%" height="190" role="img" aria-label="Credit spread payoff: capped gain above the higher strike, capped loss below the lower strike">
+  <line x1="34" y1="96" x2="596" y2="96" stroke="#b7b6ad" stroke-width="1" stroke-dasharray="3 3"/>
+  <line x1="34" y1="18" x2="34" y2="168" stroke="#dcdad0" stroke-width="1"/>
+  <path d="M60,150 L250,150 L430,58 L590,58" fill="none" stroke="#1d1d1b" stroke-width="1.6" stroke-linejoin="round"/>
+  <line x1="430" y1="58" x2="430" y2="104" stroke="#8c8c85" stroke-width="1" stroke-dasharray="2 2"/>
+  <line x1="250" y1="150" x2="250" y2="104" stroke="#8c8c85" stroke-width="1" stroke-dasharray="2 2"/>
+  <circle cx="376" cy="96" r="2.8" fill="#b0503c"/>
+  <line x1="34" y1="58" x2="590" y2="58" stroke="#4b7d5b" stroke-width="0.7" stroke-dasharray="2 3" opacity="0.55"/>
+  <line x1="34" y1="150" x2="590" y2="150" stroke="#b0503c" stroke-width="0.7" stroke-dasharray="2 3" opacity="0.55"/>
+  <text x="596" y="54" text-anchor="end" class="axcap" style="fill:#2f5a3e;">MOST YOU CAN MAKE &mdash; THE CREDIT</text>
+  <text x="596" y="146" text-anchor="end" class="axcap" style="fill:#8f3e2d;">MOST YOU CAN LOSE &mdash; AND IT STOPS HERE</text>
+  <text x="430" y="118" text-anchor="middle" class="axcap">PUT YOU SOLD</text>
+  <text x="250" y="118" text-anchor="middle" class="axcap">PUT YOU BOUGHT</text>
+  <text x="376" y="88" text-anchor="middle" class="axcap" style="fill:#8f3e2d;">BREAK-EVEN</text>
+  <text x="30" y="22" text-anchor="end" class="axcap">P/L</text>
+  <text x="596" y="180" text-anchor="end" class="axcap">SHARE PRICE AT EXPIRY &rarr;</text>
+</svg></div>
+
+  <hr class="thin">
+
+  <div class="sectlabel">05 / The numbers</div>
+  <h2 class="stitle">A worked example, in round figures.</h2>
+  <p class="small">Illustrative only &mdash; real prices differ every day. A share trading at $100:</p>
+
+  <table class="ruletbl" style="margin-top:4px;">
+    <tbody>
+      <tr><td style="width:46%"><b>Sell</b> the $90 put</td><td>You are paid <span class="gt">$200</span></td><td class="small" style="color:#55554a;">The income leg</td></tr>
+      <tr><td><b>Buy</b> the $85 put</td><td>You pay <span class="rt">$80</span></td><td class="small" style="color:#55554a;">The safety net</td></tr>
+      <tr><td><b>Net credit</b> &mdash; yours to keep</td><td><b class="gt">$120</b></td><td class="small" style="color:#55554a;">The most you can make</td></tr>
+      <tr><td><b>Gap between strikes</b> ($5 &times; 100)</td><td>$500</td><td class="small" style="color:#55554a;">The size of the risk</td></tr>
+      <tr><td><b>Most you can lose</b> ($500 &minus; $120)</td><td><b class="rt">$380</b></td><td class="small" style="color:#55554a;">And it stops there</td></tr>
+      <tr><td><b>Cash tied up</b></td><td><b>$380</b></td><td class="small" style="color:#55554a;">Not $9,000</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout" style="margin-top:14px;">
+    <div class="tag">The real advantage.</div>
+    <p class="small" style="margin:0;">A plain $90 put ties up <b>$9,000</b>. This spread ties up <b>$380</b> for a similar chance of success. That is roughly twenty-four positions&rsquo; worth of room from the same money &mdash; which is what makes genuine spreading across different companies possible at all on a modest account.</p>
+  </div>
+
+  <hr class="rule">
+
+  <div class="sectlabel">06 / What Lane B costs you</div>
+  <h2 class="stitle">Bounded is not the same as safe.</h2>
+
+  <ul class="flags" style="margin-top:6px;">
+    <li><b>You lose the whole risked amount, and not rarely.</b> $380 gone is a common outcome, not a freak one. Capped does not mean unlikely.</li>
+    <li><b>Less income.</b> You paid for the safety net out of your own premium. $120 instead of $200 on the same move.</li>
+    <li><b>You may need a higher permission level.</b> Spreads sit above plain puts in most brokers&rsquo; tiers. Check yours before planning around them.</li>
+    <li><b>Two legs, two spreads to cross.</b> Double the commission and double the bid/ask cost, in and out. On thinly traded contracts this quietly eats the credit.</li>
+    <li><b>You can still be assigned on the leg you sold.</b> The net loss stays capped, but shares can still appear and need dealing with.</li>
+    <li><b>Nothing to fall back on.</b> In Lane A a bad outcome leaves you holding a company you wanted. Here it leaves you holding nothing.</li>
+  </ul>
+
+  <div class="foot"><span>Options Cheat Sheet &middot; 07</span><span>Educational reference &mdash; not investment advice</span></div>
+</section>
+
+<!-- ============ PAGE 4 ============ -->
+<section class="page">
+  <div class="runhead"><span>Options Cheat Sheet</span><span>No. 07 &middot; Two lanes</span></div>
+
+  <div class="sectlabel">07 / Running both</div>
+  <h2 class="stitle">Split the money before you split your attention.</h2>
+  <p>The two lanes compete for the same cash, and the one with the better-looking premium will always win that argument in the moment. So decide the split when you are calm, write it down, and treat it as fixed until you deliberately revisit it.</p>
+
+  <div class="grid2" style="margin-top:10px;">
+    <div class="card cream">
+      <div class="lab">Lane A budget</div>
+      <h4>Few names, large commitments</h4>
+      <p class="small" style="margin:0;">Each position ties up a full strike&rsquo;s worth. Count how many simultaneous assignments you could actually absorb &mdash; that number, not the premium, is what limits this lane.</p>
+    </div>
+    <div class="card cream">
+      <div class="lab">Lane B budget</div>
+      <h4>Many names, small commitments</h4>
+      <p class="small" style="margin:0;">Each position ties up only its own maximum loss. The limit here is attention and correlation, not cash. Twelve spreads on twelve technology companies is one bet, not twelve.</p>
+    </div>
+  </div>
+
+  <div class="callout" style="margin-top:12px;">
+    <div class="tag">Always keep dry.</div>
+    <p class="small" style="margin:0;">Set aside a slice that neither lane may touch. The day everything falls together is the day Lane A hands you shares, Lane B hands you losses, and the best prices in months appear at once. Fully committed, you watch it happen.</p>
+  </div>
+
+  <hr class="rule">
+
+  <div class="sectlabel">08 / Two rule sets</div>
+  <h2 class="stitle">Write them separately. They are not the same trade.</h2>
+
+  <table class="ruletbl">
+    <thead>
+      <tr><th style="width:26%">Rule</th><th style="width:37%">Lane A &mdash; conviction</th><th>Lane B &mdash; income</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><b>Which names</b></td><td class="fill"><span class="ph">&hellip;&hellip;&hellip;</span></td><td class="fill"><span class="ph">&hellip;&hellip;&hellip;</span></td></tr>
+      <tr><td><b>Cash ceiling</b></td><td class="fill"><span class="ph">&hellip;&hellip;&hellip;</span></td><td class="fill"><span class="ph">&hellip;&hellip;&hellip;</span></td></tr>
+      <tr><td><b>Max positions at once</b></td><td class="fill"><span class="ph">&hellip;&hellip;&hellip;</span></td><td class="fill"><span class="ph">&hellip;&hellip;&hellip;</span></td></tr>
+      <tr><td><b>Days to expiry</b></td><td class="fill"><span class="ph">&hellip;&hellip;&hellip;</span></td><td class="fill"><span class="ph">&hellip;&hellip;&hellip;</span></td></tr>
+      <tr><td><b>Distance from price</b></td><td class="fill"><span class="ph">&hellip;&hellip;&hellip;</span></td><td class="fill"><span class="ph">&hellip;&hellip;&hellip;</span></td></tr>
+      <tr><td><b>Take profit at</b></td><td class="fill"><span class="ph">&hellip;&hellip;&hellip;</span></td><td class="fill"><span class="ph">&hellip;&hellip;&hellip;</span></td></tr>
+      <tr><td><b>If it goes against me</b></td><td class="fill"><span class="ph">&hellip;&hellip;&hellip;</span></td><td class="fill"><span class="ph">&hellip;&hellip;&hellip;</span></td></tr>
+      <tr><td><b>Never write through</b></td><td class="fill"><span class="ph">&hellip;&hellip;&hellip;</span></td><td class="fill"><span class="ph">&hellip;&hellip;&hellip;</span></td></tr>
+    </tbody>
+  </table>
+
+  <hr class="rule">
+
+  <div class="sectlabel">09 / The two ways this fails</div>
+  <h2 class="stitle">Both are about lanes bleeding into each other.</h2>
+
+  <div class="grid2" style="margin-top:8px;">
+    <div class="card red">
+      <div class="lab">Failure one</div>
+      <h4>Lane B priced like Lane A</h4>
+      <p class="small" style="margin:0;">Selling a plain put on a company you don&rsquo;t want, because the premium was good and you are in the habit. If it falls you own it, at full cost, with no floor and no reason to hold it. This is the expensive one.</p>
+    </div>
+    <div class="card red">
+      <div class="lab">Failure two</div>
+      <h4>Lane A chosen by premium</h4>
+      <p class="small" style="margin:0;">Letting the chain pick your companies. The richest premium belongs to whatever the market is most frightened of &mdash; which is rarely the same list as the companies you actually researched and want to hold for years.</p>
+    </div>
+  </div>
+
+  <div class="callout" style="margin-top:16px;background:#fbfaf6;">
+    <div class="tag">The short version.</div>
+    <p class="small" style="margin:0;">Ask one question before every trade: <b>if I&rsquo;m assigned, am I pleased?</b> Pleased means Lane A &mdash; plain put, real cash behind it, few names you know well. Not pleased means Lane B &mdash; a spread with a floor, small, spread across names, and never a plain put. Budget the two separately, keep some cash out of both, and write the rules while the market is closed. <b>Nothing here is a recommendation to trade, and none of it is financial advice.</b></p>
+  </div>
+
+  <div class="foot"><span>Options Cheat Sheet &middot; 07</span><span>Educational reference &mdash; not investment advice</span></div>
+</section>
+
+</div>
+<nav class="reader-nav">
+<a class="rn-prev" href="06-owning-and-earning.html"><div class="rn-dir">&larr; Previous</div><div class="rn-ttl">No. 06 &middot; Owning &amp; Earning</div></a>
+<a class="rn-next" href="options/"><div class="rn-dir">Back to series &rarr;</div><div class="rn-ttl">All seven primers</div></a>
+</nav>
+</body>
+</html>
