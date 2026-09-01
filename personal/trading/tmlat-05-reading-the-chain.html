@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TMLAT No. 05 &mdash; Reading that wall of numbers</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;1,400&family=Outfit:wght@300;400;500;600;700&display=swap">
+<link rel="stylesheet" href="assets/tmlat.css">
+</head>
+<body class="tmlat">
+
+<div class="t-bar">
+  <a class="t-back" href="options/">&larr; Series</a>
+  <div class="t-mid">TMLAT &middot; No. 05</div>
+  <a class="t-full" href="05-reading-the-chain.html">Full version</a>
+</div>
+
+<div class="wrap">
+
+  <div class="kick">Tell me like a 10-year-old &middot; No. 05</div>
+  <h1>Reading that <em>wall of numbers</em></h1>
+  <p class="stand">The option chain looks like a spreadsheet exploded. It isn&rsquo;t complicated &mdash; it&rsquo;s a <strong>menu</strong>, and once you know the shape you&rsquo;ll never be confused by it again.</p>
+
+  <nav class="toc">
+    <h2>What&rsquo;s in here</h2>
+    <ol><li><a href="#s1">It&rsquo;s a menu with prices down the middle</a></li><li><a href="#s2">Two prices, always &mdash; and the gap costs you</a></li><li><a href="#s3">Is anyone else actually here?</a></li><li><a href="#s4">Choosing how long you need</a></li></ol>
+  </nav>
+
+    <section class="blk" id="s1">
+      <div class="num">01</div>
+      <h2 class="head">It&rsquo;s a menu with prices down the middle</h2>
+      <p>Every option chain, on every platform, has the same layout. Learn it once.</p>
+      <figure class="fig"><svg viewBox="0 0 480 150" role="img" aria-label="An option chain: calls on the left, strike prices down the middle, puts on the right">
+  <rect x="10" y="18" width="170" height="116" rx="8" fill="#fdf4e4" stroke="#f0dcb8"/>
+  <rect x="192" y="18" width="96" height="116" rx="8" fill="#fff" stroke="#e4ded1"/>
+  <rect x="300" y="18" width="170" height="116" rx="8" fill="#e8f4f2" stroke="#c2e0db"/>
+  <text x="95" y="42" text-anchor="middle" class="flab">CALLS</text>
+  <text x="240" y="42" text-anchor="middle" class="flab">PRICES</text>
+  <text x="385" y="42" text-anchor="middle" class="flab">PUTS</text>
+  <text x="95" y="70" text-anchor="middle" class="fcap">BUY TICKETS</text>
+  <text x="240" y="70" text-anchor="middle" class="fcap">£ 10</text>
+  <text x="385" y="70" text-anchor="middle" class="fcap">SELL TICKETS</text>
+  <text x="240" y="94" text-anchor="middle" class="fcap">£ 11</text>
+  <text x="240" y="118" text-anchor="middle" class="fcap">£ 12</text>
+  <text x="95" y="112" text-anchor="middle" class="fcap">ONE ROW EACH</text>
+  <text x="385" y="112" text-anchor="middle" class="fcap">ONE ROW EACH</text>
+</svg><figcaption>Calls on one side, puts on the other, the price ladder down the middle.</figcaption></figure>
+      <ul class="plain"><li>Down the <strong>middle</strong> runs a ladder of prices &mdash; all the possible strike prices you could pick.</li><li>On <strong>one side</strong> are the call tickets (the buy ones) for each of those prices.</li><li>On the <strong>other side</strong> are the put tickets (the sell ones) for the same prices.</li><li>Along the <strong>top</strong> are the dates &mdash; each tab is a different expiry.</li></ul>
+      <p>So reading it is a three-step choice: pick a date, run down to the price you care about, then look left for calls or right for puts. That&rsquo;s it.</p>
+    </section>
+
+    <section class="blk" id="s2">
+      <div class="num">02</div>
+      <h2 class="head">Two prices, always &mdash; and the gap costs you</h2>
+      <p>Every ticket shows two prices, never one, and this catches everybody out at first.</p>
+      <ul class="plain"><li><strong>Bid</strong> &mdash; what someone will pay you if you&rsquo;re selling.</li><li><strong>Ask</strong> &mdash; what you must pay if you&rsquo;re buying.</li><li><strong>Spread</strong> &mdash; the gap between them.</li></ul>
+      <div class="ana"><div class="lab">The second-hand shop</div><p>The shop will buy your bike for &pound;80 and sell you the identical bike for &pound;100. That &pound;20 gap is how the shop lives.</p><p>The bid/ask spread is the same idea. You buy at the higher number and sell at the lower one, so the moment you buy, you&rsquo;re slightly behind.</p><p>A narrow gap is a busy, healthy market. A wide gap means it&rsquo;ll cost you real money just to get in and back out.</p></div>
+      <div class="warn"><div class="lab">What a wide spread actually means</div><p>If the bid is &pound;1.00 and the ask is &pound;1.60, you lose 60p per share &mdash; &pound;60 a contract &mdash; simply for changing your mind. On a ticket worth a couple of hundred pounds, that&rsquo;s enormous. Wide spreads are a reason to walk away, not a detail.</p></div>
+    </section>
+
+    <section class="blk" id="s3">
+      <div class="num">03</div>
+      <h2 class="head">Is anyone else actually here?</h2>
+      <p>Two columns tell you whether a ticket is busy or deserted, and people constantly muddle them.</p>
+      <ul class="plain"><li><strong>Volume</strong> &mdash; how many changed hands <em>today</em>. Resets to zero every morning.</li><li><strong>Open interest</strong> &mdash; how many exist <em>in total</em>, right now, held by someone.</li></ul>
+      <div class="ana"><div class="lab">A restaurant</div><p>Volume is how many people came in today. Open interest is how many are sitting at tables right now.</p><p>A place with both numbers healthy is somewhere you can get served and leave when you like.</p><p>Both numbers near zero is an empty restaurant with the lights off. You might get in. Getting back out at a fair price is the problem.</p></div>
+      <p>For anything you might need to exit early &mdash; which is most things &mdash; check these before you check the premium.</p>
+    </section>
+
+    <section class="blk" id="s4">
+      <div class="num">04</div>
+      <h2 class="head">Choosing how long you need</h2>
+      <p>Every date tab is a different amount of time, and time cuts differently depending on which side you&rsquo;re on.</p>
+      <ul class="plain"><li><strong>Nearby dates</strong> are cheap, melt fast, and are twitchy as anything. Great for sellers collecting rent, brutal for buyers.</li><li><strong>Distant dates</strong> cost more, melt slowly, and give your idea room to actually happen. Kinder to buyers, slower going for sellers.</li></ul>
+      <div class="ana"><div class="lab">Booking a hotel</div><p>One night is cheap but you must be right about tonight specifically. A fortnight costs much more but gives the weather a fair chance to turn.</p><p>Buying a very short-dated option is betting on tonight. It&rsquo;s cheap for a reason, and the reason is that it&rsquo;s usually wrong.</p></div>
+      <div class="jar"><div class="lab">The words grown-ups use</div><dl><dt>DTE</dt><dd>Days to expiry.</dd><dt>Weeklies</dt><dd>Options expiring this week &mdash; the twitchiest.</dd><dt>Front month</dt><dd>The nearest monthly expiry.</dd><dt>Liquidity</dt><dd>Whether enough people are trading it that you can get in and out sensibly.</dd></dl></div>
+    </section>
+
+  <div class="fnav">
+    <a href="tmlat-04-the-greeks.html"><div class="dir">&larr; Previous</div><div class="ttl">No. 04 &middot; The Greeks</div></a>
+    <a href="tmlat-06-owning-and-earning.html"><div class="dir">Next &rarr;</div><div class="ttl">No. 06 &middot; Getting paid</div></a>
+  </div>
+
+  <div class="disc"><strong>A reminder.</strong> This is me teaching myself, written in plain words on purpose. It is education, not financial advice, and options can lose you more than you put in. Nothing here is a suggestion to make any particular trade.</div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TMLAT No. 03 &mdash; Why the ticket price keeps changing</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;1,400&family=Outfit:wght@300;400;500;600;700&display=swap">
+<link rel="stylesheet" href="assets/tmlat.css">
+</head>
+<body class="tmlat">
+
+<div class="t-bar">
+  <a class="t-back" href="options/">&larr; Series</a>
+  <div class="t-mid">TMLAT &middot; No. 03</div>
+  <a class="t-full" href="03-what-moves-the-price.html">Full version</a>
+</div>
+
+<div class="wrap">
+
+  <div class="kick">Tell me like a 10-year-old &middot; No. 03</div>
+  <h1>Why the ticket price <em>keeps changing</em></h1>
+  <p class="stand">A ticket&rsquo;s price is made of two things glued together: <strong>what it&rsquo;s worth right now</strong>, and <strong>hope</strong>. The first is simple maths. The second is where all the confusion lives.</p>
+
+  <nav class="toc">
+    <h2>What&rsquo;s in here</h2>
+    <ol><li><a href="#s1">Every price is two things added together</a></li><li><a href="#s2">The hope part melts, and it speeds up</a></li><li><a href="#s3">Bouncy things have dearer tickets</a></li><li><a href="#s4">How to be right and still lose money</a></li></ol>
+  </nav>
+
+    <section class="blk" id="s1">
+      <div class="num">01</div>
+      <h2 class="head">Every price is two things added together</h2>
+      <p>Whenever you see an option price, you&rsquo;re looking at a sum. Two parts, always:</p>
+      <ul class="plain"><li><strong>Real worth right now.</strong> If you used the ticket this second, how much better off would you be? Your call lets you buy at &pound;100, the thing costs &pound;130, so that&rsquo;s &pound;30 of real worth. No opinion involved &mdash; it&rsquo;s arithmetic.</li><li><strong>Hope.</strong> Everything else. This is what people will pay for the chance that things get <em>even better</em> before the ticket expires.</li></ul>
+      <p>If a ticket costs &pound;38 and only &pound;30 of that is real worth, the other &pound;8 is pure hope. And hope has a nasty property, which is the next section.</p>
+      <div class="jar"><div class="lab">The words grown-ups use</div><dl><dt>Intrinsic value</dt><dd>The real worth right now. The arithmetic part.</dd><dt>Extrinsic value</dt><dd>The hope part. Also called time value.</dd><dt>Premium</dt><dd>The two added together. What you actually pay.</dd></dl></div>
+    </section>
+
+    <section class="blk" id="s2">
+      <div class="num">02</div>
+      <h2 class="head">The hope part melts, and it speeds up</h2>
+      <p>Hope value shrinks every single day, because there&rsquo;s less time left for something good to happen. On expiry day it reaches exactly zero &mdash; there&rsquo;s no future left to hope about.</p>
+      <figure class="fig"><svg viewBox="0 0 480 170" role="img" aria-label="Time value melts away, slowly at first and fastest near the expiry date">
+  <line x1="42" y1="132" x2="452" y2="132" stroke="#e4ded1" stroke-width="1.5"/>
+  <line x1="42" y1="22" x2="42" y2="132" stroke="#e4ded1" stroke-width="1.5"/>
+  <path d="M42,36 C150,44 250,62 330,86 C390,104 424,120 448,131"
+        fill="none" stroke="#c8892a" stroke-width="2.5" stroke-linecap="round"/>
+  <circle cx="448" cy="131" r="4" fill="#b0503c"/>
+  <text x="52" y="30" class="fcap">HOPE VALUE</text>
+  <text x="446" y="150" text-anchor="end" class="fcap">EXPIRY DAY</text>
+  <text x="48" y="150" class="fcap">TODAY</text>
+  <text x="330" y="76" text-anchor="middle" class="fcap" style="fill:#b0503c;">MELTS FASTEST HERE</text>
+</svg><figcaption>Hope value drips away slowly at first, then falls off a cliff near the end.</figcaption></figure>
+      <div class="ana"><div class="lab">The ice cube</div><p>Think of the hope part as an ice cube sitting on a table. It melts whether or not anything interesting happens.</p><p>And it doesn&rsquo;t melt evenly. A big cube on a cold morning barely changes. A small cube in the afternoon sun vanishes fast.</p><p>Options behave the same way: a ticket with three months left loses hope value slowly. A ticket with three days left loses it <strong>very</strong> quickly.</p></div>
+      <p>This cuts both ways, which is what makes it interesting. If you <em>bought</em> the ticket, melting is your enemy &mdash; you&rsquo;re losing money just from time passing. If you <em>sold</em> the ticket, melting is your friend, and it&rsquo;s the whole reason people sell options for income.</p>
+      <div class="jar"><div class="lab">The words grown-ups use</div><dl><dt>Time decay</dt><dd>The melting.</dd><dt>Theta</dt><dd>The Greek letter for how fast it melts per day. See No. 04.</dd><dt>DTE</dt><dd>Days to expiry &mdash; how much ice is left.</dd></dl></div>
+    </section>
+
+    <section class="blk" id="s3">
+      <div class="num">03</div>
+      <h2 class="head">Bouncy things have dearer tickets</h2>
+      <p>Two companies. Both cost &pound;100 a share. One drifts up and down by a few pence a week. The other regularly leaps or dives 10% in a day.</p>
+      <p>A ticket on the bouncy one costs much more. Not because anyone knows which way it&rsquo;s going &mdash; nobody does &mdash; but because <em>anything might happen</em>, and tickets are worth more when anything might happen.</p>
+      <div class="ana"><div class="lab">The weather</div><p>You&rsquo;re selling umbrella insurance. Charging someone in a place where it never rains is easy money, so you charge very little.</p><p>In a place with wild, unpredictable storms, you charge a lot &mdash; because you might genuinely have to pay out.</p><p>Option prices work identically. Wild and unpredictable means expensive tickets.</p></div>
+      <div class="warn"><div class="lab">The trap hiding in this</div><p>When you spot an option paying a wonderfully fat premium, the market is not being generous. It is telling you, in the only language it has, that this thing moves violently. The rich premium <em>is</em> the warning label.</p></div>
+      <div class="jar"><div class="lab">The words grown-ups use</div><dl><dt>Volatility</dt><dd>How much and how fast something jumps about.</dd><dt>Implied volatility (IV)</dt><dd>How bouncy the market is betting it&rsquo;ll be from here.</dd><dt>IV crush</dt><dd>When a big event passes, uncertainty vanishes, and ticket prices drop suddenly &mdash; even if you guessed the direction right.</dd></dl></div>
+    </section>
+
+    <section class="blk" id="s4">
+      <div class="num">04</div>
+      <h2 class="head">How to be right and still lose money</h2>
+      <p>This is the one that genuinely baffles beginners, and it&rsquo;s worth sitting with until it clicks.</p>
+      <div class="ana"><div class="lab">The maddening example</div><p>You buy a call because you reckon the shares will rise. You&rsquo;re right &mdash; they rise! And your ticket is worth <em>less</em> than when you bought it.</p><p>How? Two things worked against you while you were being right. The hope value melted a bit each day. And the market got calmer, so everyone&rsquo;s tickets got cheaper.</p><p>Both losses were bigger than your small win from the price going up. You were correct about the direction and it didn&rsquo;t save you.</p></div>
+      <p>With shares this can&rsquo;t happen: right about direction means money. With options, you need to be right about <strong>direction</strong>, <strong>size of move</strong>, <strong>timing</strong>, and to not get caught by calm settling in. Four things instead of one.</p>
+      <p>That&rsquo;s not a reason to avoid options. It <em>is</em> the reason that &ldquo;I think this will go up&rdquo; is a badly incomplete reason to buy a call.</p>
+    </section>
+
+  <div class="fnav">
+    <a href="tmlat-02-trading-safely.html"><div class="dir">&larr; Previous</div><div class="ttl">No. 02 &middot; Not getting hurt</div></a>
+    <a href="tmlat-04-the-greeks.html"><div class="dir">Next &rarr;</div><div class="ttl">No. 04 &middot; The Greeks</div></a>
+  </div>
+
+  <div class="disc"><strong>A reminder.</strong> This is me teaching myself, written in plain words on purpose. It is education, not financial advice, and options can lose you more than you put in. Nothing here is a suggestion to make any particular trade.</div>
+
+</div>
+</body>
+</html>

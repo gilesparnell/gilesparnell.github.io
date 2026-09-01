@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TMLAT No. 04 &mdash; The Greeks are just dials</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;1,400&family=Outfit:wght@300;400;500;600;700&display=swap">
+<link rel="stylesheet" href="assets/tmlat.css">
+</head>
+<body class="tmlat">
+
+<div class="t-bar">
+  <a class="t-back" href="options/">&larr; Series</a>
+  <div class="t-mid">TMLAT &middot; No. 04</div>
+  <a class="t-full" href="04-the-greeks.html">Full version</a>
+</div>
+
+<div class="wrap">
+
+  <div class="kick">Tell me like a 10-year-old &middot; No. 04</div>
+  <h1>The Greeks are just <em>dials</em></h1>
+  <p class="stand">They have intimidating names because they&rsquo;re Greek letters. They are just <strong>dials on a dashboard</strong>, each one answering a single plain question about your ticket.</p>
+
+  <nav class="toc">
+    <h2>What&rsquo;s in here</h2>
+    <ol><li><a href="#s1">Five dials, five questions</a></li><li><a href="#s2">Delta &mdash; how much you move with it</a></li><li><a href="#s3">Gamma &mdash; how twitchy delta is</a></li><li><a href="#s4">Theta &mdash; the daily rent</a></li><li><a href="#s5">Vega &mdash; how much you care about drama</a></li><li><a href="#s6">Which way each dial points for you</a></li></ol>
+  </nav>
+
+    <section class="blk" id="s1">
+      <div class="num">01</div>
+      <h2 class="head">Five dials, five questions</h2>
+      <p>Nobody sat down to make this confusing. Each Greek letter answers one question, and the questions are all fairly obvious once someone tells you what they are.</p>
+      <figure class="fig"><svg viewBox="0 0 480 128" role="img" aria-label="The Greeks as four dials: delta, gamma, theta and vega">
+  <g>
+    <circle cx="70" cy="56" r="30" fill="#fff" stroke="#e4ded1" stroke-width="1.5"/>
+    <line x1="70" y1="56" x2="88" y2="38" stroke="#c8892a" stroke-width="2.5" stroke-linecap="round"/>
+    <text x="70" y="106" text-anchor="middle" class="fcap">DELTA</text>
+  </g>
+  <g>
+    <circle cx="180" cy="56" r="30" fill="#fff" stroke="#e4ded1" stroke-width="1.5"/>
+    <line x1="180" y1="56" x2="198" y2="48" stroke="#c8892a" stroke-width="2.5" stroke-linecap="round"/>
+    <text x="180" y="106" text-anchor="middle" class="fcap">GAMMA</text>
+  </g>
+  <g>
+    <circle cx="290" cy="56" r="30" fill="#fff" stroke="#e4ded1" stroke-width="1.5"/>
+    <line x1="290" y1="56" x2="278" y2="76" stroke="#b0503c" stroke-width="2.5" stroke-linecap="round"/>
+    <text x="290" y="106" text-anchor="middle" class="fcap">THETA</text>
+  </g>
+  <g>
+    <circle cx="400" cy="56" r="30" fill="#fff" stroke="#e4ded1" stroke-width="1.5"/>
+    <line x1="400" y1="56" x2="416" y2="66" stroke="#0e7d72" stroke-width="2.5" stroke-linecap="round"/>
+    <text x="400" y="106" text-anchor="middle" class="fcap">VEGA</text>
+  </g>
+</svg><figcaption>Four dials worth knowing. The fifth barely moves.</figcaption></figure>
+      <ul class="plain"><li><strong>Delta</strong> &mdash; if the share moves &pound;1, how much does my ticket move?</li><li><strong>Gamma</strong> &mdash; how quickly does that answer itself change?</li><li><strong>Theta</strong> &mdash; how much do I lose each day just from time passing?</li><li><strong>Vega</strong> &mdash; how much do I care if things get more or less jumpy?</li><li><strong>Rho</strong> &mdash; how much do I care about interest rates? (Almost never. Ignore it for now.)</li></ul>
+      <p>Learn delta and theta properly and you&rsquo;ll understand most of what happens to your positions. The others are refinements.</p>
+    </section>
+
+    <section class="blk" id="s2">
+      <div class="num">02</div>
+      <h2 class="head">Delta &mdash; how much you move with it</h2>
+      <p>Delta is a number between 0 and 1 (or 0 and &minus;1 for puts). It says how much your ticket moves when the share moves by &pound;1.</p>
+      <div class="ana"><div class="lab">Being towed on a rope</div><p>Delta 0.5 means you&rsquo;re on a fairly slack rope. The share walks forward a metre, you get dragged half a metre.</p><p>Delta 0.9 means the rope is nearly tight &mdash; the share moves a metre, you move ninety centimetres. You&rsquo;re almost <em>being</em> the share.</p><p>Delta 0.1 means a very long, loose rope. The share moves a whole metre and you barely twitch.</p></div>
+      <p>There&rsquo;s a handy second use: delta is roughly the chance the ticket ends up worth using. A delta of 0.3 means somewhere near a 30% chance. It&rsquo;s an approximation, not a promise &mdash; but it&rsquo;s how people talk about picking strikes, so it&rsquo;s worth knowing.</p>
+    </section>
+
+    <section class="blk" id="s3">
+      <div class="num">03</div>
+      <h2 class="head">Gamma &mdash; how twitchy delta is</h2>
+      <p>Delta doesn&rsquo;t sit still. As the share price moves, delta changes too. Gamma measures how fast.</p>
+      <div class="ana"><div class="lab">Bicycle gears</div><p>Delta is what gear you&rsquo;re in. Gamma is how violently the gears change when the road tilts.</p><p>Low gamma is a smooth, predictable ride. High gamma means the gears crash about &mdash; one small move in the share and your position feels completely different from a moment ago.</p></div>
+      <p>Gamma is highest for tickets that are close to the strike price and close to expiry. That combination is exactly why last-day options feel wild and unmanageable: tiny movements flip you between &ldquo;worthless&rdquo; and &ldquo;valuable&rdquo; repeatedly.</p>
+    </section>
+
+    <section class="blk" id="s4">
+      <div class="num">04</div>
+      <h2 class="head">Theta &mdash; the daily rent</h2>
+      <p>Theta is the ice cube from No. 03, put into a number. It tells you how much value drips away per day, all else being equal.</p>
+      <div class="ana"><div class="lab">Renting a deckchair</div><p>You pay for the deckchair by the day whether or not you sit in it. Theta is that daily charge.</p><p>If you <strong>bought</strong> the ticket, you&rsquo;re the one paying rent. Every morning you wake up slightly poorer, even if nothing happened.</p><p>If you <strong>sold</strong> the ticket, you&rsquo;re the landlord collecting it. Every quiet day is a good day.</p></div>
+      <p>This is the real reason people sell options for income: they&rsquo;re collecting rent from time itself. And it&rsquo;s the real reason buying far-out cheap options usually disappoints &mdash; you&rsquo;re paying rent on something that mostly expires worthless.</p>
+    </section>
+
+    <section class="blk" id="s5">
+      <div class="num">05</div>
+      <h2 class="head">Vega &mdash; how much you care about drama</h2>
+      <p>Vega says how much your ticket&rsquo;s price changes when the market&rsquo;s expectation of jumpiness changes.</p>
+      <div class="ana"><div class="lab">The umbrella shop</div><p>You own a shop full of umbrellas. A forecast of storms arrives &mdash; you haven&rsquo;t sold a thing, but your stock just became more valuable. Then the forecast changes to a calm fortnight and your umbrellas are worth less again.</p><p>Nothing about the umbrellas changed. Only expectations did. That&rsquo;s vega.</p></div>
+      <p>It explains the classic beginner injury around big announcements: everyone expects drama, tickets get expensive, the announcement happens, uncertainty evaporates, and every ticket gets cheaper at once &mdash; including the ones held by people who guessed the direction correctly.</p>
+    </section>
+
+    <section class="blk" id="s6">
+      <div class="num">06</div>
+      <h2 class="head">Which way each dial points for you</h2>
+      <p>The same dial helps one person and hurts another, depending on whether you bought or sold. This little table is worth remembering:</p>
+      <ul class="plain"><li><strong>You bought a ticket:</strong> time hurts you (theta against), calm hurts you (vega against), big moves help you.</li><li><strong>You sold a ticket:</strong> time helps you (theta for), calm helps you (vega for), big moves hurt you.</li></ul>
+      <div class="ana"><div class="lab">The plain-English version</div><p><strong>Buyers</strong> need something to happen, and reasonably soon. Boredom is expensive for them.</p><p><strong>Sellers</strong> need nothing much to happen. They are being paid for patience, and drama is what costs them.</p></div>
+    </section>
+
+  <div class="fnav">
+    <a href="tmlat-03-what-moves-the-price.html"><div class="dir">&larr; Previous</div><div class="ttl">No. 03 &middot; Why the price moves</div></a>
+    <a href="tmlat-05-reading-the-chain.html"><div class="dir">Next &rarr;</div><div class="ttl">No. 05 &middot; Reading the screen</div></a>
+  </div>
+
+  <div class="disc"><strong>A reminder.</strong> This is me teaching myself, written in plain words on purpose. It is education, not financial advice, and options can lose you more than you put in. Nothing here is a suggestion to make any particular trade.</div>
+
+</div>
+</body>
+</html>
