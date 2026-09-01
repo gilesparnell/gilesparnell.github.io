@@ -185,3 +185,17 @@ figure.fig figcaption{
   font-size:0.85rem;line-height:1.55;color:var(--muted);
 }
 .disc strong{color:var(--ink-soft);}
+
+/* ---------- glossary links ---------- */
+.t-gl{
+  font-size:0.78rem;font-weight:600;white-space:nowrap;color:var(--muted);
+  border:1px solid var(--line);background:var(--card);
+  padding:7px 12px;border-radius:9px;transition:all .2s;
+}
+.t-gl:hover{color:var(--ink);border-color:var(--faint);}
+.fnav a.fnav-gl{background:var(--teal-bg);border-color:var(--teal-line);}
+.fnav a.fnav-gl:hover{background:#dbeeeb;}
+.fnav a.fnav-gl .ttl{color:var(--teal);}
+@media(max-width:520px){
+  .t-gl{display:none;}
+}
