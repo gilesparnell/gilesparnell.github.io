@@ -95,6 +95,14 @@
     .btn-pdf:hover { color: var(--text); border-color: var(--faint); }
     .btn-tmlat { color: #7fe3d4; background: rgba(56,191,160,0.12); border: 1px solid rgba(56,191,160,0.34); }
     .btn-tmlat:hover { color: #a7f0e5; background: rgba(56,191,160,0.22); border-color: rgba(56,191,160,0.6); }
+    .companion { display: flex; align-items: center; gap: 20px; margin-top: 20px; padding: 22px 24px; text-decoration: none; color: inherit; background: rgba(56,191,160,0.07); border: 1px solid rgba(56,191,160,0.28); border-radius: var(--radius); transition: transform 0.35s cubic-bezier(0.16,1,0.3,1), border-color 0.3s, background 0.3s; }
+    .companion:hover { transform: translateY(-3px); border-color: rgba(56,191,160,0.55); background: rgba(56,191,160,0.13); }
+    .companion-ico { flex-shrink: 0; width: 54px; height: 54px; display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 22px; font-weight: 700; color: #7fe3d4; background: rgba(56,191,160,0.14); border: 1px solid rgba(56,191,160,0.3); border-radius: 13px; }
+    .companion-body { flex: 1; min-width: 0; }
+    .companion-title { font-weight: 700; font-size: 18px; letter-spacing: -0.02em; margin-bottom: 4px; }
+    .companion-desc { font-size: 13.5px; color: var(--dim); line-height: 1.55; }
+    .companion-go { flex-shrink: 0; font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: #7fe3d4; white-space: nowrap; }
+    @media (max-width: 640px) { .companion { flex-wrap: wrap; gap: 14px; } .companion-go { width: 100%; } }
 
     .site-footer { margin-top: 44px; padding-top: 20px; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: #6a6152; }
     .site-footer a { color: var(--dim); text-decoration: none; transition: color 0.2s; }
@@ -225,9 +233,18 @@
 
   </div>
 
+  <a class="companion" href="../glossary/">
+    <div class="companion-ico">AZ</div>
+    <div class="companion-body">
+      <div class="companion-title">The glossary</div>
+      <div class="companion-desc">Stuck on a word? Every term in four columns — the definition, the same thing explained like you're ten, and a worked example. Plus an annotated walk through the IBKR portfolio screen.</div>
+    </div>
+    <div class="companion-go">86 terms →</div>
+  </a>
+
   <footer class="site-footer">
     <span>© 2026 Giles Parnell</span>
-    <span><a href="../../../">Giles Parnell</a> · <a href="../../">Personal</a> · <a href="../">Trading</a></span>
+    <span><a href="../../../">Giles Parnell</a> · <a href="../../">Personal</a> · <a href="../">Trading</a> · <a href="../glossary/">Glossary</a></span>
   </footer>
 
 </div>
