@@ -157,3 +157,16 @@ td.c-ex,td.c-kid,td.c-def{min-width:14rem;}
 .foot-nav .ttl{font-size:0.97rem;font-weight:600;color:var(--ink);}
 
 [hidden]{display:none !important;}
+
+/* ---------- category callout ---------- */
+.note{
+  background:var(--amber-bg);border:1px solid #f0dcb8;
+  border-left:4px solid var(--amber);border-radius:10px;
+  padding:15px 18px;margin:0 0 16px;
+}
+.note-lab{
+  font-size:0.7rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--amber);margin-bottom:7px;
+}
+.note p{margin:0;font-size:0.95rem;line-height:1.6;color:#5a4a2c;}
+.note b{color:#463819;font-weight:700;}
