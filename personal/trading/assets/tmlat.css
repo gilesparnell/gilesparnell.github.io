@@ -199,3 +199,24 @@ figure.fig figcaption{
 @media(max-width:520px){
   .t-gl{display:none;}
 }
+
+/* ---------- the golden rule ---------- */
+.goldrule{
+  margin:26px 0;padding:26px 28px;
+  background:linear-gradient(180deg,#fdf4e4 0%,#fbeedb 100%);
+  border:1px solid #eccf9c;border-radius:14px;
+  box-shadow:0 1px 0 rgba(255,255,255,0.7) inset;
+  text-align:center;
+}
+.goldrule .gr-lab{
+  font-size:0.68rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--amber);margin-bottom:12px;
+}
+.goldrule .gr-text{
+  font-family:'Spectral',Georgia,serif;font-weight:600;
+  font-size:clamp(1.25rem,3.6vw,1.72rem);line-height:1.3;
+  color:#463819;margin:0;letter-spacing:-.01em;
+}
+.goldrule .gr-sub{
+  margin:14px 0 0;font-size:0.94rem;line-height:1.55;color:#6b5a38;
+}
