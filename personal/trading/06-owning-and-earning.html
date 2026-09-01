@@ -173,6 +173,16 @@ hr.thin{border:none;border-top:1px solid var(--line2);margin:10px 0;}
 .ruletbl td.fill{border-bottom:1px solid var(--faint);min-width:34mm;}
 .ruletbl .ph{color:var(--faint);font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:.06em;}
 
+.goldrule{
+  border:1.4px solid #d9b878;border-radius:4px;background:#fbf4e6;
+  padding:11px 16px;margin:14px 0 0;text-align:center;
+}
+.goldrule .gr-lab{font-family:'IBM Plex Mono',monospace;font-size:7.6px;letter-spacing:.2em;
+  text-transform:uppercase;color:#a8802f;margin-bottom:5px;}
+.goldrule .gr-text{font-family:'Spectral',serif;font-weight:600;font-size:17px;line-height:1.25;
+  color:#463819;margin:0;}
+.goldrule .gr-sub{font-size:8.8px;line-height:1.45;color:#6b5a38;margin:6px 0 0;}
+
 .foot{
   position:absolute;left:15mm;right:15mm;bottom:11mm;
   display:flex;justify-content:space-between;
@@ -219,6 +229,12 @@ svg{display:block;}
   <div class="intro">
     <p class="lead">The first five numbers treated options as trades. This one treats them as <em>a way of managing shares you intend to own for years</em>. The question changes from &ldquo;which way will it move?&rdquo; to something far more answerable: <b>given what I already hold, which positions am I even allowed to take, and what does each one commit me to?</b></p>
     <p class="small">That reframing matters because it removes prediction from the decision. You are not forecasting a price. You are naming a price at which you would be content to buy, or content to sell, and being paid for the commitment.</p>
+  </div>
+
+  <div class="goldrule">
+    <div class="gr-lab">The one rule</div>
+    <p class="gr-text">Only sell puts on things you&rsquo;d want to own.</p>
+    <p class="gr-sub">Selling a put <em>is</em> a promise to buy the shares. If the price falls you own them &mdash; that is the deal, not bad luck. This single rule is what turns an assignment from a loss into a purchase you were happy to make, and it is the condition every page here rests on.</p>
   </div>
 
   <hr class="rule">
@@ -527,7 +543,7 @@ svg{display:block;}
 
   <div class="callout" style="margin-top:16px;background:#fbfaf6;">
     <div class="tag">The short version.</div>
-    <p class="small" style="margin:0;">Let your holdings decide which positions are available &mdash; cash writes puts, shares write calls. Name the price you would be content to transact at, back the obligation with real collateral, and write the rules before you open the chain. Income follows from the discipline, not from the strike. <b>Nothing here is a recommendation to trade, and none of it is financial advice; it is a map of how the mechanics fit together if you choose to use them.</b></p>
+    <p class="small" style="margin:0;"><b>Only sell puts on things you&rsquo;d want to own.</b> Beyond that: let your holdings decide which positions are available &mdash; cash writes puts, shares write calls. Name the price you would be content to transact at, back the obligation with real collateral, and write the rules before you open the chain. Income follows from the discipline, not from the strike. <b>Nothing here is a recommendation to trade, and none of it is financial advice; it is a map of how the mechanics fit together if you choose to use them.</b></p>
   </div>
 
   <div class="foot"><span>Options Cheat Sheet &middot; 06</span><span>Educational reference &mdash; not investment advice</span></div>
