@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TMLAT No. 07 &mdash; Two lanes, one account</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;1,400&family=Outfit:wght@300;400;500;600;700&display=swap">
+<link rel="stylesheet" href="assets/tmlat.css">
+</head>
+<body class="tmlat">
+
+<div class="t-bar">
+  <a class="t-back" href="options/">&larr; Series</a>
+  <div class="t-mid">TMLAT &middot; No. 07</div>
+  <a class="t-gl" href="glossary/">Glossary</a>
+  <a class="t-full" href="07-two-lanes.html">Full version</a>
+</div>
+
+<div class="wrap">
+
+  <div class="kick">Tell me like a 10-year-old &middot; No. 07</div>
+  <h1>Two lanes, <em>one account</em></h1>
+  <p class="stand">There are two different reasons to sell an option, and they need <strong>opposite rules</strong>. On the screen they look almost the same. That is exactly why people come unstuck.</p>
+
+  <nav class="toc">
+    <h2>What&rsquo;s in here</h2>
+    <ol><li><a href="#s1">One question sorts every trade</a></li><li><a href="#s2">Lane A &mdash; companies you actually want</a></li><li><a href="#s3">Lane B &mdash; companies you just want money from</a></li><li><a href="#s4">What Lane B costs you</a></li><li><a href="#s5">Running both at once</a></li></ol>
+  </nav>
+
+    <section class="blk" id="s1">
+      <div class="num">01</div>
+      <h2 class="head">One question sorts every trade</h2>
+      <div class="goldrule"><div class="gr-lab">The one rule</div><p class="gr-text">If I&rsquo;m assigned these shares, am I pleased?</p><p class="gr-sub"><b>Yes</b> &rarr; Lane A. Sell a plain put, keep the cash ready, welcome the shares. <b>No</b> &rarr; Lane B. Never sell a plain put here &mdash; use a spread, so the loss has a floor.</p></div>
+      <p>Ask it <em>before</em> you look at what the option pays. The payment will always argue for &ldquo;yes&rdquo;, because a big payment is exactly what a risky company looks like.</p>
+      <p>Everything else on this page follows from your answer.</p>
+    </section>
+
+    <section class="blk" id="s2">
+      <div class="num">02</div>
+      <h2 class="head">Lane A &mdash; companies you actually want</h2>
+      <p>Tesla, SpaceX, Nvidia &mdash; whatever your list is. Here you are not really chasing income. You are <strong>buying companies at prices you chose</strong>, and getting paid while you wait to find out whether you get them.</p>
+      <div class="ana"><div class="lab">How it runs</div><p><b>1.</b> Decide the price you&rsquo;d genuinely be happy to pay for 100 shares. Not a strike off the screen &mdash; a price.</p><p><b>2.</b> Sell a put at that level. You&rsquo;re paid straight away. Put the full purchase money aside in your own head, whatever the broker holds.</p><p><b>3.</b> If the price stays up, nothing happens. Keep the money, do it again.</p><p><b>4.</b> If it falls, the shares turn up. That is not a mistake. That is the thing you asked for.</p><p><b>5.</b> Now you own 100 shares, so you can sell a call against them and get paid a third time.</p></div>
+      <p>The reason this works is that the bad outcome isn&rsquo;t really bad. You end up owning a company you wanted, at a price you picked. <strong>The loss is a purchase.</strong></p>
+      <div class="warn"><div class="lab">The version that goes wrong</div><p>You&rsquo;re assigned at $95 and it keeps sliding to $70. You now hold shares worth $2,500 less than you paid. Nothing broke &mdash; the trade did exactly what it promised. The question is whether you still believe in the company. A lower price on its own is not new information. A changed business is. Don&rsquo;t confuse the two, and don&rsquo;t sell another put to &ldquo;fix the average&rdquo; &mdash; that just makes a bad position bigger.</p></div>
+    </section>
+
+    <section class="blk" id="s3">
+      <div class="num">03</div>
+      <h2 class="head">Lane B &mdash; companies you just want money from</h2>
+      <p>Different job entirely. You have no interest in owning these. You only want the payment. So the shares turning up is the thing you are trying to <em>avoid</em>.</p>
+      <p>A plain put can&rsquo;t do that, because a plain put <strong>is</strong> a promise to buy. So you build it differently:</p>
+      <div class="ana"><div class="lab">The two-part version</div><p><b>Sell</b> a put, as normal. That&rsquo;s the bit that pays you.</p><p><b>At the same time, buy</b> a cheaper put lower down. That&rsquo;s a safety net.</p><p>If the share price collapses, the one you bought goes up in value and stops the damage. Your loss has a floor, and you know exactly where it is before you start.</p></div>
+      <p>It&rsquo;s called a <strong>spread</strong> &mdash; because you have two contracts spread apart on price.</p>
+      <ul class="plain"><li><strong>Share at $100.</strong> Sell the $90 put, get paid $200.</li><li><strong>Buy the $85 put</strong> for $80. Now you keep $120 rather than $200.</li><li><strong>Gap between them:</strong> $5, which over 100 shares is $500.</li><li><strong>Worst case:</strong> $500 minus the $120 you kept = <b>$380</b>. It cannot get worse than that.</li><li><strong>Cash tied up: $380</strong> &mdash; not the $9,000 a plain put would need.</li></ul>
+      <p>That last line is the real reason to use one. The same money stretches across many more positions, which is what lets you spread across different companies at all on a normal-sized account.</p>
+    </section>
+
+    <section class="blk" id="s4">
+      <div class="num">04</div>
+      <h2 class="head">What Lane B costs you</h2>
+      <p>A floor under the loss sounds like it has no downside. It has several, and they&rsquo;re worth knowing before you plan around it.</p>
+      <ul class="plain"><li><strong>You lose the full amount fairly often.</strong> Capped is not the same as unlikely. Losing the whole $380 is a normal outcome, not a freak one.</li><li><strong>You get paid less.</strong> $120 rather than $200, because you bought the safety net out of your own premium.</li><li><strong>You may not be allowed to yet.</strong> Brokers put spreads at a higher permission level than plain puts. Worth checking yours.</li><li><strong>Two contracts, double the costs.</strong> Two lots of commission, and two gaps between buy and sell price to cross, both going in and coming out.</li><li><strong>Nothing to fall back on.</strong> In Lane A a bad day leaves you holding a company you wanted. Here it just leaves you poorer.</li></ul>
+    </section>
+
+    <section class="blk" id="s5">
+      <div class="num">05</div>
+      <h2 class="head">Running both at once</h2>
+      <p>They compete for the same money, and the one with the better-looking payment will always win that argument in the moment. So decide the split when the market is shut.</p>
+      <ul class="plain"><li><strong>Lane A:</strong> few companies, big commitments. The limit is how many assignments you could genuinely absorb at the same time.</li><li><strong>Lane B:</strong> more companies, small commitments. The limit is attention &mdash; and the fact that twelve technology companies all fall on the same day.</li><li><strong>Untouchable slice:</strong> money neither lane may use. The day everything drops together is the day Lane A hands you shares, Lane B hands you losses, and the best prices in a year appear at once.</li></ul>
+      <div class="ana"><div class="lab">The two ways this goes wrong</div><p><b>Lane B run like Lane A.</b> Selling a plain put on a company you don&rsquo;t want, because the payment looked good and it&rsquo;s the habit you&rsquo;re in. It falls, you own it, at full price, with no floor and no reason to keep it. This is the expensive one.</p><p><b>Lane A picked by payment.</b> Letting the screen choose your companies. The richest payments belong to whatever the market is most frightened of &mdash; which is rarely the same list as the companies you researched and want to hold for years.</p></div>
+      <p>Two lanes, two sets of rules, written down separately. The full blank rules table is on page four of the proper version of this issue.</p>
+    </section>
+
+  <div class="fnav">
+    <a href="tmlat-06-owning-and-earning.html"><div class="dir">&larr; Previous</div><div class="ttl">No. 06 &middot; Getting paid</div></a>
+    
+    <a class="fnav-gl" href="glossary/"><div class="dir">Stuck on a word?</div><div class="ttl">The glossary &rarr;</div></a>
+  </div>
+
+  <div class="disc"><strong>A reminder.</strong> This is me teaching myself, written in plain words on purpose. It is education, not financial advice, and options can lose you more than you put in. Nothing here is a suggestion to make any particular trade.</div>
+
+</div>
+</body>
+</html>
