@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Options Cheat Sheet — No. 06</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+:root{
+  --ink:#1d1d1b;
+  --muted:#8c8c85;
+  --faint:#b7b6ad;
+  --line:#dcdad0;
+  --line2:#e7e5db;
+  --paper:#ffffff;
+  --green:#4b7d5b;
+  --green-ink:#2f5a3e;
+  --green-panel:#e8efe6;
+  --green-line:#cfe0ce;
+  --red:#b0503c;
+  --red-ink:#8f3e2d;
+  --red-panel:#f6e9e3;
+  --red-line:#ecd2c6;
+  --cream:#f3f1e9;
+  --cream-line:#e6e3d6;
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;background:#54534d;}
+body{
+  font-family:'Inter',-apple-system,system-ui,sans-serif;
+  color:var(--ink);
+  -webkit-font-smoothing:antialiased;
+}
+.page{
+  position:relative;
+  width:210mm;
+  min-height:297mm;
+  background:var(--paper);
+  margin:0 auto;
+  padding:16mm 15mm 16mm 15mm;
+  page-break-after:always;
+}
+.page:last-child{page-break-after:auto;}
+
+.runhead{
+  display:flex;justify-content:space-between;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:8.5px;color:var(--muted);letter-spacing:.02em;
+  padding-bottom:9px;margin-bottom:0;
+}
+
+.mono{font-family:'IBM Plex Mono',monospace;}
+.serif{font-family:'Spectral',Georgia,serif;}
+.kicker{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:8.5px;letter-spacing:.22em;color:var(--muted);
+  text-transform:uppercase;
+}
+.sectlabel{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:8.5px;letter-spacing:.06em;color:var(--faint);
+  text-transform:uppercase;line-height:1.5;
+  margin-bottom:4px;
+}
+
+h1.title{
+  font-family:'Spectral',Georgia,serif;
+  font-weight:400;font-size:52px;line-height:.98;
+  margin:6px 0 0;letter-spacing:-.01em;
+}
+h1.title em{font-style:italic;font-weight:400;}
+h2.stitle{
+  font-family:'Spectral',Georgia,serif;
+  font-weight:500;font-size:23px;line-height:1.12;
+  margin:0 0 8px;letter-spacing:-.01em;
+}
+h2.stitle em{font-style:italic;font-weight:400;color:#555;}
+h3.big{
+  font-family:'Spectral',Georgia,serif;
+  font-weight:400;font-size:28px;margin:0 0 4px;line-height:1;
+}
+p{font-size:10.5px;line-height:1.5;color:#39392f;margin:0 0 8px;}
+p.lead{font-size:11px;color:#4a4a3f;}
+.small{font-size:9px;line-height:1.45;color:#55554a;}
+.tiny{font-size:8px;line-height:1.4;}
+b,strong{font-weight:600;color:var(--ink);}
+.gt{color:var(--green-ink);font-weight:600;}
+.rt{color:var(--red-ink);font-weight:600;}
+hr.rule{border:none;border-top:1px solid var(--line);margin:16px 0;}
+hr.thin{border:none;border-top:1px solid var(--line2);margin:10px 0;}
+
+.masthead{display:flex;justify-content:space-between;align-items:flex-start;}
+.metabox{
+  text-align:right;font-family:'IBM Plex Mono',monospace;
+  font-size:8.5px;line-height:1.7;color:var(--muted);padding-top:6px;
+}
+.metabox .hd{color:var(--ink);font-weight:500;}
+
+.intro{max-width:118mm;margin-top:14px;}
+
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:11px;}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;}
+.card{
+  border:1px solid var(--line);border-radius:3px;padding:13px 14px;background:#fff;
+}
+.card.green{background:var(--green-panel);border-color:var(--green-line);}
+.card.red{background:var(--red-panel);border-color:var(--red-line);}
+.card.cream{background:var(--cream);border-color:var(--cream-line);}
+.card .lab{font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;}
+.card h4{font-family:'Spectral',serif;font-weight:500;font-size:16px;margin:0 0 6px;}
+.dot{display:inline-block;width:6px;height:6px;border-radius:50%;vertical-align:middle;margin-right:5px;}
+.dot.g{background:var(--green);}
+.dot.r{background:var(--red);}
+
+.rows{margin-top:8px;border-top:1px dotted var(--faint);}
+.row{display:flex;justify-content:space-between;gap:8px;padding:4px 0;border-bottom:1px dotted #d9d7cc;}
+.row .k{font-family:'IBM Plex Mono',monospace;font-size:7.6px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);white-space:nowrap;}
+.row .v{font-size:9px;text-align:right;color:#333;}
+.row .v.g{color:var(--green-ink);font-weight:600;}
+.row .v.r{color:var(--red-ink);font-weight:600;}
+
+.callout{
+  border:1px solid var(--line);border-radius:3px;background:var(--cream);
+  padding:12px 15px;display:flex;gap:16px;align-items:flex-start;
+}
+.callout .tag{font-family:'Spectral',serif;font-style:italic;font-size:13px;color:#333;white-space:nowrap;min-width:88px;}
+
+.checklist{list-style:none;margin:0;padding:0;}
+.checklist li{position:relative;padding:7px 0 7px 26px;border-bottom:1px dotted #d9d7cc;font-size:10px;line-height:1.4;}
+.checklist li:before{
+  content:"";position:absolute;left:0;top:7px;width:13px;height:13px;border:1.4px solid var(--green);border-radius:3px;
+}
+.checklist li:after{
+  content:"";position:absolute;left:4px;top:8px;width:4px;height:7px;border:solid var(--green);border-width:0 1.6px 1.6px 0;transform:rotate(40deg);
+}
+.checklist li b{display:block;font-size:10.5px;}
+.checklist li span{color:#5a5a4f;font-size:8.7px;}
+
+.flags{list-style:none;margin:0;padding:0;}
+.flags li{position:relative;padding:6px 0 6px 20px;border-bottom:1px dotted #e2c9bf;font-size:9.4px;line-height:1.42;}
+.flags li:before{content:"\00D7";position:absolute;left:2px;top:5px;color:var(--red);font-weight:700;font-size:12px;font-family:'IBM Plex Mono',monospace;}
+.flags li b{color:var(--red-ink);}
+
+.gloss{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px 22px;}
+.gloss .term{font-family:'Spectral',serif;font-style:italic;font-size:12.5px;margin:0 0 3px;border-top:1px solid var(--line);padding-top:8px;}
+.gloss p{font-size:8.7px;line-height:1.42;color:#55554a;margin:0;}
+
+/* decision matrix */
+.matrix{width:100%;border-collapse:collapse;margin-top:4px;}
+.matrix th{
+  font-family:'IBM Plex Mono',monospace;font-size:7.6px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--muted);text-align:left;font-weight:500;
+  padding:0 8px 6px 0;border-bottom:1px solid var(--line);
+}
+.matrix td{
+  font-size:9.4px;line-height:1.4;color:#39392f;
+  padding:7px 8px 7px 0;border-bottom:1px dotted #d9d7cc;vertical-align:top;
+}
+.matrix td.act{font-family:'IBM Plex Mono',monospace;font-size:8.4px;letter-spacing:.06em;
+  text-transform:uppercase;font-weight:500;white-space:nowrap;}
+.matrix td.act.g{color:var(--green-ink);}
+.matrix td.act.r{color:var(--red-ink);}
+
+/* fill-in rules table */
+.ruletbl{width:100%;border-collapse:collapse;margin-top:6px;}
+.ruletbl th{
+  font-family:'IBM Plex Mono',monospace;font-size:7.6px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--muted);text-align:left;font-weight:500;
+  padding:0 8px 6px 0;border-bottom:1px solid var(--line);
+}
+.ruletbl td{font-size:9.2px;line-height:1.42;color:#39392f;padding:7px 8px 7px 0;
+  border-bottom:1px dotted #d9d7cc;vertical-align:top;}
+.ruletbl td.fill{border-bottom:1px solid var(--faint);min-width:34mm;}
+.ruletbl .ph{color:var(--faint);font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:.06em;}
+
+.foot{
+  position:absolute;left:15mm;right:15mm;bottom:11mm;
+  display:flex;justify-content:space-between;
+  font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--faint);
+  letter-spacing:.06em;border-top:1px solid var(--line);padding-top:7px;
+}
+
+svg{display:block;}
+.axcap{font-family:'IBM Plex Mono',monospace;font-size:6.5px;fill:var(--muted);letter-spacing:.08em;}
+</style>
+  <link rel="stylesheet" href="assets/style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap">
+  <link rel="stylesheet" href="assets/reader.css">
+</head>
+<body class="reader">
+<div class="reader-bar">
+  <a class="rb-back" href="options/">&larr; Options series</a>
+  <div class="rb-title">No. 06 &middot; Owning &amp; Earning</div>
+</div>
+<div class="reader-scroll">
+
+<!-- ============ PAGE 1 ============ -->
+<section class="page">
+  <div class="runhead"><span>Options Cheat Sheet</span><span>No. 06 &middot; Owning &amp; earning</span></div>
+
+  <div class="masthead">
+    <div style="max-width:120mm;">
+      <div class="kicker">A visual primer &middot; No. 06</div>
+      <h1 class="title">Owning it,<br><em>and earning.</em></h1>
+    </div>
+    <div class="metabox">
+      <div class="hd">Four tools</div>
+      Put &middot; Call &middot; Protect &middot; Collar<br>
+      Cash side, share side<br>
+      Collateral &amp; the wheel<br><br>
+      <div class="hd">Four pages</div>
+      <div class="hd" style="margin-top:10px;">Read after</div>
+      No. 02 &mdash; trading safely
+    </div>
+  </div>
+
+  <div class="intro">
+    <p class="lead">The first five numbers treated options as trades. This one treats them as <em>a way of managing shares you intend to own for years</em>. The question changes from &ldquo;which way will it move?&rdquo; to something far more answerable: <b>given what I already hold, which positions am I even allowed to take, and what does each one commit me to?</b></p>
+    <p class="small">That reframing matters because it removes prediction from the decision. You are not forecasting a price. You are naming a price at which you would be content to buy, or content to sell, and being paid for the commitment.</p>
+  </div>
+
+  <hr class="rule">
+
+  <div class="sectlabel">01 / First fork</div>
+  <h2 class="stitle">Cash backs one side. Shares back the other.</h2>
+  <p>Before strategy, before strike selection, one structural fact decides everything downstream: <b>an option you sell must be backed by the thing you have promised to deliver.</b> That single rule splits the whole field in two.</p>
+
+  <div class="grid2" style="margin-top:10px;">
+    <div class="card cream">
+      <div class="lab">You hold cash</div>
+      <h4>Cash backs the <em>buy</em> promise</h4>
+      <p class="small" style="margin:0 0 6px;">Selling a put promises to <b>buy</b> shares at the strike. What you must be able to deliver is money &mdash; 100 &times; strike per contract. Cash is the raw material of the put side, and its purpose is acquiring shares at a price you chose rather than the price on offer today.</p>
+      <p class="small" style="margin:0;"><b>Use it when:</b> you want to own the stock, don&rsquo;t yet (or want more), and the settlement money is genuinely available.</p>
+    </div>
+    <div class="card cream">
+      <div class="lab">You hold shares</div>
+      <h4>Shares back the <em>sell</em> promise</h4>
+      <p class="small" style="margin:0 0 6px;">Selling a call promises to <b>deliver</b> shares at the strike. What you must be able to deliver is stock &mdash; 100 shares per contract, in the same account. Shares are the raw material of the call side, and their purpose is producing income from a position you already hold.</p>
+      <p class="small" style="margin:0;"><b>Use it when:</b> you own at least 100 shares and would accept selling some of them at a higher price.</p>
+    </div>
+  </div>
+
+  <p class="small" style="margin-top:10px;">Everything follows from which of those two you have. Cash and no shares gives you exactly one income position &mdash; the short put. Shares and no spare cash gives you exactly one &mdash; the covered call. Hold both and the full set opens, including the cycle on page three that converts each into the other.</p>
+
+  <hr class="rule">
+
+  <div class="sectlabel">02 / The decision</div>
+  <h2 class="stitle">Four tools. Your holdings decide which are available.</h2>
+  <p>Every income strategy around a stock you like reduces to one of these. The left column is the honest question to ask first &mdash; if the answer isn&rsquo;t a clear yes, the position isn&rsquo;t for you, whatever the premium looks like.</p>
+
+  <table class="matrix">
+    <thead>
+      <tr><th style="width:36%">If this is true of you</th><th style="width:20%">The position</th><th style="width:14%">Backed by</th><th>What you are actually promising</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>I want more of this, but only lower &mdash; and I hold the cash to buy it.</td>
+        <td class="act g">Sell a put</td>
+        <td class="act">Cash</td>
+        <td>To buy 100 shares at the strike if it falls below. You keep the premium either way.</td>
+      </tr>
+      <tr>
+        <td>I own 100+ shares, want income, and would accept selling higher.</td>
+        <td class="act g">Sell a covered call</td>
+        <td class="act">Shares</td>
+        <td>To sell 100 shares at the strike if it rises above. Your upside stops there.</td>
+      </tr>
+      <tr>
+        <td>I own shares, intend to keep them, and want a floor under a fall.</td>
+        <td class="act r">Buy a put</td>
+        <td class="act">Cash (cost)</td>
+        <td>Nothing. You pay for the right to sell at the strike. This one costs money rather than earning it.</td>
+      </tr>
+      <tr>
+        <td>I own shares, want a floor, and will give up some upside to fund it.</td>
+        <td class="act r">Collar</td>
+        <td class="act">Shares</td>
+        <td>Both of the above at once &mdash; sell a call to pay for a protective put. Capped above, floored below.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout" style="margin-top:14px;">
+    <div class="tag">Read it twice.</div>
+    <p class="small" style="margin:0;">The two rows that <em>earn</em> premium both hand someone else a decision about your money. The two that <em>cost</em> premium buy back that control. There is no row that earns income and keeps full control &mdash; <b>that combination is what the premium is paid for.</b></p>
+  </div>
+
+  <div class="foot"><span>Options Cheat Sheet &middot; 06</span><span>Educational reference &mdash; not investment advice</span></div>
+</section>
+
+<!-- ============ PAGE 2 ============ -->
+<section class="page">
+  <div class="runhead"><span>Options Cheat Sheet</span><span>No. 06 &middot; Owning &amp; earning</span></div>
+
+  <div class="sectlabel">03 / Shape of the payoff</div>
+  <h2 class="stitle">What each income position looks like at expiry.</h2>
+  <p>Both charts share the same silhouette, and it is worth sitting with: <b>a flat ceiling, and a slope that keeps going.</b> That asymmetry is the entire character of selling premium.</p>
+
+  <div class="grid2" style="margin-top:12px;">
+    <div class="card">
+      <div class="lab"><span class="dot g"></span>Short put &middot; backed by cash</div>
+      <svg viewBox="0 0 300 150" width="100%" height="150" role="img" aria-label="Short put payoff at expiry: capped gain above the strike, losses increasing below the break-even price">
+        <line x1="30" y1="70" x2="292" y2="70" stroke="#b7b6ad" stroke-width="1" stroke-dasharray="3 3"/>
+        <line x1="30" y1="14" x2="30" y2="132" stroke="#dcdad0" stroke-width="1"/>
+        <path d="M40,127 L190,52 L285,52" fill="none" stroke="#1d1d1b" stroke-width="1.5" stroke-linejoin="round"/>
+        <line x1="190" y1="52" x2="190" y2="76" stroke="#8c8c85" stroke-width="1" stroke-dasharray="2 2"/>
+        <circle cx="153" cy="70" r="2.6" fill="#b0503c"/>
+        <line x1="30" y1="52" x2="285" y2="52" stroke="#4b7d5b" stroke-width="0.7" stroke-dasharray="2 3" opacity="0.6"/>
+        <text x="292" y="49" text-anchor="end" class="axcap" style="fill:#2f5a3e;">PREMIUM KEPT &mdash; MAX GAIN</text>
+        <text x="190" y="86" text-anchor="middle" class="axcap">STRIKE</text>
+        <text x="150" y="63" text-anchor="middle" class="axcap" style="fill:#8f3e2d;">BREAK-EVEN</text>
+        <text x="44" y="140" class="axcap" style="fill:#8f3e2d;">LOSS GROWS AS IT FALLS</text>
+        <text x="26" y="18" text-anchor="end" class="axcap">P/L</text>
+        <text x="292" y="80" text-anchor="end" class="axcap">PRICE AT EXPIRY &rarr;</text>
+      </svg>
+      <p class="small" style="margin:6px 0 0;">Break-even sits at <b>strike minus premium</b> &mdash; your effective purchase price if assigned. Everything above the strike pays the same flat amount, however far it rises.</p>
+    </div>
+
+    <div class="card">
+      <div class="lab"><span class="dot g"></span>Covered call &middot; backed by shares</div>
+      <svg viewBox="0 0 300 150" width="100%" height="150" role="img" aria-label="Covered call payoff at expiry: gains rise with the share price then stop at the strike, losses continue below break-even">
+        <line x1="30" y1="70" x2="292" y2="70" stroke="#b7b6ad" stroke-width="1" stroke-dasharray="3 3"/>
+        <line x1="30" y1="14" x2="30" y2="132" stroke="#dcdad0" stroke-width="1"/>
+        <path d="M40,124 L190,45 L285,45" fill="none" stroke="#1d1d1b" stroke-width="1.5" stroke-linejoin="round"/>
+        <path d="M190,45 L285,45 L285,20 L190,20 Z" fill="#f6e9e3" opacity="0.75"/>
+        <path d="M190,45 L285,45" fill="none" stroke="#1d1d1b" stroke-width="1.5"/>
+        <line x1="190" y1="45" x2="190" y2="76" stroke="#8c8c85" stroke-width="1" stroke-dasharray="2 2"/>
+        <circle cx="140" cy="70" r="2.6" fill="#b0503c"/>
+        <text x="238" y="33" text-anchor="middle" class="axcap" style="fill:#8f3e2d;">UPSIDE GIVEN UP</text>
+        <text x="190" y="86" text-anchor="middle" class="axcap">STRIKE</text>
+        <text x="137" y="63" text-anchor="middle" class="axcap" style="fill:#8f3e2d;">BREAK-EVEN</text>
+        <text x="44" y="140" class="axcap" style="fill:#8f3e2d;">STILL EXPOSED BELOW</text>
+        <text x="26" y="18" text-anchor="end" class="axcap">P/L</text>
+        <text x="292" y="80" text-anchor="end" class="axcap">PRICE AT EXPIRY &rarr;</text>
+      </svg>
+      <p class="small" style="margin:6px 0 0;">The premium lowers your break-even a little, but it does <b>not</b> protect you in a fall &mdash; you still own the shares all the way down. The shaded block is the rally you agreed to miss.</p>
+    </div>
+  </div>
+
+  <hr class="rule">
+
+  <div class="sectlabel">04 / The two income positions</div>
+  <h2 class="stitle">Paid now, obligated later.</h2>
+
+  <div class="grid2" style="margin-top:10px;">
+    <div class="card green">
+      <div class="lab"><span class="dot g"></span>Income &middot; acquire</div>
+      <h4>Short put</h4>
+      <div class="rows" style="margin-top:2px;">
+        <div class="row"><span class="k">You receive</span><span class="v g">Premium, immediately</span></div>
+        <div class="row"><span class="k">Best case</span><span class="v">Expires worthless &mdash; keep premium, buy nothing</span></div>
+        <div class="row"><span class="k">Worst case</span><span class="v r">Stock collapses; you own it at the strike</span></div>
+        <div class="row"><span class="k">Break-even</span><span class="v">Strike &minus; premium</span></div>
+        <div class="row"><span class="k">Max gain</span><span class="v">The premium. That is all.</span></div>
+        <div class="row"><span class="k">Needs</span><span class="v">Cash &mdash; 100 &times; strike per contract</span></div>
+      </div>
+    </div>
+
+    <div class="card green">
+      <div class="lab"><span class="dot g"></span>Income &middot; release</div>
+      <h4>Covered call</h4>
+      <div class="rows" style="margin-top:2px;">
+        <div class="row"><span class="k">You receive</span><span class="v g">Premium, immediately</span></div>
+        <div class="row"><span class="k">Best case</span><span class="v">Expires worthless &mdash; keep premium and shares</span></div>
+        <div class="row"><span class="k">Worst case</span><span class="v r">A large rally you don&rsquo;t participate in</span></div>
+        <div class="row"><span class="k">Break-even</span><span class="v">Share cost &minus; premium</span></div>
+        <div class="row"><span class="k">Max gain</span><span class="v">Premium + rise up to the strike</span></div>
+        <div class="row"><span class="k">Needs</span><span class="v">100 shares per contract, same broker</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout" style="margin-top:14px;">
+    <div class="tag">The symmetry.</div>
+    <p class="small" style="margin:0;">Both cap your gain at the premium and leave a much larger adverse outcome open. That is not a flaw in the trade &mdash; it is what you are being paid for. <b>Selling options transfers risk from someone else to you, and the premium is the fee for accepting it.</b> Any strategy promising high recurring income with no matching exposure has simply hidden the exposure somewhere you haven&rsquo;t looked yet.</p>
+  </div>
+
+  <div class="foot"><span>Options Cheat Sheet &middot; 06</span><span>Educational reference &mdash; not investment advice</span></div>
+</section>
+
+<!-- ============ PAGE 3 ============ -->
+<section class="page">
+  <div class="runhead"><span>Options Cheat Sheet</span><span>No. 06 &middot; Owning &amp; earning</span></div>
+
+  <div class="sectlabel">05 / Collateral</div>
+  <h2 class="stitle">The rules that decide what you can actually do.</h2>
+  <p>Strategy discussions jump straight to strike selection. These four mechanical constraints decide whether a position is available to you at all, and they cause more unpleasant surprises than any amount of mispricing.</p>
+
+  <div class="grid2" style="margin-top:10px;">
+    <div class="card">
+      <div class="lab">Constraint 01</div>
+      <h4>One contract, one hundred shares</h4>
+      <p class="small" style="margin:0;">A covered call needs 100 shares per contract in the account. Holding 187 shares covers <b>one</b> contract, not one and a half. The remainder simply stays uncapped &mdash; which is often exactly what you want.</p>
+    </div>
+    <div class="card red">
+      <div class="lab">Constraint 02</div>
+      <h4>Shares must sit at the same broker</h4>
+      <p class="small" style="margin:0;">Shares held at one broker cannot collateralise an option sold at another. A call written against shares held elsewhere is <b>naked</b>, not covered &mdash; a different risk profile entirely and usually a different approval level. Consolidate first, or don&rsquo;t write the call.</p>
+    </div>
+    <div class="card red">
+      <div class="lab">Constraint 03</div>
+      <h4>&ldquo;Cash-secured&rdquo; is a discipline, not a setting</h4>
+      <p class="small" style="margin:0;">In a margin account the broker typically reserves only a fraction of the assignment value &mdash; often around 20&ndash;30%, not the full amount. The platform will happily let you sell far more puts than your cash could ever settle. <b>The cash backing is a rule you impose on yourself; nothing enforces it for you.</b></p>
+    </div>
+    <div class="card">
+      <div class="lab">Constraint 04</div>
+      <h4>Assignment can arrive early</h4>
+      <p class="small" style="margin:0;">US equity options are American-style: a short option can be assigned on any trading day, not only at expiry. It grows more likely as the option moves deep in-the-money or ahead of a dividend. Plan for the obligation landing sooner than the expiry date implies.</p>
+    </div>
+  </div>
+
+  <hr class="rule">
+
+  <div class="sectlabel">06 / The cycle</div>
+  <h2 class="stitle">The wheel &mdash; and why you might want to slow it down.</h2>
+  <p>Chain the two income positions together and you get a repeating cycle, commonly called the wheel. Cash becomes shares through assignment; shares become cash through a call; and round it goes, collecting premium at each turn.</p>
+
+  <div style="margin:12px 0 6px;">
+    <svg viewBox="0 0 620 118" width="100%" height="118" role="img" aria-label="The wheel: cash to short put to shares to covered call and back to cash">
+      <defs>
+        <marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+          <path d="M0,1 L9,5 L0,9 z" fill="#8c8c85"/>
+        </marker>
+      </defs>
+      <rect x="2" y="34" width="118" height="46" rx="3" fill="#f3f1e9" stroke="#e6e3d6"/>
+      <text x="61" y="54" text-anchor="middle" class="axcap" style="font-size:8.5px;fill:#1d1d1b;letter-spacing:.14em;">CASH</text>
+      <text x="61" y="67" text-anchor="middle" class="axcap">WAITING TO BUY</text>
+      <line x1="124" y1="57" x2="164" y2="57" stroke="#8c8c85" stroke-width="1" marker-end="url(#ar)"/>
+      <text x="144" y="48" text-anchor="middle" class="axcap" style="fill:#2f5a3e;">SELL PUT</text>
+      <rect x="170" y="34" width="130" height="46" rx="3" fill="#e8efe6" stroke="#cfe0ce"/>
+      <text x="235" y="54" text-anchor="middle" class="axcap" style="font-size:8.5px;fill:#2f5a3e;letter-spacing:.14em;">PREMIUM IN</text>
+      <text x="235" y="67" text-anchor="middle" class="axcap">ASSIGNED? BUY AT STRIKE</text>
+      <line x1="304" y1="57" x2="344" y2="57" stroke="#8c8c85" stroke-width="1" marker-end="url(#ar)"/>
+      <rect x="350" y="34" width="118" height="46" rx="3" fill="#f3f1e9" stroke="#e6e3d6"/>
+      <text x="409" y="54" text-anchor="middle" class="axcap" style="font-size:8.5px;fill:#1d1d1b;letter-spacing:.14em;">100 SHARES</text>
+      <text x="409" y="67" text-anchor="middle" class="axcap">NOW OWNED</text>
+      <line x1="472" y1="57" x2="512" y2="57" stroke="#8c8c85" stroke-width="1" marker-end="url(#ar)"/>
+      <text x="492" y="48" text-anchor="middle" class="axcap" style="fill:#2f5a3e;">SELL CALL</text>
+      <rect x="518" y="34" width="100" height="46" rx="3" fill="#e8efe6" stroke="#cfe0ce"/>
+      <text x="568" y="54" text-anchor="middle" class="axcap" style="font-size:8.5px;fill:#2f5a3e;letter-spacing:.14em;">PREMIUM IN</text>
+      <text x="568" y="67" text-anchor="middle" class="axcap">CALLED AWAY?</text>
+      <path d="M568,84 L568,102 L61,102 L61,84" fill="none" stroke="#b7b6ad" stroke-width="1" stroke-dasharray="3 3" marker-end="url(#ar)"/>
+      <text x="314" y="112" text-anchor="middle" class="axcap">BACK TO CASH &mdash; REPEAT</text>
+    </svg>
+  </div>
+
+  <div class="callout" style="margin-top:10px;">
+    <div class="tag">The modification.</div>
+    <p class="small" style="margin:0;">The wheel as usually taught assumes you are indifferent to holding the stock &mdash; it treats shares as inventory. <b>If your actual thesis is that you want to own the company for years, a fast wheel works against you:</b> aggressive calls keep selling the position back out at precisely the moment it is rising. Writing calls further out-of-the-money collects less premium and turns the wheel more slowly, which is the correct trade when the shares themselves are the point.</p>
+  </div>
+
+  <hr class="rule">
+
+  <div class="sectlabel">07 / Correlation</div>
+  <h2 class="stitle">The trap: doubling down on what you already own.</h2>
+  <p>Selling a put on a company you already hold heavily feels efficient &mdash; it is a stock you know, and you would be glad to own more cheaply. The problem is <b>when</b> the obligation triggers.</p>
+  <p class="small">Assignment happens on a fall. That is precisely the moment your existing holding is worth less. So the position quietly commits you to adding capital to a losing concentration at the worst possible time, and it does so automatically, without any decision from you on the day. Two positions that look independent on paper turn out to be one bet, sized larger. Varying <em>which</em> underlying you write against is not a refinement &mdash; it is the point.</p>
+
+  <div class="foot"><span>Options Cheat Sheet &middot; 06</span><span>Educational reference &mdash; not investment advice</span></div>
+</section>
+
+<!-- ============ PAGE 4 ============ -->
+<section class="page">
+  <div class="runhead"><span>Options Cheat Sheet</span><span>No. 06 &middot; Owning &amp; earning</span></div>
+
+  <div class="sectlabel">08 / The objective</div>
+  <h2 class="stitle">Two goals that quietly fight each other.</h2>
+  <p>&ldquo;Generate as much monthly income as possible without risking the capital&rdquo; sounds like one objective. It is two, pulling in opposite directions. Every lever that raises premium raises risk somewhere:</p>
+
+  <div class="grid3" style="margin-top:10px;">
+    <div class="card cream">
+      <div class="lab">Lever</div>
+      <h4>Closer strikes</h4>
+      <p class="small" style="margin:0;">More premium, and a much higher chance of assignment. You are paid more precisely because you are more likely to be held to it.</p>
+    </div>
+    <div class="card cream">
+      <div class="lab">Lever</div>
+      <h4>More contracts</h4>
+      <p class="small" style="margin:0;">Income scales linearly; so does the obligation. Committing all available cash leaves nothing for the opportunity a fall creates.</p>
+    </div>
+    <div class="card cream">
+      <div class="lab">Lever</div>
+      <h4>Higher volatility names</h4>
+      <p class="small" style="margin:0;">Rich premium is compensation for real movement. The market is not mispricing it for your benefit.</p>
+    </div>
+  </div>
+
+  <p style="margin-top:12px;">A more honest objective, and a more achievable one: <b>generate repeatable income while preserving the long-term thesis.</b> That version has a defensible answer to &ldquo;should I take this trade?&rdquo; &mdash; does it threaten the holding I actually care about? The maximising version answers every such question with &ldquo;yes, take it&rdquo;, which is how income strategies end in forced sales.</p>
+
+  <hr class="rule">
+
+  <div class="sectlabel">09 / The system</div>
+  <h2 class="stitle">Write the rules before the chain is in front of you.</h2>
+  <p>Strike selection under live quotes is where discipline dies &mdash; the premium is visible and the risk is abstract. Deciding the rules in advance, away from the screen, is the whole game. Fill this in once, then trade it.</p>
+
+  <table class="ruletbl">
+    <thead>
+      <tr><th style="width:24%">Rule</th><th style="width:44%">What it governs</th><th>Yours</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><b>Entry price</b></td><td>The effective purchase price at which you would be genuinely content to own the shares &mdash; strike minus premium.</td><td class="fill"><span class="ph">&hellip;&hellip;&hellip;&hellip;</span></td></tr>
+      <tr><td><b>Days to expiry</b></td><td>The window you will write in. Shorter decays faster but demands more frequent decisions.</td><td class="fill"><span class="ph">&hellip;&hellip;&hellip;&hellip;</span></td></tr>
+      <tr><td><b>Distance from price</b></td><td>How far out-of-the-money, as a delta or a percentage. This sets your assignment probability.</td><td class="fill"><span class="ph">&hellip;&hellip;&hellip;&hellip;</span></td></tr>
+      <tr><td><b>Capital ceiling</b></td><td>Maximum share of cash committed to assignment obligations at any one time. Reserve the rest.</td><td class="fill"><span class="ph">&hellip;&hellip;&hellip;&hellip;</span></td></tr>
+      <tr><td><b>Laddering</b></td><td>Whether entries are staged across separate price levels rather than all written at one strike.</td><td class="fill"><span class="ph">&hellip;&hellip;&hellip;&hellip;</span></td></tr>
+      <tr><td><b>Exit</b></td><td>The profit level at which you buy the option back rather than holding to expiry.</td><td class="fill"><span class="ph">&hellip;&hellip;&hellip;&hellip;</span></td></tr>
+      <tr><td><b>Blackouts</b></td><td>Events you will not write through &mdash; earnings, product announcements, index changes, lock-up expiries.</td><td class="fill"><span class="ph">&hellip;&hellip;&hellip;&hellip;</span></td></tr>
+      <tr><td><b>Uncapped core</b></td><td>The share count you will never write calls against, so the thesis always has room to run.</td><td class="fill"><span class="ph">&hellip;&hellip;&hellip;&hellip;</span></td></tr>
+    </tbody>
+  </table>
+
+  <hr class="rule">
+
+  <div class="sectlabel">10 / Before you write</div>
+  <h2 class="stitle">The pre-flight checks.</h2>
+
+  <ul class="checklist" style="margin-top:6px;">
+    <li><b>Am I looking at live prices?</b><span>Delayed quotes on an option with a wide spread means pricing blind. Confirm the data is real-time before setting any limit.</span></li>
+    <li><b>Would I be pleased to be assigned at this effective price?</b><span>If the honest answer is no, the premium is irrelevant. This is the only question that really matters.</span></li>
+    <li><b>Is the collateral genuinely there, in the right account?</b><span>Cash for puts; 100 shares per contract, same broker, for calls.</span></li>
+    <li><b>Does this concentrate something I already hold?</b><span>Check what else moves with it. Correlated positions are one bet, not two.</span></li>
+    <li><b>Is the contract liquid?</b><span>Tight spread, real volume, healthy open interest &mdash; otherwise exiting early costs more than the premium was worth.</span></li>
+    <li><b>Do I know the tax treatment?</b><span>Premium received and assignment both carry consequences, differing by jurisdiction and by whether you are classed as investor or trader. Settle it with an accountant before volume builds, not at year end.</span></li>
+  </ul>
+
+  <div class="callout" style="margin-top:16px;background:#fbfaf6;">
+    <div class="tag">The short version.</div>
+    <p class="small" style="margin:0;">Let your holdings decide which positions are available &mdash; cash writes puts, shares write calls. Name the price you would be content to transact at, back the obligation with real collateral, and write the rules before you open the chain. Income follows from the discipline, not from the strike. <b>Nothing here is a recommendation to trade, and none of it is financial advice; it is a map of how the mechanics fit together if you choose to use them.</b></p>
+  </div>
+
+  <div class="foot"><span>Options Cheat Sheet &middot; 06</span><span>Educational reference &mdash; not investment advice</span></div>
+</section>
+
+</div>
+<nav class="reader-nav">
+<a class="rn-prev" href="05-reading-the-chain.html"><div class="rn-dir">&larr; Previous</div><div class="rn-ttl">No. 05 &middot; Reading the Chain</div></a>
+<a class="rn-next" href="options/"><div class="rn-dir">Back to series &rarr;</div><div class="rn-ttl">All six primers</div></a>
+</nav>
+</body>
+</html>
