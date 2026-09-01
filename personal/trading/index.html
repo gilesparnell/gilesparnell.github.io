@@ -14,6 +14,7 @@
        A thin section index. Two children:
          options/    — the six-issue primer landing
          companies/  — firm write-ups
+         glossary/   — the four-column term reference
        The reader articles (01–05) and their PDFs stay
        at this level so their published URLs hold. They
        keep their own editorial paper theme — do NOT
@@ -102,6 +103,7 @@
       transition: border-color 0.3s, transform 0.4s cubic-bezier(0.16,1,0.3,1);
     }
     .panel:hover { border-color: rgba(230,178,90,0.4); transform: translateY(-3px); }
+    .panel-wide { grid-column: 1 / -1; }
     .panel-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; }
     .panel-num { font-family: var(--font-mono); font-size: 46px; font-weight: 700; letter-spacing: -0.04em; color: rgba(230,178,90,0.3); }
     .panel-tag { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint); border: 1px solid var(--border); padding: 4px 10px; border-radius: 100px; }
@@ -173,6 +175,16 @@
       <div class="panel-title">Companies under the lens</div>
       <p class="panel-desc">Firms that sell training, funding or signals to retail traders — read properly and checked against the public registers. What's actually on offer, where the marketing and the paperwork disagree, and the questions worth asking first.</p>
       <div class="panel-foot"><span>Open the write-ups</span><span class="arrow">→</span></div>
+    </a>
+
+    <a class="panel panel-wide" href="glossary/">
+      <div class="panel-head">
+        <span class="panel-num">03</span>
+        <span class="panel-tag">66 terms</span>
+      </div>
+      <div class="panel-title">The glossary</div>
+      <p class="panel-desc">Every term in four columns — the word, a proper definition, the same thing explained like you're ten, and a worked example with real numbers. Searchable, and grouped from the basics through to margin and market data.</p>
+      <div class="panel-foot"><span>Open the glossary</span><span class="arrow">→</span></div>
     </a>
 
   </div>
