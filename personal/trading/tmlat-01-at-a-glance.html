@@ -68,8 +68,66 @@
       <div class="num">04</div>
       <h2 class="head">Four things you can do &mdash; that&rsquo;s the lot</h2>
       <p>Two kinds of ticket, two sides to be on. Two times two is four. There is no fifth thing.</p>
+      <figure class="fig"><svg viewBox="0 0 660 430" role="img" aria-label="A two by two matrix: calls and puts across the top, buyer and seller down the side, showing rights, obligations, what each side wants and who pays the premium">
+  <defs><style>
+    .m-hd{font-family:'Outfit',sans-serif;font-size:21px;font-weight:700;}
+    .m-side{font-family:'Outfit',sans-serif;font-size:12px;font-weight:700;letter-spacing:.18em;fill:#867f70;}
+    .m-k{font-family:'Outfit',sans-serif;font-size:13.5px;font-weight:700;fill:#232019;}
+    .m-t{font-family:'Outfit',sans-serif;font-size:12.5px;fill:#4b463c;}
+    .m-tag{font-family:'Outfit',sans-serif;font-size:10px;font-weight:700;letter-spacing:.12em;}
+  </style></defs>
+
+  <rect x="0" y="0" width="660" height="430" rx="12" fill="#ffffff" stroke="#e4ded1"/>
+
+  <text x="240" y="42" text-anchor="middle" class="m-hd" fill="#0e7d72">CALLS</text>
+  <text x="510" y="42" text-anchor="middle" class="m-hd" fill="#b0503c">PUTS</text>
+
+  <line x1="60" y1="58" x2="640" y2="58" stroke="#e4ded1" stroke-width="1.5"/>
+  <line x1="375" y1="58" x2="375" y2="412" stroke="#e4ded1" stroke-width="1.5"/>
+  <line x1="60" y1="238" x2="640" y2="238" stroke="#e4ded1" stroke-width="1.5"/>
+  <line x1="60" y1="58" x2="60" y2="412" stroke="#e4ded1" stroke-width="1.5"/>
+
+  <text x="38" y="150" class="m-side" text-anchor="middle" transform="rotate(-90 38 150)">BUYER</text>
+  <text x="38" y="326" class="m-side" text-anchor="middle" transform="rotate(-90 38 326)">SELLER</text>
+
+  <rect x="60" y="58" width="580" height="180" fill="#fdf4e4" opacity="0.5"/>
+  <rect x="60" y="238" width="580" height="174" fill="#e8f4f2" opacity="0.45"/>
+
+  <!-- buyer / call -->
+  <text x="217" y="98" text-anchor="middle" class="m-k">Has the RIGHT to buy</text>
+  <text x="217" y="126" text-anchor="middle" class="m-t">Wants the price to rise</text>
+  <text x="217" y="152" text-anchor="middle" class="m-t">above the strike</text>
+  <text x="217" y="192" text-anchor="middle" class="m-t" style="fill:#b0503c;font-weight:600;">Pays the premium</text>
+  <text x="217" y="216" text-anchor="middle" class="m-t" style="font-size:11px;fill:#867f70;">Loss capped at what was paid</text>
+
+  <!-- buyer / put -->
+  <text x="508" y="98" text-anchor="middle" class="m-k">Has the RIGHT to sell</text>
+  <text x="508" y="126" text-anchor="middle" class="m-t">Wants the price to fall</text>
+  <text x="508" y="152" text-anchor="middle" class="m-t">below the strike</text>
+  <text x="508" y="192" text-anchor="middle" class="m-t" style="fill:#b0503c;font-weight:600;">Pays the premium</text>
+  <text x="508" y="216" text-anchor="middle" class="m-t" style="font-size:11px;fill:#867f70;">Loss capped at what was paid</text>
+
+  <!-- seller / call -->
+  <text x="217" y="278" text-anchor="middle" class="m-k">Has the OBLIGATION to sell</text>
+  <text x="217" y="306" text-anchor="middle" class="m-t">Needs the price to stay</text>
+  <text x="217" y="332" text-anchor="middle" class="m-t"><tspan style="font-weight:700;">below</tspan> the strike</text>
+  <text x="217" y="372" text-anchor="middle" class="m-t" style="fill:#0e7d72;font-weight:600;">Collects the premium</text>
+  <text x="217" y="396" text-anchor="middle" class="m-t" style="font-size:11px;fill:#867f70;">Gain capped at the premium</text>
+
+  <!-- seller / put -->
+  <text x="508" y="278" text-anchor="middle" class="m-k">Has the OBLIGATION to buy</text>
+  <text x="508" y="306" text-anchor="middle" class="m-t">Needs the price to stay</text>
+  <text x="508" y="332" text-anchor="middle" class="m-t"><tspan style="font-weight:700;">above</tspan> the strike</text>
+  <text x="508" y="372" text-anchor="middle" class="m-t" style="fill:#0e7d72;font-weight:600;">Collects the premium</text>
+  <text x="508" y="396" text-anchor="middle" class="m-t" style="font-size:11px;fill:#867f70;">Gain capped at the premium</text>
+
+  <rect x="381" y="244" width="253" height="162" rx="10" fill="none" stroke="#0e7d72" stroke-width="2.2"/>
+  <rect x="452" y="234" width="112" height="20" rx="10" fill="#0e7d72"/>
+  <text x="508" y="248" text-anchor="middle" class="m-tag" fill="#ffffff">CASH-SECURED PUT</text>
+</svg><figcaption>The whole of options on one grid. Buyers hold rights and pay; sellers carry obligations and get paid.</figcaption></figure>
       <ul class="plain"><li><strong>Buy a call</strong> &mdash; pay a little, hoping it goes up.</li><li><strong>Sell a call</strong> &mdash; get paid a little, promising to hand something over if it goes up.</li><li><strong>Buy a put</strong> &mdash; pay a little, hoping it goes down (or as insurance on something you own).</li><li><strong>Sell a put</strong> &mdash; get paid a little, promising to buy something if it goes down.</li></ul>
       <p>When people describe complicated-sounding strategies with names like <em>collar</em>, <em>spread</em> or <em>condor</em>, they are always just doing several of these four at the same time. Nothing new gets invented.</p>
+      <div class="warn"><div class="lab">One phrase to be careful with</div><p>You will often see this grid drawn with &ldquo;the put seller wants the stock to go <em>up</em>&rdquo;. That is loose enough to mislead. A put seller doesn&rsquo;t need the price to rise &mdash; they need it to <b>stay above the strike</b>. Flat is perfect. Getting this backwards makes selling a put feel like a bet on a rise, when it is really a bet on &ldquo;not below this line&rdquo;. The same applies in reverse to the call seller.</p></div>
     </section>
 
     <section class="blk" id="s5">
