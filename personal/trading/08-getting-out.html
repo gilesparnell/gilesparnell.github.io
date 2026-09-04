@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Options Cheat Sheet — No. 08</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+:root{
+  --ink:#1d1d1b;
+  --muted:#8c8c85;
+  --faint:#b7b6ad;
+  --line:#dcdad0;
+  --line2:#e7e5db;
+  --paper:#ffffff;
+  --green:#4b7d5b;
+  --green-ink:#2f5a3e;
+  --green-panel:#e8efe6;
+  --green-line:#cfe0ce;
+  --red:#b0503c;
+  --red-ink:#8f3e2d;
+  --red-panel:#f6e9e3;
+  --red-line:#ecd2c6;
+  --cream:#f3f1e9;
+  --cream-line:#e6e3d6;
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;background:#54534d;}
+body{
+  font-family:'Inter',-apple-system,system-ui,sans-serif;
+  color:var(--ink);
+  -webkit-font-smoothing:antialiased;
+}
+.page{
+  position:relative;
+  width:210mm;
+  min-height:297mm;
+  background:var(--paper);
+  margin:0 auto;
+  padding:16mm 15mm 16mm 15mm;
+  page-break-after:always;
+}
+.page:last-child{page-break-after:auto;}
+
+.runhead{
+  display:flex;justify-content:space-between;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:8.5px;color:var(--muted);letter-spacing:.02em;
+  padding-bottom:9px;margin-bottom:0;
+}
+
+.mono{font-family:'IBM Plex Mono',monospace;}
+.serif{font-family:'Spectral',Georgia,serif;}
+.kicker{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:8.5px;letter-spacing:.22em;color:var(--muted);
+  text-transform:uppercase;
+}
+.sectlabel{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:8.5px;letter-spacing:.06em;color:var(--faint);
+  text-transform:uppercase;line-height:1.5;
+  margin-bottom:4px;
+}
+
+h1.title{
+  font-family:'Spectral',Georgia,serif;
+  font-weight:400;font-size:52px;line-height:.98;
+  margin:6px 0 0;letter-spacing:-.01em;
+}
+h1.title em{font-style:italic;font-weight:400;}
+h2.stitle{
+  font-family:'Spectral',Georgia,serif;
+  font-weight:500;font-size:23px;line-height:1.12;
+  margin:0 0 8px;letter-spacing:-.01em;
+}
+h2.stitle em{font-style:italic;font-weight:400;color:#555;}
+h3.big{
+  font-family:'Spectral',Georgia,serif;
+  font-weight:400;font-size:28px;margin:0 0 4px;line-height:1;
+}
+p{font-size:10.5px;line-height:1.5;color:#39392f;margin:0 0 8px;}
+p.lead{font-size:11px;color:#4a4a3f;}
+.small{font-size:9px;line-height:1.45;color:#55554a;}
+.tiny{font-size:8px;line-height:1.4;}
+b,strong{font-weight:600;color:var(--ink);}
+.gt{color:var(--green-ink);font-weight:600;}
+.rt{color:var(--red-ink);font-weight:600;}
+hr.rule{border:none;border-top:1px solid var(--line);margin:16px 0;}
+hr.thin{border:none;border-top:1px solid var(--line2);margin:10px 0;}
+
+.masthead{display:flex;justify-content:space-between;align-items:flex-start;}
+.metabox{
+  text-align:right;font-family:'IBM Plex Mono',monospace;
+  font-size:8.5px;line-height:1.7;color:var(--muted);padding-top:6px;
+}
+.metabox .hd{color:var(--ink);font-weight:500;}
+
+.intro{max-width:118mm;margin-top:14px;}
+
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:11px;}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;}
+.card{
+  border:1px solid var(--line);border-radius:3px;padding:13px 14px;background:#fff;
+}
+.card.green{background:var(--green-panel);border-color:var(--green-line);}
+.card.red{background:var(--red-panel);border-color:var(--red-line);}
+.card.cream{background:var(--cream);border-color:var(--cream-line);}
+.card .lab{font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;}
+.card h4{font-family:'Spectral',serif;font-weight:500;font-size:16px;margin:0 0 6px;}
+.dot{display:inline-block;width:6px;height:6px;border-radius:50%;vertical-align:middle;margin-right:5px;}
+.dot.g{background:var(--green);}
+.dot.r{background:var(--red);}
+
+.rows{margin-top:8px;border-top:1px dotted var(--faint);}
+.row{display:flex;justify-content:space-between;gap:8px;padding:4px 0;border-bottom:1px dotted #d9d7cc;}
+.row .k{font-family:'IBM Plex Mono',monospace;font-size:7.6px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);white-space:nowrap;}
+.row .v{font-size:9px;text-align:right;color:#333;}
+.row .v.g{color:var(--green-ink);font-weight:600;}
+.row .v.r{color:var(--red-ink);font-weight:600;}
+
+.callout{
+  border:1px solid var(--line);border-radius:3px;background:var(--cream);
+  padding:12px 15px;display:flex;gap:16px;align-items:flex-start;
+}
+.callout .tag{font-family:'Spectral',serif;font-style:italic;font-size:13px;color:#333;white-space:nowrap;min-width:88px;}
+
+.checklist{list-style:none;margin:0;padding:0;}
+.checklist li{position:relative;padding:7px 0 7px 26px;border-bottom:1px dotted #d9d7cc;font-size:10px;line-height:1.4;}
+.checklist li:before{
+  content:"";position:absolute;left:0;top:7px;width:13px;height:13px;border:1.4px solid var(--green);border-radius:3px;
+}
+.checklist li:after{
+  content:"";position:absolute;left:4px;top:8px;width:4px;height:7px;border:solid var(--green);border-width:0 1.6px 1.6px 0;transform:rotate(40deg);
+}
+.checklist li b{display:block;font-size:10.5px;}
+.checklist li span{color:#5a5a4f;font-size:8.7px;}
+
+.flags{list-style:none;margin:0;padding:0;}
+.flags li{position:relative;padding:6px 0 6px 20px;border-bottom:1px dotted #e2c9bf;font-size:9.4px;line-height:1.42;}
+.flags li:before{content:"\00D7";position:absolute;left:2px;top:5px;color:var(--red);font-weight:700;font-size:12px;font-family:'IBM Plex Mono',monospace;}
+.flags li b{color:var(--red-ink);}
+
+.gloss{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px 22px;}
+.gloss .term{font-family:'Spectral',serif;font-style:italic;font-size:12.5px;margin:0 0 3px;border-top:1px solid var(--line);padding-top:8px;}
+.gloss p{font-size:8.7px;line-height:1.42;color:#55554a;margin:0;}
+
+/* decision matrix */
+.matrix{width:100%;border-collapse:collapse;margin-top:4px;}
+.matrix th{
+  font-family:'IBM Plex Mono',monospace;font-size:7.6px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--muted);text-align:left;font-weight:500;
+  padding:0 8px 6px 0;border-bottom:1px solid var(--line);
+}
+.matrix td{
+  font-size:9.4px;line-height:1.4;color:#39392f;
+  padding:7px 8px 7px 0;border-bottom:1px dotted #d9d7cc;vertical-align:top;
+}
+.matrix td.act{font-family:'IBM Plex Mono',monospace;font-size:8.4px;letter-spacing:.06em;
+  text-transform:uppercase;font-weight:500;white-space:nowrap;}
+.matrix td.act.g{color:var(--green-ink);}
+.matrix td.act.r{color:var(--red-ink);}
+
+/* fill-in rules table */
+.ruletbl{width:100%;border-collapse:collapse;margin-top:6px;}
+.ruletbl th{
+  font-family:'IBM Plex Mono',monospace;font-size:7.6px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--muted);text-align:left;font-weight:500;
+  padding:0 8px 6px 0;border-bottom:1px solid var(--line);
+}
+.ruletbl td{font-size:9.2px;line-height:1.42;color:#39392f;padding:7px 8px 7px 0;
+  border-bottom:1px dotted #d9d7cc;vertical-align:top;}
+.ruletbl td.fill{border-bottom:1px solid var(--faint);min-width:34mm;}
+.ruletbl .ph{color:var(--faint);font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:.06em;}
+
+.goldrule{
+  border:1.4px solid #d9b878;border-radius:4px;background:#fbf4e6;
+  padding:11px 16px;margin:14px 0 0;text-align:center;
+}
+.goldrule .gr-lab{font-family:'IBM Plex Mono',monospace;font-size:7.6px;letter-spacing:.2em;
+  text-transform:uppercase;color:#a8802f;margin-bottom:5px;}
+.goldrule .gr-text{font-family:'Spectral',serif;font-weight:600;font-size:17px;line-height:1.25;
+  color:#463819;margin:0;}
+.goldrule .gr-sub{font-size:8.8px;line-height:1.45;color:#6b5a38;margin:6px 0 0;}
+
+.foot{
+  position:absolute;left:15mm;right:15mm;bottom:11mm;
+  display:flex;justify-content:space-between;
+  font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--faint);
+  letter-spacing:.06em;border-top:1px solid var(--line);padding-top:7px;
+}
+
+svg{display:block;}
+.axcap{font-family:'IBM Plex Mono',monospace;font-size:6.5px;fill:var(--muted);letter-spacing:.08em;}
+
+/* numbered steps (No. 08) */
+.steps{list-style:none;margin:0;padding:0;counter-reset:st;}
+.steps li{position:relative;padding:8px 0 8px 30px;border-bottom:1px dotted #d9d7cc;
+  font-size:9.6px;line-height:1.45;counter-increment:st;color:#39392f;}
+.steps li:before{
+  content:counter(st,decimal-leading-zero);position:absolute;left:0;top:9px;
+  font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:.06em;
+  color:#a8802f;font-weight:600;
+}
+.steps li b{display:block;font-size:10.5px;margin-bottom:1px;color:var(--ink);}
+.steps li span{color:#5a5a4f;}
+</style>
+  <link rel="stylesheet" href="assets/style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap">
+  <link rel="stylesheet" href="assets/reader.css">
+</head>
+<body class="reader">
+<div class="reader-bar">
+  <a class="rb-back" href="options/">&larr; Options series</a>
+  <div class="rb-title">No. 08 &middot; Getting Out</div>
+</div>
+<div class="reader-scroll">
+
+<!-- ============ PAGE 1 ============ -->
+<section class="page">
+  <div class="runhead"><span>Options Cheat Sheet</span><span>No. 08 &middot; Getting out</span></div>
+
+  <div class="masthead">
+    <div style="max-width:120mm;">
+      <div class="kicker">A visual primer &middot; No. 08</div>
+      <h1 class="title">Getting out,<br><em>on purpose.</em></h1>
+    </div>
+    <div class="metabox">
+      <div class="hd">Three endings</div>
+      You close it<br>
+      It expires worthless<br>
+      You are assigned<br><br>
+      <div class="hd">Only one</div>
+      is a decision you make<br><br>
+      <div class="hd">Three pages</div>
+      <div class="hd" style="margin-top:10px;">Read after</div>
+      No. 07 &mdash; two lanes
+    </div>
+  </div>
+
+  <div class="intro">
+    <p class="lead">Every issue so far ends at the moment you open a position. This one starts there. A sold option has three possible endings, and <b>only one of them is something you choose</b> &mdash; the other two happen to you, on a fixed date, whether you are watching or not.</p>
+    <p class="small">So the exit needs rules written in advance, the same way the entry does. Otherwise the decision gets made at 3pm on a Friday by whichever way the price happens to be moving.</p>
+  </div>
+
+  <div class="goldrule">
+    <div class="gr-lab">Why closing early is not giving up profit</div>
+    <p class="gr-text">The risk doesn&rsquo;t shrink as the profit does.</p>
+    <p class="gr-sub">When you sold the put you were risking $35,000 of obligation to make $456. Once it is worth $105, you are risking the same $35,000 to make the last $105. The reward shrank. The exposure did not. That gap is the entire argument for closing early.</p>
+  </div>
+
+  <hr class="rule">
+
+  <div class="sectlabel">01 / The three endings</div>
+  <h2 class="stitle">One you choose. Two that arrive on their own.</h2>
+
+  <div class="grid3" style="margin-top:9px;">
+    <div class="card cream">
+      <div class="lab">Ending one &mdash; your call</div>
+      <h4>You close it</h4>
+      <p class="small" style="margin:0;">You buy the same contract back. It costs whatever it is worth today, plus commission. The obligation ends the moment it fills, the collateral is released, and the profit becomes real rather than paper. <b>This is the only ending with a date you control.</b></p>
+    </div>
+    <div class="card green">
+      <div class="lab">Ending two &mdash; the common one</div>
+      <h4>It expires worthless</h4>
+      <p class="small" style="margin:0;">The price finished on the right side of your strike. The contract simply stops existing. Nothing to click, no commission, no confirmation email. The position is gone from your screen the next morning and the premium is permanently yours.</p>
+    </div>
+    <div class="card red">
+      <div class="lab">Ending three &mdash; automatic</div>
+      <h4>You are assigned</h4>
+      <p class="small" style="margin:0;">It finished on the wrong side, by any margin at all. 100 shares per contract land in your account and the cash leaves. Nobody rings to check. In Lane A that is the outcome you signed up for. In Lane B it is the thing you built the spread to prevent.</p>
+    </div>
+  </div>
+
+  <div class="callout" style="margin-top:14px;">
+    <div class="tag">The main thing.</div>
+    <p class="small" style="margin:0;"><b>There is no ending where doing nothing means nothing happens.</b> &ldquo;I&rsquo;ll leave it and see&rdquo; is not a neutral choice &mdash; it is choosing ending two or ending three, sight unseen, based on where the price lands in the final minutes. That is fine when the price is nowhere near your strike. It is a real decision when it is close.</p>
+  </div>
+
+  <hr class="rule">
+
+  <div class="sectlabel">02 / The percentage rule</div>
+  <h2 class="stitle">How much of the money have you already made?</h2>
+  <p>The single most useful number on an open short option is not the profit in dollars &mdash; it is the profit as a share of the most you could ever make. You collected a premium. That premium is the ceiling. Nothing you do will earn more than it.</p>
+
+  <div class="card cream" style="margin:9px 0 11px;">
+    <div class="lab">The sum</div>
+    <p class="small" style="margin:0;"><b>Captured</b> = ( premium collected &minus; what it costs to buy back now ) &divide; premium collected. <span style="color:#5a5a4f;">Sold for $456, worth $105 today &rarr; ( 456 &minus; 105 ) &divide; 456 = <b>77%</b>. You have made 77% of everything this trade will ever pay you, and $105 remains.</span></p>
+  </div>
+
+  <div style="margin:12px 0 4px;"><svg viewBox="0 0 620 205" width="100%" height="205" role="img" aria-label="What it costs to buy back a sold option as expiry approaches, showing the point where three quarters of the premium has been captured">
+  <rect x="470" y="30" width="126" height="134" fill="#fbf4e6" stroke="none"/>
+  <line x1="46" y1="164" x2="596" y2="164" stroke="#dcdad0" stroke-width="1"/>
+  <line x1="46" y1="26" x2="46" y2="164" stroke="#dcdad0" stroke-width="1"/>
+  <line x1="46" y1="104" x2="470" y2="104" stroke="#8c8c85" stroke-width="0.7" stroke-dasharray="2 3" opacity="0.75"/>
+  <line x1="46" y1="134" x2="545" y2="134" stroke="#4b7d5b" stroke-width="0.7" stroke-dasharray="2 3" opacity="0.85"/>
+  <path d="M62,44 C 220,54 360,80 470,104 C 508,116 545,134 588,164" fill="none" stroke="#1d1d1b" stroke-width="1.7" stroke-linejoin="round"/>
+  <circle cx="470" cy="104" r="3" fill="#8c8c85"/>
+  <circle cx="545" cy="134" r="3.2" fill="#4b7d5b"/>
+  <text x="42" y="48" text-anchor="end" class="axcap">FULL</text>
+  <text x="42" y="107" text-anchor="end" class="axcap">HALF</text>
+  <text x="42" y="167" text-anchor="end" class="axcap">NIL</text>
+  <text x="52" y="20" class="axcap">WHAT IT COSTS TO BUY THE CONTRACT BACK</text>
+  <text x="464" y="119" text-anchor="end" class="axcap">HALF THE PREMIUM CAPTURED</text>
+  <text x="539" y="149" text-anchor="end" class="axcap" style="fill:#2f5a3e;">THREE QUARTERS CAPTURED</text>
+  <text x="588" y="62" text-anchor="end" class="axcap" style="fill:#a8802f;">LITTLE LEFT TO EARN &mdash;</text>
+  <text x="588" y="73" text-anchor="end" class="axcap" style="fill:#a8802f;">FULL OBLIGATION</text>
+  <text x="588" y="84" text-anchor="end" class="axcap" style="fill:#a8802f;">STILL RUNNING</text>
+  <text x="62" y="180" class="axcap">DAY YOU SOLD IT</text>
+  <text x="596" y="180" text-anchor="end" class="axcap">EXPIRY &rarr;</text>
+  <text x="596" y="196" text-anchor="end" class="axcap" style="fill:#b7b6ad;">SHAPE IS ILLUSTRATIVE &mdash; DECAY SPEEDS UP NEAR THE END</text>
+</svg></div>
+
+  <div class="foot"><span>Options Cheat Sheet &middot; 08</span><span>Educational reference &mdash; not investment advice</span></div>
+</section>
+
+<!-- ============ PAGE 2 ============ -->
+<section class="page">
+  <div class="runhead"><span>Options Cheat Sheet</span><span>No. 08 &middot; Getting out</span></div>
+
+  <div class="sectlabel">03 / Reading the number</div>
+  <h2 class="stitle">What to do at each stage.</h2>
+
+  <table class="matrix">
+    <thead>
+      <tr><th style="width:16%">Captured</th><th style="width:32%">What that means</th><th>The usual call</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><b>Under 50%</b></td><td>Most of the premium is still ahead of you.</td><td class="act g">Hold &mdash; decay is still paying properly</td></tr>
+      <tr><td><b>50 &ndash; 75%</b></td><td>The returns are thinning. Each remaining day pays less than the last one did.</td><td class="act g">The usual window to close, if time remains</td></tr>
+      <tr><td><b>75 &ndash; 90%</b></td><td>Small money against the full obligation, still running.</td><td class="act r">Close &mdash; unless the exit cost eats the gain</td></tr>
+      <tr><td><b>Over 90%</b></td><td>Almost nothing left to make.</td><td class="act r">Close only if it costs a dollar or two</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout" style="margin-top:12px;">
+    <div class="tag">The exception.</div>
+    <p class="small" style="margin:0;">Percentages stop mattering when the contract is worth pennies. Buying back an option trading at $0.07 costs $7 plus about a dollar of commission &mdash; roughly $8 spent to protect $7 of gains. <b>At that point, letting it expire is the cheaper exit</b>, provided the price is nowhere near your strike. Check the distance, then leave it alone.</p>
+  </div>
+
+  <hr class="rule">
+
+  <div class="sectlabel">04 / The other reasons</div>
+  <h2 class="stitle">Four triggers that have nothing to do with profit.</h2>
+
+  <ul class="checklist" style="margin-top:6px;">
+    <li><b>Delta has climbed a long way</b><span>You sold it at &minus;0.20 and it now reads &minus;0.45. The market has more than doubled its estimate of the chance you end up with the shares. Whatever you decided when you opened it, this is no longer that trade &mdash; so re-decide it on today&rsquo;s numbers rather than defending the original.</span></li>
+    <li><b>You want the collateral back</b><span>On a normal account the scarce thing is not ideas, it is cash. A position sitting at 85% captured is renting several thousand dollars for very little. Closing it is sometimes about what the money could do next, not about this trade at all.</span></li>
+    <li><b>The reason changed</b><span>You sold the put because you were happy to own the company at that price. Then results came out, or the story moved. If you would not open the trade again today, holding it is a decision you are making by default.</span></li>
+    <li><b>Something big and dated is coming</b><span>Earnings, a court date, a product launch. Holding a short option across a known event is a different trade from the one you sized. Either close before it, or decide deliberately that you want to be in it.</span></li>
+  </ul>
+
+  <hr class="rule">
+
+  <div class="sectlabel">05 / Expiry day</div>
+  <h2 class="stitle">What actually happens if you leave it.</h2>
+
+  <div class="grid2" style="margin-top:8px;">
+    <div class="card green">
+      <div class="lab">Finished out of the money</div>
+      <h4>It vanishes</h4>
+      <p class="small" style="margin:0;">For a put you sold, that means the share price closed <b>above</b> your strike. The contract expires worthless. No action, no commission, no paperwork. The position clears from your account overnight and the margin it was holding is released.</p>
+    </div>
+    <div class="card red">
+      <div class="lab">Finished in the money</div>
+      <h4>It is exercised for you</h4>
+      <p class="small" style="margin:0;">One cent below your strike is enough. The clearing house exercises it automatically on the buyer&rsquo;s behalf. You wake up owning 100 shares per contract, with strike &times; 100 gone from your cash. <b>Nobody asks first, and there is no cancelling it afterwards.</b></p>
+    </div>
+  </div>
+
+  <ul class="flags" style="margin-top:12px;">
+    <li><b>The last hour does the most damage.</b> A position comfortably clear at 3pm can be through the strike by 4pm, with no time left to decide anything about it.</li>
+    <li><b>The price you are watching is not the price that settles it.</b> The closing auction and late trades decide where it finishes, not the last quote you saw.</li>
+    <li><b>A cent counts the same as five dollars.</b> There is no &ldquo;barely&rdquo; in the money. Over the line is over the line.</li>
+    <li><b>Assigned shares carry the weekend.</b> They arrive on Friday&rsquo;s close and you cannot act on them until Monday&rsquo;s open, which is frequently not Friday&rsquo;s price.</li>
+    <li><b>From Sydney, the deciding hour is the middle of your night.</b> A US close lands around 6am AEST. If you plan to act on expiry day, plan when.</li>
+  </ul>
+
+  <hr class="rule">
+
+  <div class="sectlabel">06 / Before expiry</div>
+  <h2 class="stitle">Early assignment &mdash; rare, but real.</h2>
+  <p>The buyer of your put can exercise on any day, not just the last one. In practice they almost never do while the contract still holds time value, because exercising early throws that value away &mdash; selling the contract would pay them more than using it. So an option comfortably out of the money is close to untouchable.</p>
+  <p class="small">It becomes a genuine possibility when the option is <b>deep in the money and nearly out of time</b>, where there is barely any time value left to waste. If you are short a put that has gone well past its strike close to expiry, treat assignment as something that could happen tonight rather than on the stated date.</p>
+
+  <div class="foot"><span>Options Cheat Sheet &middot; 08</span><span>Educational reference &mdash; not investment advice</span></div>
+</section>
+
+<!-- ============ PAGE 3 ============ -->
+<section class="page">
+  <div class="runhead"><span>Options Cheat Sheet</span><span>No. 08 &middot; Getting out</span></div>
+
+  <div class="sectlabel">07 / The mechanics</div>
+  <h2 class="stitle">Closing one, step by step.</h2>
+  <p>Selling opened the position, so buying closes it. The order you want is a <b>buy to close</b> &mdash; same contract, same expiry, same strike, same quantity. Everything below is the IBKR route; other brokers use the same idea with different menus.</p>
+
+  <ol class="steps" style="margin-top:8px;">
+    <li><b>Open Portfolio &rarr; Positions and find the row.</b><span>Work from the position itself rather than searching the chain again. It carries the exact contract, so there is nothing to mistype.</span></li>
+    <li><b>Right-click the row and choose Close Position.</b><span>This builds the order for you, already set to buy, already matched to your quantity. It is the safest way in, because you are not re-entering any of the details.</span></li>
+    <li><b>Check it says BUY, and check the quantity.</b><span>The one expensive mistake here is a second SELL, which doubles your position instead of ending it. Quantity 1 closes one contract; if you hold three of the same contract and only want out of one, say so explicitly.</span></li>
+    <li><b>Set a limit price. Never send it as a market order.</b><span>The gap between the buy and sell price on an option is wide, and a market order accepts whatever is sitting there. On a cheap contract that difference can be larger than the profit you are protecting.</span></li>
+    <li><b>Start at the middle, then walk toward the ask.</b><span>If the bid is $1.00 and the ask $1.15, offer $1.07 and wait a minute. No fill, try $1.10. You are buying, so raising your limit is what gets you filled &mdash; and each step up costs real money.</span></li>
+    <li><b>Send it, then confirm it actually closed.</b><span>The row should disappear from Positions, Realized P&amp;L should move by the amount you made, and the margin the position was holding should be released. Until all three happen, you are still short the option.</span></li>
+  </ol>
+
+  <hr class="rule">
+
+  <div class="sectlabel">08 / What it costs</div>
+  <h2 class="stitle">You cross the spread on the way out too.</h2>
+
+  <div class="grid2" style="margin-top:8px;">
+    <div class="card">
+      <div class="lab">The spread</div>
+      <h4>Paid twice, both directions</h4>
+      <p class="small" style="margin:0;">You sold at the bid, the lower price. You buy back at the ask, the higher one. On a contract quoted $1.00 bid and $1.15 ask, that gap is $15 on a single contract &mdash; usually more than the commission, and never shown as a fee anywhere.</p>
+    </div>
+    <div class="card">
+      <div class="lab">The commission</div>
+      <h4>About a dollar, each way</h4>
+      <p class="small" style="margin:0;">Small in isolation, and irrelevant on a $456 premium. It stops being irrelevant on a contract worth $7, which is exactly the case where letting it expire beats closing it. Round it into the decision rather than ignoring it.</p>
+    </div>
+  </div>
+
+  <hr class="rule">
+
+  <div class="sectlabel">09 / The third option</div>
+  <h2 class="stitle">Rolling &mdash; and what it does not do.</h2>
+  <p>A roll is one order that buys back the contract you are short and sells a later one, usually further from the price. It nets to a single credit or debit, and it keeps you in the trade rather than ending it.</p>
+
+  <div class="grid2" style="margin-top:8px;">
+    <div class="card cream">
+      <div class="lab">What it is good for</div>
+      <h4>Buying time, on purpose</h4>
+      <p class="small" style="margin:0;">A position going against you close to expiry has almost no time value left to work with. Moving it out several weeks gives the decay something to do again, and usually pays you a further credit for the trouble.</p>
+    </div>
+    <div class="card red">
+      <div class="lab">What it is not</div>
+      <h4>An escape</h4>
+      <p class="small" style="margin:0;">The obligation does not go away &mdash; it moves. Roll a losing put often enough and you own the same problem months later, larger. <b>If you are rolling to dodge an assignment you said you would welcome, you have quietly left Lane A.</b></p>
+    </div>
+  </div>
+
+  <hr class="rule">
+
+  <div class="sectlabel">10 / Write it down</div>
+  <h2 class="stitle">Your exit rules, before you need them.</h2>
+  <p class="small">Fill this in while nothing is going wrong. The point of writing it down is that expiry week is the worst possible time to be deciding what you think.</p>
+
+  <table class="ruletbl">
+    <thead>
+      <tr><th style="width:30%"></th><th style="width:35%">Lane A &mdash; conviction</th><th>Lane B &mdash; income</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><b>Close at what % captured</b></td><td class="fill"><span class="ph">&hellip;&hellip;&hellip;</span></td><td class="fill"><span class="ph">&hellip;&hellip;&hellip;</span></td></tr>
+      <tr><td><b>Close if delta reaches</b></td><td class="fill"><span class="ph">&hellip;&hellip;&hellip;</span></td><td class="fill"><span class="ph">&hellip;&hellip;&hellip;</span></td></tr>
+      <tr><td><b>Latest I will hold it</b></td><td class="fill"><span class="ph">&hellip;&hellip;&hellip;</span></td><td class="fill"><span class="ph">&hellip;&hellip;&hellip;</span></td></tr>
+      <tr><td><b>If it is in the money the day before</b></td><td class="fill"><span class="ph">&hellip;&hellip;&hellip;</span></td><td class="fill"><span class="ph">&hellip;&hellip;&hellip;</span></td></tr>
+      <tr><td><b>Will I roll, or take the outcome</b></td><td class="fill"><span class="ph">&hellip;&hellip;&hellip;</span></td><td class="fill"><span class="ph">&hellip;&hellip;&hellip;</span></td></tr>
+      <tr><td><b>Never hold through</b></td><td class="fill"><span class="ph">&hellip;&hellip;&hellip;</span></td><td class="fill"><span class="ph">&hellip;&hellip;&hellip;</span></td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout" style="margin-top:16px;background:#fbfaf6;">
+    <div class="tag">The short version.</div>
+    <p class="small" style="margin:0;">Work out what share of the premium you have already made. Past about three quarters, the money left is small and the obligation is not &mdash; that is usually the moment to buy it back. Close it with a limit order, never a market one, and check the position has actually gone. Let it expire only when it is worth pennies <em>and</em> the price is nowhere near your strike. And remember that leaving it alone is not the absence of a decision: out of the money it disappears quietly, in the money by a single cent the shares arrive whether you were awake or not. <b>Nothing here is a recommendation to trade, and none of it is financial advice.</b></p>
+  </div>
+
+  <div class="foot"><span>Options Cheat Sheet &middot; 08</span><span>Educational reference &mdash; not investment advice</span></div>
+</section>
+
+</div>
+<nav class="reader-nav">
+<a class="rn-prev" href="07-two-lanes.html"><div class="rn-dir">&larr; Previous</div><div class="rn-ttl">No. 07 &middot; Two Lanes</div></a>
+<a class="rn-next" href="options/"><div class="rn-dir">Back to series &rarr;</div><div class="rn-ttl">All eight primers</div></a>
+</nav>
+</body>
+</html>
