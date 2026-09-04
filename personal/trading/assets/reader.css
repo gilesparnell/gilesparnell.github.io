@@ -164,6 +164,12 @@ body.reader .page svg{max-width:100%;}
   /* the blank write-on lines are 34mm wide for print; on a phone that alone
      pushes the rules table past the screen edge. */
   body.reader .ruletbl td.fill{min-width:0 !important;}
+
+  /* Text-heavy figures shrink to illegibility on a phone -- 8px labels inside a
+     620-unit viewBox land at about 5px on a 390px screen. Hold them at a legible
+     width and let the wrapper scroll, the same way wide tables do. */
+  body.reader .figscroll{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+  body.reader .figscroll svg{min-width:540px;}
 }
 @media (max-width:440px){
   .reader-nav{flex-direction:column;}

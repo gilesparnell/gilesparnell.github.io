@@ -191,6 +191,8 @@ hr.thin{border:none;border-top:1px solid var(--line2);margin:10px 0;}
 }
 
 svg{display:block;}
+.flabx{font-family:'IBM Plex Mono',monospace;font-size:7.6px;fill:#39392f;letter-spacing:.06em;font-weight:500;}
+.fnote{font-family:'Inter',sans-serif;font-size:8.4px;fill:#4a4a40;}
 .axcap{font-family:'IBM Plex Mono',monospace;font-size:6.5px;fill:var(--muted);letter-spacing:.08em;}
 </style>
   <link rel="stylesheet" href="assets/style.css">
@@ -481,7 +483,121 @@ svg{display:block;}
 <section class="page">
   <div class="runhead"><span>Options Cheat Sheet</span><span>No. 06 &middot; Owning &amp; earning</span></div>
 
-  <div class="sectlabel">08 / The objective</div>
+  <div class="sectlabel">08 / Buying on purpose</div>
+  <h2 class="stitle">When assignment is the point, not the risk.</h2>
+  <p>Everything up to here treats assignment as something to be managed. For a company you have genuinely decided you want to own, that is backwards. <b>Assignment is the objective</b> &mdash; and once it is, the premium stops being income and turns into something else.</p>
+
+  <div class="callout" style="margin-top:11px;">
+    <div class="tag">The reframe.</div>
+    <p class="small" style="margin:0;"><b>The premium is not revenue. It is a discount on the purchase price.</b> Sell a $350 put for $456 and take the shares: you pay $35,000, you kept $456, so the real cost is $34,544 &mdash; <b>$345.44 a share</b>. The premium came off the price. It was never a separate income stream sitting alongside the purchase; it was always part of what you paid.</p>
+  </div>
+
+  <p style="margin-top:11px;">That resolves the tension on the page before. &ldquo;Collect the most premium&rdquo; and &ldquo;actually end up owning it&rdquo; look like competing goals, and for a company you don&rsquo;t want, they are. For a company you <em>do</em> want they collapse into one: <b>the lowest net price for shares you finish up holding.</b> Which means writing <em>closer</em> to the current price rather than further from it &mdash; paying more premium and making assignment more likely at the same time. For once, both goals point the same way.</p>
+
+  <div class="figscroll" style="margin:12px 0 2px;"><svg viewBox="0 0 620 240" width="100%" height="240" role="img" aria-label="Where the strike sits relative to today's share price, and what each choice means for premium and for the chance of being assigned">
+  <text x="24" y="14" class="axcap">WHERE YOU PUT THE STRIKE, RELATIVE TO TODAY&rsquo;S PRICE</text>
+  <text x="24" y="34" class="axcap" style="fill:#2f5a3e;">&uarr; MORE LIKELY YOU END UP OWNING THE SHARES</text>
+
+  <line x1="150" y1="46" x2="150" y2="214" stroke="#dcdad0" stroke-width="1"/>
+  <line x1="24" y1="118" x2="596" y2="118" stroke="#8c8c85" stroke-width="0.9" stroke-dasharray="3 3"/>
+
+  <line x1="142" y1="64" x2="158" y2="64" stroke="#4b7d5b" stroke-width="1.6"/>
+  <circle cx="150" cy="64" r="3.4" fill="#4b7d5b"/>
+  <text x="132" y="67" text-anchor="end" class="flabx">$155 STRIKE</text>
+  <text x="166" y="61" class="fnote" style="fill:#2f5a3e;">Above the price &mdash; already in the money.</text>
+  <text x="166" y="74" class="fnote" style="fill:#2f5a3e;">Biggest premium, and the shares almost certainly arrive.</text>
+
+  <line x1="142" y1="118" x2="158" y2="118" stroke="#1d1d1b" stroke-width="1.6"/>
+  <circle cx="150" cy="118" r="3.4" fill="#1d1d1b"/>
+  <text x="132" y="115" text-anchor="end" class="flabx">$150 &mdash; TODAY</text>
+  <text x="166" y="112" class="fnote">At the price &mdash; roughly a coin flip on whether</text>
+  <text x="166" y="125" class="fnote">you finish the week owning 100 shares.</text>
+
+  <line x1="142" y1="164" x2="158" y2="164" stroke="#8c8c85" stroke-width="1.6"/>
+  <circle cx="150" cy="164" r="3.4" fill="#8c8c85"/>
+  <text x="132" y="167" text-anchor="end" class="flabx">$140 STRIKE</text>
+  <text x="166" y="161" class="fnote">Below &mdash; a real chance, and less premium.</text>
+  <text x="166" y="174" class="fnote">Cheaper per share on the days it does happen.</text>
+
+  <line x1="142" y1="206" x2="158" y2="206" stroke="#b0503c" stroke-width="1.6"/>
+  <circle cx="150" cy="206" r="3.4" fill="#b0503c"/>
+  <text x="132" y="209" text-anchor="end" class="flabx">$130 STRIKE</text>
+  <text x="166" y="203" class="fnote" style="fill:#8f3e2d;">Well below &mdash; this is an income trade.</text>
+  <text x="166" y="216" class="fnote" style="fill:#8f3e2d;">You will almost always just keep the cash.</text>
+
+  <text x="24" y="234" class="axcap">&darr; CHEAPER PER SHARE IF IT HAPPENS &mdash; BUT FAR LESS LIKELY TO HAPPEN AT ALL</text>
+</svg></div>
+
+  <div class="foot"><span>Options Cheat Sheet &middot; 06</span><span>Educational reference &mdash; not investment advice</span></div>
+</section>
+
+<!-- ============ PAGE 5 ============ -->
+<section class="page">
+  <div class="runhead"><span>Options Cheat Sheet</span><span>No. 06 &middot; Owning &amp; earning</span></div>
+
+  <div class="sectlabel">09 / The dial</div>
+  <h2 class="stitle">Delta tells you which business you are actually in.</h2>
+  <p>Delta is roughly the chance the option finishes in the money, which is roughly the chance you end up owning the shares. It is the single number that says whether a position is an income trade or an acquisition trade &mdash; whatever you intended when you opened it.</p>
+
+  <table class="matrix" style="margin-top:6px;">
+    <thead>
+      <tr><th style="width:15%">Delta</th><th style="width:22%">Chance of getting the shares</th><th style="width:15%">Premium</th><th>What that position actually is</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><b>0.10 &ndash; 0.15</b></td><td>Around 1 in 8</td><td>Small</td><td class="act r">Income only &mdash; you will rarely own anything</td></tr>
+      <tr><td><b>0.20 &ndash; 0.30</b></td><td>Around 1 in 4</td><td>Moderate</td><td class="act">Patient accumulation, over many months</td></tr>
+      <tr><td><b>0.30 &ndash; 0.45</b></td><td>Around 1 in 3</td><td>Good</td><td class="act g">Genuinely trying to acquire the shares</td></tr>
+      <tr><td><b>About 0.50</b></td><td>Roughly a coin flip</td><td>High</td><td class="act g">At the money &mdash; aggressive acquisition</td></tr>
+      <tr><td><b>Above 0.50</b></td><td>More likely than not</td><td>Highest</td><td class="act g">Strike above the price &mdash; deliberate buying</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout" style="margin-top:13px;">
+    <div class="tag">Read it honestly.</div>
+    <p class="small" style="margin:0;">If you say you want the shares and every open position sits at 0.10, <b>the positions disagree with you.</b> There is nothing wrong with a 0.10 delta put &mdash; it is simply an income trade, and it will almost always leave you holding cash rather than stock. The mismatch is worth catching early, because a year of it means a year of small premiums and no shares.</p>
+  </div>
+
+  <hr class="rule">
+
+  <div class="sectlabel">10 / Following through</div>
+  <h2 class="stitle">Four things that decide whether you actually end up owning it.</h2>
+
+  <div class="grid2" style="margin-top:9px;">
+    <div class="card green">
+      <div class="lab">The aggressive route</div>
+      <h4>Write above the price</h4>
+      <p class="small" style="margin:0;">A strike above today&rsquo;s price is already in the money, so assignment is likely and the premium is large. Shares at $150, sell the $155 put for $8: if assigned you pay $155 having kept $8, so <b>$147 net &mdash; below what the shares cost today</b>. Paid to commit, and bought at a discount to the screen.</p>
+    </div>
+    <div class="card cream">
+      <div class="lab">The discipline</div>
+      <h4>Don&rsquo;t roll away from it</h4>
+      <p class="small" style="margin:0;">When it goes in the money the platform shows a loss and every instinct says roll it further out. For a company you wanted, <b>take the shares.</b> That was the point. Rolling to dodge assignment is how people finish with neither the stock nor the premium &mdash; and if you find yourself rolling, the honest question is whether you wanted the company at all.</p>
+    </div>
+    <div class="card red">
+      <div class="lab">The trap afterwards</div>
+      <h4>Go carefully on covered calls</h4>
+      <p class="small" style="margin:0;">The obvious next move is to sell calls against the new shares. That is the wheel, and it is built to <em>churn</em> stock &mdash; wrong tool if the plan was to keep it. One good run and the shares are called away at $400 on the way to $600, leaving you in cash in the exact company you spent months acquiring. If you write calls here at all, use a strike you would be genuinely pleased to sell at.</p>
+    </div>
+    <div class="card cream">
+      <div class="lab">The real limit</div>
+      <h4>Count the assignments you can fund</h4>
+      <p class="small" style="margin:0;">Raising delta only works if you can pay when it lands. Correlated names fall together, so assume every position triggers in the same week and ask whether the cash covers it. <b>Size to the number of assignments you can actually absorb</b>, accumulate in tranches at different strikes and dates, and keep a slice of cash that no strategy may touch.</p>
+    </div>
+  </div>
+
+  <div class="callout" style="margin-top:14px;background:#fbfaf6;">
+    <div class="tag">The honest cost.</div>
+    <p class="small" style="margin:0;">If you truly want to own something, the certain way to own it is to buy it. Selling puts gets it slightly cheaper <em>if it comes to you</em>, and leaves you holding cash if it doesn&rsquo;t. In a year where the share runs from $375 to $600, the put seller collects a few hundred dollars a month and never gets aboard. <b>That is the actual cost of this approach, and it appears on no screen anywhere</b> &mdash; there is no line item for the shares you didn&rsquo;t buy.</p>
+  </div>
+
+  <div class="foot"><span>Options Cheat Sheet &middot; 06</span><span>Educational reference &mdash; not investment advice</span></div>
+</section>
+
+<!-- ============ PAGE 6 ============ -->
+<section class="page">
+  <div class="runhead"><span>Options Cheat Sheet</span><span>No. 06 &middot; Owning &amp; earning</span></div>
+
+  <div class="sectlabel">11 / The objective</div>
   <h2 class="stitle">Two goals that quietly fight each other.</h2>
   <p>&ldquo;Generate as much monthly income as possible without risking the capital&rdquo; sounds like one objective. It is two, pulling in opposite directions. Every lever that raises premium raises risk somewhere:</p>
 
@@ -507,7 +623,7 @@ svg{display:block;}
 
   <hr class="rule">
 
-  <div class="sectlabel">09 / The system</div>
+  <div class="sectlabel">12 / The system</div>
   <h2 class="stitle">Write the rules before the chain is in front of you.</h2>
   <p>Strike selection under live quotes is where discipline dies &mdash; the premium is visible and the risk is abstract. Deciding the rules in advance, away from the screen, is the whole game. Fill this in once, then trade it.</p>
 
@@ -529,7 +645,7 @@ svg{display:block;}
 
   <hr class="rule">
 
-  <div class="sectlabel">10 / Before you write</div>
+  <div class="sectlabel">13 / Before you write</div>
   <h2 class="stitle">The pre-flight checks.</h2>
 
   <ul class="checklist" style="margin-top:6px;">
