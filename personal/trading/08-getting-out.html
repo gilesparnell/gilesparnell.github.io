@@ -202,7 +202,8 @@ svg{display:block;}
   font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:.06em;
   color:#a8802f;font-weight:600;
 }
-.steps li b{display:block;font-size:10.5px;margin-bottom:1px;color:var(--ink);}
+.steps li > b{display:block;font-size:10.5px;margin-bottom:1px;color:var(--ink);}
+.steps li span b{display:inline;font-size:inherit;margin:0;color:var(--ink);}
 .steps li span{color:#5a5a4f;}
 </style>
   <link rel="stylesheet" href="assets/style.css">
@@ -399,11 +400,16 @@ svg{display:block;}
   <ol class="steps" style="margin-top:8px;">
     <li><b>Open Portfolio &rarr; Positions and find the row.</b><span>Work from the position itself rather than searching the chain again. It carries the exact contract, so there is nothing to mistype.</span></li>
     <li><b>Right-click the row and choose Close Position.</b><span>This builds the order for you, already set to buy, already matched to your quantity. It is the safest way in, because you are not re-entering any of the details.</span></li>
-    <li><b>Check it says BUY, and check the quantity.</b><span>The one expensive mistake here is a second SELL, which doubles your position instead of ending it. Quantity 1 closes one contract; if you hold three of the same contract and only want out of one, say so explicitly.</span></li>
+    <li><b>Check it says BUY, and that the price is labelled DEBIT.</b><span>Those two words are the whole safety check. <b>DEBIT means money leaving</b> &mdash; correct when closing, because you are paying to get out. <b>CREDIT means money arriving</b> &mdash; correct when opening. A ticket showing CREDIT while you are trying to close is a second SELL, which doubles the position instead of ending it. Check the quantity too: 1 closes one contract, not all three of an identical holding.</span></li>
     <li><b>Set a limit price. Never send it as a market order.</b><span>The gap between the buy and sell price on an option is wide, and a market order accepts whatever is sitting there. On a cheap contract that difference can be larger than the profit you are protecting.</span></li>
     <li><b>Start at the middle, then walk toward the ask.</b><span>If the bid is $1.00 and the ask $1.15, offer $1.07 and wait a minute. No fill, try $1.10. You are buying, so raising your limit is what gets you filled &mdash; and each step up costs real money.</span></li>
     <li><b>Send it, then confirm it actually closed.</b><span>The row should disappear from Positions, Realized P&amp;L should move by the amount you made, and the margin the position was holding should be released. Until all three happen, you are still short the option.</span></li>
   </ol>
+
+  <div class="callout" style="margin-top:14px;">
+    <div class="tag">A fifth reason.</div>
+    <p class="small" style="margin:0;">The four triggers on page two are all about the trade. There is a fifth that is about the <em>calendar</em>: <b>closing a dead contract early to release its collateral.</b> A put with delta 0.000 and a day to run carries no real risk &mdash; but under a cash-secured rule its full strike &times; 100 stays committed until it expires, and you cannot fund the replacement until it clears. Buying it back for $15 or $20 frees that money now rather than at tomorrow&rsquo;s close. Worth it when you have a position waiting to go on and no cash to put it on with; pointless otherwise, because the contract expires free of charge.</p>
+  </div>
 
   <hr class="rule">
 
