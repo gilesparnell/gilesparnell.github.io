@@ -80,6 +80,18 @@ h1 em{font-style:italic;}
 
 /* ---------- category block ---------- */
 section.cat{margin-top:44px;scroll-margin-top:68px;}
+#top{scroll-margin-top:80px;}
+
+/* per-section "back to categories" links, one at the top of a section
+   (right under its heading) and one at the bottom (after its table/notes) */
+.sec-top{margin:0 0 14px;}
+.sec-top a{
+  display:inline-flex;align-items:center;gap:5px;
+  font-size:0.78rem;font-weight:600;color:var(--muted);
+  text-decoration:none;transition:color .2s;
+}
+.sec-top a:hover{color:var(--teal);}
+.sec-top-end{margin:16px 0 0;}
 .cat-head{margin-bottom:14px;}
 .cat-head h2{
   font-family:'Spectral',Georgia,serif;font-weight:500;
