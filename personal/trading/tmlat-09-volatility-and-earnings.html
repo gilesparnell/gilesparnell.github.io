@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TMLAT No. 09 &mdash; Volatility &amp; earnings</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;1,400&family=Outfit:wght@300;400;500;600;700&display=swap">
+<link rel="stylesheet" href="assets/tmlat.css">
+</head>
+<body class="tmlat">
+
+<div class="t-bar">
+  <a class="t-back" href="options/">&larr; Series</a>
+  <div class="t-mid">TMLAT &middot; No. 09</div>
+  <a class="t-gl" href="glossary/">Glossary</a>
+  <a class="t-full" href="09-volatility-and-earnings.html">Full version</a>
+</div>
+
+<div class="wrap">
+
+  <div class="kick">Tell me like a 10-year-old &middot; No. 09</div>
+  <h1>Selling into <em>the event</em></h1>
+  <p class="stand">A few times a year a company tells everyone how it did. That week, option prices get <strong>much</strong> more expensive. If you are the one selling, that is good news &mdash; as long as you know what you are agreeing to.</p>
+
+  <nav class="toc">
+    <h2>What&rsquo;s in here</h2>
+    <ol>
+      <li><a href="#s1">The umbrella shop before a storm</a></li>
+      <li><a href="#s2">After the storm, nobody wants umbrellas</a></li>
+      <li><a href="#s3">How big a storm are people expecting?</a></li>
+      <li><a href="#s4">Picking how far away your line is</a></li>
+      <li><a href="#s5">If you&rsquo;re not sure, pick the middle</a></li>
+      <li><a href="#s6">One promise per 100 shares</a></li>
+    </ol>
+  </nav>
+
+  <section class="blk" id="s1">
+    <div class="num">01</div>
+    <h2 class="head">The umbrella shop before a storm</h2>
+    <div class="ana">
+      <div class="lab">Think of it like this</div>
+      <p>You sell umbrellas. The weather forecast says a big storm <em>might</em> come on Wednesday. Nobody knows for sure. Everyone wants an umbrella just in case, so you can charge a lot for one.</p>
+    </div>
+    <p>That is what happens to options before a company reports its results. Nobody knows if the news will be good or bad, so people pay more for options. The grown-up name for &ldquo;how much people are expecting things to swing&rdquo; is <strong>implied volatility</strong>, or <strong>IV</strong>.</p>
+    <p>Two more numbers help you tell if prices are high right now:</p>
+    <ul class="plain">
+      <li><strong>IV compared with what actually happened.</strong> If the forecast says huge storm but the last month was drizzle, umbrellas are expensive. Good time to be the shop.</li>
+      <li><strong>IV Rank.</strong> A score from 0 to 100 for &ldquo;is this forecast scary <em>for this town</em>?&rdquo; Over about 70 means scarier than usual.</li>
+    </ul>
+  </section>
+
+  <section class="blk" id="s2">
+    <div class="num">02</div>
+    <h2 class="head">After the storm, nobody wants umbrellas</h2>
+    <p>Thursday comes. The storm happened, or it didn&rsquo;t. Either way, nobody needs an umbrella any more, and the price drops straight away.</p>
+    <p>That drop is called <strong>IV crush</strong>. Every option on the company gets cheaper at once, the morning after the news.</p>
+    <div class="warn">
+      <div class="lab">The bit people get wrong</div>
+      <p>You have to sell <em>before</em> the news. If you wait until afterwards to see what happens, the expensive part has already gone. The shop that sold umbrellas on Tuesday already has the money.</p>
+    </div>
+  </section>
+
+  <section class="blk" id="s3">
+    <div class="num">03</div>
+    <h2 class="head">How big a storm are people expecting?</h2>
+    <p>You can work this out yourself. Add up what people are paying for a &ldquo;price goes up&rdquo; bet and a &ldquo;price goes down&rdquo; bet, both at today&rsquo;s price.</p>
+    <ul class="plain">
+      <li>Stock is at <strong>$200</strong>.</li>
+      <li>The &ldquo;up&rdquo; bet costs <strong>$6.50</strong> and the &ldquo;down&rdquo; bet costs <strong>$6.50</strong>.</li>
+      <li>Together that is <strong>$13</strong>. So everyone expects the price to land somewhere between about <strong>$187 and $213</strong>.</li>
+    </ul>
+    <div class="jar">
+      <div class="lab">The words grown-ups use</div>
+      <dl>
+        <dt>Expected move</dt><dd>How far everyone is betting the price will wander before the deadline.</dd>
+        <dt>IV crush</dt><dd>Option prices falling fast once the big news is out.</dd>
+        <dt>IV Rank</dt><dd>Whether today&rsquo;s forecast is high or low for this particular company.</dd>
+      </dl>
+    </div>
+  </section>
+
+  <section class="blk" id="s4">
+    <div class="num">04</div>
+    <h2 class="head">Picking how far away your line is</h2>
+    <p>Selling a call means promising to sell your shares at a price line, if the stock gets there. You get paid for the promise straight away.</p>
+    <ul class="plain">
+      <li><strong>A line close to today&rsquo;s price</strong> pays you more, but the stock reaches it more easily. Then your shares are sold and you miss anything above the line.</li>
+      <li><strong>A line far away</strong> pays you less, but if the stock shoots up you keep more of the rise.</li>
+    </ul>
+    <p>The number called <strong>delta</strong> tells you roughly the chance the line gets reached. <strong>0.30 means about 3 in 10.</strong> Bigger delta, more likely. Smaller delta, less likely.</p>
+    <div class="ana">
+      <div class="lab">Two paths that meet</div>
+      <p>For any two lines, there is a price where both pay you exactly the same. Below it, the closer line wins. Above it, the further line wins. If that meeting point is above where everyone expects the price to go, the further line only wins if something surprising happens.</p>
+    </div>
+  </section>
+
+  <section class="blk" id="s5">
+    <div class="num">05</div>
+    <h2 class="head">If you&rsquo;re not sure, pick the middle</h2>
+    <p>Lots of news stories about a company doesn&rsquo;t mean you know something. Everyone else has read them too, and the prices already include them.</p>
+    <p>If you are honestly guessing which way the stock will go, choose the line around <strong>0.30</strong>. Only move it further away if you have real evidence &mdash; things like sales numbers or profits &mdash; not headlines.</p>
+  </section>
+
+  <section class="blk" id="s6">
+    <div class="num">06</div>
+    <h2 class="head">One promise per 100 shares</h2>
+    <p>One option covers 100 shares. If you own 100 shares, you make <strong>one</strong> promise. Never more.</p>
+    <div class="warn">
+      <div class="lab">Watch out for</div>
+      <p>Making a second promise is like selling umbrellas you don&rsquo;t own. If the storm is huge, you have to go and buy them at any price to hand over. There is no limit on how much that can cost &mdash; and news week is exactly when the storms are biggest.</p>
+    </div>
+  </section>
+
+  <div class="goldrule">
+    <div class="gr-lab">The one to remember</div>
+    <p class="gr-text">You get paid for not knowing, not for being right.</p>
+    <p class="gr-sub">Sell before the news, pick the middle line unless you really know something, and only promise shares you actually have.</p>
+  </div>
+
+  <div class="fnav">
+    <a href="tmlat-08-getting-out.html"><div class="dir">&larr; Previous</div><div class="ttl">No. 08 &middot; Getting out</div></a>
+    <a class="fnav-gl" href="glossary/"><div class="dir">Stuck on a word?</div><div class="ttl">The glossary &rarr;</div></a>
+  </div>
+
+  <div class="disc"><strong>A reminder.</strong> This is me teaching myself, written in plain words on purpose. It is education, not financial advice, and options can lose you more than you put in. Nothing here is a suggestion to make any particular trade.</div>
+
+</div>
+</body>
+</html>
