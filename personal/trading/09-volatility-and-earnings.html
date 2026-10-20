@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Options Cheat Sheet — No. 09</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+:root{
+  --ink:#1d1d1b;
+  --muted:#8c8c85;
+  --faint:#b7b6ad;
+  --line:#dcdad0;
+  --line2:#e7e5db;
+  --paper:#ffffff;
+  --green:#4b7d5b;
+  --green-ink:#2f5a3e;
+  --green-panel:#e8efe6;
+  --green-line:#cfe0ce;
+  --red:#b0503c;
+  --red-ink:#8f3e2d;
+  --red-panel:#f6e9e3;
+  --red-line:#ecd2c6;
+  --cream:#f3f1e9;
+  --cream-line:#e6e3d6;
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;background:#54534d;}
+body{
+  font-family:'Inter',-apple-system,system-ui,sans-serif;
+  color:var(--ink);
+  -webkit-font-smoothing:antialiased;
+}
+.page{
+  position:relative;
+  width:210mm;
+  min-height:297mm;
+  background:var(--paper);
+  margin:0 auto;
+  padding:16mm 15mm 16mm 15mm;
+  page-break-after:always;
+}
+.page:last-child{page-break-after:auto;}
+
+.runhead{
+  display:flex;justify-content:space-between;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:8.5px;color:var(--muted);letter-spacing:.02em;
+  padding-bottom:9px;margin-bottom:0;
+}
+
+.mono{font-family:'IBM Plex Mono',monospace;}
+.serif{font-family:'Spectral',Georgia,serif;}
+.kicker{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:8.5px;letter-spacing:.22em;color:var(--muted);
+  text-transform:uppercase;
+}
+.sectlabel{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:8.5px;letter-spacing:.06em;color:var(--faint);
+  text-transform:uppercase;line-height:1.5;
+  margin-bottom:4px;
+}
+
+h1.title{
+  font-family:'Spectral',Georgia,serif;
+  font-weight:400;font-size:52px;line-height:.98;
+  margin:6px 0 0;letter-spacing:-.01em;
+}
+h1.title em{font-style:italic;font-weight:400;}
+h2.stitle{
+  font-family:'Spectral',Georgia,serif;
+  font-weight:500;font-size:23px;line-height:1.12;
+  margin:0 0 8px;letter-spacing:-.01em;
+}
+h2.stitle em{font-style:italic;font-weight:400;color:#555;}
+h3.big{
+  font-family:'Spectral',Georgia,serif;
+  font-weight:400;font-size:28px;margin:0 0 4px;line-height:1;
+}
+p{font-size:10.5px;line-height:1.5;color:#39392f;margin:0 0 8px;}
+p.lead{font-size:11px;color:#4a4a3f;}
+.small{font-size:9px;line-height:1.45;color:#55554a;}
+.tiny{font-size:8px;line-height:1.4;}
+b,strong{font-weight:600;color:var(--ink);}
+.gt{color:var(--green-ink);font-weight:600;}
+.rt{color:var(--red-ink);font-weight:600;}
+hr.rule{border:none;border-top:1px solid var(--line);margin:16px 0;}
+hr.thin{border:none;border-top:1px solid var(--line2);margin:10px 0;}
+
+.masthead{display:flex;justify-content:space-between;align-items:flex-start;}
+.metabox{
+  text-align:right;font-family:'IBM Plex Mono',monospace;
+  font-size:8.5px;line-height:1.7;color:var(--muted);padding-top:6px;
+}
+.metabox .hd{color:var(--ink);font-weight:500;}
+
+.intro{max-width:118mm;margin-top:14px;}
+
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:11px;}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;}
+.card{
+  border:1px solid var(--line);border-radius:3px;padding:13px 14px;background:#fff;
+}
+.card.green{background:var(--green-panel);border-color:var(--green-line);}
+.card.red{background:var(--red-panel);border-color:var(--red-line);}
+.card.cream{background:var(--cream);border-color:var(--cream-line);}
+.card .lab{font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;}
+.card h4{font-family:'Spectral',serif;font-weight:500;font-size:16px;margin:0 0 6px;}
+.dot{display:inline-block;width:6px;height:6px;border-radius:50%;vertical-align:middle;margin-right:5px;}
+.dot.g{background:var(--green);}
+.dot.r{background:var(--red);}
+
+.rows{margin-top:8px;border-top:1px dotted var(--faint);}
+.row{display:flex;justify-content:space-between;gap:8px;padding:4px 0;border-bottom:1px dotted #d9d7cc;}
+.row .k{font-family:'IBM Plex Mono',monospace;font-size:7.6px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);white-space:nowrap;}
+.row .v{font-size:9px;text-align:right;color:#333;}
+.row .v.g{color:var(--green-ink);font-weight:600;}
+.row .v.r{color:var(--red-ink);font-weight:600;}
+
+.callout{
+  border:1px solid var(--line);border-radius:3px;background:var(--cream);
+  padding:12px 15px;display:flex;gap:16px;align-items:flex-start;
+}
+.callout .tag{font-family:'Spectral',serif;font-style:italic;font-size:13px;color:#333;white-space:nowrap;min-width:88px;}
+
+.checklist{list-style:none;margin:0;padding:0;}
+.checklist li{position:relative;padding:7px 0 7px 26px;border-bottom:1px dotted #d9d7cc;font-size:10px;line-height:1.4;}
+.checklist li:before{
+  content:"";position:absolute;left:0;top:7px;width:13px;height:13px;border:1.4px solid var(--green);border-radius:3px;
+}
+.checklist li:after{
+  content:"";position:absolute;left:4px;top:8px;width:4px;height:7px;border:solid var(--green);border-width:0 1.6px 1.6px 0;transform:rotate(40deg);
+}
+.checklist li b{display:block;font-size:10.5px;}
+.checklist li span{color:#5a5a4f;font-size:8.7px;}
+
+.flags{list-style:none;margin:0;padding:0;}
+.flags li{position:relative;padding:6px 0 6px 20px;border-bottom:1px dotted #e2c9bf;font-size:9.4px;line-height:1.42;}
+.flags li:before{content:"\00D7";position:absolute;left:2px;top:5px;color:var(--red);font-weight:700;font-size:12px;font-family:'IBM Plex Mono',monospace;}
+.flags li b{color:var(--red-ink);}
+
+.gloss{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px 22px;}
+.gloss .term{font-family:'Spectral',serif;font-style:italic;font-size:12.5px;margin:0 0 3px;border-top:1px solid var(--line);padding-top:8px;}
+.gloss p{font-size:8.7px;line-height:1.42;color:#55554a;margin:0;}
+
+/* decision matrix */
+.matrix{width:100%;border-collapse:collapse;margin-top:4px;}
+.matrix th{
+  font-family:'IBM Plex Mono',monospace;font-size:7.6px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--muted);text-align:left;font-weight:500;
+  padding:0 8px 6px 0;border-bottom:1px solid var(--line);
+}
+.matrix td{
+  font-size:9.4px;line-height:1.4;color:#39392f;
+  padding:7px 8px 7px 0;border-bottom:1px dotted #d9d7cc;vertical-align:top;
+}
+.matrix td.act{font-family:'IBM Plex Mono',monospace;font-size:8.4px;letter-spacing:.06em;
+  text-transform:uppercase;font-weight:500;white-space:nowrap;}
+.matrix td.act.g{color:var(--green-ink);}
+.matrix td.act.r{color:var(--red-ink);}
+
+/* fill-in rules table */
+.ruletbl{width:100%;border-collapse:collapse;margin-top:6px;}
+.ruletbl th{
+  font-family:'IBM Plex Mono',monospace;font-size:7.6px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--muted);text-align:left;font-weight:500;
+  padding:0 8px 6px 0;border-bottom:1px solid var(--line);
+}
+.ruletbl td{font-size:9.2px;line-height:1.42;color:#39392f;padding:7px 8px 7px 0;
+  border-bottom:1px dotted #d9d7cc;vertical-align:top;}
+.ruletbl td.fill{border-bottom:1px solid var(--faint);min-width:34mm;}
+.ruletbl .ph{color:var(--faint);font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:.06em;}
+
+.goldrule{
+  border:1.4px solid #d9b878;border-radius:4px;background:#fbf4e6;
+  padding:11px 16px;margin:14px 0 0;text-align:center;
+}
+.goldrule .gr-lab{font-family:'IBM Plex Mono',monospace;font-size:7.6px;letter-spacing:.2em;
+  text-transform:uppercase;color:#a8802f;margin-bottom:5px;}
+.goldrule .gr-text{font-family:'Spectral',serif;font-weight:600;font-size:17px;line-height:1.25;
+  color:#463819;margin:0;}
+.goldrule .gr-sub{font-size:8.8px;line-height:1.45;color:#6b5a38;margin:6px 0 0;}
+
+.foot{
+  position:absolute;left:15mm;right:15mm;bottom:11mm;
+  display:flex;justify-content:space-between;
+  font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--faint);
+  letter-spacing:.06em;border-top:1px solid var(--line);padding-top:7px;
+}
+
+svg{display:block;}
+.axcap{font-family:'IBM Plex Mono',monospace;font-size:6.5px;fill:var(--muted);letter-spacing:.08em;}
+
+/* numbered steps (No. 08) */
+.steps{list-style:none;margin:0;padding:0;counter-reset:st;}
+.steps li{position:relative;padding:8px 0 8px 30px;border-bottom:1px dotted #d9d7cc;
+  font-size:9.6px;line-height:1.45;counter-increment:st;color:#39392f;}
+.steps li:before{
+  content:counter(st,decimal-leading-zero);position:absolute;left:0;top:9px;
+  font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:.06em;
+  color:#a8802f;font-weight:600;
+}
+.steps li > b{display:block;font-size:10.5px;margin-bottom:1px;color:var(--ink);}
+.steps li span b{display:inline;font-size:inherit;margin:0;color:var(--ink);}
+.steps li span{color:#5a5a4f;}
+/* No. 09 additions */
+.matrix td.num{font-family:'IBM Plex Mono',monospace;font-size:8.6px;white-space:nowrap;}
+.matrix td.best{background:var(--green-panel);color:var(--green-ink);font-weight:600;}
+.matrix td.neg{color:var(--red-ink);}
+</style>
+  <link rel="stylesheet" href="assets/style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap">
+  <link rel="stylesheet" href="assets/reader.css">
+</head>
+<body class="reader">
+<div class="reader-bar">
+  <a class="rb-back" href="options/">&larr; Options series</a>
+  <div class="rb-title">No. 09 &middot; Volatility &amp; Earnings</div>
+</div>
+<div class="reader-scroll">
+
+<!-- ============ PAGE 1 ============ -->
+<section class="page">
+  <div class="runhead"><span>Options Cheat Sheet</span><span>No. 09 &middot; Volatility &amp; earnings</span></div>
+
+  <div class="masthead">
+    <div style="max-width:120mm;">
+      <div class="kicker">A visual primer &middot; No. 09</div>
+      <h1 class="title">Selling into<br><em>the event.</em></h1>
+    </div>
+    <div class="metabox">
+      <div class="hd">Three numbers</div>
+      Implied volatility<br>
+      IV against HV<br>
+      IV Rank<br><br>
+      <div class="hd">One read</div>
+      the expected move<br><br>
+      <div class="hd">Three pages</div>
+      <div class="hd" style="margin-top:10px;">Read after</div>
+      No. 06 &mdash; owning &amp; earning
+    </div>
+  </div>
+
+  <div class="intro">
+    <p class="lead">Earnings week is when option prices are fattest. <b>That is the opportunity and the risk at the same time.</b></p>
+    <p class="small">No. 06 lists earnings as a blackout &mdash; an event you will not write through. That is a sound default. This page is the informed exception: how to decide, deliberately and with numbers, whether to sell a covered call or a put across an earnings report, and what it will cost you if you do.</p>
+  </div>
+
+  <div class="goldrule">
+    <div class="gr-lab">Why earnings week pays sellers</div>
+    <p class="gr-text">You are paid for the uncertainty, not the outcome.</p>
+    <p class="gr-sub">Before the report nobody knows the result, so every option carries a large uncertainty charge. The seller collects that charge up front. The morning after, it is gone &mdash; whichever way the stock moved.</p>
+  </div>
+
+  <hr class="rule">
+
+  <div class="sectlabel">01 / Before you sell</div>
+  <h2 class="stitle">Three numbers before you sell.</h2>
+  <p>Every option price carries a forecast. Three numbers tell you whether that forecast is cheap or expensive right now.</p>
+
+  <table class="matrix">
+    <thead>
+      <tr><th style="width:20%">Number</th><th style="width:34%">What it tells you</th><th>How a seller reads it</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><b>Implied volatility (IV)</b></td><td>The swing the market is pricing in, as a yearly percentage.</td><td>Higher means fatter premiums. Divide by 16 for a rough one-day move: IV 85% &asymp; 5.3% a day.</td></tr>
+      <tr><td><b>IV / HV</b></td><td>IV against how much the stock has actually been moving (historical volatility).</td><td>Above 100%: options are priced for more than the stock has been doing. Earnings weeks often run 200%+.</td></tr>
+      <tr><td><b>IV Rank</b></td><td>Today&rsquo;s IV against its own range over the past 52 or 13 weeks, from 0 to 100.</td><td>70+ is a common rule of thumb for &ldquo;expensive for this stock&rdquo; &mdash; a seller&rsquo;s window. A low rank means thin premiums.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="grid2" style="margin-top:12px;">
+    <div class="card cream">
+      <div class="lab">Worked read</div>
+      <h4>XYZ, the day before earnings</h4>
+      <p class="small" style="margin:0;">IV 85%. The stock&rsquo;s recent actual swing (HV) is 35%. IV/HV &asymp; 240%. IV Rank 80. <b>All three say the same thing:</b> option buyers are paying a lot for this week.</p>
+    </div>
+    <div class="card">
+      <div class="lab">Where to find them &mdash; IBKR</div>
+      <h4>Portfolio view &rarr; gear &rarr; Columns</h4>
+      <p class="small" style="margin:0;">Add <b>Implied Vol. %</b> (the IV of each position), <b>Implied Vol./Hist. Vol %</b> (the ratio) and <b>52 Week / 13 Week IV Rank</b>. The option chain shows each expiry&rsquo;s IV at the top of the strike column. <b>Opt. IV%</b> on the stock panel is one 30-day figure for the whole stock.</p>
+    </div>
+  </div>
+
+  <div class="foot"><span>Options Cheat Sheet &middot; 09</span><span>Educational reference &mdash; not investment advice</span></div>
+</section>
+
+<!-- ============ PAGE 2 ============ -->
+<section class="page">
+  <div class="runhead"><span>Options Cheat Sheet</span><span>No. 09 &middot; Volatility &amp; earnings</span></div>
+
+  <div class="sectlabel">02 / The expected move</div>
+  <h2 class="stitle">Read the expected move straight off the chain.</h2>
+  <p>Add the at-the-money call to the at-the-money put for the expiry you are looking at. The total is roughly how far the market expects the stock to move, in either direction, by that date.</p>
+
+  <div style="margin:10px 0 6px;"><svg viewBox="0 0 620 120" width="100%" height="120" role="img" aria-label="Expected range of 187 to 213 dollars around a 200 dollar stock, with the 205 and 210 strikes inside the range and the 215 and 220 strikes outside it">
+  <rect x="110" y="38" width="338" height="34" fill="#e8efe6" stroke="#cfe0ce"/>
+  <line x1="40" y1="55" x2="596" y2="55" stroke="#dcdad0" stroke-width="1"/>
+  <line x1="279" y1="30" x2="279" y2="80" stroke="#1d1d1b" stroke-width="1.6"/>
+  <text x="279" y="24" text-anchor="middle" class="axcap" style="fill:#1d1d1b;">XYZ $200</text>
+  <text x="110" y="92" text-anchor="middle" class="axcap">$187</text>
+  <text x="448" y="92" text-anchor="middle" class="axcap">$213</text>
+  <text x="279" y="108" text-anchor="middle" class="axcap" style="fill:#2f5a3e;">EXPECTED RANGE BY FRIDAY &mdash; CALL $6.50 + PUT $6.50 = $13</text>
+  <circle cx="344" cy="55" r="3.4" fill="#4b7d5b"/><text x="344" y="50" text-anchor="middle" class="axcap" style="fill:#2f5a3e;">205</text>
+  <circle cx="409" cy="55" r="3.4" fill="#4b7d5b"/><text x="409" y="50" text-anchor="middle" class="axcap" style="fill:#2f5a3e;">210</text>
+  <circle cx="474" cy="55" r="3.4" fill="#b0503c"/><text x="474" y="50" text-anchor="middle" class="axcap" style="fill:#8f3e2d;">215</text>
+  <circle cx="539" cy="55" r="3.4" fill="#b0503c"/><text x="539" y="50" text-anchor="middle" class="axcap" style="fill:#8f3e2d;">220</text>
+  <text x="506" y="74" text-anchor="middle" class="axcap" style="fill:#8f3e2d;">OUTSIDE</text>
+  <text x="376" y="74" text-anchor="middle" class="axcap" style="fill:#2f5a3e;">INSIDE</text>
+</svg></div>
+
+  <div class="grid2" style="margin-top:6px;">
+    <div class="card green">
+      <div class="lab">Inside the range</div>
+      <h4>Firmly in play</h4>
+      <p class="small" style="margin:0;">The market already expects the stock could reach these strikes. Expect them to be tested.</p>
+    </div>
+    <div class="card red">
+      <div class="lab">Outside the range</div>
+      <h4>Need a surprise</h4>
+      <p class="small" style="margin:0;">These are only reached if the report beats what everyone is already braced for. Choosing them is a bet on that surprise.</p>
+    </div>
+  </div>
+
+  <hr class="rule">
+
+  <div class="sectlabel">03 / The morning after</div>
+  <h2 class="stitle">Why the premium is fat now, <em>and gone tomorrow.</em></h2>
+  <p>Before the report, nobody knows the result, so option prices carry a large uncertainty charge. The moment the result is out, that charge disappears. IV collapses overnight and every option on the stock gets cheaper at once. This is <b>IV crush</b>.</p>
+
+  <div class="grid3" style="margin-top:9px;">
+    <div class="card cream">
+      <div class="lab">Timing</div>
+      <h4>Sell before, not after</h4>
+      <p class="small" style="margin:0;">The uncertainty charge is only there while the uncertainty is. Waiting for the result means selling after the premium has gone.</p>
+    </div>
+    <div class="card green">
+      <div class="lab">The seller&rsquo;s tailwind</div>
+      <h4>The crush works for you</h4>
+      <p class="small" style="margin:0;">If the stock does not run past your strike, the option you sold loses most of its value overnight. Illustrative: a 210 call sold for $3.00 might be worth around $0.70 the next morning with the stock flat. Buy it back for $70, keep $230, and you are free to sell again.</p>
+    </div>
+    <div class="card">
+      <div class="lab">Choosing the expiry</div>
+      <h4>Shorter concentrates it</h4>
+      <p class="small" style="margin:0;">An expiry two days after the report might show IV of 85% while one three trading days later shows 66%. The event is a bigger share of the shorter option&rsquo;s life. The longer one still pays a little more in dollars, for the extra days.</p>
+    </div>
+  </div>
+
+  <hr class="rule">
+
+  <div class="sectlabel">04 / Choosing the strike</div>
+  <h2 class="stitle">Compare strikes by outcome, not by premium.</h2>
+  <p>The closer the strike, the more premium you collect. But the strike is also your ceiling. The question is never &ldquo;which pays most&rdquo;, it is <b>&ldquo;which pays most for the outcome I actually expect&rdquo;</b>. XYZ at $200, shares owned at $200, Friday expiry two days after earnings:</p>
+
+  <table class="matrix">
+    <thead>
+      <tr><th>Strike</th><th>Premium</th><th>Delta &asymp; chance called away</th><th>Best possible result</th><th>Losing money below</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><b>205</b></td><td class="num">$400</td><td class="num">0.40</td><td class="num">$900</td><td class="num">$196.00</td></tr>
+      <tr><td><b>210</b></td><td class="num">$300</td><td class="num">0.30</td><td class="num">$1,300</td><td class="num">$197.00</td></tr>
+      <tr><td><b>215</b></td><td class="num">$220</td><td class="num">0.23</td><td class="num">$1,720</td><td class="num">$197.80</td></tr>
+      <tr><td><b>220</b></td><td class="num">$150</td><td class="num">0.17</td><td class="num">$2,150</td><td class="num">$198.50</td></tr>
+    </tbody>
+  </table>
+  <p class="tiny" style="color:var(--muted);margin-top:5px;">Best possible result = premium plus the share gain up to the strike. Losing money below = share cost minus premium per share.</p>
+
+  <div class="foot"><span>Options Cheat Sheet &middot; 09</span><span>Educational reference &mdash; not investment advice</span></div>
+</section>
+
+<!-- ============ PAGE 3 ============ -->
+<section class="page">
+  <div class="runhead"><span>Options Cheat Sheet</span><span>No. 09 &middot; Volatility &amp; earnings</span></div>
+
+  <div class="sectlabel">04 / Choosing the strike, continued</div>
+  <h2 class="stitle">What you end up with at Friday&rsquo;s close.</h2>
+  <p class="small">Shares plus premium, against the $200 cost. The best strike for each closing price is shaded.</p>
+
+  <table class="matrix">
+    <thead>
+      <tr><th style="width:24%">XYZ closes at</th><th>205 call</th><th>210 call</th><th>215 call</th><th>220 call</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><b>$185</b> &mdash; big fall</td><td class="num best">&minus;$1,100</td><td class="num neg">&minus;$1,200</td><td class="num neg">&minus;$1,280</td><td class="num neg">&minus;$1,350</td></tr>
+      <tr><td><b>$200</b> &mdash; flat</td><td class="num best">+$400</td><td class="num">+$300</td><td class="num">+$220</td><td class="num">+$150</td></tr>
+      <tr><td><b>$210</b></td><td class="num">+$900</td><td class="num best">+$1,300</td><td class="num">+$1,220</td><td class="num">+$1,150</td></tr>
+      <tr><td><b>$215</b></td><td class="num">+$900</td><td class="num">+$1,300</td><td class="num best">+$1,720</td><td class="num">+$1,650</td></tr>
+      <tr><td><b>$225+</b></td><td class="num">+$900</td><td class="num">+$1,300</td><td class="num">+$1,720</td><td class="num best">+$2,150</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout" style="margin-top:12px;">
+    <div class="tag">Find the crossover.</div>
+    <p class="small" style="margin:0;">For any two strikes there is a closing price where they pay exactly the same. Below it the closer strike wins; above it the further strike wins. <b>205 vs 210 cross at $206. 210 vs 215 at $210.80. 215 vs 220 at $215.70.</b> Set those against the expected range of $187&ndash;$213: the 215 and 220 only come out ahead if the stock finishes near or beyond the top of what the market is pricing. That is a bet on a surprise &mdash; fine if you have a reason, expensive if you do not.</p>
+  </div>
+
+  <hr class="rule">
+
+  <div class="sectlabel">05 / No view?</div>
+  <h2 class="stitle">If you don&rsquo;t have a view, <em>don&rsquo;t pretend to.</em></h2>
+  <p>Delta works the same for calls as for puts: it is roughly the chance the option finishes in the money. For a covered call, that is the chance your shares get called away. <b>Higher delta, more likely. Lower delta, less likely.</b> The reversed version circulates; check it against any live chain &mdash; the strike nearest the price always has the highest delta.</p>
+
+  <table class="matrix">
+    <thead>
+      <tr><th style="width:36%">Your honest view</th><th style="width:20%">Where to sell</th><th>Why</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><b>No real view</b></td><td class="act g">Around 0.30</td><td>The neutral default. Most of the premium of a close strike, and a real chunk of upside kept.</td></tr>
+      <tr><td><b>Evidence for a rise</b> &mdash; results, guidance, margins, not headlines</td><td class="act g">0.20 &ndash; 0.25</td><td>Leave room for the move you have a reason to expect.</td></tr>
+      <tr><td><b>Mainly want income</b>, happy to be called away</td><td class="act r">0.35 &ndash; 0.45</td><td>Paid more precisely because it is more likely to be held to.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout" style="margin-top:12px;">
+    <div class="tag">Headlines are priced.</div>
+    <p class="small" style="margin:0;">A product launch everyone has seen, or a wave of media attention, is not an edge. Option prices already reflect what the whole market knows. <b>If the reason for leaning bullish is the news cycle, sell the neutral strike.</b></p>
+  </div>
+
+  <hr class="rule">
+
+  <div class="sectlabel">06 / What it costs</div>
+  <h2 class="stitle">What selling into earnings costs you.</h2>
+
+  <ul class="flags" style="margin-top:6px;">
+    <li><b>A capped upside on a gap up.</b> If the report sends the stock 10% higher overnight, you keep the gain only up to your strike. The rest belongs to the buyer.</li>
+    <li><b>A small cushion on a gap down.</b> The premium covers only the first few dollars of a fall. Below your break-even you lose $100 for every $1, exactly as if you had never sold the call. You keep the shares and the premium, and nothing forces you to sell &mdash; but the next call pays less if you keep its strike at or above your cost.</li>
+    <li><b>One contract per 100 shares. Never more.</b> A second call on 100 shares is uncovered (naked). Its loss has no ceiling, and earnings night is exactly when a stock gaps furthest. Most brokers restrict it to their highest permission level for that reason.</li>
+  </ul>
+
+  <div class="foot"><span>Options Cheat Sheet &middot; 09</span><span>Educational reference &mdash; not investment advice</span></div>
+</section>
+
+<!-- ============ PAGE 4 ============ -->
+<section class="page">
+  <div class="runhead"><span>Options Cheat Sheet</span><span>No. 09 &middot; Volatility &amp; earnings</span></div>
+
+  <div class="sectlabel">07 / The ticket</div>
+  <h2 class="stitle">Before you press Submit.</h2>
+
+  <ul class="checklist" style="margin-top:6px;">
+    <li><b>The side panel shows the contract you mean</b><span>Some platforms keep the last contract you clicked loaded in the order panel. Click the bid of the row you want, then read the panel header: expiry, strike, CALL or PUT.</span></li>
+    <li><b>The action is SELL</b><span>A profile showing &ldquo;max loss = premium, unlimited return&rdquo; is the <em>buyer&rsquo;s</em> view of that option. Use the Sell button and check the ticket says Sell.</span></li>
+    <li><b>Quantity = shares &divide; 100</b><span>100 shares, 1 contract. Anything more is the naked call above.</span></li>
+    <li><b>Limit at the mid, not the ask</b><span>Start halfway between bid and ask. If it has not filled in a minute or two, step $0.05 toward the bid.</span></li>
+    <li><b>DAY orders cancel at the close</b><span>An unfilled order disappears. You can place it again next session, still before the report.</span></li>
+    <li><b>Know the report time in your own timezone</b><span>A US after-the-close report lands the next morning in Australia.</span></li>
+  </ul>
+
+  <hr class="rule">
+
+  <div class="sectlabel">08 / Your rules</div>
+  <h2 class="stitle">Add these to your rules before the next report.</h2>
+  <p class="small">The same idea as the rules template in No. 06: decide away from the screen, then trade it.</p>
+
+  <table class="ruletbl">
+    <thead>
+      <tr><th style="width:26%">Rule</th><th style="width:40%">What it governs</th><th>Yours</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><b>Write through earnings?</b></td><td>Whether you sell across a report at all, or keep the No. 06 blackout.</td><td class="fill"><span class="ph">&hellip;&hellip;&hellip;</span></td></tr>
+      <tr><td><b>IV threshold</b></td><td>The IV/HV ratio or IV Rank below which the premium is not worth the gap risk.</td><td class="fill"><span class="ph">&hellip;&hellip;&hellip;</span></td></tr>
+      <tr><td><b>Strike rule</b></td><td>The delta you sell at when you have no view, and what evidence moves you off it.</td><td class="fill"><span class="ph">&hellip;&hellip;&hellip;</span></td></tr>
+      <tr><td><b>Expiry</b></td><td>The first expiry after the report, or a later one.</td><td class="fill"><span class="ph">&hellip;&hellip;&hellip;</span></td></tr>
+      <tr><td><b>After the report</b></td><td>Buy back once the crush has taken most of the premium, or hold to expiry.</td><td class="fill"><span class="ph">&hellip;&hellip;&hellip;</span></td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout" style="margin-top:16px;background:#fbfaf6;">
+    <div class="tag">The short version.</div>
+    <p class="small" style="margin:0;">Earnings week pays sellers more than any other week of the quarter, because it is the week the outcome is least known. Read the three numbers, read the expected move, compare strikes by outcome, and sell the neutral strike unless you have real evidence. <b>Nothing here is a recommendation to trade, and none of it is financial advice;</b> it is a map of how the mechanics fit together if you choose to use them.</p>
+  </div>
+
+  <div class="foot"><span>Options Cheat Sheet &middot; 09</span><span>Educational reference &mdash; not investment advice</span></div>
+</section>
+
+</div>
+<nav class="reader-nav">
+<a class="rn-prev" href="08-getting-out.html"><div class="rn-dir">&larr; Previous</div><div class="rn-ttl">No. 08 &middot; Getting Out</div></a>
+<a class="rn-next" href="options/"><div class="rn-dir">Back to series &rarr;</div><div class="rn-ttl">All nine primers</div></a>
+</nav>
+</body>
+</html>
