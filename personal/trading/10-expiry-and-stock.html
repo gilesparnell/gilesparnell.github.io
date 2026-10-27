@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Options Cheat Sheet — No. 10</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+:root{
+  --ink:#1d1d1b;
+  --muted:#8c8c85;
+  --faint:#b7b6ad;
+  --line:#dcdad0;
+  --line2:#e7e5db;
+  --paper:#ffffff;
+  --green:#4b7d5b;
+  --green-ink:#2f5a3e;
+  --green-panel:#e8efe6;
+  --green-line:#cfe0ce;
+  --red:#b0503c;
+  --red-ink:#8f3e2d;
+  --red-panel:#f6e9e3;
+  --red-line:#ecd2c6;
+  --cream:#f3f1e9;
+  --cream-line:#e6e3d6;
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;background:#54534d;}
+body{
+  font-family:'Inter',-apple-system,system-ui,sans-serif;
+  color:var(--ink);
+  -webkit-font-smoothing:antialiased;
+}
+.page{
+  position:relative;
+  width:210mm;
+  min-height:297mm;
+  background:var(--paper);
+  margin:0 auto;
+  padding:16mm 15mm 16mm 15mm;
+  page-break-after:always;
+}
+.page:last-child{page-break-after:auto;}
+
+.runhead{
+  display:flex;justify-content:space-between;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:8.5px;color:var(--muted);letter-spacing:.02em;
+  padding-bottom:9px;margin-bottom:0;
+}
+
+.mono{font-family:'IBM Plex Mono',monospace;}
+.serif{font-family:'Spectral',Georgia,serif;}
+.kicker{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:8.5px;letter-spacing:.22em;color:var(--muted);
+  text-transform:uppercase;
+}
+.sectlabel{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:8.5px;letter-spacing:.06em;color:var(--faint);
+  text-transform:uppercase;line-height:1.5;
+  margin-bottom:4px;
+}
+
+h1.title{
+  font-family:'Spectral',Georgia,serif;
+  font-weight:400;font-size:52px;line-height:.98;
+  margin:6px 0 0;letter-spacing:-.01em;
+}
+h1.title em{font-style:italic;font-weight:400;}
+h2.stitle{
+  font-family:'Spectral',Georgia,serif;
+  font-weight:500;font-size:23px;line-height:1.12;
+  margin:0 0 8px;letter-spacing:-.01em;
+}
+h2.stitle em{font-style:italic;font-weight:400;color:#555;}
+h3.big{
+  font-family:'Spectral',Georgia,serif;
+  font-weight:400;font-size:28px;margin:0 0 4px;line-height:1;
+}
+p{font-size:10.5px;line-height:1.5;color:#39392f;margin:0 0 8px;}
+p.lead{font-size:11px;color:#4a4a3f;}
+.small{font-size:9px;line-height:1.45;color:#55554a;}
+.tiny{font-size:8px;line-height:1.4;}
+b,strong{font-weight:600;color:var(--ink);}
+.gt{color:var(--green-ink);font-weight:600;}
+.rt{color:var(--red-ink);font-weight:600;}
+hr.rule{border:none;border-top:1px solid var(--line);margin:16px 0;}
+hr.thin{border:none;border-top:1px solid var(--line2);margin:10px 0;}
+
+.masthead{display:flex;justify-content:space-between;align-items:flex-start;}
+.metabox{
+  text-align:right;font-family:'IBM Plex Mono',monospace;
+  font-size:8.5px;line-height:1.7;color:var(--muted);padding-top:6px;
+}
+.metabox .hd{color:var(--ink);font-weight:500;}
+
+.intro{max-width:118mm;margin-top:14px;}
+
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:11px;}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;}
+.card{
+  border:1px solid var(--line);border-radius:3px;padding:13px 14px;background:#fff;
+}
+.card.green{background:var(--green-panel);border-color:var(--green-line);}
+.card.red{background:var(--red-panel);border-color:var(--red-line);}
+.card.cream{background:var(--cream);border-color:var(--cream-line);}
+.card .lab{font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;}
+.card h4{font-family:'Spectral',serif;font-weight:500;font-size:16px;margin:0 0 6px;}
+.dot{display:inline-block;width:6px;height:6px;border-radius:50%;vertical-align:middle;margin-right:5px;}
+.dot.g{background:var(--green);}
+.dot.r{background:var(--red);}
+
+.rows{margin-top:8px;border-top:1px dotted var(--faint);}
+.row{display:flex;justify-content:space-between;gap:8px;padding:4px 0;border-bottom:1px dotted #d9d7cc;}
+.row .k{font-family:'IBM Plex Mono',monospace;font-size:7.6px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);white-space:nowrap;}
+.row .v{font-size:9px;text-align:right;color:#333;}
+.row .v.g{color:var(--green-ink);font-weight:600;}
+.row .v.r{color:var(--red-ink);font-weight:600;}
+
+.callout{
+  border:1px solid var(--line);border-radius:3px;background:var(--cream);
+  padding:12px 15px;display:flex;gap:16px;align-items:flex-start;
+}
+.callout .tag{font-family:'Spectral',serif;font-style:italic;font-size:13px;color:#333;white-space:nowrap;min-width:88px;}
+
+.checklist{list-style:none;margin:0;padding:0;}
+.checklist li{position:relative;padding:7px 0 7px 26px;border-bottom:1px dotted #d9d7cc;font-size:10px;line-height:1.4;}
+.checklist li:before{
+  content:"";position:absolute;left:0;top:7px;width:13px;height:13px;border:1.4px solid var(--green);border-radius:3px;
+}
+.checklist li:after{
+  content:"";position:absolute;left:4px;top:8px;width:4px;height:7px;border:solid var(--green);border-width:0 1.6px 1.6px 0;transform:rotate(40deg);
+}
+.checklist li b{display:block;font-size:10.5px;}
+.checklist li span{color:#5a5a4f;font-size:8.7px;}
+
+.flags{list-style:none;margin:0;padding:0;}
+.flags li{position:relative;padding:6px 0 6px 20px;border-bottom:1px dotted #e2c9bf;font-size:9.4px;line-height:1.42;}
+.flags li:before{content:"\00D7";position:absolute;left:2px;top:5px;color:var(--red);font-weight:700;font-size:12px;font-family:'IBM Plex Mono',monospace;}
+.flags li b{color:var(--red-ink);}
+
+.gloss{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px 22px;}
+.gloss .term{font-family:'Spectral',serif;font-style:italic;font-size:12.5px;margin:0 0 3px;border-top:1px solid var(--line);padding-top:8px;}
+.gloss p{font-size:8.7px;line-height:1.42;color:#55554a;margin:0;}
+
+/* decision matrix */
+.matrix{width:100%;border-collapse:collapse;margin-top:4px;}
+.matrix th{
+  font-family:'IBM Plex Mono',monospace;font-size:7.6px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--muted);text-align:left;font-weight:500;
+  padding:0 8px 6px 0;border-bottom:1px solid var(--line);
+}
+.matrix td{
+  font-size:9.4px;line-height:1.4;color:#39392f;
+  padding:7px 8px 7px 0;border-bottom:1px dotted #d9d7cc;vertical-align:top;
+}
+.matrix td.act{font-family:'IBM Plex Mono',monospace;font-size:8.4px;letter-spacing:.06em;
+  text-transform:uppercase;font-weight:500;white-space:nowrap;}
+.matrix td.act.g{color:var(--green-ink);}
+.matrix td.act.r{color:var(--red-ink);}
+
+/* fill-in rules table */
+.ruletbl{width:100%;border-collapse:collapse;margin-top:6px;}
+.ruletbl th{
+  font-family:'IBM Plex Mono',monospace;font-size:7.6px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--muted);text-align:left;font-weight:500;
+  padding:0 8px 6px 0;border-bottom:1px solid var(--line);
+}
+.ruletbl td{font-size:9.2px;line-height:1.42;color:#39392f;padding:7px 8px 7px 0;
+  border-bottom:1px dotted #d9d7cc;vertical-align:top;}
+.ruletbl td.fill{border-bottom:1px solid var(--faint);min-width:34mm;}
+.ruletbl .ph{color:var(--faint);font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:.06em;}
+
+.goldrule{
+  border:1.4px solid #d9b878;border-radius:4px;background:#fbf4e6;
+  padding:11px 16px;margin:14px 0 0;text-align:center;
+}
+.goldrule .gr-lab{font-family:'IBM Plex Mono',monospace;font-size:7.6px;letter-spacing:.2em;
+  text-transform:uppercase;color:#a8802f;margin-bottom:5px;}
+.goldrule .gr-text{font-family:'Spectral',serif;font-weight:600;font-size:17px;line-height:1.25;
+  color:#463819;margin:0;}
+.goldrule .gr-sub{font-size:8.8px;line-height:1.45;color:#6b5a38;margin:6px 0 0;}
+
+.foot{
+  position:absolute;left:15mm;right:15mm;bottom:11mm;
+  display:flex;justify-content:space-between;
+  font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--faint);
+  letter-spacing:.06em;border-top:1px solid var(--line);padding-top:7px;
+}
+
+svg{display:block;}
+.axcap{font-family:'IBM Plex Mono',monospace;font-size:6.5px;fill:var(--muted);letter-spacing:.08em;}
+
+/* numbered steps (No. 08) */
+.steps{list-style:none;margin:0;padding:0;counter-reset:st;}
+.steps li{position:relative;padding:8px 0 8px 30px;border-bottom:1px dotted #d9d7cc;
+  font-size:9.6px;line-height:1.45;counter-increment:st;color:#39392f;}
+.steps li:before{
+  content:counter(st,decimal-leading-zero);position:absolute;left:0;top:9px;
+  font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:.06em;
+  color:#a8802f;font-weight:600;
+}
+.steps li > b{display:block;font-size:10.5px;margin-bottom:1px;color:var(--ink);}
+.steps li span b{display:inline;font-size:inherit;margin:0;color:var(--ink);}
+.steps li span{color:#5a5a4f;}
+/* No. 09 / 10 additions */
+.matrix td.num{font-family:'IBM Plex Mono',monospace;font-size:8.6px;white-space:nowrap;}
+.matrix td.best{background:var(--green-panel);color:var(--green-ink);font-weight:600;}
+.matrix td.neg{color:var(--red-ink);}
+</style>
+  <link rel="stylesheet" href="assets/style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap">
+  <link rel="stylesheet" href="assets/reader.css">
+</head>
+<body class="reader">
+<div class="reader-bar">
+  <a class="rb-back" href="options/">&larr; Options series</a>
+  <div class="rb-title">No. 10 &middot; Expiry &amp; Stock</div>
+</div>
+<div class="reader-scroll">
+
+<!-- ============ PAGE 1 ============ -->
+<section class="page">
+  <div class="runhead"><span>Options Cheat Sheet</span><span>No. 10 &middot; Expiry &amp; stock</span></div>
+
+  <div class="masthead">
+    <div style="max-width:120mm;">
+      <div class="kicker">A visual primer &middot; No. 10</div>
+      <h1 class="title">How long,<br><em>and on what.</em></h1>
+    </div>
+    <div class="metabox">
+      <div class="hd">Two choices</div>
+      the expiry<br>
+      the stock<br><br>
+      <div class="hd">One rule</div>
+      compare at the same delta<br><br>
+      <div class="hd">Four pages</div>
+      <div class="hd" style="margin-top:10px;">Read after</div>
+      No. 09 &mdash; volatility &amp; earnings
+    </div>
+  </div>
+
+  <div class="intro">
+    <p class="lead">Short expiries collect more premium per day. <b>More premium is not the same as more return.</b></p>
+    <p class="small">A common piece of advice is to sell 3&ndash;6 day options and keep the wheel spinning: put, call, put, call. This page sets out what that buys you, what it costs, what twelve years of index data say about weekly against monthly selling, and how to compare one stock&rsquo;s premium with another&rsquo;s.</p>
+  </div>
+
+  <div class="goldrule">
+    <div class="gr-lab">Why short expiries pay more per day</div>
+    <p class="gr-text">Time value melts fastest at the end.</p>
+    <p class="gr-sub">An option&rsquo;s price grows with the square root of time, not with time itself. A one-week option is worth roughly half a one-month option, not a quarter. Sell four weeklies in a row and you collect about twice the premium of one monthly &mdash; if every week behaves.</p>
+  </div>
+
+  <hr class="rule">
+
+  <div class="sectlabel">01 / Compare like with like</div>
+  <h2 class="stitle">Compare expiries at the same delta, <em>not the same strike.</em></h2>
+  <p>A later expiry at the same strike always pays more, partly because it is more likely to be reached. Comparing like with like means holding the risk level constant. Delta is roughly the chance of being called away (No. 09), so pick the strike with the same delta in each expiry.</p>
+
+  <p class="small"><b>XYZ at $200, IV 40%. Calls at about 0.30 delta.</b> Illustrative figures.</p>
+  <table class="matrix">
+    <thead>
+      <tr><th style="width:22%">Expiry</th><th>~0.30 strike</th><th>Premium</th><th>Per day</th><th>Room above price</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><b>7 days</b></td><td class="num">$205</td><td class="num">$2.40</td><td class="num best">$0.34</td><td class="num">+2.5%</td></tr>
+      <tr><td><b>14 days</b></td><td class="num">$207.50</td><td class="num">$3.30</td><td class="num">$0.24</td><td class="num">+3.75%</td></tr>
+      <tr><td><b>30 days</b></td><td class="num">$212.50</td><td class="num">$4.50</td><td class="num">$0.15</td><td class="num best">+6.25%</td></tr>
+    </tbody>
+  </table>
+
+  <div class="grid2" style="margin-top:12px;">
+    <div class="card red">
+      <div class="lab">The same-strike trap</div>
+      <h4>The 14-day $205 looks richer</h4>
+      <p class="small" style="margin:0;">It pays about $4.00 against $2.40 for the 7-day $205. But its delta is about 0.39, not 0.34. <b>You are being paid more because you are more likely to lose the shares.</b> The fair 14-day comparison is the $207.50.</p>
+    </div>
+    <div class="card">
+      <div class="lab">Where to read it &mdash; IBKR</div>
+      <h4>Option chain &rarr; Delta column</h4>
+      <p class="small" style="margin:0;">Switch the expiry tab, then find the call whose delta matches the one you were looking at. The strike will be further out on the longer expiry. Read the premium off <b>that</b> row.</p>
+    </div>
+  </div>
+
+  <div class="foot"><span>Options Cheat Sheet &middot; 10</span><span>Educational reference &mdash; not investment advice</span></div>
+</section>
+
+<!-- ============ PAGE 2 ============ -->
+<section class="page">
+  <div class="runhead"><span>Options Cheat Sheet</span><span>No. 10 &middot; Expiry &amp; stock</span></div>
+
+  <div class="sectlabel">02 / Two weeklies or one fortnightly</div>
+  <h2 class="stitle">Two one-week calls usually beat one two-week call. <em>Usually.</em></h2>
+  <p>From the table: two 7-day calls at $2.40 bring in about <b>$4.80</b> if the second week looks like the first. One 14-day call brings in <b>$3.30</b>, fixed today. Only the first week&rsquo;s premium is known when you start.</p>
+
+  <table class="matrix">
+    <thead>
+      <tr><th style="width:30%"></th><th>Two 7-day calls</th><th>One 14-day call</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><b>Premium</b></td><td class="num best">~$4.80 (estimate)</td><td class="num">$3.30 (known)</td></tr>
+      <tr><td><b>Chance of being called away</b></td><td class="num neg">roughly 1 in 2 over both weeks</td><td class="num best">about 1 in 3</td></tr>
+      <tr><td><b>Trades, commissions, bid/ask</b></td><td class="num">2 of each</td><td class="num best">1</td></tr>
+      <tr><td><b>Room above price</b></td><td class="num">+2.5% each week</td><td class="num best">+3.75%</td></tr>
+      <tr><td><b>Decisions</b></td><td class="num">Every Friday</td><td class="num best">One</td></tr>
+    </tbody>
+  </table>
+
+  <p class="small" style="margin-top:10px;"><b>When two weeklies come out behind:</b></p>
+  <ul class="flags" style="margin-top:4px;">
+    <li><b>Called away in week one.</b> There is no second call. You sold at your strike, which is a profit if the strike is above your cost, and you are back to selling puts.</li>
+    <li><b>The stock falls in week one.</b> Next week&rsquo;s call has to stay at or above your cost. That strike is now further from the price, so it pays very little.</li>
+    <li><b>IV drops.</b> Week two&rsquo;s premium shrinks with it. After earnings, this is the normal path.</li>
+  </ul>
+
+  <hr class="rule">
+
+  <div class="sectlabel">03 / What the data say</div>
+  <h2 class="stitle">Weekly selling collected more and returned less.</h2>
+  <p>Cboe publishes two benchmark indexes that sell at-the-money S&amp;P 500 puts, fully backed by cash: one rolls monthly (PUT), the other weekly (WPUT). Research by Prof. Oleg Bondarenko compares them.</p>
+
+  <table class="matrix">
+    <thead>
+      <tr><th style="width:36%"></th><th>Monthly (PUT)</th><th>Weekly (WPUT)</th><th>S&amp;P 500</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><b>Return a year</b>, 2006&ndash;2015</td><td class="num best">6.59%</td><td class="num">5.61%</td><td class="num">7.09%</td></tr>
+      <tr><td><b>Premium collected a year</b>, 2006&ndash;2018</td><td class="num">22.1%</td><td class="num best">37.1%</td><td class="num">&mdash;</td></tr>
+      <tr><td><b>Volatility</b>, 2006&ndash;2018</td><td class="num">10.7%</td><td class="num best">9.5%</td><td class="num">14.3%</td></tr>
+      <tr><td><b>Worst fall from a peak</b>, 2006&ndash;2018</td><td class="num">32.7%</td><td class="num best">24.2%</td><td class="num">50.9%</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout" style="margin-top:12px;">
+    <div class="tag">Read it carefully.</div>
+    <p class="small" style="margin:0;">Weekly took in about 1.7&times; the premium and still returned about 1% a year less: more frequent hits ate the extra income. It was a smoother ride. Risk-adjusted, the two came out about level. <b>This is an index, puts only, before trading costs.</b> Single stocks gap harder, and costs bite four times as often on weeklies. Nothing here tests 3&ndash;6 day expiries.</p>
+  </div>
+
+  <div class="foot"><span>Options Cheat Sheet &middot; 10</span><span>Educational reference &mdash; not investment advice</span></div>
+</section>
+
+<!-- ============ PAGE 3 ============ -->
+<section class="page">
+  <div class="runhead"><span>Options Cheat Sheet</span><span>No. 10 &middot; Expiry &amp; stock</span></div>
+
+  <div class="sectlabel">04 / Choosing the stock</div>
+  <h2 class="stitle">Four numbers to compare one stock&rsquo;s premium with another&rsquo;s.</h2>
+  <p>The three volatility numbers from No. 09 tell you how much a stock&rsquo;s options pay and whether now is a good time to sell. A fourth tells you what you earn for the money you tie up.</p>
+
+  <table class="matrix">
+    <thead>
+      <tr><th style="width:20%">Number</th><th style="width:36%">Question it answers</th><th>How a seller reads it</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><b>IV %</b></td><td>How much does the market expect this stock to move?</td><td>Higher pays more premium &mdash; and comes with bigger swings against you.</td></tr>
+      <tr><td><b>IV Rank</b></td><td>Is IV high or low for this stock right now?</td><td>70+ is expensive for that stock. Low means thin premiums, whatever the IV.</td></tr>
+      <tr><td><b>IV / HV</b></td><td>Are options priced above what the stock actually does?</td><td>Well above 100% is a fear premium you get paid to carry. Near 100% is fair.</td></tr>
+      <tr><td><b>Premium yield</b></td><td>What do I earn per dollar tied up?</td><td>Premium &divide; (strike &times; 100), at the same delta and expiry for every stock.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="grid2" style="margin-top:12px;">
+    <div class="card cream">
+      <div class="lab">Worked read &mdash; premium yield</div>
+      <h4>The bigger cheque isn&rsquo;t the better deal</h4>
+      <p class="small" style="margin:0;">ABC at $400: a 30-day 0.30-delta call pays $8 &mdash; $800 on $40,000 of shares, <b>2.0%</b>. DEF at $100: the same call pays $2.50 &mdash; $250 on $10,000, <b>2.5%</b>. DEF pays less per contract and more per dollar.</p>
+    </div>
+    <div class="card">
+      <div class="lab">Where to find them &mdash; IBKR</div>
+      <h4>One watchlist, the same columns</h4>
+      <p class="small" style="margin:0;">Put every stock you are considering in one watchlist with <b>Implied Vol. %</b>, <b>52 Week IV Rank</b> and <b>Implied Vol./Hist. Vol %</b>. The Screeners section can rank stocks by option implied volatility. Premium yield you work out from the chain.</p>
+    </div>
+  </div>
+
+  <hr class="rule">
+
+  <div class="sectlabel">05 / One bet, not four</div>
+  <h2 class="stitle">Different tickers can still be <em>the same trade.</em></h2>
+  <p>Large technology and growth stocks tend to fall together. Selling puts on four of them is closer to one bet four times the size than four separate bets. A broad sell-off hits all of them in the same week.</p>
+
+  <ul class="flags" style="margin-top:6px;">
+    <li><b>Add up every obligation.</b> Strike &times; 100 &times; contracts, across every open put on every stock, against your cash. The leverage check in the glossary applies to the total, not each trade.</li>
+    <li><b>Calmer names pay less for a reason.</b> A lower-IV stock pays less at the same delta because it is less likely to gap. That is a feature, not a flaw.</li>
+    <li><b>Each stock has its own earnings week.</b> IV rises before every report and drops straight after. More stocks means more of those weeks to plan around (No. 09).</li>
+  </ul>
+
+  <div class="foot"><span>Options Cheat Sheet &middot; 10</span><span>Educational reference &mdash; not investment advice</span></div>
+</section>
+
+<!-- ============ PAGE 4 ============ -->
+<section class="page">
+  <div class="runhead"><span>Options Cheat Sheet</span><span>No. 10 &middot; Expiry &amp; stock</span></div>
+
+  <div class="sectlabel">06 / Your rules</div>
+  <h2 class="stitle">Decide these before the next Friday.</h2>
+  <p class="small">The same idea as the rules template in No. 06: decide away from the screen, then trade it.</p>
+
+  <table class="ruletbl">
+    <thead>
+      <tr><th style="width:26%">Rule</th><th style="width:40%">What it governs</th><th>Yours</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><b>Default expiry</b></td><td>Weekly, fortnightly or monthly, and what makes you change it.</td><td class="fill"><span class="ph">&hellip;&hellip;&hellip;</span></td></tr>
+      <tr><td><b>Delta</b></td><td>The delta you hold constant when you compare expiries.</td><td class="fill"><span class="ph">&hellip;&hellip;&hellip;</span></td></tr>
+      <tr><td><b>Minimum premium yield</b></td><td>The yield below which a trade is not worth the risk or the commission.</td><td class="fill"><span class="ph">&hellip;&hellip;&hellip;</span></td></tr>
+      <tr><td><b>Stock list</b></td><td>Which stocks you sell on, and the IV Rank you want before selling.</td><td class="fill"><span class="ph">&hellip;&hellip;&hellip;</span></td></tr>
+      <tr><td><b>Total obligation cap</b></td><td>The most you will owe across every open put, as a share of cash.</td><td class="fill"><span class="ph">&hellip;&hellip;&hellip;</span></td></tr>
+    </tbody>
+  </table>
+
+  <hr class="rule">
+
+  <div class="sectlabel">07 / The ticket</div>
+  <h2 class="stitle">Before you press Submit.</h2>
+
+  <ul class="checklist" style="margin-top:6px;">
+    <li><b>The delta, not just the strike</b><span>If you changed the expiry, re-pick the strike from the Delta column.</span></li>
+    <li><b>Limit at the mid</b><span>Every $0.01 is $1 a contract. On a $3.75 / $3.90 market, selling at the bid instead of the ask is $15 less. Start at the mid and step toward the bid.</span></li>
+    <li><b>The market is open</b><span>US options trade only in the regular session &mdash; 6&frac12; hours. The glossary has the times in Sydney, which shift through the year.</span></li>
+    <li><b>Wait out the open</b><span>Prices jump around for the first 15&ndash;30 minutes. A limit placed after that is more likely to fill near fair value.</span></li>
+  </ul>
+
+  <div class="callout" style="margin-top:16px;background:#fbfaf6;">
+    <div class="tag">The short version.</div>
+    <p class="small" style="margin:0;">Short expiries collect more per day, give you less room and more chances to be called away, and cost more in trading. Compare expiries at the same delta, compare stocks by premium yield, and add up what you owe across every stock. <b>Nothing here is a recommendation to trade, and none of it is financial advice;</b> it is a map of how the mechanics fit together if you choose to use them.</p>
+  </div>
+
+  <p class="small" style="margin-top:10px;color:#55554a;">Sources: O. Bondarenko, <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2750188">An Analysis of Index Option Writing with Monthly and Weekly Rollover</a> (2016) and <a href="https://cdn.cboe.com/resources/education/research_publications/PutWriteCBOE19_v14_by_Prof_Oleg_Bondarenko_as_of_June_14.pdf">Historical Performance of Put-Writing Strategies</a> (2019), both for Cboe.</p>
+
+  <div class="foot"><span>Options Cheat Sheet &middot; 10</span><span>Educational reference &mdash; not investment advice</span></div>
+</section>
+
+</div>
+<nav class="reader-nav">
+<a class="rn-prev" href="09-volatility-and-earnings.html"><div class="rn-dir">&larr; Previous</div><div class="rn-ttl">No. 09 &middot; Volatility &amp; Earnings</div></a>
+<a class="rn-next" href="options/"><div class="rn-dir">Back to series &rarr;</div><div class="rn-ttl">All ten primers</div></a>
+</nav>
+</body>
+</html>
