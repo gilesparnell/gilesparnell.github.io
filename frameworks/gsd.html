@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GSD Core &mdash; Frameworks &middot; Giles Parnell</title>
+<meta name="description" content="GSD Core, run first-hand on a live-money options dashboard: how the phase loop works, what it cost, the switches worth turning on, and why from 28 Oct 2026 I use it only where it earns its place.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;1,400&family=Outfit:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../personal/trading/assets/tmlat.css">
+<link rel="stylesheet" href="assets/frameworks.css">
+</head>
+<body class="tmlat fw">
+
+<div class="t-bar">
+  <a class="t-back" href="./">&larr; Frameworks</a>
+  <div class="t-mid">Frameworks &middot; GSD Core</div>
+  <a class="t-full" href="https://github.com/open-gsd/gsd-core">Source</a>
+</div>
+
+<div class="wrap">
+
+  <div class="kick">Frameworks &middot; GSD Core</div>
+  <h1>GSD Core, <em>and where it earns its place</em></h1>
+  <p class="stand">A set of slash commands for Claude Code that turn &ldquo;build me X&rdquo; into a fixed sequence: agree the decisions, write a plan, have the plan checked, build it in small committed steps, then prove it does what you asked. Each step writes a plain Markdown file and the next step reads it, so nothing depends on Claude remembering. <strong>Since 28 Oct 2026 it&rsquo;s optional in my projects</strong>: I reach for single commands, not the whole loop.</p>
+
+  <div class="fw-facts">
+    <span>Package: <b><a href="https://www.npmjs.com/package/@opengsd/gsd-core">@opengsd/gsd-core</a></b></span>
+    <span>Source: <b><a href="https://github.com/open-gsd/gsd-core">open-gsd/gsd-core</a></b></span>
+    <span>Licence: <b>MIT</b></span>
+    <span>Installed here: <b>v1.13.0</b></span>
+    <span>Runs on: <b>Claude Code, Codex, Cursor, Copilot and others</b></span>
+  </div>
+
+  <div class="fw-cmd">npx -y @opengsd/gsd-core@latest --claude --local</div>
+
+  <div class="jar">
+    <div class="lab">Which GSD this is</div>
+    <dl>
+      <dt>Install</dt><dd><code>@opengsd/gsd-core</code> on npm, built from the <a href="https://github.com/open-gsd/gsd-core">open-gsd/gsd-core</a> repository. It is maintained by the Open GSD maintainers listed on its npm page. The copy in my projects reports itself as this package (<code>gsd-tools runtime-identity</code>).</dd>
+      <dt>Not this</dt><dd>The earlier repository, <a href="https://github.com/gsd-build/get-shit-done">gsd-build/get-shit-done</a>, was archived on 31 May 2026. Its README now says the project continues as GSD Core in the Open GSD repository. Comparison articles that rank GSD by star count still link the archived one.</dd>
+    </dl>
+  </div>
+
+  <nav class="toc" id="contents">
+    <h2>What&rsquo;s in here</h2>
+    <ol>
+      <li><a href="#now">Where GSD stands now (28 Oct 2026)</a></li>
+      <li><a href="#lean-loop">The lean loop I use instead</a></li>
+      <li><a href="#which">GSD, Superpowers or the lean loop</a></li>
+      <li><a href="#fit">How GSD fits with my skills and CLAUDE.md</a></li>
+      <li><a href="#why">Why bother: the problem it fixes</a></li>
+      <li><a href="#flow">The whole flow on one page</a></li>
+      <li><a href="#terminal">What it looks like in the terminal</a></li>
+      <li><a href="#second-ai">Getting a second AI to check the work</a></li>
+      <li><a href="#loop">The phase loop, step by step</a></li>
+      <li><a href="#files">What each step writes to disc</a></li>
+      <li><a href="#gates">Gates, and which ones actually block</a></li>
+      <li><a href="#build">A real build: an IBKR options dashboard</a></li>
+      <li><a href="#switches">Switches worth turning on</a></li>
+      <li><a href="#start">Starting your own project</a></li>
+      <li><a href="#commands">Command quick reference</a></li>
+    </ol>
+  </nav>
+
+  <!-- 01 -->
+  <section class="blk" id="now">
+    <div class="num">01</div>
+    <h2 class="head">Where GSD stands now <em>(28 Oct 2026)</em></h2>
+    <p>Seven weeks into the IBKR dashboard, GSD was taking too long to produce working code. On 28 Oct 2026 I made it optional for the rest of that build. Phase 3 finished in GSD because its plans already existed. Phases 4 to 7 run on the lean loop below.</p>
+    <div class="fw-stats">
+      <div><span class="s">Commits</span><div class="v">47%</div><div class="k">173 of 370 were docs or chore, not code</div></div>
+      <div><span class="s">Phase 3 planning</span><div class="v">~820k</div><div class="k">subagent tokens before the checker ran</div></div>
+      <div><span class="s">Time to first code</span><div class="v">~1 hr</div><div class="k">research, pattern map and planner for one phase</div></div>
+      <div><span class="s">Progress</span><div class="v">3 of 8</div><div class="k">phases done after seven weeks</div></div>
+    </div>
+    <p>Two reasons, both from that session:</p>
+    <ul class="plain">
+      <li><strong>The full chain is overkill for low-risk phases.</strong> Researcher, pattern mapper, planner and up to three checker rounds run on every phase, including screens built over numbers that already exist.</li>
+      <li><strong>GSD&rsquo;s subagents bypass my own skills.</strong> Test-first, verification and Codex routing are global rules, and they weren&rsquo;t reaching the agents doing the work (<a href="./#layers">why</a>).</li>
+    </ul>
+    <p>What GSD gets right stayed: ROADMAP.md and REQUIREMENTS.md are still the source of truth, <code>/gsd-discuss-phase</code> still records the decisions, and <code>/gsd-verify-work</code> still runs the phone test at the end of each phase.</p>
+    <div class="ana">
+      <div class="lab">How it played out per phase</div>
+      <p>Phase 3 guards a live-money account with passkeys, so it kept the full treatment and a <code>/ce:review</code> on the sign-in code. Phases 4 and 5 are screens over existing numbers: low risk, lean loop. Phase 6 (reconnect hardening) is medium risk and may earn a research pass. Phase 7 is a fixed file contract with another app, so it gets contract tests and a review.</p>
+    </div>
+    <p class="back-top"><a href="#contents">&uarr; Contents</a></p>
+  </section>
+
+  <!-- 02 -->
+  <section class="blk" id="lean-loop">
+    <div class="num">02</div>
+    <h2 class="head">The lean loop I use instead</h2>
+    <p>The lean loop is my own way of working, not a package. It keeps GSD&rsquo;s decision step and phone test, and hands everything between them to my global skills. It is written into the dashboard&rsquo;s <code>.claude/CLAUDE.md</code> as the default for each phase:</p>
+    <div class="tablewrap">
+      <table class="fw-t">
+        <thead><tr><th>Step</th><th>How</th><th>Why this way</th></tr></thead>
+        <tbody>
+          <tr><td class="nw"><b>1. Decide</b></td><td><code>/gsd-discuss-phase N</code></td><td>Interactive and cheap. Writes CONTEXT.md with numbered decisions. The part of GSD most worth keeping.</td></tr>
+          <tr><td class="nw"><b>2. Plan</b></td><td>Claude writes one plan file from CONTEXT.md</td><td>Each unit tagged <code>Execution target:</code> for Codex or Claude. No researcher, pattern mapper or checker agents.</td></tr>
+          <tr><td class="nw"><b>3. Build</b></td><td>Codex builds it test-first</td><td><code>tdd-first</code> and <code>runtime-routing</code> apply as the global rules intend.</td></tr>
+          <tr><td class="nw"><b>4. Check</b></td><td><code>verification-before-completion</code>, then <code>/gsd-verify-work N</code></td><td>Evidence before &ldquo;done&rdquo;, then a walk-through test on the phone.</td></tr>
+          <tr><td class="nw"><b>5. Review</b></td><td><code>/ce:review</code></td><td>Only for security, money or external-contract code: the sign-in code and the Phase 7 income feed.</td></tr>
+          <tr><td class="nw"><b>6. Ship</b></td><td><code>shipping-discipline</code>, <code>versioning-discipline</code></td><td>Same as any other repo.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <h3 class="fw-h3">When a GSD command earns its place</h3>
+    <ul class="plain">
+      <li><strong><code>/gsd-plan-phase N --research</code></strong> when a phase hits ground I genuinely don&rsquo;t know.</li>
+      <li><strong><code>/gsd-debug</code></strong> for a stubborn bug that has to survive a <code>/clear</code>.</li>
+      <li><strong><code>/gsd-quick</code></strong> for a small fix that should still be tracked and committed.</li>
+      <li><strong>If a full GSD workflow runs anyway</strong>, cap the plan checker at one pass, not three.</li>
+    </ul>
+    <div class="warn">
+      <div class="lab">Who writes the code changed too</div>
+      <p>For Phases 1 to 3, GSD&rsquo;s own Claude executor agents wrote all the code; I chose that on 22 Oct 2026 as the fastest option with the fewest moving parts. The lean loop moves building back to Codex, in line with my global rule: Claude plans, Codex builds.</p>
+    </div>
+    <p class="back-top"><a href="#contents">&uarr; Contents</a></p>
+  </section>
+
+  <!-- 03 -->
+  <section class="blk" id="which">
+    <div class="num">03</div>
+    <h2 class="head">GSD, Superpowers <em>or the lean loop</em></h2>
+    <p>Rigour isn&rsquo;t the number of documents. It&rsquo;s three things: the decisions that matter written down once, tests that prove the behaviour, and a careful review of the risky parts. GSD produces all three but puts every piece of work through the full treatment, including the low-risk majority.</p>
+    <div class="tablewrap">
+      <table class="fw-t">
+        <thead><tr><th>Reach for</th><th>When</th><th>Source</th></tr></thead>
+        <tbody>
+          <tr><td class="nw"><b>Lean loop</b></td>
+              <td>The default for a solo build. Most phases: screens, wiring, features over logic that already exists.</td>
+              <td>My own; written into each project&rsquo;s CLAUDE.md</td></tr>
+          <tr><td class="nw"><b>GSD Core, full loop</b></td>
+              <td>Unfamiliar ground, or a phase where a mistake costs money or security and a second AI should check the plans before any code exists. Also useful once, up front, for a requirements doc and roadmap.</td>
+              <td><a href="https://github.com/open-gsd/gsd-core">open-gsd/gsd-core</a> &middot; <a href="https://www.npmjs.com/package/@opengsd/gsd-core">npm</a></td></tr>
+          <tr><td class="nw"><b>Single GSD commands</b></td>
+              <td>Decisions (<code>/gsd-discuss-phase</code>), phone tests (<code>/gsd-verify-work</code>), stubborn bugs (<code>/gsd-debug</code>), tracked small fixes (<code>/gsd-quick</code>).</td>
+              <td>Same package</td></tr>
+          <tr><td class="nw"><b>Superpowers</b></td>
+              <td>Someone without their own skills set up who wants a ready-made loop: brainstorm, plan, build test-first with subagents, review, finish the branch. I already cover that with my own skills, so I haven&rsquo;t installed it.</td>
+              <td><a href="https://github.com/obra/superpowers">obra/superpowers</a></td></tr>
+          <tr><td class="nw"><b>Compound Engineering review</b></td>
+              <td><code>/ce:review</code> on security, money or external-contract code only. Not for building.</td>
+              <td><a href="https://github.com/EveryInc/compound-engineering-plugin">EveryInc/compound-engineering-plugin</a></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Switching mid-project costs nothing. Everything GSD writes is plain Markdown (ROADMAP, REQUIREMENTS, and per phase CONTEXT, RESEARCH and PLAN files), so any lighter process can read it as input.</p>
+    <p class="back-top"><a href="#contents">&uarr; Contents</a></p>
+  </section>
+
+  <!-- 04 -->
+  <section class="blk" id="fit">
+    <div class="num">04</div>
+    <h2 class="head">How GSD fits with my skills <em>and CLAUDE.md</em></h2>
+    <p>The general picture, and what happens when the layers disagree, is on the <a href="./#layers">Frameworks page</a>. For GSD specifically:</p>
+    <div class="tablewrap">
+      <table class="fw-t">
+        <thead><tr><th>What</th><th>Lives in</th><th>Owns</th></tr></thead>
+        <tbody>
+          <tr><td class="nw"><b>Global rules</b></td><td><code>~/.claude/CLAUDE.md</code></td><td>Test first, verify before done, commit gate, Claude plans and Codex builds. Applies everywhere.</td></tr>
+          <tr><td class="nw"><b>Global skills</b></td><td><code>~/.claude/skills/</code></td><td>How to do each of those: <code>tdd-first</code>, <code>verification-before-completion</code>, <code>systematic-debugging</code>, <code>runtime-routing</code>, <code>shipping-discipline</code>, <code>versioning-discipline</code>.</td></tr>
+          <tr><td class="nw"><b>Project CLAUDE.md</b></td><td><code>.claude/CLAUDE.md</code></td><td>Whether GSD is in charge for this repo, and which commands are allowed. On the dashboard: &ldquo;GSD is a tool to reach for, not a gate.&rdquo;</td></tr>
+          <tr><td class="nw"><b>GSD</b></td><td><code>.claude/gsd-core/</code>, <code>.planning/</code></td><td>Its commands and agents, plus the roadmap, requirements and per-phase files. ROADMAP.md and REQUIREMENTS.md stay the source of truth either way.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>On a conflict, the project file has to say so explicitly. Claude Code doesn&rsquo;t let one file override another, so an unstated conflict gets resolved at random. The project section names the narrowing (&ldquo;GSD optional&rdquo;), and the global skills are the default way of working inside it.</p>
+    <p class="back-top"><a href="#contents">&uarr; Contents</a></p>
+  </section>
+
+  <!-- 05 -->
+  <section class="blk" id="why">
+    <div class="num">05</div>
+    <h2 class="head">Why bother: the problem it fixes</h2>
+    <div class="fw-pair">
+      <div>
+        <div class="lab">Without it: a long chat with Claude</div>
+        <ul>
+          <li><b>Decisions get lost.</b> You agreed something 40 messages ago; the context window dropped it.</li>
+          <li><b>&ldquo;Done&rdquo; means &ldquo;finished typing&rdquo;.</b> The code runs, and nobody checked it answers the question you asked.</li>
+          <li><b>One model checks its own work.</b> It has the same blind spots writing the test as writing the code.</li>
+          <li><b>A new session means re-explaining</b> everything from scratch.</li>
+        </ul>
+      </div>
+      <div class="good">
+        <div class="lab">With it: a fixed loop, written down</div>
+        <ul>
+          <li><b>Decisions are numbered</b> (D-01, D-02&hellip;) and every plan has to reference them, or the plan is rejected.</li>
+          <li><b>Each phase ends with a check against its goal</b>, with you in the loop, and fix plans written for anything that fails.</li>
+          <li><b>A different AI can review the plans</b> before a line of code exists (<a href="#second-ai">section 08</a>).</li>
+          <li><b>A fresh session reads <code>STATE.md</code></b> and carries on where the last one stopped.</li>
+        </ul>
+      </div>
+    </div>
+    <p class="back-top"><a href="#contents">&uarr; Contents</a></p>
+  </section>
+
+  <!-- 06 -->
+  <section class="blk" id="flow">
+    <div class="num">06</div>
+    <h2 class="head">The whole flow on one page</h2>
+    <p class="fw-hint">On a phone, scroll the diagram sideways.</p>
+    <div class="fw-scroll">
+    <svg class="fw-diagram" viewBox="0 0 900 700" role="img" aria-label="GSD Core flow: install, then gsd-new-project produces PROJECT.md, REQUIREMENTS.md and ROADMAP.md through a questioning to research to requirements to roadmap sequence; then each phase runs discuss, optional spec, plan, optional cross-AI review, execute, verify and ship in a loop.">
+      <defs><marker id="fwarrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#b3ab99"/></marker></defs>
+
+      <rect x="30" y="20" width="240" height="46" rx="8" fill="var(--bg3)" stroke="var(--border2)"/>
+      <text x="150" y="40" text-anchor="middle" class="fw-node-lab" fill="var(--text3)">STEP 0</text>
+      <text x="150" y="55" text-anchor="middle" class="fw-node-t" fill="var(--text)">npx @opengsd/gsd-core install</text>
+
+      <line x1="150" y1="66" x2="150" y2="96" stroke="var(--border2)" stroke-width="1.5"/>
+
+      <rect x="30" y="98" width="840" height="112" rx="10" fill="var(--purple-bg)" stroke="var(--purple-border)"/>
+      <text x="50" y="120" class="fw-node-lab" fill="var(--purple-text)">/gsd-new-project &mdash; run once per repo (or /gsd-onboard for code that already exists)</text>
+
+      <g>
+        <rect x="50" y="132" width="180" height="60" rx="7" fill="var(--bg)" stroke="var(--border)"/>
+        <text x="140" y="155" text-anchor="middle" class="fw-node-t" fill="var(--text)">Questioning</text>
+        <text x="140" y="172" text-anchor="middle" class="fw-node-d" fill="var(--text2)">rough idea in, gaps surfaced</text>
+        <text x="240" y="168" fill="var(--text3)" font-size="16">&#8594;</text>
+        <rect x="258" y="132" width="180" height="60" rx="7" fill="var(--bg)" stroke="var(--border)"/>
+        <text x="348" y="155" text-anchor="middle" class="fw-node-t" fill="var(--text)">Research</text>
+        <text x="348" y="172" text-anchor="middle" class="fw-node-d" fill="var(--text2)">optional, domain-scoped</text>
+        <text x="448" y="168" fill="var(--text3)" font-size="16">&#8594;</text>
+        <rect x="466" y="132" width="180" height="60" rx="7" fill="var(--bg)" stroke="var(--border)"/>
+        <text x="556" y="155" text-anchor="middle" class="fw-node-t" fill="var(--text)">Requirements</text>
+        <text x="556" y="172" text-anchor="middle" class="fw-node-d" fill="var(--text2)">REQUIREMENTS.md written</text>
+        <text x="656" y="168" fill="var(--text3)" font-size="16">&#8594;</text>
+        <rect x="674" y="132" width="176" height="60" rx="7" fill="var(--bg)" stroke="var(--border)"/>
+        <text x="762" y="155" text-anchor="middle" class="fw-node-t" fill="var(--text)">Roadmap</text>
+        <text x="762" y="172" text-anchor="middle" class="fw-node-d" fill="var(--text2)">work split into phases</text>
+      </g>
+
+      <line x1="450" y1="210" x2="450" y2="244" stroke="var(--border2)" stroke-width="1.5"/>
+      <text x="450" y="238" text-anchor="middle" class="fw-node-lab" fill="var(--text3)">then, for every phase on the roadmap &mdash; repeats</text>
+
+      <rect x="30" y="252" width="840" height="378" rx="10" fill="var(--bg3)" stroke="var(--border2)" stroke-dasharray="4 3"/>
+      <text x="50" y="276" class="fw-node-lab" fill="var(--text3)">dashed border = optional step &middot; solid = always run</text>
+
+      <g>
+        <rect x="50" y="292" width="380" height="92" rx="8" fill="var(--blue-bg)" stroke="var(--blue-border)"/>
+        <text x="66" y="312" class="fw-node-lab" fill="var(--blue-text)">1 &middot; DISCUSS-PHASE</text>
+        <text x="66" y="332" class="fw-node-t" fill="var(--text)">Claude asks about the grey areas</text>
+        <text x="66" y="350" class="fw-node-d" fill="var(--text2)">skips anything already decided</text>
+        <text x="66" y="364" class="fw-node-d" fill="var(--text2)">new ideas are parked for later, not quietly built</text>
+        <text x="66" y="378" class="fw-node-d" fill="var(--text2)">output: CONTEXT.md, decisions D-01..D-NN</text>
+
+        <rect x="470" y="292" width="380" height="92" rx="8" fill="var(--amber-bg)" stroke="var(--amber-border)" stroke-dasharray="5 3"/>
+        <text x="486" y="312" class="fw-node-lab" fill="var(--amber-text)">SPEC-PHASE &mdash; optional</text>
+        <text x="486" y="332" class="fw-node-t" fill="var(--text)">Pins down exactly what "done" means</text>
+        <text x="486" y="350" class="fw-node-d" fill="var(--text2)">scores how vague the scope still is</text>
+        <text x="486" y="364" class="fw-node-d" fill="var(--text2)">keeps asking until the score is low enough</text>
+        <text x="486" y="378" class="fw-node-d" fill="var(--text2)">output: SPEC.md with testable statements</text>
+
+        <rect x="50" y="400" width="380" height="92" rx="8" fill="var(--teal-bg)" stroke="var(--teal-border)"/>
+        <text x="66" y="420" class="fw-node-lab" fill="var(--teal-text)">2 &middot; PLAN-PHASE</text>
+        <text x="66" y="440" class="fw-node-t" fill="var(--text)">Research &#8594; plan &#8594; checker</text>
+        <text x="66" y="458" class="fw-node-d" fill="var(--text2)">a separate checker agent can reject the plan</text>
+        <text x="66" y="472" class="fw-node-d" fill="var(--text2)">up to 3 rewrite rounds</text>
+        <text x="66" y="486" class="fw-node-d" fill="var(--text2)">output: one PLAN.md per chunk of work</text>
+
+        <rect x="470" y="400" width="380" height="92" rx="8" fill="var(--purple-bg)" stroke="var(--purple-border)" stroke-dasharray="5 3"/>
+        <text x="486" y="420" class="fw-node-lab" fill="var(--purple-text)">CROSS-AI REVIEW &mdash; optional, see section 08</text>
+        <text x="486" y="440" class="fw-node-t" fill="var(--text)">A different AI audits the plans</text>
+        <text x="486" y="458" class="fw-node-d" fill="var(--text2)">Codex / Gemini / Cursor / local models</text>
+        <text x="486" y="472" class="fw-node-d" fill="var(--text2)">findings folded back with plan-phase --reviews</text>
+        <text x="486" y="486" class="fw-node-d" fill="var(--text2)">output: REVIEWS.md</text>
+
+        <rect x="50" y="508" width="380" height="92" rx="8" fill="var(--green-bg)" stroke="var(--green-border)"/>
+        <text x="66" y="528" class="fw-node-lab" fill="var(--green-text)">3 &middot; EXECUTE-PHASE</text>
+        <text x="66" y="548" class="fw-node-t" fill="var(--text)">Fresh agents build each plan</text>
+        <text x="66" y="566" class="fw-node-d" fill="var(--text2)">each starts with a clean context window</text>
+        <text x="66" y="580" class="fw-node-d" fill="var(--text2)">one git commit per task</text>
+        <text x="66" y="594" class="fw-node-d" fill="var(--text2)">output: the code, SUMMARY.md</text>
+
+        <rect x="470" y="508" width="380" height="92" rx="8" fill="var(--navy-bg)" stroke="var(--navy-border)"/>
+        <text x="486" y="528" class="fw-node-lab" fill="var(--navy-text)">4 &middot; VERIFY &#8594; REVIEW &#8594; SHIP</text>
+        <text x="486" y="548" class="fw-node-t" fill="var(--text)">Did it meet the goal, not just finish?</text>
+        <text x="486" y="566" class="fw-node-d" fill="var(--text2)">you test it; failures become fix plans</text>
+        <text x="486" y="580" class="fw-node-d" fill="var(--text2)">code review, security review, lessons learned</text>
+        <text x="486" y="594" class="fw-node-d" fill="var(--text2)">output: VERIFICATION.md, UAT.md, PR</text>
+      </g>
+
+      <line x1="240" y1="384" x2="240" y2="400" stroke="var(--border2)" stroke-width="1.5"/>
+      <line x1="240" y1="492" x2="240" y2="508" stroke="var(--border2)" stroke-width="1.5"/>
+      <path d="M 430 338 L 470 338" stroke="var(--border2)" stroke-width="1.5" marker-end="url(#fwarrow)"/>
+      <path d="M 430 446 L 470 446" stroke="var(--border2)" stroke-width="1.5" marker-end="url(#fwarrow)"/>
+      <path d="M 430 554 L 470 554" stroke="var(--border2)" stroke-width="1.5" marker-end="url(#fwarrow)"/>
+
+      <text x="450" y="660" text-anchor="middle" class="fw-node-lab" fill="var(--text3)">every output is a plain Markdown file, committed to git &mdash; a new session reads STATE.md and carries on</text>
+      <text x="450" y="680" text-anchor="middle" class="fw-node-lab" fill="var(--text3)">smallest useful loop: discuss &#8594; plan &#8594; execute &#8594; verify</text>
+    </svg>
+    </div>
+    <p class="back-top"><a href="#contents">&uarr; Contents</a></p>
+  </section>
+
+  <!-- 07 -->
+  <section class="blk" id="terminal">
+    <div class="num">07</div>
+    <h2 class="head">What it looks like in the terminal</h2>
+    <p>One phase, condensed from a real run. You type the green lines. Everything else is Claude, its subagents, or files landing in <code>.planning/</code>.</p>
+    <div class="fw-term">
+      <div class="bar">claude &mdash; ibkr-dashboard</div>
+<pre><span class="u">&gt; /gsd-discuss-phase 2</span>
+<span class="c">  Grey area: when should the screen say the data is out of date?</span>
+<span class="c">  ...you answer in plain English; nothing is built yet...</span>
+<span class="f">  wrote .planning/phases/02-live-home-screen/02-CONTEXT.md  (decisions D-01 .. D-22)</span>
+
+<span class="u">&gt; /gsd-plan-phase 2</span>
+<span class="c">  researcher  &rarr; 02-RESEARCH.md</span>
+<span class="c">  planner     &rarr; 02-01-PLAN.md .. 02-12-PLAN.md</span>
+<span class="c">  checker     &rarr; every decision referenced? every requirement owned?  </span><span class="u">pass</span>
+
+<span class="u">&gt; /gsd-review --phase 2 --cursor</span>
+<span class="w">  cursor (a non-Claude model) reviewing 12 plans...</span>
+<span class="f">  wrote 02-REVIEWS.md  </span><span class="r">HIGH concerns found</span>
+
+<span class="u">&gt; /gsd-plan-phase 2 --reviews</span>
+<span class="c">  planner revises; each finding marked incorporated / deferred / rejected, with a reason</span>
+
+<span class="u">&gt; /gsd-execute-phase 2</span>
+<span class="c">  wave 1 ... wave 7   fresh agent per plan, one commit per task</span>
+
+<span class="u">&gt; /gsd-code-review 2</span>   <span class="c">&rarr; 02-REVIEW.md   8 findings</span>
+<span class="u">&gt; /gsd-code-review 2 --fix</span><span class="c">  &rarr; 8 fixed, 8 commits</span>
+
+<span class="u">&gt; /gsd-verify-work 2</span>
+<span class="c">  Test 1: In IB Gateway's settings, Read-Only API is ticked. Does it match?</span>
+<span class="u">&gt; pass</span></pre>
+    </div>
+    <p class="back-top"><a href="#contents">&uarr; Contents</a></p>
+  </section>
+
+  <!-- 08 -->
+  <section class="blk" id="second-ai">
+    <div class="num">08</div>
+    <h2 class="head">Getting a second AI to check the work</h2>
+    <p>When the same model writes the plan and checks the plan, it shares its own blind spots. GSD sends the finished plans to a <strong>different AI, from a different company, running in its own command-line tool</strong>. Its findings come back as a file, and Claude has to answer every one in writing before any code gets built. This is still the part I&rsquo;d run GSD for on a phase that touches money.</p>
+
+    <p class="fw-hint">On a phone, scroll the diagram sideways.</p>
+    <div class="fw-scroll">
+    <svg class="fw-diagram" viewBox="0 0 900 470" role="img" aria-label="Cross-AI review flow. Claude writes plans. gsd-review sends the same plans to Codex, Gemini and Cursor in parallel, each in its own CLI. Their findings are collected into REVIEWS.md, ranked high, medium and low. gsd-plan-phase with the reviews flag sends them back to Claude, which revises the plans and records each finding as incorporated, deferred or rejected with a reason. The convergence command repeats this until no high concerns remain. After execution, code review checks the actual code and the fix flag applies the fixes.">
+      <defs>
+        <marker id="fwa2" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#b3ab99"/></marker>
+        <marker id="fwa3" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#cbbfe6"/></marker>
+      </defs>
+
+      <text x="30" y="30" class="fw-node-lab" fill="var(--text3)">before any code exists &mdash; reviewing the plan</text>
+
+      <rect x="30" y="46" width="190" height="120" rx="9" fill="var(--teal-bg)" stroke="var(--teal-border)"/>
+      <text x="46" y="68" class="fw-node-lab" fill="var(--teal-text)">CLAUDE</text>
+      <text x="46" y="90" class="fw-node-t" fill="var(--text)">Writes the plans</text>
+      <text x="46" y="110" class="fw-node-d" fill="var(--text2)">/gsd-plan-phase 2</text>
+      <text x="46" y="126" class="fw-node-d" fill="var(--text2)">02-01-PLAN.md</text>
+      <text x="46" y="140" class="fw-node-d" fill="var(--text2)">02-02-PLAN.md &hellip;</text>
+      <text x="46" y="154" class="fw-node-d" fill="var(--text2)">+ the decisions they rest on</text>
+
+      <path d="M 220 106 C 260 106 260 66 300 66" fill="none" stroke="var(--border2)" stroke-width="1.5" marker-end="url(#fwa2)"/>
+      <path d="M 220 106 L 300 106" fill="none" stroke="var(--border2)" stroke-width="1.5" marker-end="url(#fwa2)"/>
+      <path d="M 220 106 C 260 106 260 146 300 146" fill="none" stroke="var(--border2)" stroke-width="1.5" marker-end="url(#fwa2)"/>
+      <text x="232" y="226" class="fw-node-d" fill="var(--text3)">/gsd-review --phase 2 &middot; same prompt to each, in parallel</text>
+
+      <g>
+        <rect x="302" y="46" width="200" height="38" rx="7" fill="var(--purple-bg)" stroke="var(--purple-border)"/>
+        <text x="316" y="62" class="fw-node-t" fill="var(--text)">Codex CLI</text>
+        <text x="316" y="76" class="fw-node-d" fill="var(--text2)">OpenAI models</text>
+        <rect x="302" y="87" width="200" height="38" rx="7" fill="var(--purple-bg)" stroke="var(--purple-border)"/>
+        <text x="316" y="103" class="fw-node-t" fill="var(--text)">Gemini CLI</text>
+        <text x="316" y="117" class="fw-node-d" fill="var(--text2)">Google models</text>
+        <rect x="302" y="128" width="200" height="38" rx="7" fill="var(--purple-bg)" stroke="var(--purple-border)"/>
+        <text x="316" y="144" class="fw-node-t" fill="var(--text)">Cursor agent</text>
+        <text x="316" y="158" class="fw-node-d" fill="var(--text2)">pick any model it offers</text>
+      </g>
+      <text x="302" y="190" class="fw-node-d" fill="var(--text3)">also: OpenCode, Qwen, CodeRabbit,</text>
+      <text x="302" y="203" class="fw-node-d" fill="var(--text3)">Ollama / LM Studio running locally</text>
+
+      <path d="M 502 65 C 540 65 540 106 578 106" fill="none" stroke="var(--border2)" stroke-width="1.5"/>
+      <path d="M 502 106 L 578 106" fill="none" stroke="var(--border2)" stroke-width="1.5" marker-end="url(#fwa2)"/>
+      <path d="M 502 147 C 540 147 540 106 578 106" fill="none" stroke="var(--border2)" stroke-width="1.5"/>
+
+      <rect x="580" y="46" width="290" height="120" rx="9" fill="var(--bg3)" stroke="var(--border2)"/>
+      <text x="596" y="68" class="fw-node-lab" fill="var(--text3)">02-REVIEWS.md</text>
+      <text x="596" y="90" class="fw-node-t" fill="var(--text)">Findings, one section per reviewer</text>
+      <rect x="596" y="102" width="44" height="16" rx="8" fill="var(--coral-bg)" stroke="var(--coral-border)"/>
+      <text x="618" y="113" text-anchor="middle" class="fw-node-lab" fill="var(--coral-text)">HIGH</text>
+      <rect x="646" y="102" width="56" height="16" rx="8" fill="var(--amber-bg)" stroke="var(--amber-border)"/>
+      <text x="674" y="113" text-anchor="middle" class="fw-node-lab" fill="var(--amber-text)">MEDIUM</text>
+      <rect x="708" y="102" width="40" height="16" rx="8" fill="var(--blue-bg)" stroke="var(--blue-border)"/>
+      <text x="728" y="113" text-anchor="middle" class="fw-node-lab" fill="var(--blue-text)">LOW</text>
+      <text x="596" y="138" class="fw-node-d" fill="var(--text2)">each points at a specific plan and line</text>
+      <text x="596" y="152" class="fw-node-d" fill="var(--text2)">+ where reviewers agree, when there are two or more</text>
+
+      <path d="M 725 166 L 725 250" fill="none" stroke="var(--purple-border)" stroke-width="1.5" marker-end="url(#fwa3)"/>
+      <text x="735" y="214" class="fw-node-d" fill="var(--purple-text)">/gsd-plan-phase 2 --reviews</text>
+
+      <rect x="530" y="252" width="340" height="104" rx="9" fill="var(--teal-bg)" stroke="var(--teal-border)"/>
+      <text x="546" y="274" class="fw-node-lab" fill="var(--teal-text)">CLAUDE &mdash; REVISES</text>
+      <text x="546" y="294" class="fw-node-t" fill="var(--text)">Answers every finding in writing</text>
+      <rect x="546" y="306" width="88" height="16" rx="8" fill="var(--green-bg)" stroke="var(--green-border)"/>
+      <text x="590" y="317" text-anchor="middle" class="fw-node-lab" fill="var(--green-text)">incorporated</text>
+      <rect x="640" y="306" width="64" height="16" rx="8" fill="var(--amber-bg)" stroke="var(--amber-border)"/>
+      <text x="672" y="317" text-anchor="middle" class="fw-node-lab" fill="var(--amber-text)">deferred</text>
+      <rect x="710" y="306" width="64" height="16" rx="8" fill="var(--coral-bg)" stroke="var(--coral-border)"/>
+      <text x="742" y="317" text-anchor="middle" class="fw-node-lab" fill="var(--coral-text)">rejected</text>
+      <text x="546" y="342" class="fw-node-d" fill="var(--text2)">each with its reason, kept in the plan as a ledger</text>
+
+      <path d="M 530 304 C 140 304 125 250 125 170" fill="none" stroke="var(--purple-border)" stroke-width="1.5" stroke-dasharray="5 3" marker-end="url(#fwa3)"/>
+      <rect x="150" y="262" width="300" height="40" rx="7" fill="var(--bg)" stroke="var(--purple-border)" stroke-dasharray="4 3"/>
+      <text x="164" y="279" class="fw-node-t" fill="var(--purple-text)">/gsd-plan-review-convergence 2</text>
+      <text x="164" y="294" class="fw-node-d" fill="var(--text2)">runs this loop for you until no HIGH concerns remain</text>
+
+      <line x1="30" y1="384" x2="870" y2="384" stroke="var(--border)" stroke-dasharray="3 4"/>
+      <text x="30" y="404" class="fw-node-lab" fill="var(--text3)">after the code is written &mdash; reviewing the code</text>
+
+      <rect x="30" y="414" width="190" height="44" rx="8" fill="var(--green-bg)" stroke="var(--green-border)"/>
+      <text x="42" y="432" class="fw-node-t" fill="var(--text)">/gsd-execute-phase 2</text>
+      <text x="42" y="448" class="fw-node-d" fill="var(--text2)">code + tests, a commit per task</text>
+      <path d="M 220 436 L 243 436" stroke="var(--border2)" stroke-width="1.5" marker-end="url(#fwa2)"/>
+      <rect x="245" y="414" width="190" height="44" rx="8" fill="var(--navy-bg)" stroke="var(--navy-border)"/>
+      <text x="257" y="432" class="fw-node-t" fill="var(--text)">/gsd-code-review 2</text>
+      <text x="257" y="448" class="fw-node-d" fill="var(--text2)">Claude: bugs, security, quality</text>
+      <path d="M 435 436 L 458 436" stroke="var(--border2)" stroke-width="1.5" marker-end="url(#fwa2)"/>
+      <rect x="460" y="414" width="190" height="44" rx="8" fill="var(--navy-bg)" stroke="var(--navy-border)"/>
+      <text x="472" y="432" class="fw-node-t" fill="var(--text)">/gsd-code-review 2 --fix</text>
+      <text x="472" y="448" class="fw-node-d" fill="var(--text2)">each fix as its own commit</text>
+      <path d="M 650 436 L 673 436" stroke="var(--border2)" stroke-width="1.5" marker-end="url(#fwa2)"/>
+      <rect x="675" y="414" width="195" height="44" rx="8" fill="var(--purple-bg)" stroke="var(--purple-border)"/>
+      <text x="687" y="432" class="fw-node-t" fill="var(--text)">/gsd-ship 2</text>
+      <text x="687" y="448" class="fw-node-d" fill="var(--text2)">a second AI reads the whole diff</text>
+    </svg>
+    </div>
+
+    <h3 class="fw-h3">What it caught on a real build</h3>
+    <p>These numbers come from the dashboard in <a href="#build">section 12</a>; the review files are in that project&rsquo;s repo.</p>
+    <div class="fw-stats">
+      <div><span class="s">Phase 1 &middot; Codex</span><div class="v">13</div><div class="k">findings on five plans, each citing a file and line</div></div>
+      <div><span class="s">Phase 1 &middot; outcome</span><div class="v">10 / 3</div><div class="k">incorporated / rejected, every rejection reasoned in writing</div></div>
+      <div><span class="s">Phase 2 &middot; Cursor</span><div class="v">2 rounds</div><div class="k">round 2 deliberately on a different model family</div></div>
+      <div><span class="s">Phase 2 &middot; code review</span><div class="v">8 / 8</div><div class="k">findings fixed after the build, one commit each</div></div>
+    </div>
+    <div class="tablewrap">
+      <table class="fw-t">
+        <thead><tr><th>A finding from the review</th><th>Decision</th><th>Why it mattered</th></tr></thead>
+        <tbody>
+          <tr><td><b>The sign of <code>avg_cost</code> is never pinned down.</b> Is a sold option&rsquo;s cost stored as a credit or a debit?</td>
+              <td><span class="pill teal">incorporated</span></td>
+              <td>Left open, the break-even price would have been calculated backwards, and the tests would still have passed because they used the same wrong assumption. No amount of Claude re-reading its own plan was going to find this one.</td></tr>
+          <tr><td><b>Rename the test-first commit convention.</b></td>
+              <td><span class="pill rose">rejected</span></td>
+              <td>The rename would have erased the &ldquo;test written and failing first&rdquo; evidence the project&rsquo;s rules require. The useful half of the point was kept. A reviewer finding is input, not an order.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="fw-h3">Turning it on</h3>
+    <p>Install at least one other AI&rsquo;s command-line tool and log in (Codex CLI, Gemini CLI, or Cursor&rsquo;s <code>cursor-agent</code>). GSD detects whichever are installed. Then pin the models and pick a default in <code>.planning/config.json</code>:</p>
+    <div class="fw-term">
+      <div class="bar">.planning/config.json</div>
+<pre>"review": {
+  "models": {
+    "codex":  "gpt-6.1-sol",
+    "gemini": "gemini-3.5-flash",
+    "cursor": "gemini-4-argon-high"
+  },
+  "default_reviewers": ["cursor"]
+}</pre>
+    </div>
+    <p>After that it&rsquo;s two commands per phase: <code>/gsd-review --phase N</code> (or <code>--codex</code>, <code>--gemini</code>, <code>--all</code>), then <code>/gsd-plan-phase N --reviews</code>. Or hand the whole loop over with <code>/gsd-plan-review-convergence N</code>, which refuses to run until <code>workflow.plan_review_convergence</code> is <code>true</code> (<a href="#switches">section 13</a>).</p>
+
+    <h3 class="fw-h3">A second AI on the code, too</h3>
+    <p>Plan reviews catch design mistakes. They can&rsquo;t see bugs that only appear once code exists, and GSD&rsquo;s built-in code review is Claude checking Claude. <code>/gsd-ship</code> has a hook for this: set <code>workflow.code_review_command</code> and the whole diff is piped to that command, which must answer with JSON containing <code>"verdict": "APPROVED"</code> or <code>"REVISE"</code>. GSD doesn&rsquo;t include a command that talks to another AI, so I wrote a small one: <a href="../Claude/downloads/gsd_cross_ai_review.py">gsd_cross_ai_review.py</a>. It hands the diff to Cursor&rsquo;s CLI in read-only mode and returns the verdict. If anything goes wrong it reports a failure; it never quietly approves.</p>
+    <p>Its first live test was a deliberately planted bug: a short put&rsquo;s break-even changed from <em>strike &minus; premium</em> to <em>strike + premium</em>. It took 31 seconds:</p>
+    <div class="fw-term">
+      <div class="bar">diff &rarr; gsd_cross_ai_review.py &rarr; cursor-agent</div>
+<pre><span class="u">$ git diff main...HEAD | python3 gsd_cross_ai_review.py --model gemini-4-argon-high</span>
+{
+  "verdict": <span class="r">"REVISE"</span>,
+  "confidence": 100,
+  "summary": "...changed from `strike - premium` to `strike + premium`,
+              which is the formula for a call option rather than a put option.",
+  "issues": [{ "severity": <span class="r">"high"</span>, "file": "calc.py",
+               "suggestion": "Keep `return strike - premium`." }]
+}</pre>
+    </div>
+    <p class="fw-hint">The command <code>/gsd-ship</code> really runs builds a fuller prompt (diff stats, phase state, the JSON shape it wants) and pipes that in. The one-liner shows the idea.</p>
+
+    <div class="fw-grid">
+      <div class="advise"><div class="lab">Lesson</div><h4>Use a different model family each round</h4><ul><li>Round 2 should look at the fixes with fresh eyes, not the same ones that suggested them.</li></ul></div>
+      <div class="advise"><div class="lab">Lesson</div><h4>Cheap tiers fail on big plan sets</h4><ul><li>Codex on a ChatGPT Plus plan and Gemini&rsquo;s free tier both failed on a large plan set; Cursor handled it.</li><li>A reviewer that can&rsquo;t run is recorded as a failure, not quietly dropped.</li></ul></div>
+      <div class="advise"><div class="lab">Lesson</div><h4>Spend it where mistakes cost money</h4><ul><li>Roughly 8 minutes per reviewer per phase.</li><li>Worth it for maths, money and login code; skip it for cosmetic work.</li></ul></div>
+    </div>
+
+    <div class="ana">
+      <div class="lab">The checker matters more than the planner</div>
+      <p>GSD&rsquo;s default setup put its own internal plan-checker on the cheapest model. That checker said &ldquo;all findings incorporated&rdquo; while missing all three rejections. Run on a stronger model, it found one fix had reached only 7 of the 11 places it needed to. Set <code>model_overrides</code> so the checker isn&rsquo;t the weakest link.</p>
+    </div>
+    <p class="back-top"><a href="#contents">&uarr; Contents</a></p>
+  </section>
+
+  <!-- 09 -->
+  <section class="blk" id="loop">
+    <div class="num">09</div>
+    <h2 class="head">The phase loop, step by step</h2>
+    <p>Nine possible steps per phase. Two are required. The rest are checks you add when a phase is risky, vague, or expensive to get wrong. Under the lean loop I keep step 1 and step 7 and replace the rest with my own skills.</p>
+    <div class="tablewrap">
+      <table class="fw-t">
+        <thead><tr><th>#</th><th>Step</th><th>Why you&rsquo;d run it</th><th>Weight</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td class="nw"><code>/gsd-discuss-phase N</code></td><td>Captures design decisions as numbered <b>D-NN</b> records. Everything after is checked against them, so a decision never captured is never built.</td><td><span class="pill teal">recommended</span></td></tr>
+          <tr><td>2</td><td class="nw"><code>/gsd-spec-phase N</code></td><td>Scores how vague the scope still is and pins down <em>what</em> the phase delivers. Worth it when &ldquo;done&rdquo; is still fuzzy after discussion.</td><td><span class="pill">optional</span></td></tr>
+          <tr><td>3</td><td class="nw"><code>/gsd-plan-phase N</code></td><td>Researches, writes the plans, and runs a checker over them. The core command.</td><td><span class="pill rose">required</span></td></tr>
+          <tr><td>4</td><td class="nw"><code>/gsd-review --phase N</code><br><code>/gsd-plan-phase N --reviews</code></td><td>A different AI audits the plans, then the findings are folded back in. See <a href="#second-ai">section 08</a>.</td><td><span class="pill teal">recommended</span></td></tr>
+          <tr><td>5</td><td class="nw"><code>/gsd-execute-phase N</code></td><td>Builds the plans in dependency order, one commit per task.</td><td><span class="pill rose">required</span></td></tr>
+          <tr><td>6</td><td class="nw"><code>/gsd-code-review N</code><br><code>/gsd-secure-phase N</code></td><td>Checks over the code just written: bugs and quality, then whether the security risks the plan named were actually handled.</td><td><span class="pill">optional</span></td></tr>
+          <tr><td>7</td><td class="nw"><code>/gsd-verify-work N</code></td><td>You test it, one check at a time, against the phase&rsquo;s <em>goal</em>. Anything that fails gets diagnosed and a fix plan written automatically.</td><td><span class="pill teal">recommended</span></td></tr>
+          <tr><td>8</td><td class="nw"><code>/gsd-extract-learnings N</code></td><td>Pulls decisions, lessons and surprises out of the finished phase so later phases inherit them.</td><td><span class="pill">optional</span></td></tr>
+          <tr><td>9</td><td class="nw"><code>/gsd-ship N</code></td><td>Opens the pull request with a body built from the requirements and verification.</td><td><span class="pill">optional</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="back-top"><a href="#contents">&uarr; Contents</a></p>
+  </section>
+
+  <!-- 10 -->
+  <section class="blk" id="files">
+    <div class="num">10</div>
+    <h2 class="head">What each step writes to disc</h2>
+    <p>Every phase gets a folder under <code>.planning/phases/NN-name/</code>. Files build up in this order, and each step reads the ones before it.</p>
+    <div class="tablewrap">
+      <table class="fw-t">
+        <thead><tr><th>File</th><th>Written by</th><th>Carries</th></tr></thead>
+        <tbody>
+          <tr><td class="nw"><code>NN-CONTEXT.md</code></td><td>discuss-phase</td><td>Numbered decisions <b>D-01&hellip;D-NN</b></td></tr>
+          <tr><td class="nw"><code>NN-SPEC.md</code></td><td>spec-phase</td><td>Edge cases, things it must never do, vagueness score</td></tr>
+          <tr><td class="nw"><code>NN-RESEARCH.md</code></td><td>plan-phase</td><td>Findings about the library or API, open questions</td></tr>
+          <tr><td class="nw"><code>NN-MM-PLAN.md</code></td><td>plan-phase</td><td>The plans themselves, one per chunk of work</td></tr>
+          <tr><td class="nw"><code>NN-REVIEWS.md</code></td><td>review</td><td>Second-AI findings and where reviewers agree</td></tr>
+          <tr><td class="nw"><code>NN-MM-SUMMARY.md</code></td><td>execute-phase</td><td>What was actually built, and the commits</td></tr>
+          <tr><td class="nw"><code>NN-REVIEW.md</code></td><td>code-review</td><td>Bugs and quality issues in the finished code</td></tr>
+          <tr><td class="nw"><code>NN-VERIFICATION.md</code></td><td>verifier</td><td>Did it meet the goal, and what&rsquo;s left for a human</td></tr>
+          <tr><td class="nw"><code>NN-UAT.md</code></td><td>verify-work</td><td>Your test results, pass by pass</td></tr>
+          <tr><td class="nw"><code>NN-LEARNINGS.md</code></td><td>extract-learnings</td><td>Lessons carried into later phases</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="back-top"><a href="#contents">&uarr; Contents</a></p>
+  </section>
+
+  <!-- 11 -->
+  <section class="blk" id="gates">
+    <div class="num">11</div>
+    <h2 class="head">Gates, and which ones actually block</h2>
+    <p>Not every check stops the run. Knowing which ones really block saves arguing with the ones that don&rsquo;t.</p>
+    <div class="fw-grid">
+      <div class="block"><div class="lab">Blocking</div><h4>Decision coverage</h4><ul><li>Every <code>D-NN</code> must be referenced by a plan.</li><li>Won&rsquo;t mark a phase planned if a decision was silently dropped.</li></ul></div>
+      <div class="block"><div class="lab">Blocking</div><h4>API coverage</h4><ul><li>Every capability of an external API is marked &ldquo;use&rdquo; or &ldquo;opt out, because&hellip;&rdquo;</li><li>Testing won&rsquo;t start until the list is complete.</li></ul></div>
+      <div class="block"><div class="lab">Blocking</div><h4>Phase completion</h4><ul><li>A phase isn&rsquo;t complete until every human test has passed and verification is current.</li></ul></div>
+      <div class="advise"><div class="lab">Advisory</div><h4>Plan-checker</h4><ul><li>About 12 checks over the plan set.</li><li>Blockers force a rewrite, up to 3 rounds.</li></ul></div>
+      <div class="advise"><div class="lab">Advisory</div><h4>Requirements coverage</h4><ul><li>Every requirement assigned to a plan.</li><li>Offers re-plan, defer or accept.</li></ul></div>
+      <div class="script"><div class="lab">Scripted, no AI</div><h4>Verify-command probes</h4><ul><li>Do the test commands in each plan exist and run?</li><li>These return exit codes, not opinions.</li></ul></div>
+    </div>
+    <div class="ana">
+      <div class="lab">Scripted beats clever</div>
+      <p>When an AI-driven check disagrees with a scripted one, believe the script.</p>
+    </div>
+    <p class="back-top"><a href="#contents">&uarr; Contents</a></p>
+  </section>
+
+  <!-- 12 -->
+  <section class="blk" id="build">
+    <div class="num">12</div>
+    <h2 class="head">A real build: <em>an IBKR options dashboard</em></h2>
+    <p>A read-only web app on a live Interactive Brokers account. It answers one question IBKR&rsquo;s own screens don&rsquo;t: <strong>if every put I&rsquo;ve sold gets exercised, does my cash cover it?</strong> The requirements were drafted before GSD was installed. Here&rsquo;s the kind of vagueness the questioning step pulled out of them:</p>
+
+    <div class="fw-q"><span class="n">01</span><span class="t">&ldquo;Max puts sellable without liquidation risk&rdquo;</span>
+      <div class="d">The broker&rsquo;s own margin limit (what actually triggers liquidation), or a self-imposed cash-secured limit the broker doesn&rsquo;t enforce at all? Mixing those two up is the most expensive ambiguity on the list.</div></div>
+    <div class="fw-q"><span class="n">02</span><span class="t">&ldquo;Potential profit on existing calls and puts&rdquo;</span>
+      <div class="d">Today&rsquo;s paper profit if closed now, or how much of the premium has been earned toward the maximum? Different numbers.</div></div>
+    <div class="fw-q"><span class="n">03</span><span class="t">&ldquo;Income from options, week by week&rdquo;</span>
+      <div class="d">Only closed trades, or does it move with open positions too?</div></div>
+    <div class="fw-q"><span class="n">04</span><span class="t">&ldquo;Annualised % return&rdquo;</span>
+      <div class="d">Against the whole account, or only the cash tied up that week? On this account, the share of cash in use swung between roughly 3% and 96% in a single session, so the choice changes the answer enormously.</div></div>
+
+    <p style="margin-top:22px;">That became a seven-phase roadmap, with a strike-price advisor inserted as Phase 2.1. Status as of 29 Oct 2026:</p>
+    <div class="tablewrap">
+      <table class="fw-t">
+        <thead><tr><th>#</th><th>Phase</th><th>State</th><th>Run with</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>Core risk maths: pure functions, no live connection</td><td><span class="pill teal">complete &middot; 21 Oct</span></td><td>GSD</td></tr>
+          <tr><td>2</td><td>Live home screen: connection, leverage ratio, out-of-date warnings</td><td><span class="pill amber">built &middot; 2 tests wait on US market hours</span></td><td>GSD</td></tr>
+          <tr><td>2.1</td><td>Strike advisor</td><td><span class="pill amber">15 of 16 plans built</span></td><td>GSD</td></tr>
+          <tr><td>3</td><td>Secure remote access: passkeys, phone install</td><td><span class="pill amber">10 of 10 plans built &middot; phone test pending</span></td><td>GSD, the last full run</td></tr>
+          <tr><td>4&ndash;7</td><td>Position detail, charts, reconnect hardening, then the income feed</td><td><span class="pill">not started</span></td><td>Lean loop</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="fw-stats">
+      <div><span class="s">Plans written</span><div class="v">19</div><div class="k">across the first two phases</div></div>
+      <div><span class="s">Commits</span><div class="v">205</div><div class="k">by 23 Oct, one per task, so any step can be undone</div></div>
+      <div><span class="s">Test files</span><div class="v">47</div><div class="k">each test written and failing before its code</div></div>
+      <div><span class="s">Second-AI rounds</span><div class="v">3</div><div class="k">Codex on Phase 1, Cursor twice on Phase 2</div></div>
+    </div>
+    <p>Phases 4 to 7 give a direct comparison: the same app built two ways. Phase 3&rsquo;s planning cost (about 820k subagent tokens and an hour) is the yardstick for the lean loop on Phase 4.</p>
+    <p class="back-top"><a href="#contents">&uarr; Contents</a></p>
+  </section>
+
+  <!-- 13 -->
+  <section class="blk" id="switches">
+    <div class="num">13</div>
+    <h2 class="head">Switches worth turning on</h2>
+    <p>Out of the box, GSD runs the core loop and leaves several of its best checks off or waiting to be run by hand. These are the eight I switched on for the dashboard, ordered by how much they&rsquo;re worth on something that touches real money. &ldquo;Automatic&rdquo; means GSD runs it at that point in the loop once the setting is on.</p>
+    <div class="tablewrap">
+      <table class="fw-t">
+        <thead><tr><th>#</th><th>What</th><th>How to turn it on</th><th>What you get</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td><b>Security review</b></td><td><code>workflow.security_enforcement: true</code><br><span class="pill rose">automatic</span> after testing</td><td>Checks every risk named in the plans was dealt with in the code. Open high-severity risks block the phase from shipping. Run <code>/gsd-secure-phase N</code> for phases that closed before it was on.</td></tr>
+          <tr><td>2</td><td><b>Second AI on the code</b></td><td><code>workflow.code_review_command</code><br><span class="pill rose">automatic</span> at <code>/gsd-ship</code></td><td>The whole diff goes to a different AI before the pull request opens (<a href="#second-ai">section 08</a>). Needs a bridge script such as <a href="../Claude/downloads/gsd_cross_ai_review.py">this one</a>.</td></tr>
+          <tr><td>3</td><td><b>Review &rarr; revise loop</b></td><td><code>workflow.plan_review_convergence: true</code><br><span class="pill teal">command</span></td><td>Unlocks <code>/gsd-plan-review-convergence N</code>, which repeats review and revision until no HIGH concerns remain, and the <code>--converge</code> option on <code>/gsd-next</code> and <code>/gsd-autonomous</code>.</td></tr>
+          <tr><td>4</td><td><b>Lessons carried forward</b></td><td><code>/gsd-extract-learnings N</code><br><span class="pill teal">command</span> after each phase</td><td>Writes <code>LEARNINGS.md</code>: decisions, surprises and patterns from the phase, read by the planner for later phases.</td></tr>
+          <tr><td>5</td><td><b>Pin down &ldquo;done&rdquo; first</b></td><td><code>/gsd-spec-phase N</code><br><span class="pill teal">command</span> before planning</td><td>For any phase with a fixed external contract (a file format another programme reads, an API you don&rsquo;t control). It keeps asking until the scope is tight, then writes testable statements.</td></tr>
+          <tr><td>6</td><td><b>Testing checks the screen itself</b></td><td><code>workflow.live_dom_uat: true</code><br><span class="pill rose">automatic</span> during build and test</td><td>With a browser tool connected (Claude in Chrome or Chrome DevTools), GSD opens the app, checks what it can see, and only asks you about the parts that need human judgement.</td></tr>
+          <tr><td>7</td><td><b>Codebase map</b></td><td><code>/gsd-map-codebase</code> once<br><code>workflow.plan_drift_precheck: true</code></td><td>Writes documents describing the code (structure, conventions, concerns) that planners read. The drift check warns before planning when the map has gone stale.</td></tr>
+          <tr><td>8</td><td><b>UI review</b></td><td><code>workflow.ui_review: true</code><br><span class="pill rose">automatic</span> after testing</td><td>A visual audit of the screens against the phase&rsquo;s design spec, scored across six areas, on any phase that built UI.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>To make them the default for every new project, put them in <code>~/.gsd/defaults.json</code>; GSD reads it when it creates a project. Mine:</p>
+    <div class="fw-term">
+      <div class="bar">~/.gsd/defaults.json</div>
+<pre>{
+  "workflow": {
+    "security_enforcement": true,
+    "code_review_command": "python3 /Users/you/.claude/scripts/gsd_cross_ai_review.py --model gemini-4-argon-high",
+    "plan_review_convergence": true,
+    "live_dom_uat": true,
+    "ui_review": true,
+    "plan_drift_precheck": true
+  },
+  "review": {
+    "models": { "cursor": "gemini-4-argon-high", "codex": "gpt-6.1-sol", "gemini": "gemini-3.5-flash" },
+    "default_reviewers": ["cursor"]
+  }
+}</pre>
+    </div>
+    <p class="fw-hint">For a project that already exists, set the same keys with <code>/gsd-config</code> or edit <code>.planning/config.json</code>. Use an absolute path in <code>code_review_command</code>: <code>/gsd-ship</code> does not expand <code>~</code>. Keep <code>model_overrides</code> (such as a stronger plan-checker) in each project&rsquo;s own config: in <code>defaults.json</code> it triggers a warning on every command once a project exists.</p>
+    <p class="back-top"><a href="#contents">&uarr; Contents</a></p>
+  </section>
+
+  <!-- 14 -->
+  <section class="blk" id="start">
+    <div class="num">14</div>
+    <h2 class="head">Starting your own project</h2>
+    <ol class="fw-steps">
+      <li><b>Decide how much GSD you want.</b> For a solo build, the lean loop with single GSD commands is usually enough. Write that choice into the project&rsquo;s <code>.claude/CLAUDE.md</code> before GSD writes its own enforcement section there.</li>
+      <li><b>Install into the repo.</b> <code>npx -y @opengsd/gsd-core@latest --claude --local</code>. Commands appear in Claude Code as <code>/gsd-&hellip;</code>.</li>
+      <li><b>Describe the project.</b> <code>/gsd-new-project</code> for a fresh idea, or <code>/gsd-onboard</code> if there&rsquo;s already code. Answer the questions properly: this is where most of the value is.</li>
+      <li><b>Run the first phase:</b> <code>/gsd-discuss-phase 1</code> &rarr; plan (GSD&rsquo;s <code>/gsd-plan-phase 1</code>, or one lean plan) &rarr; build &rarr; <code>/gsd-verify-work 1</code>.</li>
+      <li><b>Add a second AI before the phase that matters.</b> Install Codex, Gemini or Cursor&rsquo;s CLI, set <code>review.default_reviewers</code>, and run <code>/gsd-review</code> between plan and build. For a trading tool, that&rsquo;s the phase where the maths or the money logic gets written.</li>
+      <li><b>Lost? <code>/gsd-progress</code> or <code>/gsd-next</code>.</b> Both read the files on disc and tell you the next command. After a <code>/clear</code> or a new session, start here.</li>
+    </ol>
+    <p class="back-top"><a href="#contents">&uarr; Contents</a></p>
+  </section>
+
+  <!-- 15 -->
+  <section class="blk" id="commands">
+    <div class="num">15</div>
+    <h2 class="head">Command quick reference</h2>
+    <div class="tablewrap">
+      <table class="fw-t">
+        <thead><tr><th>Command</th><th>Use it when</th></tr></thead>
+        <tbody>
+          <tr><td class="nw"><code>/gsd-progress</code></td><td>&ldquo;Where am I, what&rsquo;s next?&rdquo;</td></tr>
+          <tr><td class="nw"><code>/gsd-next</code></td><td>Reads the project state and runs the right next step</td></tr>
+          <tr><td class="nw"><code>/gsd-discuss-phase N</code></td><td>Record a phase&rsquo;s decisions before planning; kept in the lean loop</td></tr>
+          <tr><td class="nw"><code>/gsd-verify-work N</code></td><td>Walk-through test against the phase goal; kept in the lean loop</td></tr>
+          <tr><td class="nw"><code>/gsd-quick</code></td><td>Small one-off task, still tracked and committed</td></tr>
+          <tr><td class="nw"><code>/gsd-fast "&lt;task&gt;"</code></td><td>Trivial change, no subagents</td></tr>
+          <tr><td class="nw"><code>/gsd-debug "&lt;symptom&gt;"</code></td><td>A bug hunt that survives <code>/clear</code></td></tr>
+          <tr><td class="nw"><code>/gsd-review --phase N</code></td><td>Second-AI review of the plans</td></tr>
+          <tr><td class="nw"><code>/gsd-plan-review-convergence N</code></td><td>Review &rarr; revise &rarr; review, until clean</td></tr>
+          <tr><td class="nw"><code>/gsd-code-review N --fix</code></td><td>Review the built code and apply the fixes</td></tr>
+          <tr><td class="nw"><code>/gsd-secure-phase N</code></td><td>Check the plan&rsquo;s security risks were really handled</td></tr>
+          <tr><td class="nw"><code>/gsd-extract-learnings N</code></td><td>Carry a finished phase&rsquo;s lessons into the next</td></tr>
+          <tr><td class="nw"><code>/gsd-spec-phase N</code></td><td>Tie down &ldquo;done&rdquo; before planning a contract-bound phase</td></tr>
+          <tr><td class="nw"><code>/gsd-map-codebase</code></td><td>Write the codebase map planners read</td></tr>
+          <tr><td class="nw"><code>/gsd-capture</code></td><td>Park an idea without derailing the current phase</td></tr>
+          <tr><td class="nw"><code>/gsd-config</code></td><td>Turn checks on and off; pick which model runs each agent</td></tr>
+          <tr><td class="nw"><code>/gsd-help --full</code></td><td>Every command, every flag</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="back-top"><a href="#contents">&uarr; Contents</a></p>
+  </section>
+
+  <div class="disc"><strong>Sources.</strong> GSD Core: <a href="https://github.com/open-gsd/gsd-core">github.com/open-gsd/gsd-core</a> and <a href="https://www.npmjs.com/package/@opengsd/gsd-core">npmjs.com/package/@opengsd/gsd-core</a>. Superpowers: <a href="https://github.com/obra/superpowers">github.com/obra/superpowers</a>. Compound Engineering: <a href="https://github.com/EveryInc/compound-engineering-plugin">github.com/EveryInc/compound-engineering-plugin</a>. CLAUDE.md loading order: <a href="https://code.claude.com/docs/en/memory">Claude Code memory docs</a>. Figures for the dashboard come from its own repo and planning files.</div>
+
+  <div class="fnav">
+    <a href="./"><div class="dir">Back</div><div class="ttl">&larr; All frameworks</div></a>
+    <a href="../Claude/"><div class="dir">Knowledge</div><div class="ttl">Skills, walkthroughs &amp; templates &rarr;</div></a>
+  </div>
+
+</div>
+</body>
+</html>
