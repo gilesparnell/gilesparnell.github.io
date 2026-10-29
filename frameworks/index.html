@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Frameworks &mdash; Knowledge &middot; Giles Parnell</title>
+<meta name="description" content="The development frameworks I use or have weighed up for Claude Code, when each one earns its place, and how they sit alongside my own skills and a project's CLAUDE.md.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;1,400&family=Outfit:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../personal/trading/assets/tmlat.css">
+<link rel="stylesheet" href="assets/frameworks.css">
+</head>
+<body class="tmlat fw">
+
+<div class="t-bar">
+  <a class="t-back" href="../">&larr; Home</a>
+  <div class="t-mid">Knowledge &middot; Frameworks</div>
+  <a class="t-full" href="gsd.html">GSD Core</a>
+</div>
+
+<div class="wrap">
+
+  <div class="kick">Knowledge &middot; Frameworks</div>
+  <h1>Frameworks, <em>and when to use them</em></h1>
+  <p class="stand">A framework here means a packaged way of working with a coding agent: a fixed set of commands or skills that takes an idea through planning, building and checking. Each one gets its own page once I've run it on real work. <strong>GSD Core</strong> is the first.</p>
+
+  <nav class="toc">
+    <h2>What&rsquo;s in here</h2>
+    <ol>
+      <li><a href="#pages">Framework pages</a></li>
+      <li><a href="#compared">Also weighed up</a></li>
+      <li><a href="#layers">How a framework fits with my setup</a></li>
+      <li><a href="#conflicts">When the layers disagree</a></li>
+    </ol>
+  </nav>
+
+  <section class="blk" id="pages">
+    <div class="num">01</div>
+    <h2 class="head">Framework pages</h2>
+    <p>One page per framework I have actually run, with what it does, what it cost and the settings I ended up with.</p>
+    <div class="fw-cards">
+      <a class="fw-card" href="gsd.html">
+        <div class="top"><span class="name">GSD Core</span><span class="pill amber">In use &middot; optional since 28 Oct 2026</span></div>
+        <p>Slash commands that run a project as phases: agree the decisions, plan, check the plan, build in small commits, then test against the goal. Every step writes a Markdown file the next step reads. Thorough, and heavy on time and tokens for one person.</p>
+        <div class="links"><span>Read the GSD page &rarr;</span></div>
+      </a>
+    </div>
+  </section>
+
+  <section class="blk" id="compared">
+    <div class="num">02</div>
+    <h2 class="head">Also weighed up</h2>
+    <p>These came up when deciding how to run the rest of the IBKR dashboard build on 28 Oct 2026. None has its own page yet. The full comparison, and what I chose, is on the <a href="gsd.html#now">GSD page</a>.</p>
+    <div class="tablewrap">
+      <table class="fw-t">
+        <thead><tr><th>Framework</th><th>What it is</th><th>Where I&rsquo;ve landed</th></tr></thead>
+        <tbody>
+          <tr><td class="nw"><b>Superpowers</b><br><a href="https://github.com/obra/superpowers">obra/superpowers</a></td>
+              <td>A skills library by Jesse Vincent. Skills load each session and trigger on their own: brainstorm a design, write a plan, build test-first with subagents, review, finish the branch.</td>
+              <td>Not installed. Two of my global skills, <code>systematic-debugging</code> and <code>verification-before-completion</code>, are adapted from it, so I get its strongest habits without a third framework.</td></tr>
+          <tr><td class="nw"><b>Lean loop</b><br>my own, not a package</td>
+              <td>Decide with <code>/gsd-discuss-phase</code>, write one plan file in the session, Codex builds it test-first, verify with evidence.</td>
+              <td>My default from Phase 4 of the dashboard onwards. Described on the <a href="gsd.html#lean-loop">GSD page</a>.</td></tr>
+          <tr><td class="nw"><b>Compound Engineering</b><br><a href="https://github.com/EveryInc/compound-engineering-plugin">EveryInc/compound-engineering-plugin</a></td>
+              <td>A Claude Code plugin with planning, work and multi-agent review commands.</td>
+              <td>Installed. I found its build output low quality, so I use <code>/ce:review</code> only on security, money or external-contract code.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="blk" id="layers">
+    <div class="num">03</div>
+    <h2 class="head">How a framework fits with my setup</h2>
+    <p>Four layers feed every Claude Code session. A framework is the last one added, and the easiest to let take over.</p>
+    <div class="tablewrap">
+      <table class="fw-t">
+        <thead><tr><th>Layer</th><th>Lives in</th><th>Holds</th></tr></thead>
+        <tbody>
+          <tr><td class="nw"><b>Global rules</b></td><td><code>~/.claude/CLAUDE.md</code></td>
+              <td>How I work everywhere: timezone, test first, verify before claiming done, never commit without being asked, Claude plans and Codex builds.</td></tr>
+          <tr><td class="nw"><b>Global skills</b></td><td><code>~/.claude/skills/</code></td>
+              <td>The detail behind those rules, loaded when the task calls for it: <code>tdd-first</code>, <code>verification-before-completion</code>, <code>systematic-debugging</code>, <code>runtime-routing</code>, <code>shipping-discipline</code>, <code>versioning-discipline</code>.</td></tr>
+          <tr><td class="nw"><b>Project rules</b></td><td><code>&lt;repo&gt;/.claude/CLAUDE.md</code></td>
+              <td>What is true of this one project: its stack, its constraints, and which workflow it runs. This is where a project says whether a framework is in charge.</td></tr>
+          <tr><td class="nw"><b>Framework</b></td><td>e.g. <code>&lt;repo&gt;/.claude/gsd-core/</code></td>
+              <td>The framework&rsquo;s own commands, agents and state files (<code>.planning/</code> for GSD).</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="warn">
+      <div class="lab">The trap</div>
+      <p>GSD does its work inside its own subagents (planner, executor, checker), and each follows GSD&rsquo;s own prompts. My global skills load into the main conversation, which under GSD mostly just launches those agents. So the skills stopped firing. GSD had replaced them, not added to them.</p>
+    </div>
+  </section>
+
+  <section class="blk" id="conflicts">
+    <div class="num">04</div>
+    <h2 class="head">When the layers disagree</h2>
+    <p>Claude Code doesn&rsquo;t rank these files. It reads them all, user-level first and project-level after, and <a href="https://code.claude.com/docs/en/memory">its documentation</a> says that when two instructions conflict Claude may follow either one. A conflict left in place is a coin toss.</p>
+    <p>So the rule I keep is <strong>no conflicts, only explicit narrowing</strong>:</p>
+    <ul class="plain">
+      <li><strong>Global rules set the defaults.</strong> Test first, evidence before &ldquo;done&rdquo;, Codex builds from a clear plan.</li>
+      <li><strong>A project&rsquo;s CLAUDE.md narrows them, in writing, for that repo.</strong> The IBKR dashboard&rsquo;s file has a section headed &ldquo;Workflow (GSD optional &mdash; decided 2026-10-28)&rdquo; that names the default loop and when GSD commands are allowed.</li>
+      <li><strong>A framework runs only where the project file says it does.</strong> When GSD was installed it wrote its own &ldquo;GSD Workflow Enforcement&rdquo; section into the project file, which kept pulling every session back into GSD. That section is what had to change.</li>
+      <li><strong>Re-check after a framework update.</strong> The rewritten section sits between GSD&rsquo;s own markers, so a <code>/gsd-update</code> can put the old text back.</li>
+    </ul>
+  </section>
+
+  <div class="fnav">
+    <a href="gsd.html"><div class="dir">Framework</div><div class="ttl">GSD Core &rarr;</div></a>
+    <a href="../Claude/"><div class="dir">Knowledge</div><div class="ttl">Skills, walkthroughs &amp; templates &rarr;</div></a>
+    <a href="../"><div class="dir">Back</div><div class="ttl">&larr; Home</div></a>
+  </div>
+
+</div>
+</body>
+</html>

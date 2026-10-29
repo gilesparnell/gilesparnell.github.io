@@ -1,0 +1,133 @@
+/* =====================================================================
+   frameworks.css — additions for the /frameworks/ pages.
+   Load AFTER ../personal/trading/assets/tmlat.css, which supplies the
+   tokens, top bar, shell, hero, contents box, section headings, callout
+   boxes (.ana/.warn/.jar) and footer nav. This file adds only what the
+   trading reader pages don't have: tables, cards, a terminal block,
+   stat tiles and a light palette for the SVG diagrams.
+   Nothing here restyles the trading pages.
+   ===================================================================== */
+
+/* inline code */
+body.fw code{font-family:'IBM Plex Mono',ui-monospace,Menlo,monospace;font-size:0.84em;
+  color:#0b5f57;background:var(--teal-bg);border:1px solid var(--teal-line);
+  padding:1px 5px;border-radius:5px;overflow-wrap:anywhere;}
+body.fw a{color:var(--teal);}
+body.fw .t-bar a,body.fw .fnav a,body.fw .toc a,body.fw a.fw-card{color:inherit;}
+
+/* fact strip under the hero */
+.fw-facts{display:flex;flex-wrap:wrap;gap:8px 22px;margin:22px 0 0;padding:14px 0;
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  font-size:0.86rem;color:var(--muted);}
+.fw-facts b{color:var(--ink);font-weight:600;}
+
+/* one-line command */
+.fw-cmd{font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:0.86rem;color:var(--ink);
+  background:var(--card);border:1px solid var(--line);border-radius:10px;
+  padding:12px 16px;margin:18px 0;overflow-x:auto;white-space:nowrap;}
+
+/* framework cards on the index */
+.fw-cards{display:grid;grid-template-columns:1fr;gap:14px;margin:18px 0;}
+a.fw-card,div.fw-card{display:block;text-decoration:none;background:var(--card);
+  border:1px solid var(--line);border-radius:12px;padding:18px 20px;transition:all .2s;}
+a.fw-card:hover{border-color:var(--teal-line);background:var(--teal-bg);}
+.fw-card .top{display:flex;align-items:baseline;justify-content:space-between;gap:10px;flex-wrap:wrap;}
+.fw-card .name{font-family:'Spectral',Georgia,serif;font-size:1.35rem;font-weight:500;color:var(--ink);}
+.fw-card p{margin:8px 0 0;font-size:0.97rem;color:var(--ink-soft);}
+.fw-card .links{margin-top:10px;font-size:0.86rem;display:flex;gap:16px;flex-wrap:wrap;}
+
+/* status pills */
+.pill{display:inline-block;font-size:0.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  border-radius:100px;padding:3px 10px;white-space:nowrap;border:1px solid var(--line);color:var(--muted);background:var(--card);}
+.pill.teal{color:var(--teal);background:var(--teal-bg);border-color:var(--teal-line);}
+.pill.amber{color:#8a5d17;background:var(--amber-bg);border-color:var(--amber-line);}
+.pill.rose{color:var(--rose);background:var(--rose-bg);border-color:var(--rose-line);}
+
+/* tables: scroll inside their own box, never the page */
+.tablewrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:16px 0 22px;
+  border:1px solid var(--line);border-radius:12px;background:var(--card);}
+table.fw-t{width:100%;border-collapse:collapse;min-width:34rem;}
+table.fw-t th{text-align:left;font-size:0.68rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--muted);background:#f4f0e7;padding:11px 14px;border-bottom:1px solid var(--line);}
+table.fw-t td{padding:12px 14px;border-bottom:1px solid #efeae0;font-size:0.92rem;line-height:1.5;
+  color:var(--ink-soft);vertical-align:top;}
+table.fw-t tr:last-child td{border-bottom:none;}
+table.fw-t td b{color:var(--ink);font-weight:600;}
+table.fw-t td.nw{white-space:nowrap;}
+
+/* two-column before/after */
+.fw-pair{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:18px 0;}
+@media(max-width:700px){.fw-pair{grid-template-columns:1fr;}}
+.fw-pair > div{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;}
+.fw-pair > div.good{background:var(--teal-bg);border-color:var(--teal-line);}
+.fw-pair .lab{font-size:0.7rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;}
+.fw-pair .good .lab{color:var(--teal);}
+.fw-pair ul{margin:0;padding-left:1.1rem;}
+.fw-pair li{font-size:0.94rem;margin-bottom:7px;color:var(--ink-soft);}
+.fw-pair li b{color:var(--ink);}
+
+/* small card grid (gates, lessons) */
+.fw-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:16px 0;}
+@media(max-width:760px){.fw-grid{grid-template-columns:1fr;}}
+.fw-grid > div{background:var(--card);border:1px solid var(--line);border-radius:11px;padding:14px 16px;}
+.fw-grid .lab{font-size:0.66rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;margin-bottom:5px;color:var(--muted);}
+.fw-grid .block .lab{color:var(--rose);}
+.fw-grid .advise .lab{color:#8a5d17;}
+.fw-grid .script .lab{color:var(--teal);}
+.fw-grid h4{font-family:'Spectral',Georgia,serif;font-weight:500;font-size:1.08rem;margin:0 0 6px;color:var(--ink);}
+.fw-grid ul{margin:0;padding-left:1rem;}
+.fw-grid li{font-size:0.86rem;line-height:1.5;color:var(--ink-soft);margin-bottom:4px;}
+
+/* stat tiles */
+.fw-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:16px 0;}
+@media(max-width:760px){.fw-stats{grid-template-columns:1fr 1fr;}}
+.fw-stats > div{background:var(--card);border:1px solid var(--line);border-radius:11px;padding:12px 14px;}
+.fw-stats .s{font-size:0.66rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);}
+.fw-stats .v{font-family:'Spectral',Georgia,serif;font-size:1.7rem;line-height:1.2;color:var(--ink);margin:4px 0 2px;}
+.fw-stats .k{font-size:0.8rem;line-height:1.4;color:var(--ink-soft);}
+
+/* terminal / file block */
+.fw-term{margin:16px 0 22px;border-radius:11px;overflow:hidden;border:1px solid #2a2f3b;background:#12151c;}
+.fw-term .bar{font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:0.72rem;color:#8b92a8;
+  padding:8px 14px;border-bottom:1px solid #2a2f3b;background:#171b24;}
+.fw-term pre{margin:0;padding:14px 16px;overflow-x:auto;-webkit-overflow-scrolling:touch;
+  font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:0.8rem;line-height:1.6;color:#d6d9e2;}
+.fw-term .u{color:#7fd8b6;} .fw-term .c{color:#8b92a8;} .fw-term .f{color:#e6c07b;}
+.fw-term .w{color:#b6a4ec;} .fw-term .r{color:#f08c78;}
+
+/* numbered questions */
+.fw-q{border-left:3px solid var(--amber);background:var(--card);border-radius:0 10px 10px 0;
+  padding:12px 16px;margin-bottom:10px;border-top:1px solid var(--line);border-right:1px solid var(--line);border-bottom:1px solid var(--line);}
+.fw-q .t{font-weight:600;color:var(--ink);font-size:0.97rem;}
+.fw-q .n{font-size:0.72rem;font-weight:700;color:var(--amber);margin-right:8px;letter-spacing:.1em;}
+.fw-q .d{font-size:0.92rem;color:var(--ink-soft);margin-top:4px;line-height:1.5;}
+
+/* ordered steps */
+ol.fw-steps{margin:16px 0;padding-left:1.3rem;}
+ol.fw-steps li{margin-bottom:12px;color:var(--ink-soft);}
+ol.fw-steps li b{color:var(--ink);}
+
+/* diagrams: same markup as before, light palette */
+.fw-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:14px 0 6px;}
+.fw-hint{font-size:0.8rem;color:var(--muted);margin:0 0 6px;}
+svg.fw-diagram{display:block;width:100%;min-width:700px;height:auto;border:1px solid var(--line);border-radius:12px;
+  --bg:#ffffff; --bg3:#f7f4ec; --border:#e4ded1; --border2:#b3ab99;
+  --text:#232019; --text2:#4b463c; --text3:#867f70;
+  --purple-bg:#f1edf8; --purple-border:#cbbfe6; --purple-text:#5b4a8a;
+  --blue-bg:#e6edf1; --blue-border:#cfdce4; --blue-text:#2f4a5e;
+  --teal-bg:#e8f4f2; --teal-border:#c2e0db; --teal-text:#0b5f57;
+  --green-bg:#e8efe6; --green-border:#cfe0ce; --green-text:#2f5a3e;
+  --amber-bg:#fdf4e4; --amber-border:#f0dcb8; --amber-text:#8a5d17;
+  --coral-bg:#fbeee9; --coral-border:#f0d5cb; --coral-text:#8f3e2d;
+  --navy-bg:#eceef4; --navy-border:#cfd3e0; --navy-text:#33395a;
+  background:var(--bg);}
+.fw-node-lab{font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:9.5px;letter-spacing:.05em;text-transform:uppercase;}
+.fw-node-t{font-family:'Outfit',sans-serif;font-size:11.5px;font-weight:600;}
+.fw-node-d{font-family:'Outfit',sans-serif;font-size:9px;}
+
+/* sub-heading inside a section */
+h3.fw-h3{font-family:'Outfit',sans-serif;font-size:0.78rem;font-weight:700;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--muted);margin:30px 0 10px;}
+.back-top{font-size:0.78rem;font-weight:600;margin:10px 0 0;}
+body.fw .back-top a{color:var(--muted);text-decoration:none;}
+body.fw .back-top a:hover{color:var(--teal);}
